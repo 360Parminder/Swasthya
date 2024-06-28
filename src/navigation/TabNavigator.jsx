@@ -5,6 +5,7 @@ import Profile from '../screens/Profile';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Leaderboard from '../screens/Leaderboard';
 import Browse from '../screens/Browse';
+import CustomHeader from '../components/CustomHeader';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +33,7 @@ const TabNavigator = () => {
           return <Icon name={iconName} color={color} size={size} />;
         },
       })}
+      
     >
       <Tab.Screen
         name='Home'
@@ -51,7 +53,7 @@ const TabNavigator = () => {
           name='Browse'
           component={Browse}
           options={{
-            // Add this line if you want to hide the header for the Profile tab as well
+            header: () => <CustomHeader headerTitle={'Browse'}/>,
           }}
         />
       <Tab.Screen

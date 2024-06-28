@@ -77,3 +77,31 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+
+# Well-organized Folder Structure
+
+src/: All the source code for the app goes here.
+
+assets/: Static assets like images, fonts, and icons.
+
+components/: Reusable UI components. These are generally small, reusable pieces of UI like buttons, inputs, etc.
+
+constants/: Constants such as colors, typography, API endpoints, etc.
+
+hooks/: Custom React hooks that can be reused across the app.
+
+navigation/: Navigation configuration files, including stack navigators, tab navigators, etc.
+
+screens/: Screen components, usually one file per screen. Each screen may have its own folder if it includes additional components or styles specific to that screen.
+
+services/: Services for API calls, analytics, and other business logic. This can also include context providers.
+
+store/: State management files (e.g., Redux files if you're using Redux).
+
+styles/: Shared styles that can be used across components and screens.
+
+utils/: Utility functions and helpers.
+
+App.js: The main app component.

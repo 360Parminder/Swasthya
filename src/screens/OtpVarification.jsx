@@ -43,7 +43,7 @@ const OtpValidation=({navigation})=>{
             source={require('../assets/images/SignIn.png')}
             resizeMode="contain"
           />
-          <Text style={styles.title}>Welcome Back to Heal</Text>
+          <Text style={styles.title}>Welcome to Heal</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter your Mobile"

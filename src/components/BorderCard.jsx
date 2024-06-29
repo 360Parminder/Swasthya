@@ -6,9 +6,9 @@ const BorderCard = ({logo,value,valueUnit}) => {
         <View style={{
             flexDirection: 'row',
             marginTop: 20,
-            rowGap: 10,
-            shadowOpacity:0.1,
-            elevation:1,
+            // rowGap: 10,
+            // shadowOpacity:0.1,
+            // elevation:1,
         }}>
             <View style={styles.container}>
 
@@ -33,8 +33,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 26,
         paddingVertical: 12,
         gap: 3,
-        
- 
     },
     logoText: {
         fontSize: 24,

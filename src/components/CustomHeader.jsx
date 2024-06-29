@@ -1,17 +1,20 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Platform, SafeAreaView } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 
 const CustomHeader = ({headerTitle}) => {
   return (
+    <SafeAreaView>
    <LinearGradient
    colors={['#F1F1F1', '#F1F1F1']} // Adjust these colors to achieve the mirror effect
       start={{x:1, y:1}}
       end={{x:1, y:1}}
    style={styles.header}
    >
+    
  <Text style={styles.headerTitle}>{headerTitle}</Text>
    </LinearGradient>
+   </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import Path from '../services/Path';
+import AuthenticationNavigator from '../context/AuthStack';
 // import messaging from '@react-native-firebase/messaging';
 // import notifee from '@notifee/react-native';
-
-const SignIn = ({ navigation }) => {
+import {useNavigation} from '@react-navigation/native'
+const SignIn = () => {
+  const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
@@ -85,42 +87,43 @@ const SignIn = ({ navigation }) => {
   //   }
   // };
 
-  useEffect(() => {
-    const getToken = async () => {
-      try {
-        const storedToken = await AsyncStorage.getItem('token');
-        if (storedToken) {
-          navigation.navigate('Home');
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getToken();
-  }, []);
+  // useEffect(() => {
+  //   const getToken = async () => {
+  //     try {
+  //       const storedToken = await AsyncStorage.getItem('userToken');
+  //       if (storedToken) {
+  //         navigation.navigate('Home');
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getToken();
+  // }, []);
 
   const handleSignIn = async () => {
     try {
-      console.log(phoneNumber, password);
-      if (phoneNumber && password) {
-        //work after backend
-        const response = await Path.post("/login", {
-          mobile: phoneNumber,
-          password: password,
-          fcm_token: fcmToken,
-        });
-        if (response.data) {
-          // console.log(response.data);
-          await AsyncStorage.setItem('token', response.data.token);
-          setToken(response.data.token);
-          navigation.navigate('Home');
-          // work after navigation set
-        } else {
-          Alert.alert("error", "invalid credentials");
-        }
-      } else {
-        Alert.alert("Please fill all the fields");
-      }
+     navigation.navigate('root');
+      // console.log(phoneNumber, password);
+      // if (phoneNumber && password) {
+      //   //work after backend
+      //   const response = await Path.post("/login", {
+      //     mobile: phoneNumber,
+      //     password: password,
+      //     fcm_token: fcmToken,
+      //   });
+      //   if (response.data) {
+      //     // console.log(response.data);
+      //     await AsyncStorage.setItem('userToken', response.data.token);
+      //     setToken(response.data.token);
+      //     navigation.navigate('Home');
+      //     // work after navigation set
+      //   } else {
+      //     Alert.alert("error", "invalid credentials");
+      //   }
+      // } else {
+      //   Alert.alert("Please fill all the fields");
+      // }
     } catch (error) {
       Alert.alert("error", "invalid credentials");
       console.log(error);

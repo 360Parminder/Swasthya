@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import HomeCard from '../components/HomeCard';
 import CircularProgress from 'react-native-circular-progress-indicator';
@@ -55,6 +55,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <>
+    <SafeAreaView>
       <View style={styles.container}>
         <View style={{ 
           height: 90,
@@ -134,6 +135,7 @@ const HomeScreen = ({ navigation }) => {
         
         </View>
       </View>
+      </SafeAreaView>
     </>
   )
 }

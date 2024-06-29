@@ -2,14 +2,14 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Browse = () => {
+const Browse = ({navigation}) => {
     return (
         <View style={styles.container}>
              <ScrollView>
 
             <Text style={styles.title}>Categories</Text>
             <View style={styles.categoriesCard}>
-               <Pressable>
+               <Pressable onPress={()=>navigation.navigate('Activity')}>
                <View style={styles.categorieHolder}>
                     <View style={{
                        flexDirection:'row',

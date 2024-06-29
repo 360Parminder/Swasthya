@@ -15,7 +15,7 @@ const Browse = ({navigation}) => {
                        flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='flame' color='#fb5607' size={36} />
+                    <Icon name='flame' color='#fb5607' size={32} />
                     <Text style={styles.categorieName}>Activity</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={35} />
@@ -27,7 +27,7 @@ const Browse = ({navigation}) => {
                          flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='body' color='#8338ec' size={36} />
+                    <Icon name='body' color='#8338ec' size={32} />
                     <Text style={styles.categorieName}>Body Measurements</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -39,7 +39,7 @@ const Browse = ({navigation}) => {
                        flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='heart' color='#d90429' size={36} />
+                    <Icon name='heart' color='#d90429' size={32} />
                     <Text style={styles.categorieName}>Heart</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -51,7 +51,7 @@ const Browse = ({navigation}) => {
                          flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='medical' color='#0077b6' size={36} />
+                    <Icon name='medical' color='#0077b6' size={32} />
                     <Text style={styles.categorieName}>Medications</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -63,7 +63,7 @@ const Browse = ({navigation}) => {
                         flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='egg' color='#80ed99' size={36} />
+                    <Icon name='egg' color='#80ed99' size={32} />
                     <Text style={styles.categorieName}>Nutrition</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -75,7 +75,7 @@ const Browse = ({navigation}) => {
                         flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='bed' color='#4cc9f0' size={36} />
+                    <Icon name='bed' color='#4cc9f0' size={32} />
                     <Text style={styles.categorieName}>Sleep</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -87,7 +87,7 @@ const Browse = ({navigation}) => {
                         flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='flame' color='#4895ef' size={36} />
+                    <Icon name='flame' color='#4895ef' size={32} />
                     <Text style={styles.categorieName}>Symptoms</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -100,7 +100,7 @@ const Browse = ({navigation}) => {
                          flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='bulb' color='#2196f3' size={36} />
+                    <Icon name='bulb' color='#2196f3' size={32} />
                     <Text style={styles.categorieName}>Mental Wellbeing</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -112,7 +112,7 @@ const Browse = ({navigation}) => {
                          flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='bicycle' color='#fb8b24' size={36} />
+                    <Icon name='bicycle' color='#fb8b24' size={32} />
                     <Text style={styles.categorieName}>Mobility</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -124,7 +124,7 @@ const Browse = ({navigation}) => {
                          flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='leaf' color='#0071bc' size={36} />
+                    <Icon name='leaf' color='#0071bc' size={32} />
                     <Text style={styles.categorieName}>Respiratory</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -136,7 +136,7 @@ const Browse = ({navigation}) => {
                        flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='ear-outline' color='#3a86ff' size={36} />
+                    <Icon name='ear-outline' color='#3a86ff' size={32} />
                     <Text style={styles.categorieName}>Hearing</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -148,7 +148,7 @@ const Browse = ({navigation}) => {
                          flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='flame' color='#000' size={36} />
+                    <Icon name='flame' color='#000' size={32} />
                     <Text style={styles.categorieName}>Diet</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -160,7 +160,7 @@ const Browse = ({navigation}) => {
                         flexDirection:'row',
                          alignItems:'center'
                     }}>
-                    <Icon name='albums' color='#0077b6' size={36} />
+                    <Icon name='albums' color='#0077b6' size={32} />
                     <Text style={styles.categorieName}>Other Data</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={36} />
@@ -174,7 +174,7 @@ const Browse = ({navigation}) => {
                         flexDirection:'row',
                         alignItems:'center'
                     }}>
-                    <Icon name='document-text-outline' color='#4361ee' size={36} />
+                    <Icon name='document-text-outline' color='#4361ee' size={32} />
                     <Text style={styles.categorieName}>Clinical Documents</Text>
                     </View>
                     <Icon name="chevron-forward" color="#000" Size={35} />
@@ -220,17 +220,18 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginHorizontal: 5,
-        marginVertical: 10,
+        marginVertical: 4,
+        paddingBottom:10,
         // backgroundColor:'#d2d2d2',
         borderBottomWidth:0.5,
-        borderBottomColor:'#000',
+        borderBottomColor:'#d1d1d1',
     },
     categorieName: {
         fontSize: 20,
         fontWeight: '600',
         color: '#000',
         // textAlign: 'left',
-        marginVertical: 10,
+        // marginVertical: 10,
         marginHorizontal: 20,
     },
 

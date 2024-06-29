@@ -10,27 +10,27 @@ const Profile = ({ navigation }) => {
 
   const [userData, setUserData] = useState(null)
 
-  //   useEffect(() => {
+    useEffect(() => {
 
-  //     const fetchUserProfile= async()=>{
+      const fetchUserProfile= async()=>{
 
-  //       const token = await AsyncStorage.getItem('token');
-  //         console.log(token);
-  //         const response = await Path.get("/profile",{
-  //           headers: {
-  //             'authorization': `Bearer ${token}`
-  //           }
-  //         })
-  //         if (response) {
-  //           console.log("response",response.data.data);
-  //           setUserData(response.data.data)
-  //           }
+        const token = await AsyncStorage.getItem('userToken');
+          console.log(token);
+          const response = await Path.get("/profile",{
+            headers: {
+              'authorization': `Bearer ${token}`
+            }
+          })
+          if (response) {
+            console.log("response",response.data.data);
+            setUserData(response.data.data)
+            }
 
 
-  //     }
-  //     fetchUserProfile();
+      }
+      fetchUserProfile();
 
-  // }, [])
+  }, [])
   // const date = userData?.dob?.toISOString()
 
   const logout = async () => {

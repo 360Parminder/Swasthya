@@ -4,7 +4,35 @@ import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 const Leaderboard = () => {
   const [timeframe, setTimeframe] = useState('daily');
   const [scope, setScope] = useState('global');
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+        try {
+            const token = await AsyncStorage.getItem('token');
+            if (token) {
+                const response = await Path.post(
+                    "/leaderboard/overall",
+                    {
+                        date: formattedDateString,
+                    },
+                    {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                if (response) {
+                    console.log("response", response.data.data);
+                    setUserData(response?.data?.data);
+                }
+            }
+        } catch (error) {
+            console.error("Error fetching leaderboard:", error);
+            
+        }
+    };
 
+    fetchLeaderboard();
+}, []); 
   const renderLeaderboardData = () => {
     // Logic to fetch and display leaderboard data based on timeframe and scope
     return (

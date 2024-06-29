@@ -103,27 +103,27 @@ const SignIn = () => {
 
   const handleSignIn = async () => {
     try {
-     navigation.navigate('root');
-      // console.log(phoneNumber, password);
-      // if (phoneNumber && password) {
-      //   //work after backend
-      //   const response = await Path.post("/login", {
-      //     mobile: phoneNumber,
-      //     password: password,
-      //     fcm_token: fcmToken,
-      //   });
-      //   if (response.data) {
-      //     // console.log(response.data);
-      //     await AsyncStorage.setItem('userToken', response.data.token);
-      //     setToken(response.data.token);
-      //     navigation.navigate('Home');
-      //     // work after navigation set
-      //   } else {
-      //     Alert.alert("error", "invalid credentials");
-      //   }
-      // } else {
-      //   Alert.alert("Please fill all the fields");
-      // }
+    //  navigation.navigate('root');
+      console.log(phoneNumber, password);
+      if (phoneNumber && password) {
+        //work after backend
+        const response = await Path.post("/login", {
+          mobile: phoneNumber,
+          password: password,
+          fcm_token: fcmToken,
+        });
+        if (response.data) {
+          console.log(response.data);
+          await AsyncStorage.setItem('userToken', response.data.token);
+          setToken(response.data.token);
+          navigation.navigate('root');
+          // work after navigation set
+        } else {
+          Alert.alert("error", "invalid credentials");
+        }
+      } else {
+        Alert.alert("Please fill all the fields");
+      }
     } catch (error) {
       Alert.alert("error", "invalid credentials");
       console.log(error);

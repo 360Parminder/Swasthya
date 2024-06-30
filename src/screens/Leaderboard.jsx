@@ -27,7 +27,7 @@ const Leaderboard = () => {
                     }
                 );
                 if (response) {
-                    console.log("response", response.data.data);
+                    // console.log("response", response.data.data);
                     setLeaderboardData(response?.data?.data);
                 }
             }

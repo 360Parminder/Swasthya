@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Button, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import Path from '../services/Path';
+import LeaderboardList from '../components/LeaderboardList';
 
 const Leaderboard = () => {
-  const [timeframe, setTimeframe] = useState('daily');
+  const [timeframe, setTimeframe] = useState('today');
   const [scope, setScope] = useState('global');
+  const [date,setDate]=useState(new Date())
+  const [leaderboardData, setLeaderboardData] = useState([]);
+
   useEffect(() => {
     const fetchLeaderboard = async () => {
         try {
-            const token = await AsyncStorage.getItem('token');
+            const token = await AsyncStorage.getItem('userToken');
             if (token) {
                 const response = await Path.post(
                     "/leaderboard/overall",
                     {
-                        date: formattedDateString,
+                      period: timeframe,
                     },
                     {
                         headers: {
@@ -22,7 +28,7 @@ const Leaderboard = () => {
                 );
                 if (response) {
                     console.log("response", response.data.data);
-                    setUserData(response?.data?.data);
+                    setLeaderboardData(response?.data?.data);
                 }
             }
         } catch (error) {
@@ -32,7 +38,7 @@ const Leaderboard = () => {
     };
 
     fetchLeaderboard();
-}, []); 
+}, [timeframe]); 
   const renderLeaderboardData = () => {
     // Logic to fetch and display leaderboard data based on timeframe and scope
     return (
@@ -49,8 +55,8 @@ const Leaderboard = () => {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={[styles.button, timeframe === 'daily' && styles.selectedButton]}
-          onPress={() => setTimeframe('daily')}
+          style={[styles.button, timeframe === 'today' && styles.selectedButton]}
+          onPress={() => setTimeframe('today')}
         >
           <Text style={styles.buttonText}>Daily</Text>
         </TouchableOpacity>
@@ -81,9 +87,10 @@ const Leaderboard = () => {
           <Text style={styles.buttonText}>My Group</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.leaderboardContainer}>
-        {renderLeaderboardData()}
-      </View>
+      <FlatList
+      data={leaderboardData}
+      renderItem={({ item,index }) => (<LeaderboardList userRank={index+1} userName={item.username} userStep={item.totalSteps}/>)}
+      />
     </View>
   );
 };
@@ -110,14 +117,10 @@ const styles = StyleSheet.create({
   },
   selectedButton: {
     backgroundColor: '#5D4FB3',
+    color:'#fff'
   },
   buttonText: {
-    color: '#000',
-  },
-  leaderboardContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    color: '#fff',
   },
 });
 

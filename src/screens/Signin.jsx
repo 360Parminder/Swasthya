@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import Path from '../services/Path';
-import AuthenticationNavigator from '../context/AuthStack';
 // import messaging from '@react-native-firebase/messaging';
 // import notifee from '@notifee/react-native';
 import {useNavigation} from '@react-navigation/native'

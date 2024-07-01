@@ -15,6 +15,7 @@ const HomeScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [date, setDate] = useState(new Date());
   const [steps,setSteps]=useState();
+  const [calories,setCalories]=useState();
   const [heartRate, setHeartRate] = useState(0);
   const [userRank, setUserRank] = useState();
   const [heartRateData2, setHeartRateData2] = useState([]);
@@ -72,35 +73,11 @@ useEffect(() => {
     };
 
     // fetch user rank
-    // const fetchUserRank = async () => {
-    //   try {
-    //     const response = await Path.post('/leaderboard/overall/ranking',
-    //       {
-    //         date: date
-    //       },
-    //       {
-    //         headers: {
-    //           'authorization': `Bearer ${token}`
-    //         }
-    //       },
-    //     )
-    //     if (response) {
-    //       console.log("user rank",response.data.ranking);
-    //       setUserRank(response.data.ranking);
-    //     }
-    //   } catch (error) {
-    //     console.log('userRank', error);
-    //   }
-    // }
-
-    // fetch user Steps
-
-
-    const fetchUserSteps = async () => {
+    const fetchUserRank = async () => {
       try {
-        const response = await Path.post('/step/view/daily',
+        const response = await Path.post('/leaderboard/overall/ranking',
           {
-            date:'2024-06-29'
+            date: date
           },
           {
             headers: {
@@ -109,7 +86,33 @@ useEffect(() => {
           },
         )
         if (response) {
-          console.log("user steps",response.data);
+          console.log("user rank",response.data.ranking);
+          setUserRank(response.data.ranking);
+        }
+      } catch (error) {
+        console.log('userRank', error);
+      }
+    }
+
+    // fetch user Steps
+
+
+    const fetchUserSteps = async () => {
+      try {
+        const response = await Path.post('/step/view/daily',
+          {
+            date:date
+          },
+          {
+            headers: {
+              'authorization': `Bearer ${token}`
+            }
+          },
+        )
+        if (response) {
+          console.log("user steps",response.data?.record[0]?.steps);
+          setSteps(response.data?.record[0]?.steps);
+          setCalories(response.data?.record[0]?.caloriesBurned)
           // setUserRank(response.data.ranking);
         }
       } catch (error) {
@@ -119,7 +122,7 @@ useEffect(() => {
 
     
     generateLastMonthDates();
-    // fetchUserRank();
+    fetchUserRank();
     fetchUserSteps();
 
   }, [token]);
@@ -153,7 +156,7 @@ useEffect(() => {
                   title='Steps'
                   titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
                   maxValue={2000}
-                  value={654}
+                  value={steps+50}
                   duration={2000}
                   radius={50}
                   progressValueColor='#5D4FB3'
@@ -176,7 +179,7 @@ useEffect(() => {
                   title='KCal'
                   titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
                   maxValue={2000}
-                  value={750}
+                  value={calories}
                   duration={2000}
                   radius={50}
                   progressValueColor='#5D4FB3'

@@ -5,39 +5,23 @@ import Path from '../services/Path';
 // import messaging from '@react-native-firebase/messaging';
 // import notifee from '@notifee/react-native';
 import {useNavigation} from '@react-navigation/native'
+import { getFCMToken } from '../utils/fcmUtils';
 const SignIn = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
-  const [fcmToken, setFCMToken] = useState();
+  const [fcmToken, setFCMToken] = useState("");
+
+
+  useEffect(() => {
+    console.log("form sign");
+    getFCMToken();
+  }, [])
+  
 
   // useEffect(() => {
-  //   const requestUserPermission = async () => {
-  //     const authStatus = await messaging().requestPermission();
-  //     const enabled =
-  //       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-  //       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-  //     if (enabled) {
-  //       console.log('Authorization status:', authStatus);
-  //       getDeviceToken();
-  //     } else {
-  //       console.log('Authorization status:', authStatus);
-  //       Alert.alert('Permission denied', 'Unable to get FCM token');
-  //     }
-  //   };
-
-  //   const getDeviceToken = async () => {
-  //     try {
-  //       const token = await messaging().getToken();
-  //       console.log('Device FCM Token:', token);
-  //       setFCMToken(token);
-  //     } catch (error) {
-  //       console.log('Failed to get FCM token:', error);
-  //     }
-  //   };
-
+  //   
   //   const onMessageReceived = async () => {
   //     const unsubscribe = messaging().onMessage(async remoteMessage => {
   //       console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "20056485144",
+    "project_id": "heal-61c11",
+    "storage_bucket": "heal-61c11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20056485144:android:4a49cd5b08fef56697426d",
+        "android_client_info": {
+          "package_name": "com.heal_upgrade"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnqdcKgXGXO9zeFd9fyZayKE2hwaGl94g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

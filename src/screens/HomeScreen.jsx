@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
   const [calories,setCalories]=useState();
   const [heartRate, setHeartRate] = useState(0);
   const [userRank, setUserRank] = useState();
-  const [heartRateData2, setHeartRateData2] = useState([]);
+
 
   const sampleData = [50, 60, 55, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
   const barData = [
@@ -42,30 +42,6 @@ useEffect(() => {
   fetchUserToken();
 }, [])
 
-useEffect(() => {
-  const requestUserPermission = async () => {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-    if (enabled) {
-      console.log('Authorization status:', authStatus);
-      getFcmToken();
-    }
-  };
-
-  const getFcmToken = async () => {
-    const fcmToken = await messaging().getToken();
-    if (fcmToken) {
-      console.log('Your Firebase Token is:', fcmToken);
-    } else {
-      console.log('Failed', 'No token received');
-    }
-  };
-
-  requestUserPermission();
-}, []);
 
 
   useEffect(() => {

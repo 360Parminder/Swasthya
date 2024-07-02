@@ -5,6 +5,7 @@ import TabNavigator from './TabNavigator';
 import { PermissionsProvider } from '../context/PermissionsContext';
 import AuthenticationNavigator from '../context/AuthStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { notificationListener } from '../utils/fcmUtils';
 
 const AppNavigator = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,6 +28,7 @@ const AppNavigator = () => {
         };
     
         checkAuthentication();
+        notificationListener();
       }, []);
 
   return (

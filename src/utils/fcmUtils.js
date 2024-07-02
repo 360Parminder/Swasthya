@@ -13,7 +13,7 @@ export async function requestUserPermission() {
 
 export async function getFCMToken() {
   const token = await messaging().getToken();
-  console.log("FCM Token",token);
+  // console.log("FCM Token",token);
   return token;
 }
 

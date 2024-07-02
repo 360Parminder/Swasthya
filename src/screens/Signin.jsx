@@ -14,9 +14,13 @@ const SignIn = () => {
 
   useEffect(() => {
     console.log("form sign");
-    getFCMToken();
+    getFCMToken().then((token)=>{
+      setFCMToken(token)
+      })
+   
   }, [])
   
+  console.log("fcm",fcmToken);
 
   // useEffect(() => {
   //   

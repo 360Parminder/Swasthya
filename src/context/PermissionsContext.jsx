@@ -1,7 +1,7 @@
 import { View, Text, Platform } from 'react-native'
 import React, { createContext, useEffect, useState } from 'react'
 import { PERMISSIONS, RESULTS, check, request } from 'react-native-permissions';
-
+import messaging from '@react-native-firebase/messaging';
 
 export const PermissionsContext = createContext();
 
@@ -72,7 +72,10 @@ useEffect(() => {
   
   }
   requestPermission()
+  
 }, [])
+
+
 
 const [Permissions,setPermissions]=useState(null);
 

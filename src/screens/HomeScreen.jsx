@@ -8,6 +8,7 @@ import ECGWave from '../components/ECGWave';
 import { BarChart } from 'react-native-gifted-charts';
 import Path from '../services/Path';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import messaging from '@react-native-firebase/messaging';
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -41,6 +42,30 @@ useEffect(() => {
   fetchUserToken();
 }, [])
 
+useEffect(() => {
+  const requestUserPermission = async () => {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+      getFcmToken();
+    }
+  };
+
+  const getFcmToken = async () => {
+    const fcmToken = await messaging().getToken();
+    if (fcmToken) {
+      console.log('Your Firebase Token is:', fcmToken);
+    } else {
+      console.log('Failed', 'No token received');
+    }
+  };
+
+  requestUserPermission();
+}, []);
 
 
   useEffect(() => {

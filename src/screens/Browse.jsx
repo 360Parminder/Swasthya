@@ -45,7 +45,7 @@ const Browse = ({navigation}) => {
                     <Icon name="chevron-forward" color="#000" Size={36} />
                 </View>
                 </Pressable>
-               <Pressable>
+               <Pressable onPress={()=>navigation.navigate('Medication')}>
                <View style={styles.categorieHolder}>
                 <View style={{
                          flexDirection:'row',

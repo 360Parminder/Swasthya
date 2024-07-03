@@ -2,7 +2,8 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import StatisticsScreen from '../components/StatisticsScreen';
-import Activity from '../screens/SubScreens/Activity';
+import Activity from '../screens/BrowseScreen/Activity';
+import Medication from '../screens/BrowseScreen/Medication';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ const StackNavigator = ({ navigation }) => {
           }),
         }} 
       />
+      <Stack.Screen name='Medication' component={Medication} options={{ headerShown: true }} />
     </Stack.Navigator>
   );
 };

@@ -7,7 +7,9 @@ import AuthenticationNavigator from '../context/AuthStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { notificationListener } from '../utils/fcmUtils';
 
+
 const AppNavigator = () => {
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 

@@ -22,6 +22,28 @@ const Medication = () => {
       <MedicineCard/>
 
       </View>
+      <View style={{
+        backgroundColor:'#fefae0',
+        marginTop:20
+      }}>
+        <View style={{
+          flexDirection:'row',
+          justifyContent:'space-between',
+          padding:10
+        }}>
+        <Text style={{
+          fontSize:20,
+          fontWeight:'bold',
+          color:'#000',
+          fontFamily: 'GaMaamli-Regular',
+        }}>Your Medications</Text>
+        <Text style={{
+          fontSize:20,
+          fontWeight:'bold',
+          color:'#000'
+        }}>Edit</Text>
+        </View>
+      </View>
       </ScrollView>
     </View>
   )

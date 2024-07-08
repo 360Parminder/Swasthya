@@ -4,6 +4,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from "reac
 import Path from "../services/Path";
 import BorderCard from "../components/BorderCard";
 import Icon from 'react-native-vector-icons/Ionicons';
+import AuthenticationNavigator from "../context/AuthStack";
 
 
 const Profile = ({ navigation }) => {
@@ -34,15 +35,15 @@ const Profile = ({ navigation }) => {
   // const date = userData?.dob?.toISOString()
 
   const logout = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const response = Path.get("/logout", {
+    const token = await AsyncStorage.getItem('userToken');
+    const response = await Path.get("/logout", {
       headers: {
         'authorization': `Bearer ${token}`
       }
     })
     if (response) {
-      AsyncStorage.removeItem('token');
-      navigation.navigate('Signin')
+      AsyncStorage.removeItem('userToken');
+      navigation.navigate('AuthenticationNavigator');
     }
     else {
       alert("something went wrong")
@@ -113,6 +114,34 @@ const Profile = ({ navigation }) => {
           </View>
         </Pressable>
       </View>
+      
+        <Pressable onPress={()=>{logout()}} style={{
+          backgroundColor:'#a3c4f3',
+          padding: 10,
+          borderRadius: 10,
+          margin: 10,
+          width: '90%',
+          alignSelf: 'center',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+
+        }}>
+          <Text style={{
+            color: '#000',
+          }}>
+            Logout
+          </Text>
+        </Pressable>
+  
 
     </View>
   );

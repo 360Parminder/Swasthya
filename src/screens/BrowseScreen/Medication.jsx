@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Image, Pressable, Modal, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Pressable, Modal, TextInput, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import MedicineCard from '../../components/MedicineCard';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -19,6 +19,14 @@ const MedicationDetail = ({ name, type, dosage, frequency }) => {
 
 const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
   const [currentScreen, setCurrentScreen] = useState(0);
+  const [medicationName, setMedicationName] = useState('');
+  const [medicationType, setMedicationType] = useState('');
+  const [medicationDosage, setMedicationDosage] = useState('');
+  const [medicationFrequency, setMedicationFrequency] = useState('');
+  const [medicationDetail, setMedicationDetail] = useState('');
+  const [medicationImage, setMedicationImage] = useState('');
+
+
 
   const screens = [
     <View key="screen1" style={styles.modalContent}>
@@ -26,11 +34,13 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
         marginTop:40,
         width: 100,
         height: 100,
-      }} source={require('../../assets/images/drugs.png')} resizeMode='contain'/>
+      }} source={require('../../assets/images/health-report.gif')} resizeMode='contain'/>
       <Text style={styles.modalText}>Medication Name</Text>
       <TextInput 
       placeholder='Add Medication Name'
       style={styles.modalInput}
+      placeholderTextColor={'#000'}
+      onChangeText={text => setMedicationName(text)}
 
 
       />
@@ -39,7 +49,49 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
       </Pressable>
     </View>,
     <View key="screen2" style={styles.modalContent}>
-      <Text style={styles.modalText}>Screen 2</Text>
+      <Image style={{
+        marginTop:40,
+        width: 100,
+        height: 100,
+        }} source={require('../../assets/images/drugsbottle.gif')} resizeMode='contain'/>
+      <Text style={styles.modalText}>Choose the Medication Type</Text>
+      <View style={{
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        // alignItems: 'center',
+        // marginTop: 20,
+        
+        borderRadius:12,
+        backgroundColor: '#fff',
+        padding: 10,
+        width: 380,
+        // height: 100,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
+        gap:10
+        
+      }}>
+        {/* <Text style={{}}>Common Form</Text> */}
+        <Pressable style={{
+
+        }} onPress={() => setMedicationType('capsule')}><Text style={{
+          color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+        }}>Capsule</Text></Pressable>
+        <Pressable style={{}} onPress={() => setMedicationType('tablet')}><Text style={{
+          color: '#000',
+        }}>Tablet</Text></Pressable>
+        <Pressable style={{}} onPress={() => setMedicationType('Liquid')}><Text style={{
+          color: '#000',
+        }}>Liqued</Text></Pressable>
+        <Pressable style={{}} onPress={() => setMedicationType('topical')}><Text style={{
+          color: '#000',
+        }}>Topical</Text></Pressable>
+      </View>
       <Pressable style={styles.modalButton} onPress={() => setCurrentScreen(2)}>
         <Text style={styles.modalButtonText}>Next</Text>
       </Pressable>
@@ -112,7 +164,7 @@ const Medication = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f9fb',
     justifyContent: 'center',
   },
   logTitle: {
@@ -148,7 +200,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   yourMedicationsContainer: {
-    backgroundColor: '#fefae0',
+    // backgroundColor: '#fefae0',
     marginTop: 20,
   },
   yourMedicationsHeader: {
@@ -160,7 +212,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#000',
-    fontFamily: 'GaMaamli-Regular',
   },
   editText: {
     fontSize: 20,
@@ -224,7 +275,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '100%',
-    height: '90%',
+    height: '98%',
     backgroundColor: 'white',
     // borderRadius: 20,
     borderTopLeftRadius:20,
@@ -251,7 +302,8 @@ const styles = StyleSheet.create({
     color:'#000',
   },
   modalButton: {
-   marginTop:360,
+  //  marginTop:360,
+  marginVertical:10,
     width:380,
     backgroundColor: '#2196F3',
     borderRadius: 10,

@@ -8,7 +8,7 @@ import ECGWave from '../components/ECGWave';
 import { BarChart } from 'react-native-gifted-charts';
 import Path from '../services/Path';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
   const [userRank, setUserRank] = useState();
 
 
-  const sampleData = [50, 60, 55, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
+  const sampleData = [50, 60, 50, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
   const barData = [
     { value: 250, label: 'Mon' },
     { value: 500, label: 'Tue' },

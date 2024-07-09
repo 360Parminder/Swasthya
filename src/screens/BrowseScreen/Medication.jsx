@@ -25,7 +25,7 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
   const [medicationFrequency, setMedicationFrequency] = useState('');
   const [medicationDetail, setMedicationDetail] = useState('');
   const [medicationImage, setMedicationImage] = useState('');
-
+  const [medicationStrength,setMedicationStrength] = useState('');
 
 
   const screens = [
@@ -41,8 +41,6 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
       style={styles.modalInput}
       placeholderTextColor={'#000'}
       onChangeText={text => setMedicationName(text)}
-
-
       />
       <Pressable style={styles.modalButton} onPress={() => setCurrentScreen(1)}>
         <Text style={styles.modalButtonText}>Next</Text>
@@ -81,6 +79,9 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
           color: '#000',
           fontSize: 16,
           fontWeight: '500',
+          borderBottomWidth:2,
+          borderBottomColor: '#000',
+          padding: 10,
         }}>Capsule</Text></Pressable>
         <Pressable style={{}} onPress={() => setMedicationType('tablet')}><Text style={{
           color: '#000',
@@ -97,13 +98,75 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
       </Pressable>
     </View>,
     <View key="screen3" style={styles.modalContent}>
-      <Text style={styles.modalText}>Screen 3</Text>
+      <Image style={{
+        marginTop:40,
+        width: 100,
+        height: 100,
+      }} source={require('../../assets/images/vaccine.gif')}/>
+      <Text style={styles.modalText}>Add the Medication Strength</Text>
+      <View>
+        <TextInput
+        style={styles.modalInput}
+        placeholderTextColor={'#000'}
+        placeholder="Enter Medication Strength"
+        onChangeText={setMedicationStrength}
+        value={medicationStrength}
+        />
+      </View>
+      <View style={{
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        // alignItems: 'center',
+        // marginTop: 20,
+        
+        borderRadius:12,
+        backgroundColor: '#fff',
+        padding: 10,
+        width: 380,
+        // height: 100,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
+        gap:10
+        
+      }}>
+        {/* <Text style={{}}>Common Form</Text> */}
+        <Pressable style={{
+
+        }} onPress={() => setMedicationType('mg')}><Text style={{
+          color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+          borderBottomWidth:2,
+          borderBottomColor: '#000',
+          padding: 10,
+        }}>mg</Text></Pressable>
+        <Pressable style={{}} onPress={() => setMedicationType('mcg')}><Text style={{
+          color: '#000',
+        }}>mcg</Text></Pressable>
+        <Pressable style={{}} onPress={() => setMedicationType('g')}><Text style={{
+          color: '#000',
+        }}>g</Text></Pressable>
+        <Pressable style={{}} onPress={() => setMedicationType('ml')}><Text style={{
+          color: '#000',
+        }}>ml</Text></Pressable>
+        <Pressable style={{}} onPress={() => setMedicationType('%')}><Text style={{
+          color: '#000',
+        }}>%</Text></Pressable>
+      </View>
       <Pressable style={styles.modalButton} onPress={() => setCurrentScreen(3)}>
         <Text style={styles.modalButtonText}>Next</Text>
       </Pressable>
     </View>,
     <View key="screen4" style={styles.modalContent}>
-      <Text style={styles.modalText}>Screen 4</Text>
+      <Image style={{
+        marginTop:40,
+        width: 100,
+        height: 100,
+      }} source={require('../../assets/images/calendar.gif')}/>
+      <Text style={styles.modalText}>When will </Text>
       <Pressable style={styles.modalButton} onPress={() => setModalVisible(false)}>
         <Text style={styles.modalButtonText}>Finish</Text>
       </Pressable>
@@ -275,7 +338,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '100%',
-    height: '98%',
+    height: '96%',
     backgroundColor: 'white',
     // borderRadius: 20,
     borderTopLeftRadius:20,

@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.heal-upgrade</string>
+	<string>org.reactjs.native.example.Swasthya</string>
 	<key>PROJECT_ID</key>
 	<string>heal-61c11</string>
 	<key>STORAGE_BUCKET</key>

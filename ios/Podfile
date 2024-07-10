@@ -18,7 +18,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'heal_upgrade' do
+target 'Swasthya' do
   config = use_native_modules!
   use_frameworks! :linkage => :static
   $RNFirebaseAsStaticFramework = true
@@ -28,7 +28,7 @@ target 'heal_upgrade' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'heal_upgradeTests' do
+  target 'SwasthyaTests' do
     inherit! :complete
     # Pods for testing
   end

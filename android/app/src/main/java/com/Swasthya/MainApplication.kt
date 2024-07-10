@@ -1,4 +1,4 @@
-package com.heal_upgrade
+package com.Swasthya
 
 import android.app.Application
 import com.facebook.react.PackageList

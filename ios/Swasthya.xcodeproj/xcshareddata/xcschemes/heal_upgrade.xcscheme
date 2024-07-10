@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "heal_upgrade.app"
-               BlueprintName = "heal_upgrade"
-               ReferencedContainer = "container:heal_upgrade.xcodeproj">
+               BuildableName = "Swasthya.app"
+               BlueprintName = "Swasthya"
+               ReferencedContainer = "container:Swasthya.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "heal_upgradeTests.xctest"
-               BlueprintName = "heal_upgradeTests"
-               ReferencedContainer = "container:heal_upgrade.xcodeproj">
+               BuildableName = "SwasthyaTests.xctest"
+               BlueprintName = "SwasthyaTests"
+               ReferencedContainer = "container:Swasthya.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "heal_upgrade.app"
-            BlueprintName = "heal_upgrade"
-            ReferencedContainer = "container:heal_upgrade.xcodeproj">
+            BuildableName = "Swasthya.app"
+            BlueprintName = "Swasthya"
+            ReferencedContainer = "container:Swasthya.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "heal_upgrade.app"
-            BlueprintName = "heal_upgrade"
-            ReferencedContainer = "container:heal_upgrade.xcodeproj">
+            BuildableName = "Swasthya.app"
+            BlueprintName = "Swasthya"
+            ReferencedContainer = "container:Swasthya.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

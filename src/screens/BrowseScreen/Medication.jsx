@@ -79,18 +79,54 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
           color: '#000',
           fontSize: 16,
           fontWeight: '500',
-          borderBottomWidth:2,
-          borderBottomColor: '#000',
+          // borderBottomWidth:2,
+          // borderBottomColor: '#000',
           padding: 10,
         }}>Capsule</Text></Pressable>
-        <Pressable style={{}} onPress={() => setMedicationType('tablet')}><Text style={{
+        <Pressable style={{
           color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+          // borderBottomWidth:2,
+          // borderBottomColor: '#000',
+          padding: 10,
+        }} onPress={() => setMedicationType('tablet')}><Text style={{
+          color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+          // borderBottomWidth:2,
+          // borderBottomColor: '#000',
+          // padding: 10,
         }}>Tablet</Text></Pressable>
-        <Pressable style={{}} onPress={() => setMedicationType('Liquid')}><Text style={{
+        <Pressable style={{
           color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+          // borderBottomWidth:2,
+          // borderBottomColor: '#000',
+          padding: 10,
+        }} onPress={() => setMedicationType('Liquid')}><Text style={{
+          color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+          borderBottomWidth:2,
+          borderBottomColor: '#000',
+          // padding: 10,
         }}>Liqued</Text></Pressable>
-        <Pressable style={{}} onPress={() => setMedicationType('topical')}><Text style={{
+        <Pressable style={{
           color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+          // borderBottomWidth:2,
+          // borderBottomColor: '#000',
+          padding: 10,
+        }} onPress={() => setMedicationType('topical')}><Text style={{
+          color: '#000',
+          fontSize: 16,
+          fontWeight: '500',
+          borderBottomWidth:2,
+          borderBottomColor: '#000',
+          // padding: 10,
         }}>Topical</Text></Pressable>
       </View>
       <Pressable style={styles.modalButton} onPress={() => setCurrentScreen(2)}>
@@ -108,9 +144,10 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
         <TextInput
         style={styles.modalInput}
         placeholderTextColor={'#000'}
-        placeholder="Enter Medication Strength"
+        placeholder="Add Strength"
         onChangeText={setMedicationStrength}
         value={medicationStrength}
+        keyboardType='numaric'
         />
       </View>
       <View style={{
@@ -132,6 +169,7 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
         gap:10
         
       }}>
+       
         {/* <Text style={{}}>Common Form</Text> */}
         <Pressable style={{
 
@@ -166,7 +204,26 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
         width: 100,
         height: 100,
       }} source={require('../../assets/images/calendar.gif')}/>
-      <Text style={styles.modalText}>When will </Text>
+      <Text style={styles.modalText}>When will you take this?</Text>
+      <View style={[styles.modalInput,{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: 380,
+        marginTop: 20,
+        }]}>
+          <Text style={{
+            fontSize: 18,
+            fontWeight: '500',
+          }}>Frequency</Text>
+          <Text style={{
+            color: '#003566',
+            fontSize: 18,
+            fontWeight: '600',
+            fontFamily:'Roboto-Black',
+            
+          }}>Every Day</Text>
+        </View>
       <Pressable style={styles.modalButton} onPress={() => setModalVisible(false)}>
         <Text style={styles.modalButtonText}>Finish</Text>
       </Pressable>

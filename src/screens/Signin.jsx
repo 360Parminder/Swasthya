@@ -4,12 +4,15 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } fro
 import Path from '../services/Path';
 import {useNavigation} from '@react-navigation/native'
 import { getFCMToken } from '../utils/fcmUtils';
+import LoadingWave from '../components/LoadingWave'
 const SignIn = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
   const [fcmToken, setFCMToken] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+  const [loader,setLoader] = useState(false);
 
 
   useEffect(() => {
@@ -87,9 +90,10 @@ const SignIn = () => {
   // }, []);
 
   const handleSignIn = async () => {
+    setLoader(true)
     try {
     //  navigation.navigate('root');
-      console.log(phoneNumber, password);
+      // console.log(phoneNumber, password);
       if (phoneNumber && password) {
         //work after backend
         const response = await Path.post("/login", {
@@ -102,53 +106,56 @@ const SignIn = () => {
           await AsyncStorage.setItem('userToken', response.data.token);
           setToken(response.data.token);
           navigation.navigate('root');
+          setLoader(false)
           // work after navigation set
         } else {
           Alert.alert("error", "invalid credentials");
+          setLoader(false)
         }
       } else {
         Alert.alert("Please fill all the fields");
+        setLoader(false)
       }
     } catch (error) {
       Alert.alert("error", "invalid credentials");
-      console.log(error);
+      setLoader(false)
+      // console.log(error);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require('../assets/images/SignIn.png')}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>Welcome Back to Heal</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Mobile Number"
-        placeholderTextColor="#000000"
-        onChangeText={text => setPhoneNumber(text)}
-        value={phoneNumber}
-        keyboardType="phone-pad"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#000000"
-        onChangeText={text => setPassword(text)}
-        value={password}
-        secureTextEntry={true}
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { navigation.navigate('Otpverification') }} style={{
-        marginTop: 10,
-      }} >
-        <Text style={[styles.buttonText, { color: '#000000' }]}>Not Registered</Text>
-      </TouchableOpacity>
-    </View>
+    loader ? <LoadingWave/> : (
+      <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../assets/images/SignIn.png')}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>Welcome Back to Heal</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Mobile Number"
+          placeholderTextColor="#000000"
+          onChangeText={text => setPhoneNumber(text)}
+          value={phoneNumber}
+          keyboardType="phone-pad"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#000000"
+          onChangeText={text => setPassword(text)}
+          value={password}
+          secureTextEntry={true}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+          <Text style={styles.buttonText}>Sign In</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Otpverification')} style={styles.notRegistered}>
+          <Text style={[styles.buttonText, styles.notRegisteredText]}>Not Registered</Text>
+        </TouchableOpacity>
+      </View>
+    )
   );
 };
 
@@ -160,8 +167,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#E6E2EE',
   },
   logo: {
-    width: 300, // Adjust the width as needed
-    height: 300, // Adjust the height as needed
+    width: 300,
+    height: 300,
     marginBottom: 20,
   },
   title: {
@@ -177,8 +184,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 15,
-    color: '#000000'
-    // placeholderTextColor: "#000000",
+    color: '#000000',
   },
   button: {
     backgroundColor: '#5D4FB3',
@@ -190,6 +196,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  notRegistered: {
+    marginTop: 10,
+  },
+  notRegisteredText: {
+    color: '#000000',
   },
 });
 

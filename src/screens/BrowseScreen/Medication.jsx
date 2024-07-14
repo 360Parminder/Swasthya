@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Image, Pressable, Modal, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Modal, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import MedicineCard from '../../components/MedicineCard';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -6,7 +6,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const MedicationDetail = ({ name, type, dosage, frequency }) => {
   return (
     <View style={styles.medicationDetail}>
-      <Image style={styles.medicationImage} source={require('../../assets/images/capsule.jpg')} />
+      <View style={styles.medicationImageContainer}>
+        <View style={styles.medicationImage}></View>
+      </View>
       <View style={styles.medicationInfo}>
         <Text style={styles.medicationName}>{name}</Text>
         <Text>{type}</Text>
@@ -21,212 +23,121 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
   const [currentScreen, setCurrentScreen] = useState(0);
   const [medicationName, setMedicationName] = useState('');
   const [medicationType, setMedicationType] = useState('');
-  const [medicationDosage, setMedicationDosage] = useState('');
+  const [medicationStrength, setMedicationStrength] = useState('');
   const [medicationFrequency, setMedicationFrequency] = useState('');
-  const [medicationDetail, setMedicationDetail] = useState('');
-  const [medicationImage, setMedicationImage] = useState('');
-  const [medicationStrength,setMedicationStrength] = useState('');
-
 
   const screens = [
     <View key="screen1" style={styles.modalContent}>
-      <Image style={{
-        marginTop:40,
-        width: 100,
-        height: 100,
-      }} source={require('../../assets/images/health-report.gif')} resizeMode='contain'/>
+        <View style={[styles.modalHeader,{justifyContent:''}]}>
+        <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <Text style={styles.modalCancelText}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
+      <Image style={styles.modalImage} source={require('../../assets/images/health-report.gif')} resizeMode='contain'/>
       <Text style={styles.modalText}>Medication Name</Text>
       <TextInput 
-      placeholder='Add Medication Name'
-      style={styles.modalInput}
-      placeholderTextColor={'#000'}
-      onChangeText={text => setMedicationName(text)}
+        placeholder='Add Medication Name'
+        style={styles.modalInput}
+        placeholderTextColor={'#000'}
+        onChangeText={text => setMedicationName(text)}
       />
-      <Pressable style={styles.modalButton} onPress={() => setCurrentScreen(1)}>
+      <TouchableOpacity style={styles.modalButton} onPress={() => setCurrentScreen(1)}>
         <Text style={styles.modalButtonText}>Next</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>,
     <View key="screen2" style={styles.modalContent}>
-      <Image style={{
-        marginTop:40,
-        width: 100,
-        height: 100,
-        }} source={require('../../assets/images/drugsbottle.gif')} resizeMode='contain'/>
-      <Text style={styles.modalText}>Choose the Medication Type</Text>
-      <View style={{
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        // alignItems: 'center',
-        // marginTop: 20,
-        
-        borderRadius:12,
-        backgroundColor: '#fff',
-        padding: 10,
-        width: 380,
-        // height: 100,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 1,
-        gap:10
-        
-      }}>
-        {/* <Text style={{}}>Common Form</Text> */}
-        <Pressable style={{
-
-        }} onPress={() => setMedicationType('capsule')}><Text style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          // borderBottomWidth:2,
-          // borderBottomColor: '#000',
-          padding: 10,
-        }}>Capsule</Text></Pressable>
-        <Pressable style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          // borderBottomWidth:2,
-          // borderBottomColor: '#000',
-          padding: 10,
-        }} onPress={() => setMedicationType('tablet')}><Text style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          // borderBottomWidth:2,
-          // borderBottomColor: '#000',
-          // padding: 10,
-        }}>Tablet</Text></Pressable>
-        <Pressable style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          // borderBottomWidth:2,
-          // borderBottomColor: '#000',
-          padding: 10,
-        }} onPress={() => setMedicationType('Liquid')}><Text style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          borderBottomWidth:2,
-          borderBottomColor: '#000',
-          // padding: 10,
-        }}>Liqued</Text></Pressable>
-        <Pressable style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          // borderBottomWidth:2,
-          // borderBottomColor: '#000',
-          padding: 10,
-        }} onPress={() => setMedicationType('topical')}><Text style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          borderBottomWidth:2,
-          borderBottomColor: '#000',
-          // padding: 10,
-        }}>Topical</Text></Pressable>
+      <View style={styles.modalHeader}>
+        <TouchableOpacity style={styles.modalBackButton} onPress={() => setCurrentScreen(0)}>
+          <Icon name={'chevron-back-outline'} color={'#3a86ff'} size={18}/>
+          <Text style={styles.modalBackText}>Back</Text>
+        </TouchableOpacity>
+        <Text style={[styles.modalHeaderText,{fontSize:18,color:'#000'}]}>{medicationName}</Text>
+        <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <Text style={styles.modalCancelText}>Cancel</Text>
+        </TouchableOpacity>
       </View>
-      <Pressable style={styles.modalButton} onPress={() => setCurrentScreen(2)}>
+      <Image style={styles.modalImage} source={require('../../assets/images/drugsbottle.gif')} resizeMode='contain'/>
+      <Text style={styles.modalText}>Choose the Medication Type</Text>
+      <View style={styles.medicationTypeContainer}>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('Capsule')}>
+          <Text style={styles.medicationTypeText}>Capsule</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('Tablet')}>
+          <Text style={styles.medicationTypeText}>Tablet</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('Liquid')}>
+          <Text style={styles.medicationTypeText}>Liquid</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('Topical')}>
+          <Text style={styles.medicationTypeText}>Topical</Text>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity style={styles.modalButton} onPress={() => setCurrentScreen(2)}>
         <Text style={styles.modalButtonText}>Next</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>,
     <View key="screen3" style={styles.modalContent}>
-      <Image style={{
-        marginTop:40,
-        width: 100,
-        height: 100,
-      }} source={require('../../assets/images/vaccine.gif')}/>
+      <View style={styles.modalHeader}>
+        <TouchableOpacity style={styles.modalBackButton} onPress={() => setCurrentScreen(1)}>
+          <Icon name={'chevron-back-outline'} color={'#3a86ff'} size={18}/>
+          <Text style={styles.modalBackText}>Back</Text>
+        </TouchableOpacity>
+        <Text style={[styles.modalHeaderText,{fontSize:18,color:'#000'}]}>{medicationName}</Text>
+        <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <Text style={styles.modalCancelText}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
+      <Image style={styles.modalImage} source={require('../../assets/images/vaccine.gif')} resizeMode='contain'/>
       <Text style={styles.modalText}>Add the Medication Strength</Text>
-      <View>
-        <TextInput
+      <TextInput
         style={styles.modalInput}
         placeholderTextColor={'#000'}
         placeholder="Add Strength"
         onChangeText={setMedicationStrength}
         value={medicationStrength}
-        keyboardType='numaric'
-        />
+        keyboardType='numeric'
+      />
+      <View style={styles.medicationTypeContainer}>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('mg')}>
+          <Text style={styles.medicationTypeText}>mg</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('mcg')}>
+          <Text style={styles.medicationTypeText}>mcg</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('g')}>
+          <Text style={styles.medicationTypeText}>g</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('ml')}>
+          <Text style={styles.medicationTypeText}>ml</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.medicationTypeOption} onPress={() => setMedicationType('%')}>
+          <Text style={styles.medicationTypeText}>%</Text>
+        </TouchableOpacity>
       </View>
-      <View style={{
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        // alignItems: 'center',
-        // marginTop: 20,
-        
-        borderRadius:12,
-        backgroundColor: '#fff',
-        padding: 10,
-        width: 380,
-        // height: 100,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 1,
-        gap:10
-        
-      }}>
-       
-        {/* <Text style={{}}>Common Form</Text> */}
-        <Pressable style={{
-
-        }} onPress={() => setMedicationType('mg')}><Text style={{
-          color: '#000',
-          fontSize: 16,
-          fontWeight: '500',
-          borderBottomWidth:2,
-          borderBottomColor: '#000',
-          padding: 10,
-        }}>mg</Text></Pressable>
-        <Pressable style={{}} onPress={() => setMedicationType('mcg')}><Text style={{
-          color: '#000',
-        }}>mcg</Text></Pressable>
-        <Pressable style={{}} onPress={() => setMedicationType('g')}><Text style={{
-          color: '#000',
-        }}>g</Text></Pressable>
-        <Pressable style={{}} onPress={() => setMedicationType('ml')}><Text style={{
-          color: '#000',
-        }}>ml</Text></Pressable>
-        <Pressable style={{}} onPress={() => setMedicationType('%')}><Text style={{
-          color: '#000',
-        }}>%</Text></Pressable>
-      </View>
-      <Pressable style={styles.modalButton} onPress={() => setCurrentScreen(3)}>
+      <TouchableOpacity style={styles.modalButton} onPress={() => setCurrentScreen(3)}>
         <Text style={styles.modalButtonText}>Next</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>,
     <View key="screen4" style={styles.modalContent}>
-      <Image style={{
-        marginTop:40,
-        width: 100,
-        height: 100,
-      }} source={require('../../assets/images/calendar.gif')}/>
+      <View style={styles.modalHeader}>
+        <TouchableOpacity style={styles.modalBackButton} onPress={() => setCurrentScreen(2)}>
+          <Icon name={'chevron-back-outline'} color={'#3a86ff'} size={18}/>
+          <Text style={styles.modalBackText}>Back</Text>
+        </TouchableOpacity>
+        <Text style={[styles.modalHeaderText,{fontSize:18,color:'#000'}]}>{medicationName}</Text>
+        <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <Text style={styles.modalCancelText}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
+      <Image style={styles.modalImage} source={require('../../assets/images/calendar.gif')} resizeMode='contain'/>
       <Text style={styles.modalText}>When will you take this?</Text>
-      <View style={[styles.modalInput,{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: 380,
-        marginTop: 20,
-        }]}>
-          <Text style={{
-            fontSize: 18,
-            fontWeight: '500',
-          }}>Frequency</Text>
-          <Text style={{
-            color: '#003566',
-            fontSize: 18,
-            fontWeight: '600',
-            fontFamily:'Roboto-Black',
-            
-          }}>Every Day</Text>
-        </View>
-      <Pressable style={styles.modalButton} onPress={() => setModalVisible(false)}>
+      <View style={styles.frequencyContainer}>
+        <Text style={styles.frequencyLabel}>Frequency</Text>
+        <Text style={styles.frequencyValue}>Every Day</Text>
+      </View>
+      <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
         <Text style={styles.modalButtonText}>Finish</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   ];
 
@@ -270,9 +181,9 @@ const Medication = () => {
           <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
           <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
           <View style={styles.addMedicationContainer}>
-            <Pressable onPress={() => setModalVisible(true)}>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Text style={styles.addMedicationText}>Add Medication</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -284,125 +195,92 @@ const Medication = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f9fb',
-    justifyContent: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
   },
   logTitle: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
-    marginHorizontal: 20,
-    marginTop: 20,
+    color: '#6b6b6b',
+    marginTop: 40,
   },
   asNeededContainer: {
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginHorizontal: 15,
-    marginVertical: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 14,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    marginTop: 30,
   },
   asNeededTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#6b6b6b',
   },
   addIcon: {
-    fontWeight: '700',
-    fontSize: 26,
+    alignSelf: 'flex-end',
   },
   yourMedicationsContainer: {
-    // backgroundColor: '#fefae0',
-    marginTop: 20,
+    marginTop: 30,
   },
   yourMedicationsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
   },
   yourMedicationsTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#6b6b6b',
   },
   editText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#3a86ff',
   },
   medicationDetail: {
-    marginHorizontal: 20,
-    marginVertical: 20,
-    borderRadius: 12,
-    backgroundColor: '#fff',
     flexDirection: 'row',
-    padding: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  medicationImageContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    borderColor: '#3a86ff',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e7f0ff',
   },
   medicationImage: {
-    width: '40%',
-    height: '100%',
+    width: 30,
+    height: 30,
+    borderRadius: 30,
+    backgroundColor: '#3a86ff',
   },
   medicationInfo: {
     marginLeft: 20,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
   },
   medicationName: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
-    color: '#000',
   },
   addMedicationContainer: {
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    marginTop: 20,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 15,
-    marginVertical: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 14,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   addMedicationText: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#03045e',
-    marginHorizontal: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#3a86ff',
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalView: {
-    width: '100%',
-    height: '90%',
+    width: '90%',
     backgroundColor: 'white',
-    // borderRadius: 20,
-    borderTopLeftRadius:20,
-    borderTopRightRadius:20,
-    padding: 35,
-    // alignItems: 'center',
-    justifyContent:'space-between',
+    borderRadius: 20,
+    padding: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -410,41 +288,87 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalContent: {
-    justifyContent: 'center',
     alignItems: 'center',
   },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  modalBackButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  modalBackText: {
+    fontSize: 18,
+    color: '#3a86ff',
+  },
+  modalCancelText: {
+    fontSize: 18,
+    color: '#3a86ff',
+  },
+  modalImage: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
+  },
   modalText: {
-    marginTop:30,
-    marginBottom: 15,
-    textAlign: 'center',
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
-    color:'#000',
+    marginBottom: 20,
+  },
+  modalInput: {
+    width: '100%',
+    padding: 10,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 20,
   },
   modalButton: {
-  //  marginTop:360,
-  marginVertical:10,
-    width:380,
-    backgroundColor: '#2196F3',
+    width: '100%',
+    backgroundColor: '#3a86ff',
+    padding: 15,
     borderRadius: 10,
-    padding: 10,
-    elevation: 2,
+    alignItems: 'center',
   },
   modalButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalInput:{
-    width: 380,
-    height: 50,
-    backgroundColor: '#F0F0F0',
-    color:'#000',
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 10,
     fontSize: 18,
-
+    color: 'white',
+  },
+  medicationTypeContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  medicationTypeOption: {
+    width: '48%',
+    backgroundColor: '#e7f0ff',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  medicationTypeText: {
+    fontSize: 16,
+    color: '#3a86ff',
+  },
+  frequencyContainer: {
+    width: '100%',
+    padding: 15,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  frequencyLabel: {
+    fontSize: 16,
+    color: '#000',
+  },
+  frequencyValue: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

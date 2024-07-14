@@ -83,7 +83,7 @@ const Profile = ({ navigation }) => {
 
       <View style={styles.card}>
 
-        <Pressable>
+        <Pressable onPress={()=>navigation.navigate('Profile Settings')}>
           <View style={styles.cardList}>
 
             <Text style={styles.cardText}>Account</Text>

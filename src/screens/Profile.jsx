@@ -16,7 +16,7 @@ const Profile = ({ navigation }) => {
       const fetchUserProfile= async()=>{
 
         const token = await AsyncStorage.getItem('userToken');
-          console.log(token);
+          // console.log(token);
           const response = await Path.get("/profile",{
             headers: {
               'authorization': `Bearer ${token}`

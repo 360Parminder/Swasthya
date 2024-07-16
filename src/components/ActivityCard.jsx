@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const ActivityCard = ({ title, date, value, valueUnit }) => {
+const ActivityCard = ({ title,iconName,fcolor, date, value, valueUnit }) => {
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
@@ -11,8 +11,8 @@ const ActivityCard = ({ title, date, value, valueUnit }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                }}>
-               <Icon name='flame' color={'#fb5607'} size={22}/>
-               <Text style={styles.title}>{title}</Text>
+               <Icon name={iconName} color={fcolor} size={22}/>
+               <Text style={[styles.title,{color:fcolor}]}>{title}</Text>
                </View>
                <View style={{
                 flexDirection: 'row',
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#fb5607',
         marginBottom: 5,
     },
     date: {

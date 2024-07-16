@@ -10,11 +10,11 @@ const Activity = () => {
         gap:14,
         marginTop:16
      }}>
-        <ActivityCard title={'Active Energy'} date={'May 2023'} value={'0.31'} valueUnit={'KCal'} />
-        <ActivityCard title={'Resting Energy'} date={'May 2023'} value={'281'} valueUnit={'KCal'} />
-        <ActivityCard title={'Steps'} date={'May 2023'} value={'215'} valueUnit={'KCal'} />
-        <ActivityCard title={'Walking '} date={'May 2023'} value={'0.15'} valueUnit={'Km'} />
-        <ActivityCard title={'Stairs Climbed'} date={'May 2023'} value={'1'} valueUnit={'floor'} />
+        <ActivityCard title={'Active Energy'} iconName={'flame'} fcolor={'#fb5607'} date={'May 2023'} value={'0.31'} valueUnit={'KCal'} />
+        <ActivityCard title={'Resting Energy'} iconName={'flame'} fcolor={'#fb5607'} date={'May 2023'} value={'281'} valueUnit={'KCal'} />
+        <ActivityCard title={'Steps'} iconName={'flame'} fcolor={'#fb5607'} date={'May 2023'} value={'215'} valueUnit={'KCal'} />
+        <ActivityCard title={'Walking '} iconName={'flame'} fcolor={'#fb5607'} date={'May 2023'} value={'0.15'} valueUnit={'Km'} />
+        <ActivityCard title={'Stairs Climbed'} iconName={'flame'} fcolor={'#fb5607'} date={'May 2023'} value={'1'} valueUnit={'floor'} />
      </View>
 
     </View>

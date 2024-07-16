@@ -4,7 +4,6 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from "reac
 import Path from "../services/Path";
 import BorderCard from "../components/BorderCard";
 import Icon from 'react-native-vector-icons/Ionicons';
-import AuthenticationNavigator from "../context/AuthStack";
 
 
 const Profile = ({ navigation }) => {
@@ -23,7 +22,7 @@ const Profile = ({ navigation }) => {
             }
           })
           if (response) {
-            console.log("response",response.data.data);
+            // console.log("response",response.data.data);
             setUserData(response.data.data)
             }
 

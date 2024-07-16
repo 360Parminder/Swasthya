@@ -5,6 +5,7 @@ import StatisticsScreen from '../components/StatisticsScreen';
 import Activity from '../screens/BrowseScreen/Activity';
 import Medication from '../screens/BrowseScreen/Medication';
 import AccountSettings from '../screens/ProfileScreen/AccountSettings';
+import BodyMeasurements from '../screens/BrowseScreen/BodyMeasurements';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const StackNavigator = ({ navigation }) => {
       />
       <Stack.Screen name='Medication' component={Medication} options={{ headerShown: true }} />
       <Stack.Screen name='Profile Settings' component={AccountSettings} options={{ headerShown: true }} />
+      <Stack.Screen name='Body Measurements' component={BodyMeasurements} options={{ headerShown: true }} />
 
     </Stack.Navigator>
   );

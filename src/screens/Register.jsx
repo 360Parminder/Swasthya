@@ -19,13 +19,13 @@ const Register = ({ navigation, route }) => {
 
   console.log(foodPreference);
   const handleRegister = async () => {
-    console.log("Name:", name);
-    console.log("Password:", password);
-    console.log("DOB:", date);
-    console.log("Gender:", gender);
-    console.log("Food Preference:", foodPreference);
-    console.log("Height:", height);
-    console.log("Weight:", weight);
+    // console.log("Name:", name);
+    // console.log("Password:", password);
+    // console.log("DOB:", date);
+    // console.log("Gender:", gender);
+    // console.log("Food Preference:", foodPreference);
+    // console.log("Height:", height);
+    // console.log("Weight:", weight);
     try {
       if (name && password && date && gender && foodPreference && height && weight) {
         //work after backend  

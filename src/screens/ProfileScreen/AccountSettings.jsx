@@ -1,4 +1,4 @@
-import { View, Text, Image, Touchable, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import React, { useState } from 'react'
 import {launchImageLibrary} from 'react-native-image-picker';
 
@@ -6,11 +6,13 @@ import {launchImageLibrary} from 'react-native-image-picker';
 const AccountSettings = () => {
   const [userProfile,setUserProfile]=useState(null);
   const choosePhoto= async()=>{
+    console.log('choose Photo function running');
     const option={
-      
+      mediaType: 'photo',
+      quality: 1,
     }
     const result = await launchImageLibrary(option)
-    console.log(result.assets[0].uri);
+    console.log(result);
     if (result.assets[0].uri) {
       console.log(result.assets[0].uri);
       setUserProfile(result)
@@ -24,7 +26,7 @@ const AccountSettings = () => {
         marginTop:60,
         alignItems:'center'
       }}>
-        <TouchableOpacity onPress={()=>{choosePhoto}}>
+        <TouchableOpacity onPress={()=>{choosePhoto()}}>
 
         <Image style={{
           width:120,
@@ -35,7 +37,7 @@ const AccountSettings = () => {
         <View style={{
           marginTop:120,
           flexDirection:'column',
-          gap:10
+          gap:30
         }}>
         <View style={{
           flexDirection:'row',
@@ -152,7 +154,7 @@ const AccountSettings = () => {
           <Pressable
           style={{
             marginTop:50,
-            backgroundColor:'#5d4fb3',
+            backgroundColor:'#7d79db',
             alignItems:'center',
             justifyContent:'center',
             borderRadius:12,

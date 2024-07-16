@@ -3,17 +3,20 @@ import React from 'react'
 
 
 const DateCard = ({ item }) => {
+  const today = new Date();
+  const currentDate = today.getDate().toString().padStart(2, '0');
+
+  const isCurrentDate = item.date === currentDate;
   return (
-    <View style={styles.card}>
-      <Text style={styles.date}>
+    <View style={[styles.card, isCurrentDate && styles.currentDateCard]}>
+      <Text style={[styles.date,isCurrentDate && styles.currentDateCardtext]}>
         {item.date}
       </Text>
-      <Text style={styles.month}>
+      <Text style={[styles.month,isCurrentDate && styles.currentDateCardtext]}>
         {item.month}
       </Text>
-
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -30,11 +33,21 @@ const styles = StyleSheet.create({
     elevation: 3,
     shadowRadius: 10
   },
+  currentDateCard: {
+    backgroundColor: '#ADD8E6',
+   // Light blue for current date
+  },
+  currentDateCardtext:{
+    color:'#fff' 
+  },
   date: {
     textTransform: 'capitalize',
     fontSize: 23,
     fontWeight: '600',
     color: '#000'
+  },
+  currentDateCard: {
+    backgroundColor: '#5d4fb3', // Light blue for current date
   },
   month: {
     textTransform: 'capitalize',

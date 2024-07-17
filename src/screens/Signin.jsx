@@ -5,6 +5,8 @@ import Path from '../services/Path';
 import {useNavigation} from '@react-navigation/native'
 import { getFCMToken } from '../utils/fcmUtils';
 import LoadingWave from '../components/LoadingWave'
+import WifiLoader from '../components/WifiLoader';
+import LoaderLine from '../components/LoaderLine';
 const SignIn = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -124,7 +126,7 @@ const SignIn = () => {
   };
 
   return (
-    loader ? <LoadingWave/> : (
+    loader ? <LoaderLine/> : (
       <View style={styles.container}>
         <Image
           style={styles.logo}

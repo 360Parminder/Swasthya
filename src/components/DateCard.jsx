@@ -5,8 +5,9 @@ import React from 'react'
 const DateCard = ({ item }) => {
   const today = new Date();
   const currentDate = today.getDate().toString().padStart(2, '0');
+  const currentMonth = today.toLocaleString('default', { month: 'short' }).toLowerCase();
 
-  const isCurrentDate = item.date === currentDate;
+ const isCurrentDate = item.date === currentDate && item.month === currentMonth
   return (
     <View style={[styles.card, isCurrentDate && styles.currentDateCard]}>
       <Text style={[styles.date,isCurrentDate && styles.currentDateCardtext]}>

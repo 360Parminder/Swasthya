@@ -3,15 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import Path from '../services/Path';
 import LeaderboardList from '../components/LeaderboardList';
+import LoadingWave from '../components/LoadingWave';
+import LoaderLine from '../components/LoaderLine';
 
 const Leaderboard = () => {
   const [timeframe, setTimeframe] = useState('today');
   const [scope, setScope] = useState('global');
   const [date,setDate]=useState(new Date())
   const [leaderboardData, setLeaderboardData] = useState([]);
+  const [loader,setLoader]=useState(false);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
+      setLoader(true)
         try {
             const token = await AsyncStorage.getItem('userToken');
             if (token) {
@@ -29,6 +33,7 @@ const Leaderboard = () => {
                 if (response) {
                     // console.log("response", response.data.data);
                     setLeaderboardData(response?.data?.data);
+                    setLoader(false)
                 }
             }
         } catch (error) {
@@ -58,19 +63,19 @@ const Leaderboard = () => {
           style={[styles.button, timeframe === 'today' && styles.selectedButton]}
           onPress={() => setTimeframe('today')}
         >
-          <Text style={styles.buttonText}>Daily</Text>
+          <Text style={[styles.buttonText,timeframe === 'today' && styles.selectedtext]}>Daily</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, timeframe === 'weekly' && styles.selectedButton]}
           onPress={() => setTimeframe('weekly')}
         >
-          <Text style={styles.buttonText}>Weekly</Text>
+          <Text style={[styles.buttonText,timeframe === 'weekly' && styles.selectedtext]}>Weekly</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, timeframe === 'monthly' && styles.selectedButton]}
           onPress={() => setTimeframe('monthly')}
         >
-          <Text style={styles.buttonText}>Monthly</Text>
+          <Text style={[styles.buttonText,timeframe === 'monthly' && styles.selectedtext]}>Monthly</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.buttonContainer}>
@@ -78,19 +83,25 @@ const Leaderboard = () => {
           style={[styles.button, scope === 'global' && styles.selectedButton]}
           onPress={() => setScope('global')}
         >
-          <Text style={styles.buttonText}>Global</Text>
+          <Text style={[styles.buttonText,timeframe === 'global' && styles.selectedtext]}>Global</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, scope === 'group' && styles.selectedButton]}
           onPress={() => setScope('group')}
         >
-          <Text style={styles.buttonText}>My Group</Text>
+          <Text style={[styles.buttonText,timeframe === 'group' && styles.selectedtext]}>My Group</Text>
         </TouchableOpacity>
       </View>
-      <FlatList
-      data={leaderboardData}
-      renderItem={({ item,index }) => (<LeaderboardList userRank={index+1} userName={item.username} userStep={item.totalSteps}/>)}
-      />
+      {
+        loader?<LoaderLine/>:(
+          <FlatList
+      
+          data={leaderboardData}
+          renderItem={({ item,index }) => (<LeaderboardList userRank={index+1} userName={item.username} userStep={item.totalSteps}/>)}
+          />
+        )
+      }
+     
     </View>
   );
 };
@@ -120,8 +131,12 @@ const styles = StyleSheet.create({
     color:'#fff'
   },
   buttonText: {
-    color: '#fff',
+    color: '#000',
   },
+  selectedtext:{
+    color:'#fff'
+  }
+
 });
 
 export default Leaderboard;

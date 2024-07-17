@@ -15,9 +15,9 @@ const HomeScreen = ({ navigation }) => {
   const [token, setToken] = useState();
   const [loading, setLoading] = useState(true);
   const [date, setDate] = useState(new Date());
-  const [steps,setSteps]=useState();
-  const [calories,setCalories]=useState();
-  const [heartRate, setHeartRate] = useState(0);
+  const [steps,setSteps]=useState(0);
+  const [calories,setCalories]=useState(0);
+  const [heartRate, setHeartRate] = useState(null);
   const [userRank, setUserRank] = useState();
 
 
@@ -180,7 +180,7 @@ useEffect(() => {
                   title='KCal'
                   titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
                   maxValue={2000}
-                  value={calories}
+                  value={calories+74}
                   duration={2000}
                   radius={50}
                   progressValueColor='#5D4FB3'
@@ -212,7 +212,7 @@ useEffect(() => {
 
 
             <SmallHomeCard cardTitle={'Distance'} cardLogo={'🚗'} logoBg={'#FF8766'} value={'05'} valueUnit={'kilometers'} />
-            <SmallHomeCard cardTitle={'Distance'} cardLogo={'🚗'} logoBg={'#FF8766'} value={'05'} valueUnit={'kilometers'} />
+            {/* <SmallHomeCard cardTitle={'Distance'} cardLogo={'🚗'} logoBg={'#FF8766'} value={'05'} valueUnit={'kilometers'} /> */}
 
           </View>
         </View>

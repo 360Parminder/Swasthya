@@ -1,7 +1,10 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import React from 'react';
 
 const HomeCard = ({ cardTitle, cardLogo, logoBg, value, valueUnit, mainContent }) => {
+    const colorScheme = useColorScheme();
+    const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
+
     return (
         <View style={styles.card}>
             <View style={styles.header}>
@@ -21,20 +24,16 @@ const HomeCard = ({ cardTitle, cardLogo, logoBg, value, valueUnit, mainContent }
     );
 }
 
-const styles = StyleSheet.create({
-    Text: {
-        color: '#000'
-    },
+const lightStyles = StyleSheet.create({
     card: {
         width: 180,
         height: 170,
         backgroundColor: '#fff',
         paddingHorizontal: 10,
         borderRadius: 10,
-        shadowOpacity:0.1,
-        elevation:3,
-        shadowRadius:10,
-        
+        shadowOpacity: 0.1,
+        elevation: 3,
+        shadowRadius: 10,
     },
     header: {
         flexDirection: "row",
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     cardLogoContainer: {
-        marginTop:10,
+        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4
@@ -63,7 +62,6 @@ const styles = StyleSheet.create({
         marginTop: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        // overflow:'hidden'
     },
     footer: {
         alignContent: 'flex-end',
@@ -74,6 +72,57 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#000000',
+    },
+});
+
+const darkStyles = StyleSheet.create({
+    card: {
+        width: 180,
+        height: 170,
+        backgroundColor: '#333',
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        shadowOpacity: 0.1,
+        elevation: 3,
+        shadowRadius: 10,
+    },
+    header: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: 10
+    },
+    cardTitle: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#ffffff',
+        marginTop: 10
+    },
+    cardLogoContainer: {
+        marginTop: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4
+    },
+    cardLogo: {
+        padding: 5,
+        fontSize: 14,
+    },
+    mainContentContainer: {
+        width: 'auto',
+        marginTop: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    footer: {
+        alignContent: 'flex-end',
+        justifyContent: 'flex-end',
+    },
+    cardValue: {
+        marginTop: 20,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#ffffff',
     },
 });
 

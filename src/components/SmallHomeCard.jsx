@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import React from 'react';
 
 const SmallHomeCard = ({ cardTitle, cardLogo, logoBg, value, valueUnit, mainContent }) => {
-    // console.log(logoBg);
+    const colorScheme = useColorScheme();
+    const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
+
     return (
         <View style={styles.card}>
             <View style={styles.header}>
@@ -16,49 +18,38 @@ const SmallHomeCard = ({ cardTitle, cardLogo, logoBg, value, valueUnit, mainCont
             </View>
             <View style={styles.footer}>
                 <Text style={styles.cardValue}>{value ? value : null}</Text>
-                <Text style={{
-                    paddingTop:5,
-                    fontWeight:'500',
-                    color:'#858585',
-                    fontSize:16
-                }}>{valueUnit}</Text>
+                <Text style={styles.valueUnit}>{valueUnit}</Text>
             </View>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    Text: {
-        color: '#000'
-    },
+const commonStyles = {
     card: {
         width: 180,
         height: 90,
-        backgroundColor: '#fff',
         paddingHorizontal: 10,
         borderRadius: 10,
-        shadowOpacity:0.1,
-        elevation:3,
-        shadowRadius:10,
-        
+        shadowOpacity: 0.1,
+        elevation: 3,
+        shadowRadius: 10,
     },
     header: {
         flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 10
+        gap: 10,
     },
     cardTitle: {
         fontSize: 18,
         fontWeight: '600',
-        color: '#000000',
-        marginTop: 10
+        marginTop: 10,
     },
     cardLogoContainer: {
-        marginTop:10,
+        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 4
+        borderRadius: 4,
     },
     cardLogo: {
         padding: 5,
@@ -68,21 +59,62 @@ const styles = StyleSheet.create({
         width: 'auto',
         marginTop: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     footer: {
-        flexDirection:'row',
-        alignItems:'center',
-        gap:5,
-        marginLeft:6
-        // alignContent: 'flex-end',
-        // justifyContent: 'flex-end',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
+        marginLeft: 6,
     },
     cardValue: {
-        // marginTop: 20,
         fontSize: 18,
         fontWeight: 'bold',
+    },
+    valueUnit: {
+        paddingTop: 5,
+        fontWeight: '500',
+        fontSize: 16,
+    },
+};
+
+const lightStyles = StyleSheet.create({
+    ...commonStyles,
+    card: {
+        ...commonStyles.card,
+        backgroundColor: '#fff',
+    },
+    cardTitle: {
+        ...commonStyles.cardTitle,
         color: '#000000',
+    },
+    cardValue: {
+        ...commonStyles.cardValue,
+        color: '#000000',
+    },
+    valueUnit: {
+        ...commonStyles.valueUnit,
+        color: '#858585',
+    },
+});
+
+const darkStyles = StyleSheet.create({
+    ...commonStyles,
+    card: {
+        ...commonStyles.card,
+        backgroundColor: '#333',
+    },
+    cardTitle: {
+        ...commonStyles.cardTitle,
+        color: '#ffffff',
+    },
+    cardValue: {
+        ...commonStyles.cardValue,
+        color: '#ffffff',
+    },
+    valueUnit: {
+        ...commonStyles.valueUnit,
+        color: '#cccccc',
     },
 });
 

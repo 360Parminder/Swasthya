@@ -1,103 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, useColorScheme } from 'react-native';
 import Path from '../services/Path';
-import {useNavigation} from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 import { getFCMToken } from '../utils/fcmUtils';
-import LoadingWave from '../components/LoadingWave'
+import LoadingWave from '../components/LoadingWave';
 import WifiLoader from '../components/WifiLoader';
 import LoaderLine from '../components/LoaderLine';
+
 const SignIn = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
-  const [fcmToken, setFCMToken] = useState("");
+  const [fcmToken, setFCMToken] = useState('');
   const [isLogin, setIsLogin] = useState(false);
-  const [loader,setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
 
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     console.log("form sign");
-    getFCMToken().then((token)=>{
-      setFCMToken(token)
-      })
-   
-  }, [])
-  
-  console.log("fcm",fcmToken);
-
-  // useEffect(() => {
-  //   
-  //   const onMessageReceived = async () => {
-  //     const unsubscribe = messaging().onMessage(async remoteMessage => {
-  //       console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
-  //       onDisplayNotification(remoteMessage.notification);
-  //     });
-
-  //     return unsubscribe; // Ensure to return the unsubscribe function for cleanup
-  //   };
-
-  //   requestUserPermission();
-  //   const unsubscribe = onMessageReceived();
-
-  //   return () => {
-  //     if (unsubscribe) unsubscribe(); // Cleanup the message listener
-  //   };
-  // }, []);
-
-  // const onDisplayNotification = async (notification) => {
-  //   try {
-  //     // Request permissions (required for iOS)
-  //     await notifee.requestPermission();
-
-  //     // Create a channel (required for Android)
-  //     const channelId = await notifee.createChannel({
-  //       id: 'default',
-  //       name: 'Default Channel',
-  //       sound: 'sound',
-  //     });
-
-  //     // Display a notification
-  //     await notifee.displayNotification({
-  //       title: notification?.title || 'Default Title',
-  //       body: notification?.body || 'Default Body',
-  //       android: {
-  //         channelId,
-  //         sound: 'sound',
-  //         // smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
-  //         // pressAction is needed if you want the notification to open the app when pressed
-  //         pressAction: {
-  //           id: 'default',
-  //         },
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.log('Failed to display notification:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const getToken = async () => {
-  //     try {
-  //       const storedToken = await AsyncStorage.getItem('userToken');
-  //       if (storedToken) {
-  //         navigation.navigate('Home');
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getToken();
-  // }, []);
+    getFCMToken().then((token) => {
+      setFCMToken(token);
+    });
+  }, []);
 
   const handleSignIn = async () => {
-    setLoader(true)
+    setLoader(true);
     try {
-    //  navigation.navigate('root');
-      // console.log(phoneNumber, password);
       if (phoneNumber && password) {
-        //work after backend
         const response = await Path.post("/login", {
           mobile: phoneNumber,
           password: password,
@@ -108,25 +40,25 @@ const SignIn = () => {
           await AsyncStorage.setItem('userToken', response.data.token);
           setToken(response.data.token);
           navigation.navigate('root');
-          setLoader(false)
-          // work after navigation set
+          setLoader(false);
         } else {
-          Alert.alert("error", "invalid credentials");
-          setLoader(false)
+          Alert.alert("Error", "Invalid credentials");
+          setLoader(false);
         }
       } else {
         Alert.alert("Please fill all the fields");
-        setLoader(false)
+        setLoader(false);
       }
     } catch (error) {
-      Alert.alert("error", "invalid credentials");
-      setLoader(false)
-      // console.log(error);
+      Alert.alert("Error", "Invalid credentials");
+      setLoader(false);
     }
   };
 
+  const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
+
   return (
-    loader ? <LoaderLine/> : (
+    loader ? <LoaderLine /> : (
       <View style={styles.container}>
         <Image
           style={styles.logo}
@@ -137,7 +69,7 @@ const SignIn = () => {
         <TextInput
           style={styles.input}
           placeholder="Mobile Number"
-          placeholderTextColor="#000000"
+          placeholderTextColor={colorScheme === 'dark' ? "#ffffff" : "#000000"}
           onChangeText={text => setPhoneNumber(text)}
           value={phoneNumber}
           keyboardType="phone-pad"
@@ -145,7 +77,7 @@ const SignIn = () => {
         <TextInput
           style={styles.input}
           placeholder="Password"
-          placeholderTextColor="#000000"
+          placeholderTextColor={colorScheme === 'dark' ? "#ffffff" : "#000000"}
           onChangeText={text => setPassword(text)}
           value={password}
           secureTextEntry={true}
@@ -161,7 +93,7 @@ const SignIn = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -204,6 +136,52 @@ const styles = StyleSheet.create({
   },
   notRegisteredText: {
     color: '#000000',
+  },
+});
+
+const darkStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#121212',
+  },
+  logo: {
+    width: 300,
+    height: 300,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#BB86FC',
+  },
+  input: {
+    width: '80%',
+    height: 40,
+    backgroundColor: '#1E1E1E',
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginBottom: 15,
+    color: '#ffffff',
+  },
+  button: {
+    backgroundColor: '#BB86FC',
+    paddingVertical: 12,
+    paddingHorizontal: 80,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  notRegistered: {
+    marginTop: 10,
+  },
+  notRegisteredText: {
+    color: '#ffffff',
   },
 });
 

@@ -6,6 +6,7 @@ import { PermissionsProvider } from '../context/PermissionsContext';
 import AuthenticationNavigator from '../context/AuthStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { notificationListener } from '../utils/fcmUtils';
+import { UserDataProvider } from '../context/UserDataContext';
 
 
 const AppNavigator = () => {
@@ -34,11 +35,13 @@ const AppNavigator = () => {
       }, []);
 
   return (
+    <UserDataProvider>
     <PermissionsProvider>
       <NavigationContainer>
         {isLoggedIn ? <TabNavigator /> : <AuthenticationNavigator />}
       </NavigationContainer>
     </PermissionsProvider>
+    </UserDataProvider>
   );
 };
 

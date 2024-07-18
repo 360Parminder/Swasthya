@@ -1,37 +1,25 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from "react-native";
 import Path from "../services/Path";
 import BorderCard from "../components/BorderCard";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { userDataContext } from "../context/UserDataContext";
 
 
 const Profile = ({ navigation }) => {
 
-  const [userData, setUserData] = useState(null)
+  const {userData} = useContext(userDataContext)
 
-    useEffect(() => {
+  const calculateAge = (dobString) => {
+    const dob = new Date(dobString);
+    const now = new Date();
+    const ageDiff = now - dob;
+    const ageDate = new Date(ageDiff);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  };
 
-      const fetchUserProfile= async()=>{
-
-        const token = await AsyncStorage.getItem('userToken');
-          // console.log(token);
-          const response = await Path.get("/profile",{
-            headers: {
-              'authorization': `Bearer ${token}`
-            }
-          })
-          if (response) {
-            // console.log("response",response.data.data);
-            setUserData(response.data.data)
-            }
-
-
-      }
-      fetchUserProfile();
-
-  }, [])
-  // const date = userData?.dob?.toISOString()
+  const userAge = calculateAge(userData.dob)
 
   const logout = async () => {
     const token = await AsyncStorage.getItem('userToken');
@@ -59,7 +47,7 @@ const Profile = ({ navigation }) => {
 
       }}>
 
-        <Image source={require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
+        <Image source={userData?{uri:userData.picture}:require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
         <Text style={styles.name}>{userData?.username ? userData?.username : "User Name "}</Text>
         <Text style={{
           color: '#000'
@@ -73,7 +61,7 @@ const Profile = ({ navigation }) => {
 
         <BorderCard logo={'⚖️'} value={userData?.weight} valueUnit={'kg'} />
         <BorderCard logo={'🧍'} value={userData?.height} valueUnit={'Cm'} />
-        <BorderCard logo={'🎂'} value={'22'} valueUnit={'Yrs'} />
+        <BorderCard logo={'🎂'} value={userAge?userAge:'..'} valueUnit={'Yrs'} />
 
 
       </View>

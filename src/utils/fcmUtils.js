@@ -1,6 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
 
 export async function requestUserPermission() {
+  
   const authStatus = await messaging().requestPermission();
   const enabled =
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -30,3 +31,4 @@ export const notificationListener = async () => {
     console.log('Message handled in the background!', remoteMessage);
   });
 };
+

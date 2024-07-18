@@ -12,13 +12,13 @@ export const UserDataProvider = ({ children }) => {
       try {
         const token = await AsyncStorage.getItem('userToken');
         if (token) {
-          const response = await Path.get('', {
+          const response = await Path.get('/profile', {
             headers: {
               'Authorization': `Bearer ${token}`
             }
           });
           if (response) {
-            setUserData(response.data);
+            setUserData(response.data.data);
           }
         }
       } catch (error) {

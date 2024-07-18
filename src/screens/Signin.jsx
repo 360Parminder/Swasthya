@@ -20,9 +20,10 @@ const SignIn = () => {
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    console.log("form sign");
     getFCMToken().then((token) => {
       setFCMToken(token);
+      console.log("form sign",token);
+      
     });
   }, []);
 

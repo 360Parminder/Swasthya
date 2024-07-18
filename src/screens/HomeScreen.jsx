@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView, useColorScheme, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView, useColorScheme, Image, ScrollView } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
 import HomeCard from '../components/HomeCard';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import SmallHomeCard from '../components/SmallHomeCard';
@@ -8,6 +8,7 @@ import ECGWave from '../components/ECGWave';
 import { BarChart } from 'react-native-gifted-charts';
 import Path from '../services/Path';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { userDataContext } from '../context/UserDataContext';
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -18,7 +19,9 @@ const HomeScreen = ({ navigation }) => {
   const [calories, setCalories] = useState(0);
   const [heartRate, setHeartRate] = useState(null);
   const [userRank, setUserRank] = useState();
+  const {userData} = useContext(userDataContext)
 
+  // console.log(userData);
   const colorScheme = useColorScheme();
 
   const sampleData = [50, 60, 50, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
@@ -42,6 +45,9 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+
+
+
     const generateLastMonthDates = () => {
       const today = new Date();
       const oneMonthAgo = new Date();
@@ -114,7 +120,7 @@ const HomeScreen = ({ navigation }) => {
               height: 50,
               borderRadius: 50,
 
-            }} source={require('../assets/images/Profile.jpg')} />
+            }} source={userData?{uri:userData.picture}:require('../assets/images/Profile.jpg')} resizeMode='cover' />
             <View style={{
               flexDirection:'column',
               justifyContent:'center',
@@ -133,7 +139,7 @@ const HomeScreen = ({ navigation }) => {
                 color: '#222222',
                 marginBottom: 5,
                 
-              }}> {'Parminder Singh'}</Text>
+              }}> {userData?userData?.username:'User Name'}</Text>
             </View>
           </View>
           <View style={styles.flatListContainer}>
@@ -145,6 +151,7 @@ const HomeScreen = ({ navigation }) => {
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
+          <ScrollView>
           <View style={styles.grid}>
             <Pressable onPress={() => { navigation.navigate('Analysis') }}>
               <HomeCard cardTitle={"Steps"} cardLogo={'👟'} logoBg={'#FFFA9E'} mainContent={(
@@ -205,6 +212,7 @@ const HomeScreen = ({ navigation }) => {
 
             <SmallHomeCard cardTitle={'Distance'} cardLogo={'🚗'} logoBg={'#FF8766'} value={'05'} valueUnit={'kilometers'} />
           </View>
+          </ScrollView>
         </View>
       </SafeAreaView>
     </>

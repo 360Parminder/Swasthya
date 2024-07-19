@@ -10,6 +10,7 @@ import { userDataContext } from "../context/UserDataContext";
 const Profile = ({ navigation }) => {
 
   const {userData} = useContext(userDataContext)
+  console.log(userData);
 
   const calculateAge = (dobString) => {
     const dob = new Date(dobString);
@@ -19,7 +20,7 @@ const Profile = ({ navigation }) => {
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   };
 
-  const userAge = calculateAge(userData.dob)
+  const userAge = calculateAge(userData?.dob)
 
   const logout = async () => {
     const token = await AsyncStorage.getItem('userToken');
@@ -94,7 +95,7 @@ const Profile = ({ navigation }) => {
           </View>
         </Pressable>
 
-        <Pressable>
+        <Pressable onPress={()=>navigation.navigate('Notification')}>
           <View style={[styles.cardList, { borderBottomWidth: 0 }]}>
             <Text style={styles.cardText}>Notifications </Text>
             <Icon name="chevron-forward-outline" color="#000" Size={28} />

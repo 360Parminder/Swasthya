@@ -80,11 +80,15 @@ const HomeScreen = ({ navigation }) => {
 
     const fetchUserSteps = async () => {
       try {
-        const response = await Path.post('/step/view/daily',
-          { date: date },
-          { headers: { 'authorization': `Bearer ${token}` } }
+        const response = await Path.get('/step/view/daily',
+          { 
+            headers: {
+               'authorization': `Bearer ${token}` 
+              } 
+          }
         );
         if (response) {
+          console.log(response.data);
           setSteps(response.data?.record[0]?.steps);
           setCalories(response.data?.record[0]?.caloriesBurned);
         }
@@ -159,7 +163,7 @@ const HomeScreen = ({ navigation }) => {
                   title='Steps'
                   titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
                   maxValue={2000}
-                  value={steps + 50}
+                  value={steps?steps + 50:50}
                   duration={2000}
                   radius={50}
                   progressValueColor='#5D4FB3'
@@ -182,7 +186,7 @@ const HomeScreen = ({ navigation }) => {
                   title='KCal'
                   titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
                   maxValue={2000}
-                  value={calories + 74}
+                  value={calories?calories + 74:74}
                   duration={2000}
                   radius={50}
                   progressValueColor='#5D4FB3'

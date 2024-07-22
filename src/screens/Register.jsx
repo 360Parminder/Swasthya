@@ -110,7 +110,7 @@ const Register = ({ navigation, route }) => {
       />
       <View style={[styles.input, { paddingLeft: 0, paddingTop: 0 }]}>
         <RNPickerSelect
-          placeholder={{ label: 'Select a sport...', value: null }}
+          placeholder={{ label: 'Select a Gender...', value: null }}
           onValueChange={(value) => setGender(value)}
           selectedValue={gender}
           items={[

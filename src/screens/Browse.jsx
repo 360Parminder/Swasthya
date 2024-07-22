@@ -121,7 +121,7 @@ const Browse = ({navigation}) => {
                     <Pressable onPress={() => navigation.navigate('Diet')}>
                         <View style={styles.categorieHolder}>
                             <View style={styles.categorieContent}>
-                                <Icon name='flame' color='#000' size={32} />
+                                <Icon name='fast-food' color='#758bfd' size={32} />
                                 <Text style={styles.categorieName}>Diet</Text>
                             </View>
                             <Icon name="chevron-forward" color="#000" size={28} />

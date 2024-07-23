@@ -1,3 +1,4 @@
+// TabNavigator.js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import StackNavigator from './StackNavigator'; // Adjust import path if needed
@@ -12,7 +13,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-    initialRouteName='Home'
+      initialRouteName='Home'
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: '#5D4FB3',
         tabBarInactiveTintColor: '#808080',
@@ -34,13 +35,13 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name='Home'
-        component={StackNavigator} // Ensure StackNavigator is imported correctly
+        component={StackNavigator}
         options={{ headerShown: false }}
       />
       <Tab.Screen
         name='Leaderboard'
         component={Leaderboard}
-        options={{}}
+        options={{ headerShown: true }}
       />
       <Tab.Screen
         name='Browse'
@@ -50,7 +51,7 @@ const TabNavigator = () => {
       <Tab.Screen
         name='Profile'
         component={Profile}
-        options={{}}
+        options={{ headerShown: true }}
       />
     </Tab.Navigator>
   );

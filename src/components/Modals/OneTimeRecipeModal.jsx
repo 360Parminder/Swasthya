@@ -153,6 +153,7 @@ const OneTimeRecipeModal = ({ oneTimeRecipeModalVisible, setOneTimeRecipeModalVi
           value={input1}
           onChangeText={setInput1}
           placeholderTextColor={'#2d1560'}
+          keyboardType='numeric'
         />
         <TextInput
           style={styles.input}
@@ -160,6 +161,7 @@ const OneTimeRecipeModal = ({ oneTimeRecipeModalVisible, setOneTimeRecipeModalVi
           value={input2}
           onChangeText={setInput2}
           placeholderTextColor={'#2d1560'}
+          keyboardType='numeric'
         />
         <View style={[styles.input, { paddingLeft: 5,alignItems:'center',justifyContent:'center',placeholderTextColor:'#000 '}]}>
           <RNPickerSelect
@@ -187,17 +189,31 @@ const OneTimeRecipeModal = ({ oneTimeRecipeModalVisible, setOneTimeRecipeModalVi
           <Text style={styles.sectionTitle}>Ingredients</Text>
           {recipe?.ingredients?.map((ingredient, index) => (
             <Text key={index} style={styles.ingredient}>
-              {ingredient.quantity} {ingredient?.amount|ingredient?.unit} {ingredient.name} {ingredient.preparation ? `(${ingredient.preparation})` : ''}
+              {ingredient?.amount|ingredient?.quantity} {ingredient?.unit} {ingredient?.name} {ingredient.preparation ? `(${ingredient.preparation})` : ''}
             </Text>
           ))}
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Instructions</Text>
-          {recipe?.instructions?.map((instruction, index) => (
-            <Text key={index} style={styles.instruction}>
-              {index + 1}. {instruction}
-            </Text>
-          ))}
+          {
+          typeof(recipe?.instructions)=="object"?(
+            recipe?.instructions?.map((instruction, index) => (
+              <Text key={index} style={styles.instruction}>
+                {index + 1}. {instruction}
+              </Text>
+            ))
+
+          ):(
+          //   instructions?.split('.').map((instruction, index) => (
+          //     <Text key={index} style={styles.instruction}>
+          //       {index + 1}. {instruction}
+          //     </Text>
+          //   )
+          // )
+           <Text>inst in text</Text>
+          )
+          
+         }
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Nutrition</Text>

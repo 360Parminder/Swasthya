@@ -92,8 +92,10 @@ const [userAge,setUserAge]=useState();
             borderRadius:10,
             paddingHorizontal:10,
             paddingVertical:5,
+
             shadowOpacity:0.1,
-            elevation:1,
+            
+            elevation:0.5,
             backgroundColor:'#f1f2fc'
           }}
           placeholder='Enter your name'

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Path from '../../services/Path';
 import OneTimeRecipeModal from '../../components/Modals/OneTimeRecipeModal';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IngredientsInHand from '../../components/Modals/IngredientsInHand';
 
 const {
   GoogleGenerativeAI,
@@ -25,52 +26,48 @@ const generationConfig = {
 };
 
 
+const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{
+  const [input1, setInput1] = useState('');
+  const [input2, setInput2] = useState('');
+  const [FoodPreference, setFoodPreference] = useState('');
+  const [recipe,setRecipe]=useState();
 
-
-const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModalVisible,})=>{
-
-  const [inputs, setInputs] = useState([{ }]);
-  const [foodPreference, setFoodPreference] = useState(null);
-  const [addProteinNext, setAddProteinNext] = useState(true);
-  const handleInputChange = (index, field, value) => {
-    const newInputs = [...inputs];
-    newInputs[index][field] = value;
-    setInputs(newInputs);
-  };
-
-  console.log([...inputs]);
-  const addInput = () => {
-    const newInputs = [...inputs];
-      newInputs.push({ ingredient: '' });
-      setAddProteinNext(false);
-       setInputs(newInputs);
-  };
   const fetchMeal = async () => {
     try {
       console.log('ai running');
       const chatSession = model.startChat({
         generationConfig,
       });
-      const result = await chatSession.sendMessage(`Create an Indian recipe that contains ${inputs} and meets your food preference: ${'veg'}.`);
-      // setRecipe(result.response.text());
-      console.log(result.response.text());
-      console.log('ai already run');
+      const result = await chatSession.sendMessage(`Create an Indian recipe that contains ${input1} grams of protein, ${input2} calories,for a week, and meets your food preference: ${FoodPreference}.Make the outputs in JSON format.`);
+  //   console.log(result);
+      const responseText = result.response.text();
+  
+  // Log the response for debugging
+  // console.log('Response:', responseText);
+  let resp = JSON.parse(responseText)
+  console.log(resp);
+  console.log(resp.name);
+  console.log(resp.title);
+  setRecipe(resp)
+     
     } catch (error) {
       console.error('Error fetching meal:', error);
       // Optionally update state to show an error message to the user
     }
   }
 
+
+
   return(
     <Modal
-    animationType="slide"
-    transparent={true}
-    visible={ingredientsInHandModalVisible}
-    onRequestClose={() => {
-      setIngredientsInHandModalVisible(!ingredientsInHandModalVisible);
-      }}
+        animationType="slide"
+        transparent={true}
+        visible={weekMealModalVisible}
+        onRequestClose={() => {
+          setWeekMealModalVisible(!weekMealModalVisible);
+        }}
       >
-        <View  style={{
+         <View style={{
           flex: 1,
           justifyContent: 'flex-end',
           alignItems: 'center',
@@ -88,14 +85,15 @@ const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModa
             shadowRadius: 4,
             elevation: 5,
             // bottom:0
-          }}>
-             <View style={{
+          }}
+          >
+              <View style={{
               height: '8%',
               paddingRight: 16,
               justifyContent: 'center',
               alignItems: 'flex-end',
             }}>
-              <Pressable onPress={() => setIngredientsInHandModalVisible(false)}>
+              <Pressable onPress={() => setWeekMealModalVisible(false)}>
                 <Text style={{
                   fontSize: 20,
                   color: '#3a86ff',
@@ -105,47 +103,46 @@ const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModa
             </View>
 
             <View style={styles.card}>
-      {inputs.map((input, index) => (
-        <View key={index}>
-          <TextInput
-            style={styles.input}
-            placeholder="ingredient"
-            value={input.protein}
-            onChangeText={(text) => handleInputChange(index, 'ingredient', text)}
-            placeholderTextColor={'#2d1560'}
+        <TextInput
+          style={styles.input}
+          placeholder="Protein"
+          value={input1}
+          onChangeText={setInput1}
+          placeholderTextColor={'#2d1560'}
+          keyboardType='numeric'
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Calories"
+          value={input2}
+          onChangeText={setInput2}
+          placeholderTextColor={'#2d1560'}
+          keyboardType='numeric'
+        />
+        <View style={[styles.input, { paddingLeft: 5,alignItems:'center',justifyContent:'center',placeholderTextColor:'#000 '}]}>
+          <RNPickerSelect
+            placeholder={{ label: 'Select Food Preference', value: null }}
+            onValueChange={(itemValue, itemIndex) =>
+              setFoodPreference(itemValue)
+            }
+            items={[
+              { label: 'Vegetarian', value: 'Vegetarian' },
+              { label: 'Non-vegetarian', value: 'Non-vegetarian' },
+              { label: 'Vegan', value: 'vegan' },
+            ]}
           />
-          
         </View>
-      ))}
-      
-      <Pressable style={[{
-        width: 35,
-        height: 35,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom:10,
-        padding:0
-      },styles.button]} onPress={addInput}>
-      <Icon style={{
-        fontSize:20,
-        fontWeight:'bold'
-        // margin:4
-      }} name="add"color={'#fff'}/>
-      </Pressable>
-      <Pressable style={styles.button} onPress={fetchMeal}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </Pressable>
-    </View>
+        <Pressable style={styles.button} onPress={fetchMeal}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </Pressable>
+      </View>
 
+           
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
   )
 }
-
-
-
 
 const Diet = () => {
 
@@ -154,6 +151,7 @@ const Diet = () => {
   const [dietType, setDietType] = useState();
   const [oneTimeRecipeModalVisible, setOneTimeRecipeModalVisible] = useState(false);
   const [ingredientsInHandModalVisible,setIngredientsInHandModalVisible]= useState(false);
+  const [weekMealModalVisible,setWeekMealModalVisible]= useState(false);
 
 
   return (
@@ -165,8 +163,8 @@ const Diet = () => {
         <TouchableOpacity style={styles.primaryButton} onPress={()=>setIngredientsInHandModalVisible(true)}>
           <Text style={styles.primaryButtonText}>Ingredients in Hand</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton}>
-          <Text style={styles.primaryButtonText}>hello</Text>
+        <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
+          <Text style={styles.primaryButtonText}>Week Meal</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.primaryButton}>
           <Text style={styles.primaryButtonText}>hello</Text>
@@ -177,6 +175,7 @@ const Diet = () => {
       </View>
       <OneTimeRecipeModal oneTimeRecipeModalVisible={oneTimeRecipeModalVisible} setOneTimeRecipeModalVisible={setOneTimeRecipeModalVisible} />
       <IngredientsInHand ingredientsInHandModalVisible={ingredientsInHandModalVisible} setIngredientsInHandModalVisible={setIngredientsInHandModalVisible} />
+      <WeekMealModal weekMealModalVisible={weekMealModalVisible} setWeekMealModalVisible={setWeekMealModalVisible}/>
     </View>
   );
 };

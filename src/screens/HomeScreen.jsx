@@ -110,7 +110,9 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <>
-      <SafeAreaView >
+      <SafeAreaView style={{
+        height:'100%'
+      }} >
         <View style={styles.container}>
           <View style={{
             flexDirection: 'row',
@@ -225,10 +227,9 @@ const HomeScreen = ({ navigation }) => {
 
 const lightStyles = StyleSheet.create({
   container: {
-    // flex: 1,
+    height:'100%',
     padding: 10,
     backgroundColor: '#f5f9fb',
-    // alignItems: 'center',
   },
   flatListContainer: {
     height: 90,

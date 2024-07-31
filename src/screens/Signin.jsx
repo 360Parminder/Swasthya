@@ -63,7 +63,7 @@ const SignIn = () => {
       <View style={styles.container}>
         <Image
           style={styles.logo}
-          source={require('../assets/images/SignIn.png')}
+          source={require('../assets/images/meditation.png')}
           resizeMode="contain"
         />
         <Text style={styles.title}>Welcome Back to Heal</Text>

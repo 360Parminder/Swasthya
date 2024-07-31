@@ -23,19 +23,20 @@ const Profile = ({ navigation }) => {
   const userAge = calculateAge(userData?.dob)
 
   const logout = async () => {
-    const token = await AsyncStorage.getItem('userToken');
-    const response = await Path.get("/logout", {
-      headers: {
-        'authorization': `Bearer ${token}`
-      }
-    })
-    if (response) {
-      AsyncStorage.removeItem('userToken');
-      navigation.navigate('AuthenticationNavigator');
-    }
-    else {
-      alert("something went wrong")
-    }
+    // const token = await AsyncStorage.getItem('userToken');
+    // const response = await Path.get("/logout", {
+    //   headers: {
+    //     'authorization': `Bearer ${token}`
+    //   }
+    // })
+    // if (response) {
+    //   AsyncStorage.removeItem('userToken');
+    //   navigation.navigate('AuthenticationNavigator');
+    // }
+    // else {
+    //   alert("something went wrong")
+    // }
+    AsyncStorage.removeItem('userToken');
   }
 
 

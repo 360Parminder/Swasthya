@@ -71,6 +71,23 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-Swasthya-SwasthyaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swasthya-SwasthyaTests.release.xcconfig"; path = "Target Support Files/Pods-Swasthya-SwasthyaTests/Pods-Swasthya-SwasthyaTests.release.xcconfig"; sourceTree = "<group>"; };
 		97EE8ED47AF74DCC9E95C3B0 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../src/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		AA42C124496F4C68AEDEBFD1 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		AC0D80212C5A8211007CA8EE /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-MediumItalic.ttf"; path = "../src/assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		AC0D80222C5A8211007CA8EE /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-Regular.ttf"; path = "../src/assets/fonts/SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		AC0D80232C5A8211007CA8EE /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-BoldItalic.ttf"; path = "../src/assets/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		AC0D80242C5A8211007CA8EE /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-BlackItalic.ttf"; path = "../src/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		AC0D80252C5A8211007CA8EE /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		AC0D80262C5A8211007CA8EE /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-LightItalic.ttf"; path = "../src/assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		AC0D80272C5A8211007CA8EE /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-ThinItalic.ttf"; path = "../src/assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		AC0D80282C5A8211007CA8EE /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Italic.ttf"; path = "../src/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		AC0D80292C5A8211007CA8EE /* SpaceMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-Bold.ttf"; path = "../src/assets/fonts/SpaceMono-Bold.ttf"; sourceTree = "<group>"; };
+		AC0D802A2C5A8211007CA8EE /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		AC0D802B2C5A8211007CA8EE /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		AC0D802C2C5A8211007CA8EE /* SpaceMono-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-Italic.ttf"; path = "../src/assets/fonts/SpaceMono-Italic.ttf"; sourceTree = "<group>"; };
+		AC0D802D2C5A8211007CA8EE /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		AC0D802E2C5A8211007CA8EE /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		AC0D802F2C5A8211007CA8EE /* GaMaamli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GaMaamli-Regular.ttf"; path = "../src/assets/fonts/GaMaamli-Regular.ttf"; sourceTree = "<group>"; };
+		AC0D80302C5A8211007CA8EE /* SpaceMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpaceMono-BoldItalic.ttf"; path = "../src/assets/fonts/SpaceMono-BoldItalic.ttf"; sourceTree = "<group>"; };
+		AC0D80312C5A8211007CA8EE /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "../src/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		AC56AA4A2C344C9A00DD79D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACFACAF22C28558000518B96 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		B39A6AFCFCDF48F39124597E /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../src/assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -178,6 +195,23 @@
 		ACDE8A2F2C28503A00621794 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				AC0D802F2C5A8211007CA8EE /* GaMaamli-Regular.ttf */,
+				AC0D80312C5A8211007CA8EE /* Roboto-Black.ttf */,
+				AC0D80242C5A8211007CA8EE /* Roboto-BlackItalic.ttf */,
+				AC0D802E2C5A8211007CA8EE /* Roboto-Bold.ttf */,
+				AC0D80232C5A8211007CA8EE /* Roboto-BoldItalic.ttf */,
+				AC0D80282C5A8211007CA8EE /* Roboto-Italic.ttf */,
+				AC0D802A2C5A8211007CA8EE /* Roboto-Light.ttf */,
+				AC0D80262C5A8211007CA8EE /* Roboto-LightItalic.ttf */,
+				AC0D802D2C5A8211007CA8EE /* Roboto-Medium.ttf */,
+				AC0D80212C5A8211007CA8EE /* Roboto-MediumItalic.ttf */,
+				AC0D802B2C5A8211007CA8EE /* Roboto-Regular.ttf */,
+				AC0D80252C5A8211007CA8EE /* Roboto-Thin.ttf */,
+				AC0D80272C5A8211007CA8EE /* Roboto-ThinItalic.ttf */,
+				AC0D80292C5A8211007CA8EE /* SpaceMono-Bold.ttf */,
+				AC0D80302C5A8211007CA8EE /* SpaceMono-BoldItalic.ttf */,
+				AC0D802C2C5A8211007CA8EE /* SpaceMono-Italic.ttf */,
+				AC0D80222C5A8211007CA8EE /* SpaceMono-Regular.ttf */,
 				ACFACAF22C28558000518B96 /* Ionicons.ttf */,
 			);
 			name = Fonts;

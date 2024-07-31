@@ -16,6 +16,12 @@ const UserRegister = ({ navigation, route }) => {
   const [open, setOpen] = useState(false);
   const [showGenderPicker, setShowGenderPicker] = useState(false);
   const [showFoodPicker, setShowFoodPicker] = useState(false);
+  const options = {
+    // weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
 
   const handleRegister = async () => {
     try {
@@ -48,10 +54,15 @@ const UserRegister = ({ navigation, route }) => {
     <View style={styles.container}>
       <Image
         style={styles.logo}
-        source={require('../assets/images/Register.png')}
+        source={require('../assets/images/heart-rate.png')}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Register to Heal</Text>
+      <Text style={styles.title}>Getting Started</Text>
+      <Text style={{
+        marginBottom:20,
+        color:'#343a40',
+        fontSize:16
+      }}>Create a account to continue!</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -72,7 +83,7 @@ const UserRegister = ({ navigation, route }) => {
         onPress={() => setOpen(true)}
       >
         <Text style={styles.dateText}>
-          {date ? date.toLocaleDateString() : 'Select Date'}
+          {date ? date.toLocaleDateString("en-US",options) : 'Select Date'}
         </Text>
       </Pressable>
       <DatePicker
@@ -88,10 +99,9 @@ const UserRegister = ({ navigation, route }) => {
           setOpen(false);
         }}
       />
-      <View style={[styles.input, { paddingLeft: 0, paddingTop: 0 }]}>
+      <View style={[styles.input, { paddingLeft: 10, paddingTop: 0 }]}>
         <RNPickerSelect
           placeholderTextColor={"#000"}
-
           placeholder={{ label: 'Select your Gender', value: null }}
           onValueChange={(value) => setGender(value)}
           selectedValue={gender}
@@ -103,7 +113,7 @@ const UserRegister = ({ navigation, route }) => {
         >
         </RNPickerSelect>
       </View>
-      <View style={[styles.input, { paddingLeft: 0, paddingTop: 0 }]}>
+      <View style={[styles.input, { paddingLeft: 10, paddingTop: 0 }]}>
         <RNPickerSelect
           placeholderTextColor={'#000'}
           placeholder={{ label: 'Select Food Preference', value: null }}
@@ -148,14 +158,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#E6E2EE',
   },
   logo: {
-    width: 250,
-    height: 200,
+    width: 100,
+    height: 100,
     marginBottom: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 5,
     color: '#5D4FB3',
   },
   input: {

@@ -14,7 +14,6 @@ const AuthenticationNavigator = () => {
       <AuthStack.Screen name='Otpverification' component={OtpValidation} options={{ headerShown: false }} />
       <AuthStack.Screen name='UserRegester' component={UserRegister} options={{ headerShown: false }} />
       <AuthStack.Screen name='root' component={TabNavigator} options={{ headerShown: false }} />
-      
     </AuthStack.Navigator>
   );
 };

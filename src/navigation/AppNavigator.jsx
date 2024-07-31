@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
 import { PermissionsProvider } from '../context/PermissionsContext';
-import AuthenticationNavigator from '../context/AuthStack';
+import AuthenticationNavigator from './AuthStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { notificationListener } from '../utils/fcmUtils';
 import { UserDataProvider } from '../context/UserDataContext';

@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Modal, Tex
 import React, { useState } from 'react';
 import MedicineCard from '../../components/MedicineCard';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { generateLastMonthDates, todayDate } from '../../utils/dateFunction';
 
 const MedicationDetail = ({ name, type, dosage, frequency }) => {
   return (
@@ -25,6 +26,10 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
   const [medicationType, setMedicationType] = useState('');
   const [medicationStrength, setMedicationStrength] = useState('');
   const [medicationFrequency, setMedicationFrequency] = useState('');
+const {date, month}= todayDate()
+// console.log(date,month);
+const dateArray = generateLastMonthDates();
+// console.log(dateArray);
 
   const screens = [
     <View key="screen1" style={styles.modalContent}>
@@ -159,14 +164,173 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
 
 const Medication = () => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  const today = new Date();
+  const oneMonthAgo = new Date();
+  oneMonthAgo.setMonth(today.getMonth());
+  console.log(oneMonthAgo);
   return (
     <View style={styles.container}>
       <ScrollView>
+      <View style={{
+        marginTop:10,
+        flexDirection:'row',
+        gap:5
+      }}>
+      <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+        <View style={{
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+          <Text>
+            W
+          </Text>
+          <View style={{
+            backgroundColor:'#000',
+            width:30,
+            height:30,
+            borderRadius:50
+          }}>
+          </View>
+        </View>
+      </View>
         <View>
           <Text style={styles.logTitle}>Log</Text>
-          <MedicineCard />
-          <MedicineCard />
+          <View style={{
+            borderRadius:10,
+            backgroundColor:'#fff',
+            paddingHorizontal:10,
+            paddingVertical:20,
+            shadowOpacity:0.1,
+            shadowRadius:10,
+            marginHorizontal:2,
+          }}>
+            <Text style={{
+              fontSize:18,
+            }}>
+              No Medication Scheduled
+            </Text>
+          </View>
+          {/* <MedicineCard />
+          <MedicineCard /> */}
         </View>
         <View style={styles.asNeededContainer}>
           <Text style={styles.asNeededTitle}>As-Needed Medications</Text>
@@ -174,14 +338,30 @@ const Medication = () => {
         </View>
         <View style={styles.yourMedicationsContainer}>
           <View style={styles.yourMedicationsHeader}>
-            <Text style={styles.yourMedicationsTitle}>Your Medications</Text>
+            <Text style={styles.yourMedicationsTitle}>Manage Your Medications</Text>
             <Text style={styles.editText}>Edit</Text>
           </View>
+
+          {/* <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
           <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
-          <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
-          <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
+          <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" /> */}
           <View style={styles.addMedicationContainer}>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <Text style={{
+             fontSize:18,
+             fontWeight:'500',
+             marginBottom:5
+            }}>
+            Add a Medication
+            </Text>
+            <Text style={{
+              fontSize:16,
+              marginBottom:15
+            }}>
+           Simplify your medication tracking by entering details quickly and setting up reminders. Ensure you never miss a dose with timely notifications.
+            </Text>
+            <TouchableOpacity style={{
+              alignItems:'center',
+            }}  onPress={() => setModalVisible(true)}>
               <Text style={styles.addMedicationText}>Add Medication</Text>
             </TouchableOpacity>
           </View>
@@ -195,7 +375,7 @@ const Medication = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f9fb',
     paddingHorizontal: 20,
   },
   logTitle: {
@@ -203,18 +383,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#6b6b6b',
     marginTop: 40,
+    marginBottom:20
   },
   asNeededContainer: {
     marginTop: 30,
+    justifyContent:'space-between',
+    backgroundColor:'#fff',
+    borderRadius:10,
+    flexDirection:'row',
+    paddingHorizontal:10,
+    paddingVertical:10
+
   },
   asNeededTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#6b6b6b',
+    fontSize: 18,
+    color: '#000814',
   },
-  addIcon: {
-    alignSelf: 'flex-end',
-  },
+  // addIcon: {
+  //   alignSelf: 'flex-end',
+  // },
   yourMedicationsContainer: {
     marginTop: 30,
   },
@@ -261,9 +448,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   addMedicationContainer: {
+    borderRadius:10,
+    backgroundColor: '#fff',
     marginTop: 20,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
+    paddingHorizontal:10,
+    paddingVertical:20,
+    shadowOpacity:0.1,
+    shadowRadius:10,
+    shadowColor:'#000',
+
   },
   addMedicationText: {
     fontSize: 16,

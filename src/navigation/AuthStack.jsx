@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignIn from '../screens/Signin';
 import OtpValidation from '../screens/OtpVarification';
 import UserRegister from '../screens/UserRegister';
-import TabNavigator from '../navigation/TabNavigator';
+import TabNavigator from './TabNavigator';
 
 const AuthStack = createNativeStackNavigator();
 

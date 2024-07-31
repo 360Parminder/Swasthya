@@ -51,6 +51,7 @@ const SignIn = () => {
         setLoader(false);
       }
     } catch (error) {
+      console.log(error);
       Alert.alert("Error", "Invalid credentials");
       setLoader(false);
     }
@@ -66,7 +67,7 @@ const SignIn = () => {
           source={require('../assets/images/meditation.png')}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Welcome Back to Heal</Text>
+        <Text style={styles.title}>Welcome Back to Swasthya</Text>
         <TextInput
           style={styles.input}
           placeholder="Mobile Number"
@@ -87,7 +88,7 @@ const SignIn = () => {
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Otpverification')} style={styles.notRegistered}>
-          <Text style={[styles.buttonText, styles.notRegisteredText]}>Not Registered</Text>
+          <Text style={[styles.buttonText, styles.notRegisteredText]}>Not registered yet!</Text>
         </TouchableOpacity>
       </View>
     )
@@ -136,7 +137,7 @@ const lightStyles = StyleSheet.create({
     marginTop: 10,
   },
   notRegisteredText: {
-    color: '#000000',
+    color: '#03045e',
   },
 });
 
@@ -182,7 +183,7 @@ const darkStyles = StyleSheet.create({
     marginTop: 10,
   },
   notRegisteredText: {
-    color: '#ffffff',
+    color: '#0077b6',
   },
 });
 

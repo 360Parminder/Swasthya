@@ -10,7 +10,7 @@ import { userDataContext } from "../context/UserDataContext";
 const Profile = ({ navigation }) => {
 
   const {userData} = useContext(userDataContext)
-  console.log(userData);
+  // console.log(userData);
 
   const calculateAge = (dobString) => {
     const dob = new Date(dobString);

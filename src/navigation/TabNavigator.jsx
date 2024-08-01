@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Leaderboard from '../screens/Leaderboard';
 import Browse from '../screens/Browse';
 import CustomHeader from '../components/CustomHeader';
+import BrowseStackNavigator from './BrowseStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +46,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name='Browse'
-        component={Browse}
+        component={BrowseStackNavigator}
         options={{ header: () => <CustomHeader headerTitle={'Browse'} /> }}
       />
       <Tab.Screen

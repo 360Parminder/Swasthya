@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
   const [calories, setCalories] = useState(0);
   const [heartRate, setHeartRate] = useState(null);
   const [userRank, setUserRank] = useState();
-  const {userData} = useContext(userDataContext)
+  const { userData } = useContext(userDataContext)
 
   // console.log(userData);
   const colorScheme = useColorScheme();
@@ -81,10 +81,10 @@ const HomeScreen = ({ navigation }) => {
     const fetchUserSteps = async () => {
       try {
         const response = await Path.get('/step/view/daily',
-          { 
+          {
             headers: {
-               'authorization': `Bearer ${token}` 
-              } 
+              'authorization': `Bearer ${token}`
+            }
           }
         );
         if (response) {
@@ -111,27 +111,27 @@ const HomeScreen = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={{
-        height:'100%'
+        height: '100%'
       }} >
         <View style={styles.container}>
           <View style={{
             flexDirection: 'row',
-            
+
             alignItems: 'center',
-            marginTop:10,
-            marginBottom:20
-          }}> 
+            marginTop: 10,
+            marginBottom: 20
+          }}>
             <Image style={{
               width: 50,
               height: 50,
               borderRadius: 50,
 
-            }} source={userData?{uri:userData.picture}:require('../assets/images/Profile.jpg')} resizeMode='cover' />
+            }} source={userData ? { uri: userData.picture } : require('../assets/images/Profile.jpg')} resizeMode='cover' />
             <View style={{
-              flexDirection:'column',
-              justifyContent:'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
               // alignItems:'center',
-              marginLeft:15
+              marginLeft: 15
             }} >
               <Text style={{
                 fontSize: 18,
@@ -144,8 +144,8 @@ const HomeScreen = ({ navigation }) => {
                 fontWeight: 'bold',
                 color: '#222222',
                 marginBottom: 5,
-                
-              }}> {userData?userData?.username:'User Name'}</Text>
+
+              }}> {userData ? userData?.username : 'User Name'}</Text>
             </View>
           </View>
           <View style={styles.flatListContainer}>
@@ -158,66 +158,66 @@ const HomeScreen = ({ navigation }) => {
             />
           </View>
           <ScrollView>
-          <View style={styles.grid}>
-            <Pressable onPress={() => { navigation.navigate('Analysis') }}>
-              <HomeCard cardTitle={"Steps"} cardLogo={'👟'} logoBg={'#FFFA9E'} mainContent={(
-                <CircularProgress
-                  title='Steps'
-                  titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
-                  maxValue={2000}
-                  value={steps?steps + 50:50}
-                  duration={2000}
-                  radius={50}
-                  progressValueColor='#5D4FB3'
-                  activeStrokeColor='#5D4FB3'
-                  inActiveStrokeColor='#E6E2EE'
-                />
+            <View style={styles.grid}>
+              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
+                <HomeCard cardTitle={"Steps"} cardLogo={'👟'} logoBg={'#FFFA9E'} mainContent={(
+                  <CircularProgress
+                    title='Steps'
+                    titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
+                    maxValue={2000}
+                    value={steps ? steps + 50 : 50}
+                    duration={2000}
+                    radius={50}
+                    progressValueColor='#5D4FB3'
+                    activeStrokeColor='#5D4FB3'
+                    inActiveStrokeColor='#E6E2EE'
+                  />
+                )} />
+              </Pressable>
+
+              <HomeCard cardTitle={'Heart rate'} cardLogo={'♥️'} logoBg={'#FFA69E'} mainContent={(
+                <ECGWave data={sampleData} width={170} height={120} />
               )} />
-            </Pressable>
 
-            <HomeCard cardTitle={'Heart rate'} cardLogo={'♥️'} logoBg={'#FFA69E'} mainContent={(
-              <ECGWave data={sampleData} width={170} height={120} />
-            )} />
+              <SmallHomeCard cardTitle={'Training'} cardLogo={'💪'} logoBg={'#F7E7A1'} value={'50'} valueUnit={'Minutes'} />
+              <SmallHomeCard cardTitle={'Ranking'} cardLogo={'🏅'} logoBg={'#F7E7A1'} value={userRank} valueUnit={''} />
 
-            <SmallHomeCard cardTitle={'Training'} cardLogo={'💪'} logoBg={'#F7E7A1'} value={'50'} valueUnit={'Minutes'} />
-            <SmallHomeCard cardTitle={'Ranking'} cardLogo={'🏅'} logoBg={'#F7E7A1'} value={userRank} valueUnit={''} />
+              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
+                <HomeCard cardTitle={'Calories'} cardLogo={'🔥'} logoBg={'#FFC966'} mainContent={(
+                  <CircularProgress
+                    title='KCal'
+                    titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
+                    maxValue={2000}
+                    value={calories ? calories + 74 : 74}
+                    duration={2000}
+                    radius={50}
+                    progressValueColor='#5D4FB3'
+                    activeStrokeColor='#5D4FB3'
+                    inActiveStrokeColor='#E6E2EE'
+                  />
+                )} />
+              </Pressable>
 
-            <Pressable onPress={() => { navigation.navigate('Analysis') }}>
-              <HomeCard cardTitle={'Calories'} cardLogo={'🔥'} logoBg={'#FFC966'} mainContent={(
-                <CircularProgress
-                  title='KCal'
-                  titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
-                  maxValue={2000}
-                  value={calories?calories + 74:74}
-                  duration={2000}
-                  radius={50}
-                  progressValueColor='#5D4FB3'
-                  activeStrokeColor='#5D4FB3'
-                  inActiveStrokeColor='#E6E2EE'
-                />
-              )} />
-            </Pressable>
+              <Pressable>
+                <HomeCard cardTitle={'Sleep'} cardLogo={'🌙'} logoBg={'#D2EDFF'} mainContent={(
+                  <BarChart
+                    barWidth={10}
+                    width={170}
+                    height={100}
+                    noOfSections={4}
+                    barBorderRadius={4}
+                    frontColor="#5D4FB3"
+                    yAxisThickness={0}
+                    xAxisThickness={0}
+                    data={barData}
+                    xAxisLabelsHeight={0}
+                    yAxisLabelWidth={0}
+                  />
+                )} />
+              </Pressable>
 
-            <Pressable>
-              <HomeCard cardTitle={'Sleep'} cardLogo={'🌙'} logoBg={'#D2EDFF'} mainContent={(
-                <BarChart
-                  barWidth={10}
-                  width={170}
-                  height={100}
-                  noOfSections={4}
-                  barBorderRadius={4}
-                  frontColor="#5D4FB3"
-                  yAxisThickness={0}
-                  xAxisThickness={0}
-                  data={barData}
-                  xAxisLabelsHeight={0}
-                  yAxisLabelWidth={0}
-                />
-              )} />
-            </Pressable>
-
-            <SmallHomeCard cardTitle={'Distance'} cardLogo={'🚗'} logoBg={'#FF8766'} value={'05'} valueUnit={'kilometers'} />
-          </View>
+              <SmallHomeCard cardTitle={'Distance'} cardLogo={'🚗'} logoBg={'#FF8766'} value={'05'} valueUnit={'kilometers'} />
+            </View>
           </ScrollView>
         </View>
       </SafeAreaView>
@@ -227,7 +227,7 @@ const HomeScreen = ({ navigation }) => {
 
 const lightStyles = StyleSheet.create({
   container: {
-    height:'100%',
+    height: '100%',
     padding: 10,
     backgroundColor: '#f5f9fb',
   },
@@ -269,7 +269,7 @@ const darkStyles = StyleSheet.create({
     width: 10,
   },
   grid: {
-    backgroundColor:'#000',
+    backgroundColor: '#000',
     marginTop: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',

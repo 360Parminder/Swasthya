@@ -10,8 +10,8 @@ const Stack = createNativeStackNavigator();
 
 const BrowseStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Browse">
-      <Stack.Screen name="Browse" component={Browse} options={{ headerShown: false }} />
+    <Stack.Navigator initialRouteName="BrowseHome">
+      <Stack.Screen name="BrowseHome" component={Browse} options={{ headerShown: false }} />
       <Stack.Screen name="Medication" component={Medication} options={{ headerShown: true }} />
       <Stack.Screen
         name='Diet'

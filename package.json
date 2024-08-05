@@ -22,6 +22,7 @@
     "axios": "^1.7.2",
     "react": "18.2.0",
     "react-native": "0.74.3",
+    "react-native-android-widget": "^0.14.1",
     "react-native-circular-progress-indicator": "^4.4.2",
     "react-native-date-picker": "^5.0.4",
     "react-native-fast-image": "^8.6.3",

@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import { View, Text, TextInput, Button } from 'react-native';
+import updateWidget from '../utils/WidgetModule';
 
 const TestScreen = () => {
-  const [svalue, setSvalue] = useState('');
-console.log(svalue);
+  const [text, setText] = useState('');
+
+  const handleUpdateWidget = () => {
+    updateWidget(text);
+  };
+
   return (
-    <SafeAreaView>
-      <RNPickerSelect
-        placeholder={{ label: 'Select a sport...', value: null }}
-        onValueChange={(itemValue, itemIndex) => setSvalue(itemValue)}
-        items={[
-          { label: 'Football', value: 'football' },
-          { label: 'Baseball', value: 'baseball' },
-          { label: 'Hockey', value: 'hockey' },
-        ]}
+    <View style={{ padding: 20 }}>
+      <Text>Update Widget Text:</Text>
+      <TextInput
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20 }}
+        onChangeText={setText}
+        value={text}
       />
-    </SafeAreaView>
+      <Button title="Update Widget" onPress={handleUpdateWidget} />
+    </View>
   );
 };
 

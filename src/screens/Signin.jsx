@@ -4,9 +4,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, useC
 import Path from '../services/Path';
 import { useNavigation } from '@react-navigation/native';
 import { getFCMToken } from '../utils/fcmUtils';
-import LoadingWave from '../components/LoadingWave';
-import WifiLoader from '../components/WifiLoader';
 import LoaderLine from '../components/LoaderLine';
+import GlobalStyles from '../Styles/GlobalStyles';
 
 const SignIn = () => {
   const navigation = useNavigation();
@@ -14,7 +13,6 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
   const [fcmToken, setFCMToken] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
   const [loader, setLoader] = useState(false);
 
   const colorScheme = useColorScheme();
@@ -61,15 +59,15 @@ const SignIn = () => {
 
   return (
     loader ? <LoaderLine /> : (
-      <View style={styles.container}>
+      <View style={GlobalStyles.container}>
         <Image
           style={styles.logo}
           source={require('../assets/images/meditation.png')}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Welcome Back to Swasthya</Text>
+        <Text style={GlobalStyles.title}>Welcome Back to Swasthya</Text>
         <TextInput
-          style={styles.input}
+          style={GlobalStyles.input}
           placeholder="Mobile Number"
           placeholderTextColor={colorScheme === 'dark' ? "#ffffff" : "#000000"}
           onChangeText={text => setPhoneNumber(text)}
@@ -77,17 +75,17 @@ const SignIn = () => {
           keyboardType="phone-pad"
         />
         <TextInput
-          style={styles.input}
+          style={GlobalStyles.input}
           placeholder="Password"
           placeholderTextColor={colorScheme === 'dark' ? "#ffffff" : "#000000"}
           onChangeText={text => setPassword(text)}
           value={password}
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-          <Text style={styles.buttonText}>Sign In</Text>
+        <TouchableOpacity style={GlobalStyles.button} onPress={handleSignIn}>
+          <Text style={GlobalStyles.buttonText}>Continue</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Otpverification')} style={styles.notRegistered}>
+        <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')} style={styles.notRegistered}>
           <Text style={[styles.buttonText, styles.notRegisteredText]}>Not registered yet!</Text>
         </TouchableOpacity>
       </View>
@@ -96,12 +94,7 @@ const SignIn = () => {
 };
 
 const lightStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#E6E2EE',
-  },
+
   logo: {
     width: 300,
     height: 300,

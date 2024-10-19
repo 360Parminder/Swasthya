@@ -5,8 +5,8 @@ import TestScreen from './src/screens/TestScreen';
 
 const App = () => {
   
-  // return <AppNavigator />;
-  return <TestScreen/>
+  return <AppNavigator />;
+  // return <TestScreen/>
 };
 
 export default App;

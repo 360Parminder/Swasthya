@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
 import { useContext } from "react";
-import { userDataContext } from "../../context/UserDataContext";
+import { userDataContext } from "../../context/UserContext";
 
 
 const BodyMeasurements =()=>{

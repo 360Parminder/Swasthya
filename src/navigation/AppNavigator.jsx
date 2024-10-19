@@ -1,47 +1,28 @@
 // AppNavigator.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
 import { PermissionsProvider } from '../context/PermissionsContext';
 import AuthenticationNavigator from './AuthStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { notificationListener } from '../utils/fcmUtils';
-import { UserDataProvider } from '../context/UserDataContext';
+import { UserDataProvider } from '../context/UserContext';
+import { AuthContext, AuthProvider } from '../context/AuthContext';
 
 const AppNavigator = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const { isAuthenticated } = useContext(AuthContext);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const checkAuthentication = async () => {
-      try {
-        const token = await AsyncStorage.getItem('userToken');
-        if (token) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
-      } catch (e) {
-        console.error('Failed to load token.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkAuthentication();
-    notificationListener();
-  }, []);
-
-  if (isLoading) {
-    // Optionally, you can return a loading screen here
-    return null;
-  }
+    setLoggedIn(isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
+    
     <UserDataProvider>
       <PermissionsProvider>
         <NavigationContainer>
-          {isLoggedIn ? <TabNavigator /> : <AuthenticationNavigator />}
+          {loggedIn ? <TabNavigator /> : <AuthenticationNavigator />}
         </NavigationContainer>
       </PermissionsProvider>
     </UserDataProvider>

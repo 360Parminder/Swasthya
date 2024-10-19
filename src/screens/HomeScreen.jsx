@@ -8,7 +8,8 @@ import ECGWave from '../components/ECGWave';
 import { BarChart } from 'react-native-gifted-charts';
 import Path from '../services/Path';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { userDataContext } from '../context/UserDataContext';
+import { userDataContext } from '../context/UserContext';
+
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -19,9 +20,9 @@ const HomeScreen = ({ navigation }) => {
   const [calories, setCalories] = useState(0);
   const [heartRate, setHeartRate] = useState(null);
   const [userRank, setUserRank] = useState();
-  const { userData } = useContext(userDataContext)
+  const { user } = useContext(userDataContext)
 
-  // console.log(userData);
+  console.log(user);
   const colorScheme = useColorScheme();
 
   const sampleData = [50, 60, 50, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
@@ -126,7 +127,7 @@ const HomeScreen = ({ navigation }) => {
               height: 50,
               borderRadius: 50,
 
-            }} source={userData ? { uri: userData.picture } : require('../assets/images/Profile.jpg')} resizeMode='cover' />
+            }} source={user ? { uri: user.picture } : require('../assets/images/Profile.jpg')} resizeMode='cover' />
             <View style={{
               flexDirection: 'column',
               justifyContent: 'center',
@@ -145,7 +146,7 @@ const HomeScreen = ({ navigation }) => {
                 color: '#222222',
                 marginBottom: 5,
 
-              }}> {userData ? userData?.username : 'User Name'}</Text>
+              }}> {user ? user?.username : 'User Name'}</Text>
             </View>
           </View>
           <View style={styles.flatListContainer}>

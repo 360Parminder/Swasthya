@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, useColorScheme } from 'react-native';
 import Path from '../services/Path';
@@ -6,59 +6,35 @@ import { useNavigation } from '@react-navigation/native';
 import { getFCMToken } from '../utils/fcmUtils';
 import LoaderLine from '../components/LoaderLine';
 import GlobalStyles from '../Styles/GlobalStyles';
+import { AuthContext } from '../context/AuthContext';
 
 const SignIn = () => {
+  const { login, isLoading } = useContext(AuthContext);
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
-  const [fcmToken, setFCMToken] = useState('');
-  const [loader, setLoader] = useState(false);
+ 
 
   const colorScheme = useColorScheme();
 
-  useEffect(() => {
-    getFCMToken().then((token) => {
-      setFCMToken(token);
-      console.log("form sign",token);
+  // useEffect(() => {
+  //   getFCMToken().then((token) => {
+  //     setFCMToken(token);
+  //     console.log("form sign",token);
       
-    });
-  }, []);
+  //   });
+  // }, []);
 
   const handleSignIn = async () => {
-    setLoader(true);
-    try {
-      if (phoneNumber && password) {
-        const response = await Path.post("/login", {
-          mobile: phoneNumber,
-          password: password,
-          fcm_token: fcmToken,
-        });
-        if (response.data) {
-          console.log(response.data);
-          await AsyncStorage.setItem('userToken', response.data.token);
-          setToken(response.data.token);
-          navigation.navigate('root');
-          setLoader(false);
-        } else {
-          Alert.alert("Error", "Invalid credentials");
-          setLoader(false);
-        }
-      } else {
-        Alert.alert("Please fill all the fields");
-        setLoader(false);
-      }
-    } catch (error) {
-      console.log(error);
-      Alert.alert("Error", "Invalid credentials");
-      setLoader(false);
-    }
+   const response = await login(phoneNumber, password);
+   console.log(response);
+   
   };
 
   const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
 
   return (
-    loader ? <LoaderLine /> : (
+   isLoading ? <LoaderLine /> : (
       <View style={GlobalStyles.container}>
         <Image
           style={styles.logo}

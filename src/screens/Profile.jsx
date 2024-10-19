@@ -4,13 +4,15 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from "reac
 import Path from "../services/Path";
 import BorderCard from "../components/BorderCard";
 import Icon from 'react-native-vector-icons/Ionicons';
-import { userDataContext } from "../context/UserDataContext";
+
+import { AuthContext } from "../context/AuthContext";
+import { userDataContext } from "../context/UserContext";
 
 
 const Profile = ({ navigation }) => {
-
-  const {userData} = useContext(userDataContext)
-  // console.log(userData);
+  const {logout} = useContext(AuthContext)
+  const {user} = useContext(userDataContext)
+  // console.log(user);
 
   const calculateAge = (dobString) => {
     const dob = new Date(dobString);
@@ -20,24 +22,24 @@ const Profile = ({ navigation }) => {
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   };
 
-  const userAge = calculateAge(userData?.dob)
+  const userAge = calculateAge(user?.dob)
 
-  const logout = async () => {
-    // const token = await AsyncStorage.getItem('userToken');
-    // const response = await Path.get("/logout", {
-    //   headers: {
-    //     'authorization': `Bearer ${token}`
-    //   }
-    // })
-    // if (response) {
-    //   AsyncStorage.removeItem('userToken');
-    //   navigation.navigate('AuthenticationNavigator');
-    // }
-    // else {
-    //   alert("something went wrong")
-    // }
-    AsyncStorage.removeItem('userToken');
-  }
+  // const logout = async () => {
+  //   // const token = await AsyncStorage.getItem('userToken');
+  //   // const response = await Path.get("/logout", {
+  //   //   headers: {
+  //   //     'authorization': `Bearer ${token}`
+  //   //   }
+  //   // })
+  //   // if (response) {
+  //   //   AsyncStorage.removeItem('userToken');
+  //   //   navigation.navigate('AuthenticationNavigator');
+  //   // }
+  //   // else {
+  //   //   alert("something went wrong")
+  //   // }
+  //   AsyncStorage.removeItem('userToken');
+  // }
 
 
   return (
@@ -49,11 +51,11 @@ const Profile = ({ navigation }) => {
 
       }}>
 
-        <Image source={userData?{uri:userData.picture}:require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
-        <Text style={styles.name}>{userData?.username ? userData?.username : "User Name "}</Text>
+        <Image source={user?{uri:user.picture}:require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
+        <Text style={styles.name}>{user?.username ? user?.username : "User Name "}</Text>
         <Text style={{
           color: '#000'
-        }}> {userData?.mobile ? userData?.mobile : "0000000000"}</Text>
+        }}> {user?.mobile ? user?.mobile : "0000000000"}</Text>
       </View>
       <View style={{
         flexDirection: 'row',
@@ -61,8 +63,8 @@ const Profile = ({ navigation }) => {
         gap: 10
       }}>
 
-        <BorderCard logo={'⚖️'} value={userData?.weight} valueUnit={'kg'} />
-        <BorderCard logo={'🧍'} value={userData?.height} valueUnit={'Cm'} />
+        <BorderCard logo={'⚖️'} value={user?.weight} valueUnit={'kg'} />
+        <BorderCard logo={'🧍'} value={user?.height} valueUnit={'Cm'} />
         <BorderCard logo={'🎂'} value={userAge?userAge:'..'} valueUnit={'Yrs'} />
 
 

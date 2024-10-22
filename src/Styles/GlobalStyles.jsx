@@ -6,14 +6,12 @@ import { G } from "react-native-svg";
 const GlobalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GlobalColor.lightBackgroundColor,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: GlobalColor.darkBackgroundColor,
+    paddingTop: Platform.OS === 'ios' ? 65 : 0,
   },
   text: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    color:GlobalColor.darkTextColor
   },
   button: {
     backgroundColor: GlobalColor.secondaryColor,

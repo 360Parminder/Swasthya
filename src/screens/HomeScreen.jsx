@@ -9,6 +9,9 @@ import { BarChart } from 'react-native-gifted-charts';
 import Path from '../services/Path';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userDataContext } from '../context/UserContext';
+import GlobalStyles from '../Styles/GlobalStyles';
+import GlobalColor from '../Styles/GlobalColor';
+import { generateLastMonthDates } from '../utils/dateFunction';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -37,71 +40,10 @@ const HomeScreen = ({ navigation }) => {
   ];
 
   useEffect(() => {
-    const fetchUserToken = async () => {
-      const token = await AsyncStorage.getItem('userToken');
-      setToken(token);
-    };
+    const data = generateLastMonthDates();
+    setData(data);
 
-    fetchUserToken();
   }, []);
-
-  useEffect(() => {
-
-
-
-    const generateLastMonthDates = () => {
-      const today = new Date();
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(today.getMonth() - 1);
-
-      const dateArray = [];
-
-      for (let d = new Date(oneMonthAgo); d <= today; d.setDate(d.getDate() + 1)) {
-        const date = d.getDate().toString().padStart(2, '0');
-        const month = d.toLocaleString('default', { month: 'short' }).toLowerCase();
-        dateArray.push({ date, month });
-      }
-
-      setData(dateArray.reverse());
-    };
-
-    const fetchUserRank = async () => {
-      try {
-        const response = await Path.post('/leaderboard/overall/ranking',
-          { date: date },
-          { headers: { 'authorization': `Bearer ${token}` } }
-        );
-        if (response) {
-          setUserRank(response.data.ranking);
-        }
-      } catch (error) {
-        console.log('userRank', error);
-      }
-    };
-
-    const fetchUserSteps = async () => {
-      try {
-        const response = await Path.get('/step/view/daily',
-          {
-            headers: {
-              'authorization': `Bearer ${token}`
-            }
-          }
-        );
-        if (response) {
-          console.log(response.data);
-          setSteps(response.data?.record[0]?.steps);
-          setCalories(response.data?.record[0]?.caloriesBurned);
-        }
-      } catch (error) {
-        console.log('userSteps', error);
-      }
-    };
-
-    generateLastMonthDates();
-    fetchUserRank();
-    fetchUserSteps();
-  }, [token]);
 
   const ItemSeparator = () => {
     return <View style={styles.separator} />;
@@ -109,44 +51,32 @@ const HomeScreen = ({ navigation }) => {
 
   const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
 
-  return (
-    <>
-      <SafeAreaView style={{
-        height: '100%'
-      }} >
-        <View style={styles.container}>
+  return (   
+        <View style={[GlobalStyles.container,]}>
           <View style={{
             flexDirection: 'row',
-
+            height:110,
             alignItems: 'center',
-            marginTop: 10,
-            marginBottom: 20
+            paddingHorizontal:20,
+            marginHorizontal:8,
+            marginVertical:10,
+            borderRadius:14,
+            backgroundColor:GlobalColor.fadedColor,
+            borderWidth:3,
+            borderColor:GlobalColor.borderColor,
           }}>
             <Image style={{
-              width: 50,
-              height: 50,
-              borderRadius: 50,
-
+              width: 70,
+              height: 70,
+              borderRadius: 100,
             }} source={user ? { uri: user.picture } : require('../assets/images/Profile.jpg')} resizeMode='cover' />
             <View style={{
               flexDirection: 'column',
               justifyContent: 'center',
-              // alignItems:'center',
               marginLeft: 15
             }} >
-              <Text style={{
-                fontSize: 18,
-                color: '#5C5C5C',
-                // marginBottom: 5,
-
-              }}>Have a good day!</Text>
-              <Text style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                color: '#222222',
-                marginBottom: 5,
-
-              }}> {user ? user?.username : 'User Name'}</Text>
+              <Text style={GlobalStyles.text}>Good Day 😊</Text>
+              <Text style={[GlobalStyles.text,{fontWeight:'600'}]}> {user ? user?.username : 'User Name'}</Text>
             </View>
           </View>
           <View style={styles.flatListContainer}>
@@ -158,7 +88,7 @@ const HomeScreen = ({ navigation }) => {
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
-          <ScrollView>
+          <ScrollView style={{marginHorizontal:20}}>
             <View style={styles.grid}>
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>
                 <HomeCard cardTitle={"Steps"} cardLogo={'👟'} logoBg={'#FFFA9E'} mainContent={(
@@ -221,8 +151,6 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </ScrollView>
         </View>
-      </SafeAreaView>
-    </>
   );
 };
 
@@ -237,6 +165,7 @@ const lightStyles = StyleSheet.create({
     shadowOpacity: 0.1,
     elevation: 3,
     shadowRadius: 1,
+    marginHorizontal:20,
   },
   separator: {
     height: 10,

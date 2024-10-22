@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Path from "./Path";
 
 const userData = {
@@ -15,6 +16,35 @@ const userData = {
             console.log(error);
         }
     },
+    fetchUserRank: async (date) => {
+        try {
+          const response = await Path.post('/leaderboard/overall/ranking',
+            { date: date },
+            { headers: { 'authorization': `Bearer ${token}` } }
+          );
+          return response;
+         
+        } catch (error) {
+          console.log('userRank', error);
+        }
+      },
+  
+      fetchUserSteps:  async () => {
+        try {
+          const response = await Path.get('/step/view/daily',
+            {
+              headers: {
+                'authorization': `Bearer ${token}`
+              }
+            }
+
+          );
+          return response;
+        
+        } catch (error) {
+          console.log('userSteps', error);
+        }
+      },
 };
 
 export default userData;

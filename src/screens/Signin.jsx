@@ -27,15 +27,13 @@ const SignIn = () => {
 
   const handleSignIn = async () => {
    const response = await login(phoneNumber, password);
-   console.log(response);
-   
   };
 
   const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
 
   return (
    isLoading ? <LoaderLine /> : (
-      <View style={GlobalStyles.container}>
+      <View style={[GlobalStyles.container,{justifyContent:'center',alignItems:'center'}]}>
         <Image
           style={styles.logo}
           source={require('../assets/images/meditation.png')}

@@ -14,9 +14,7 @@ export const UserDataProvider = ({ children }) => {
     try {
       const token = await AsyncStorage.getItem('userToken');
       if (token) {
-        const response = await userData.getUserProfile(token);
-        console.log(response);
-        
+        const response = await userData.getUserProfile(token)
         if (response.status === 200) {
           setUser(response.data.data);
         }

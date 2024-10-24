@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import GlobalColor from "./GlobalColor";
-import { G } from "react-native-svg";
 
 
 const GlobalStyles = StyleSheet.create({

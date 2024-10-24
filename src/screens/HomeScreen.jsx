@@ -6,8 +6,6 @@ import SmallHomeCard from '../components/SmallHomeCard';
 import DateCard from '../components/DateCard';
 import ECGWave from '../components/ECGWave';
 import { BarChart } from 'react-native-gifted-charts';
-import Path from '../services/Path';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userDataContext } from '../context/UserContext';
 import GlobalStyles from '../Styles/GlobalStyles';
 import GlobalColor from '../Styles/GlobalColor';

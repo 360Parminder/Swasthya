@@ -6,13 +6,14 @@ import Path from '../../services/Path';
 import OneTimeRecipeModal from '../../components/Modals/OneTimeRecipeModal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IngredientsInHand from '../../components/Modals/IngredientsInHand';
+import {Google_API_Key} from '@env';
 
 const {
   GoogleGenerativeAI,
   HarmCategory,
   HarmBlockThreshold,
 } = require("@google/generative-ai");
-const apiKey = 'AIzaSyD99F2j0C1dk3AasK-eHiRRsE-BzEFr1jw';
+const apiKey = Google_API_Key;
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
@@ -26,7 +27,7 @@ const generationConfig = {
 };
 
 
-const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{
+const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{  
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
   const [FoodPreference, setFoodPreference] = useState('');

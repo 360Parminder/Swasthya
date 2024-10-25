@@ -25,6 +25,7 @@
     "react-native-android-widget": "^0.14.1",
     "react-native-circular-progress-indicator": "^4.4.2",
     "react-native-date-picker": "^5.0.4",
+    "react-native-dotenv": "^3.4.11",
     "react-native-fast-image": "^8.6.3",
     "react-native-gifted-charts": "^1.4.11",
     "react-native-global-props": "^1.1.5",

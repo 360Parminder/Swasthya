@@ -47,7 +47,7 @@ const HomeScreen = ({ navigation }) => {
     return <View style={styles.separator} />;
   };
 
-  const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
+  const styles = colorScheme === 'dark' ? lightStyles : lightStyles;
 
   return (   
         <View style={[GlobalStyles.container,]}>
@@ -179,32 +179,6 @@ const lightStyles = StyleSheet.create({
   },
 });
 
-const darkStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#000',
-    alignItems: 'center',
-  },
-  flatListContainer: {
-    height: 90,
-    shadowOpacity: 0.1,
-    elevation: 3,
-    shadowRadius: 1,
-  },
-  separator: {
-    height: 10,
-    width: 10,
-  },
-  grid: {
-    backgroundColor: '#000',
-    marginTop: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    gridAutoFlow: 'dense',
-    gap: 10,
-  },
-});
+
 
 export default HomeScreen;

@@ -5,8 +5,9 @@ import GlobalColor from "./GlobalColor";
 const GlobalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GlobalColor.darkBackgroundColor,
+    backgroundColor: GlobalColor.backgroundColor,
     paddingTop: Platform.OS === 'ios' ? 65 : 0,
+    alignItems: 'center',
   },
   text: {
     fontSize: 20,

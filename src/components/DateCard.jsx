@@ -19,6 +19,15 @@ const DateCard = ({ item }) => {
     </View>
   );
 }
+<View style={styles.flatListContainer}>
+<FlatList
+  horizontal={true}
+  ItemSeparatorComponent={ItemSeparator}
+  data={data}
+  renderItem={DateCard}
+  keyExtractor={(item, index) => index.toString()}
+/>
+</View>
 
 const styles = StyleSheet.create({
   card: {

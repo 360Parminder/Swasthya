@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { AuthContext } from "../context/AuthContext";
 import { userDataContext } from "../context/UserContext";
+import GlobalStyles from "../Styles/GlobalStyles";
 
 
 const Profile = ({ navigation }) => {
@@ -43,18 +44,23 @@ const Profile = ({ navigation }) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
       <View style={{
+        width: '100%',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
-
+        justifyContent: 'center',
+        backgroundColor:'#1e40af',
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
+        paddingTop: 20,
+        paddingBottom: 20,
       }}>
 
         <Image source={user?{uri:user.picture}:require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
         <Text style={styles.name}>{user?.username ? user?.username : "User Name "}</Text>
         <Text style={{
-          color: '#000'
+          color: '#fff',  fontSize: 16, fontWeight: '600'
         }}> {user?.mobile ? user?.mobile : "0000000000"}</Text>
       </View>
       <View style={{
@@ -154,7 +160,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   name: {
-    color: '#000',
+    color: '#fff',
     fontSize: 22,
     fontWeight: '600',
     marginBottom: 2,

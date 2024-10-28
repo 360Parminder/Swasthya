@@ -52,7 +52,7 @@ const TabNavigator = () => {
       <Tab.Screen
         name='Profile'
         component={Profile}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
     </Tab.Navigator>
   );

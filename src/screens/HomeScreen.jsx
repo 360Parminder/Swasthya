@@ -8,15 +8,14 @@ import ECGWave from '../components/ECGWave';
 import { BarChart } from 'react-native-gifted-charts';
 import { userDataContext } from '../context/UserContext';
 import GlobalStyles from '../Styles/GlobalStyles';
-import GlobalColor from '../Styles/GlobalColor';
+import  { useGlobalColor } from '../Styles/GlobalColor';
 import { generateLastMonthDates } from '../utils/dateFunction';
+import Header from '../components/Header';
 
 
 const HomeScreen = ({ navigation }) => {
+  const GlobalColor = useGlobalColor();
   const [data, setData] = useState([]);
-  const [token, setToken] = useState();
-  const [loading, setLoading] = useState(true);
-  const [date, setDate] = useState(new Date());
   const [steps, setSteps] = useState(0);
   const [calories, setCalories] = useState(0);
   const [heartRate, setHeartRate] = useState(null);
@@ -51,32 +50,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (   
         <View style={[GlobalStyles.container,]}>
-          <View style={{
-            flexDirection: 'row',
-            height:110,
-            alignItems: 'center',
-            paddingHorizontal:20,
-            marginHorizontal:8,
-            marginVertical:10,
-            borderRadius:14,
-            backgroundColor:GlobalColor.fadedColor,
-            borderWidth:3,
-            borderColor:GlobalColor.borderColor,
-          }}>
-            <Image style={{
-              width: 70,
-              height: 70,
-              borderRadius: 100,
-            }} source={user ? { uri: user.picture } : require('../assets/images/Profile.jpg')} resizeMode='cover' />
-            <View style={{
-              flexDirection: 'column',
-              justifyContent: 'center',
-              marginLeft: 15
-            }} >
-              <Text style={GlobalStyles.text}>Good Day 😊</Text>
-              <Text style={[GlobalStyles.text,{fontWeight:'600'}]}> {user ? user?.username : 'User Name'}</Text>
-            </View>
-          </View>
+         <Header/>
           <View style={styles.flatListContainer}>
             <FlatList
               horizontal={true}
@@ -86,7 +60,7 @@ const HomeScreen = ({ navigation }) => {
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
-          <ScrollView style={{marginHorizontal:20}}>
+          <ScrollView >
             <View style={styles.grid}>
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>
                 <HomeCard cardTitle={"Steps"} cardLogo={'👟'} logoBg={'#FFFA9E'} mainContent={(
@@ -173,7 +147,7 @@ const lightStyles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     gridAutoFlow: 'dense',
     gap: 10,
   },

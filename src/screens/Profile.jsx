@@ -13,7 +13,7 @@ import GlobalStyles from "../Styles/GlobalStyles";
 const Profile = ({ navigation }) => {
   const {logout} = useContext(AuthContext)
   const {user} = useContext(userDataContext)
-  // console.log(user);
+  console.log(user);
 
   const calculateAge = (dobString) => {
     const dob = new Date(dobString);
@@ -50,9 +50,9 @@ const Profile = ({ navigation }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#1e40af',
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
+        backgroundColor:'#0e9fe9',
+        // borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 100,
         paddingTop: 20,
         paddingBottom: 20,
       }}>
@@ -79,37 +79,37 @@ const Profile = ({ navigation }) => {
 
 
       <View style={styles.card}>
-
-        <Pressable onPress={()=>navigation.navigate('Profile Settings')}>
+      
           <View style={styles.cardList}>
-
-            <Text style={styles.cardText}>Account</Text>
-            <Icon name="chevron-forward-outline" color="#000" Size={28} />
+          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
+          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="call" color="#000" Size={40} />
+          <Text style={styles.cardText}>Mobile Number</Text>
           </View>
-        </Pressable>
-
-
-
-        <Pressable >
+            <Text style={styles.cardText}>8779112732</Text>
+          </View>
           <View style={styles.cardList}>
-            <Text style={styles.cardText}>All Workouts 🚀</Text>
-            <Icon name="chevron-forward-outline" color="#000" Size={28} />
+          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
+          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="earth" color="#000" Size={40} />
+          <Text style={styles.cardText}>Country</Text>
           </View>
-        </Pressable>
+            <Text style={styles.cardText}>india</Text>
+          </View>
 
-        <Pressable>
           <View style={styles.cardList}>
-            <Text style={styles.cardText}>Workout Reminders</Text>
-            <Icon name="chevron-forward-outline" color="#000" Size={28} />
+          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
+          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="call" color="#000" Size={40} />
+          <Text style={styles.cardText}>Mobile Number</Text>
           </View>
-        </Pressable>
+            <Text style={styles.cardText}>8779112732</Text>
+          </View>
 
-        <Pressable onPress={()=>navigation.navigate('Notification')}>
-          <View style={[styles.cardList, { borderBottomWidth: 0 }]}>
-            <Text style={styles.cardText}>Notifications </Text>
-            <Icon name="chevron-forward-outline" color="#000" Size={28} />
+          <View style={styles.cardList}>
+          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
+          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="call" color="#000" Size={40} />
+          <Text style={styles.cardText}>Mobile Number</Text>
           </View>
-        </Pressable>
+            <Text style={styles.cardText}>8779112732</Text>
+          </View>
       </View>
       
         <Pressable onPress={()=>{logout()}} style={{
@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#f5f9fb',
-    paddingHorizontal: 20,
     paddingTop: 16
   },
   profilePicture: {
@@ -167,31 +166,23 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize'
   },
   card: {
+    width: '100%',
     marginTop: 26,
-    backgroundColor: '#fff',
-    borderRadius: 18,
-    // height: 300,
-    width: 350,
     gap: 10,
-    // paddingBottom:20,
-    shadowOpacity: 0.1,
-    // shadowOffset:
-    shadowRadius: 10,
-    elevation: 3
+   
   },
   cardList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#BFBFBF'
+    marginHorizontal: 15,
+    paddingVertical: 5,
   },
   cardText: {
     color: '#000',
     fontSize: 18,
-    fontWeight: '600'
+    fontWeight: '600',
+    textAlign:'left'
   }
 });
 

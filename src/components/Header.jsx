@@ -8,6 +8,7 @@ const Header = () => {
     const { user } = useContext(userDataContext)
     return(
         <View style={{
+          width: '90%',
             flexDirection: 'row',
             height:110,
             alignItems: 'center',

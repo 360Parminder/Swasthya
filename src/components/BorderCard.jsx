@@ -6,12 +6,8 @@ const BorderCard = ({logo,value,valueUnit}) => {
         <View style={{
             flexDirection: 'row',
             marginTop: 20,
-            // rowGap: 10,
-            // shadowOpacity:0.1,
-            // elevation:1,
         }}>
             <View style={styles.container}>
-
                 <Text style={styles.logoText}>
                     {logo?logo:'⛓️‍💥'}
                 </Text>
@@ -25,14 +21,19 @@ const BorderCard = ({logo,value,valueUnit}) => {
 }
 const styles = StyleSheet.create({
     container: {
+        backgroundColor:'#bae6fd',
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 2,
-        borderColor: '#5D4FB3',
-        borderRadius: 10,
+        borderColor: '#0284c7',
+        borderTopStartRadius: 5,
+        borderTopEndRadius: 35,
+        borderBottomEndRadius: 5,
+        borderBottomStartRadius: 30,
         paddingHorizontal: 26,
         paddingVertical: 12,
         gap: 3,
+
     },
     logoText: {
         fontSize: 24,

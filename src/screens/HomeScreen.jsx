@@ -8,13 +8,12 @@ import ECGWave from '../components/ECGWave';
 import { BarChart } from 'react-native-gifted-charts';
 import { userDataContext } from '../context/UserContext';
 import GlobalStyles from '../Styles/GlobalStyles';
-import  { useGlobalColor } from '../Styles/GlobalColor';
+import GlobalColor from '../Styles/GlobalColor';
 import { generateLastMonthDates } from '../utils/dateFunction';
 import Header from '../components/Header';
 
 
 const HomeScreen = ({ navigation }) => {
-  const GlobalColor = useGlobalColor();
   const [data, setData] = useState([]);
   const [steps, setSteps] = useState(0);
   const [calories, setCalories] = useState(0);
@@ -144,12 +143,13 @@ const lightStyles = StyleSheet.create({
     width: 10,
   },
   grid: {
-    marginTop: 20,
+    marginTop: 5,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
     gridAutoFlow: 'dense',
     gap: 10,
+    paddingBottom: 10,
   },
 });
 

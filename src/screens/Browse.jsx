@@ -2,10 +2,8 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalStyles from '../Styles/GlobalStyles';
-import { useGlobalColor } from '../Styles/GlobalColor';
 
 const Browse = ({navigation}) => {
-    const GlobalColor = useGlobalColor();
     return (
         <View style={GlobalStyles.container}>
             <ScrollView>
@@ -193,6 +191,7 @@ const Browse = ({navigation}) => {
         </View>
     )
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -237,11 +236,10 @@ const styles = StyleSheet.create({
     categorieName: {
         fontSize: 20,
         fontWeight: '600',
-        color:,
+        color: '#000',
         marginHorizontal: 20,
-
+        
     },
 })
-
 
 export default Browse

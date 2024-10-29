@@ -1,29 +1,27 @@
-import { useColorScheme } from "react-native";
 
-const getGlobalColor = (colorScheme) => ({
+const GlobalColor = {
   primaryColor: '#4c4291',
   secondaryColor: '#5d4fb3',
-  backgroundColor: colorScheme === 'dark' ? '#09090b' : '#e5e9fa',
+  backgroundColor: '#f9f7f3',
   lightTextColor: '#09090b',
-  darkTextColor: '#f1f2fc',
+  darkTextColor: '#001427',
+  lightBackgroundColor: '#e5e9fa',
+  darkBackgroundColor: '#09090b',
   errorColor: '#dc2626',
   warningColor: '#fbbf24',
   successColor: '#84cc16',
   infoColor: '#2563eb',
   disabledColor: '#d3d3d3',
-  borderColor: '#8425F8',
+  borderColor: '#0284c7',
   iconColor: '#ffffff',
   placeholderColor: '#d3d3d3',
   shadowColor: '#000000',
-  textColor: colorScheme === 'dark' ? '#f1f2fc' : '#09090b',
+  textColor: '#f1f2fc',
   textColorSecondary: '#808080',
   textColorTertiary: '#4a4a4a',
   textColorQuaternary: '#343a40',
   separatorColor: '#d3d3d3',
-  fadedColor: 'rgba(132, 37, 248, 0.13)'
-});
+  fadedColor:'#bae6fd'
+}
 
-export const useGlobalColor = () => {
-  const colorScheme = useColorScheme();
-  return getGlobalColor(colorScheme);
-};
+export default GlobalColor;

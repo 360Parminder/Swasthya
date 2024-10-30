@@ -2,12 +2,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import StackNavigator from './StackNavigator'; // Adjust import path if needed
-import Profile from '../screens/Profile';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Leaderboard from '../screens/Leaderboard';
-import Browse from '../screens/Browse';
 import CustomHeader from '../components/CustomHeader';
 import BrowseStackNavigator from './BrowseStackNavigator';
+import ProfileStack from './ProfileStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,11 +18,18 @@ const TabNavigator = () => {
         tabBarActiveTintColor: '#5D4FB3',
         tabBarInactiveTintColor: '#808080',
         tabBarShowLabel: false,
+        tabBarStyle: {
+          marginHorizontal: 10,  // Horizontal margin around tab bar
+          marginBottom: 10,      // Bottom margin for tab bar
+          borderRadius: 15,      // Optional: rounded corners for a card-like effect
+          elevation: 5,          // Optional: shadow for Android
+          shadowOpacity: 0.3,    // Optional: shadow for iOS
+        },
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === 'Home') {
             iconName = 'home';
-          } else if (route.name === 'Profile') {
+          } else if (route.name === 'ProfileStack') {
             iconName = 'person';
           } else if (route.name === 'Leaderboard') {
             iconName = 'podium';
@@ -50,8 +56,8 @@ const TabNavigator = () => {
         options={{ header: () => <CustomHeader headerTitle={'Browse'} /> }}
       />
       <Tab.Screen
-        name='Profile'
-        component={Profile}
+        name='ProfileStack'
+        component={ProfileStack}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

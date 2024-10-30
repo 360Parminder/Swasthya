@@ -53,8 +53,12 @@ export const AuthProvider = ({ children }) => {
         try {
             await AsyncStorage.removeItem('userToken');
             setToken(null);
+            setIsAuthenticated(false);
         } catch (error) {
             console.log(error);
+            setIsAuthenticated(false);
+            setToken(null);
+            await AsyncStorage.removeItem('userToken');
         }
     };
 

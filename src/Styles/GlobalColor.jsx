@@ -1,8 +1,9 @@
 
 const GlobalColor = {
-  primaryColor: '#4c4291',
-  secondaryColor: '#5d4fb3',
-  backgroundColor: '#f9f7f3',
+  primaryColor: '#0284c7',
+  secondaryColor: '#9381FF',
+  tertiaryColor: '#38b7f8',
+  backgroundColor: '#f8f7ff',
   lightTextColor: '#09090b',
   darkTextColor: '#001427',
   lightBackgroundColor: '#e5e9fa',
@@ -12,8 +13,8 @@ const GlobalColor = {
   successColor: '#84cc16',
   infoColor: '#2563eb',
   disabledColor: '#d3d3d3',
-  borderColor: '#0284c7',
-  iconColor: '#ffffff',
+  borderColor: '#9381FF',
+  iconColor: '#001524',
   placeholderColor: '#d3d3d3',
   shadowColor: '#000000',
   textColor: '#f1f2fc',
@@ -21,7 +22,10 @@ const GlobalColor = {
   textColorTertiary: '#4a4a4a',
   textColorQuaternary: '#343a40',
   separatorColor: '#d3d3d3',
-  fadedColor:'#bae6fd'
+  fadedColor:'#f8f7ff',
+  buttonBackgroundColor:'#9381FF',
+  buttonTextColor:'#F8F7FF',
+  
 }
 
 export default GlobalColor;

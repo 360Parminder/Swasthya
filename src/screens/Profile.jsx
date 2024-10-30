@@ -1,20 +1,17 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext, useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from "react-native";
-import Path from "../services/Path";
+import { useContext} from "react";
+import { View, Text, Image, StyleSheet,Pressable } from "react-native";
 import BorderCard from "../components/BorderCard";
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import { AuthContext } from "../context/AuthContext";
 import { userDataContext } from "../context/UserContext";
 import GlobalStyles from "../Styles/GlobalStyles";
+import GlobalColor from "../Styles/GlobalColor";
 
 
 const Profile = ({ navigation }) => {
   const {logout} = useContext(AuthContext)
   const {user} = useContext(userDataContext)
   console.log(user);
-
   const calculateAge = (dobString) => {
     const dob = new Date(dobString);
     const now = new Date();
@@ -24,25 +21,6 @@ const Profile = ({ navigation }) => {
   };
 
   const userAge = calculateAge(user?.dob)
-
-  // const logout = async () => {
-  //   // const token = await AsyncStorage.getItem('userToken');
-  //   // const response = await Path.get("/logout", {
-  //   //   headers: {
-  //   //     'authorization': `Bearer ${token}`
-  //   //   }
-  //   // })
-  //   // if (response) {
-  //   //   AsyncStorage.removeItem('userToken');
-  //   //   navigation.navigate('AuthenticationNavigator');
-  //   // }
-  //   // else {
-  //   //   alert("something went wrong")
-  //   // }
-  //   AsyncStorage.removeItem('userToken');
-  // }
-
-
   return (
     <View style={GlobalStyles.container}>
       <View style={{
@@ -50,18 +28,13 @@ const Profile = ({ navigation }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#0e9fe9',
-        // borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 100,
         paddingTop: 20,
         paddingBottom: 20,
+        position: 'relative',
       }}>
-
         <Image source={user?{uri:user.picture}:require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
         <Text style={styles.name}>{user?.username ? user?.username : "User Name "}</Text>
-        <Text style={{
-          color: '#fff',  fontSize: 16, fontWeight: '600'
-        }}> {user?.mobile ? user?.mobile : "0000000000"}</Text>
+        <Text style={{ color: GlobalColor.darkTextColor, fontSize: 16, fontWeight: '500' }}>{"parminder@gmail.com"}</Text>
       </View>
       <View style={{
         flexDirection: 'row',
@@ -79,67 +52,37 @@ const Profile = ({ navigation }) => {
 
 
       <View style={styles.card}>
-      
-          <View style={styles.cardList}>
+          <Pressable onPress={()=>navigation.navigate('Personal Details')} style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="call" color="#000" Size={40} />
-          <Text style={styles.cardText}>Mobile Number</Text>
+          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="person-circle-outline" color={GlobalColor.iconColor} size={25} />
+          <Text style={styles.cardText}>Personal Details</Text>
           </View>
-            <Text style={styles.cardText}>8779112732</Text>
-          </View>
-          <View style={styles.cardList}>
+            <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
+          </Pressable>
+          <Pressable onPress={()=>navigation.navigate('Help')} style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="earth" color="#000" Size={40} />
-          <Text style={styles.cardText}>Country</Text>
+          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="help-circle-outline" color={GlobalColor.iconColor} size={25} />
+          <Text style={styles.cardText}>Help</Text>
           </View>
-            <Text style={styles.cardText}>india</Text>
-          </View>
+          <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
+          </Pressable>
 
           <View style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="call" color="#000" Size={40} />
-          <Text style={styles.cardText}>Mobile Number</Text>
+          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="trash-outline" color={GlobalColor.iconColor} size={25} />
+          <Text style={styles.cardText}>Delete account</Text>
           </View>
-            <Text style={styles.cardText}>8779112732</Text>
+          <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
           </View>
 
-          <View style={styles.cardList}>
+          <Pressable onPress={()=>{logout()}} style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{fontSize:20,backgroundColor:'#eaf4f4',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="call" color="#000" Size={40} />
-          <Text style={styles.cardText}>Mobile Number</Text>
+          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="power-outline" color='red' size={25} />
+          <Text style={[styles.cardText,{color:'red'}]}>Log out</Text>
           </View>
-            <Text style={styles.cardText}>8779112732</Text>
-          </View>
+          <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
+          </Pressable>
       </View>
-      
-        <Pressable onPress={()=>{logout()}} style={{
-          backgroundColor:'#a3c4f3',
-          padding: 10,
-          borderRadius: 10,
-          margin: 10,
-          width: '90%',
-          alignSelf: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'row',
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-
-        }}>
-          <Text style={{
-            color: '#000',
-          }}>
-            Logout
-          </Text>
-        </Pressable>
-  
-
     </View>
   );
 }
@@ -159,15 +102,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   name: {
-    color: '#fff',
+    color: GlobalColor.darkTextColor,
     fontSize: 22,
     fontWeight: '600',
     marginBottom: 2,
     textTransform: 'capitalize'
   },
   card: {
-    width: '100%',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: GlobalColor.borderColor,
+    width: '90%',
     marginTop: 26,
+    paddingVertical: 10,
     gap: 10,
    
   },
@@ -175,7 +122,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 15,
+    marginEnd: 15,
     paddingVertical: 5,
   },
   cardText: {

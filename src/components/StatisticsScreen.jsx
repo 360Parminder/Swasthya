@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { BarChart } from 'react-native-gifted-charts'
+import GlobalStyles from '../Styles/GlobalStyles';
+import GlobalColor from '../Styles/GlobalColor';
 
 const StatisticsScreen = () => {
     const data = [
@@ -13,7 +15,7 @@ const StatisticsScreen = () => {
         {value: 300, label: 'Sun'},
       ];
   return (
-    <View style={{ flex: 1, padding: 16 }}>
+    <View style={GlobalStyles.container}>
       <View>
         <Text style={{ color:'#000', fontSize: 18, fontWeight: 'bold', textAlign: 'center' }}>Weekly Statistics</Text>
       </View>
@@ -22,7 +24,7 @@ const StatisticsScreen = () => {
           barWidth={22}
           noOfSections={3}
           barBorderRadius={4}
-          frontColor="#5D4FB3"
+          frontColor={GlobalColor.tertiaryColor}
           yAxisThickness={0}
           xAxisThickness={0}
           xAxisLabelTextStyle={{
@@ -40,18 +42,14 @@ const StatisticsScreen = () => {
             color: 'black',
             fontSize: 12,
           }}
-          
-          
         />
+      </View>
+      <View>
+        <Text style={{ color:'#000', fontSize: 18, fontWeight: 'bold', textAlign: 'center', marginTop: 50 }}>Monthly Statistics</Text>
+        
       </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-    Text:{
-        color:'#000'
-    }
-})
 
 export default StatisticsScreen

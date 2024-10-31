@@ -3,6 +3,8 @@ import { Alert, Image, Pressable, View, Text, TextInput, TouchableOpacity, Style
 import Path from '../services/Path';
 import DatePicker from 'react-native-date-picker';
 import RNPickerSelect from 'react-native-picker-select';
+import GlobalStyles from '../Styles/GlobalStyles';
+import GlobalColor from '../Styles/GlobalColor';
 
 const UserRegister = ({ navigation, route }) => {
   const { mobile } = route.params;
@@ -51,27 +53,27 @@ const UserRegister = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[GlobalStyles.container, { justifyContent: 'center' }]}>
       <Image
         style={styles.logo}
         source={require('../assets/images/heart-rate.png')}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Getting Started</Text>
+      <Text style={GlobalStyles.title}>Getting Started</Text>
       <Text style={{
-        marginBottom:20,
-        color:'#343a40',
-        fontSize:16
+        marginBottom: 20,
+        color: '#343a40',
+        fontSize: 16
       }}>Create a account to continue!</Text>
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Name"
         onChangeText={text => setName(text)}
         value={name}
         placeholderTextColor={"#000"}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Password"
         onChangeText={text => setPassword(text)}
         value={password}
@@ -79,11 +81,11 @@ const UserRegister = ({ navigation, route }) => {
         placeholderTextColor={"#000"}
       />
       <Pressable
-        style={[styles.input, styles.datePicker]}
+        style={[GlobalStyles.button, styles.datePicker]}
         onPress={() => setOpen(true)}
       >
         <Text style={styles.dateText}>
-          {date ? date.toLocaleDateString("en-US",options) : 'Select Date'}
+          {date ? date.toLocaleDateString("en-US", options) : 'Select Date'}
         </Text>
       </Pressable>
       <DatePicker
@@ -99,36 +101,35 @@ const UserRegister = ({ navigation, route }) => {
           setOpen(false);
         }}
       />
-      <View style={[styles.input, { paddingLeft: 10, paddingTop: 0 }]}>
-        <RNPickerSelect
-          placeholderTextColor={"#000"}
-          placeholder={{ label: 'Select your Gender', value: null }}
-          onValueChange={(value) => setGender(value)}
-          selectedValue={gender}
-          items={[
-            { label: 'Male', value: 'male' },
-            { label: 'Female', value: 'female' },
-            { label: 'Other', value: 'transMale' },
-          ]}
-        >
-        </RNPickerSelect>
-      </View>
-      <View style={[styles.input, { paddingLeft: 10, paddingTop: 0 }]}>
-        <RNPickerSelect
-          placeholderTextColor={'#000'}
-          placeholder={{ label: 'Select Food Preference', value: null }}
-          onValueChange={(itemValue, itemIndex) =>
-            setFoodPreference(itemValue)
-          }
-          items={[
-            { label: 'Vegetarian', value: 'veg' },
-            { label: 'Non-vegetarian', value: 'nonVeg' },
-            { label: 'Vegan', value: 'vegan' },
-          ]}
-        />
-      </View>
+
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        placeholderTextColor={"#000"}
+        placeholder={{ label: 'Select your Gender', value: null }}
+        onValueChange={(value) => setGender(value)}
+        selectedValue={gender}
+        items={[
+          { label: 'Male', value: 'male' },
+          { label: 'Female', value: 'female' },
+          { label: 'Other', value: 'transMale' },
+        ]}
+      >
+      </RNPickerSelect>
+      <RNPickerSelect
+        style={pickerSelectStyles}
+        placeholderTextColor={'#000'}
+        placeholder={{ label: 'Select Food Preference', value: null }}
+        onValueChange={(itemValue, itemIndex) =>
+          setFoodPreference(itemValue)
+        }
+        items={[
+          { label: 'Vegetarian', value: 'veg' },
+          { label: 'Non-vegetarian', value: 'nonVeg' },
+          { label: 'Vegan', value: 'vegan' },
+        ]}
+      />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Height (cm)"
         onChangeText={text => setHeight(text)}
         value={height}
@@ -136,70 +137,64 @@ const UserRegister = ({ navigation, route }) => {
         placeholderTextColor={"#000"}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Weight (kg)"
         onChangeText={text => setWeight(text)}
         value={weight}
         keyboardType="numeric"
         placeholderTextColor={"#000"}
       />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Register</Text>
+      <TouchableOpacity style={GlobalStyles.button} onPress={handleRegister}>
+        <Text style={GlobalStyles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+const pickerSelectStyles = {
+  inputIOS: {
+    width: '80%',
+    borderRadius: 5,
+    borderColor: GlobalColor.borderColor,
+    borderWidth: 1,
+    height: 50,
+    fontSize: 16,
+    paddingLeft: 10,
+    backgroundColor: 'white',
+    color: '#000',
+    marginBottom: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#E6E2EE',
   },
+  inputAndroid: {
+    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#8d3c13',
+    borderRadius: 4,
+    color: '#000',
+    backgroundColor: '#fff',
+    paddingRight: 30, // to ensure the text is never behind the icon
+    marginBottom: 10,
+  },
+};
+
+const styles = StyleSheet.create({
+
   logo: {
     width: 100,
     height: 100,
     marginBottom: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: '#5D4FB3',
-  },
-  input: {
-    width: '80%',
-    height: 40,
-    backgroundColor: 'white',
-    borderRadius: 5,
-    paddingLeft: 10,
-    marginBottom: 15,
-    justifyContent: 'center',
-    color: '#000',
-    fontSize: 18
-  },
+
   datePicker: {
-    backgroundColor: '#5D4FB3',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 15,
   },
   dateText: {
     fontSize: 18,
     color: '#fff',
-  },
-
-
-  button: {
-    backgroundColor: '#5D4FB3',
-    paddingVertical: 12,
-    paddingHorizontal: 80,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });
 

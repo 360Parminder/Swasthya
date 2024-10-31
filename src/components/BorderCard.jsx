@@ -23,7 +23,7 @@ const BorderCard = ({logo,value,valueUnit}) => {
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:GlobalColor.fadedColor,
+        backgroundColor:'#fff',
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 2,

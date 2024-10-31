@@ -2,7 +2,7 @@
 const GlobalColor = {
   primaryColor: '#0284c7',
   secondaryColor: '#9381FF',
-  tertiaryColor: '#38b7f8',
+  tertiaryColor: '#FFD8BE',
   backgroundColor: '#f8f7ff',
   lightTextColor: '#09090b',
   darkTextColor: '#001427',
@@ -22,7 +22,7 @@ const GlobalColor = {
   textColorTertiary: '#4a4a4a',
   textColorQuaternary: '#343a40',
   separatorColor: '#d3d3d3',
-  fadedColor:'#f8f7ff',
+  fadedColor:'#E1DBFE',
   buttonBackgroundColor:'#9381FF',
   buttonTextColor:'#F8F7FF',
   

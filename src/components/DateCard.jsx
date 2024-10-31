@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import GlobalColor from '../Styles/GlobalColor';
 
 
 const DateCard = ({ item }) => {
+  // console.log(item);
+  
   const today = new Date();
   const currentDate = today.getDate().toString().padStart(2, '0');
   const currentMonth = today.toLocaleString('default', { month: 'short' }).toLowerCase();
@@ -10,12 +13,14 @@ const DateCard = ({ item }) => {
  const isCurrentDate = item.date === currentDate && item.month === currentMonth
   return (
     <View style={[styles.card, isCurrentDate && styles.currentDateCard]}>
-      <Text style={[styles.date,isCurrentDate && styles.currentDateCardtext]}>
+      <Text style={[styles.date,isCurrentDate && {color:GlobalColor.buttonBackgroundColor}]}>
+        {item.day}
+      </Text>
+     <View style={{backgroundColor:'#fff',padding:5,borderRadius:25}}>
+     <Text style={[styles.month,isCurrentDate && styles.currentDateCardtext,{}]}>
         {item.date}
       </Text>
-      <Text style={[styles.month,isCurrentDate && styles.currentDateCardtext]}>
-        {item.month}
-      </Text>
+     </View>
     </View>
   );
 }
@@ -26,9 +31,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: 70,
-    height: 80,
+    height: 110,
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: 80,
     paddingHorizontal: 10,
     shadowOpacity: 0.1,
     elevation: 3,
@@ -39,7 +44,7 @@ const styles = StyleSheet.create({
    // Light blue for current date
   },
   currentDateCardtext:{
-    color:'#fff' 
+    color:GlobalColor.buttonBackgroundColor 
   },
   date: {
     textTransform: 'capitalize',
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
     color: '#000'
   },
   currentDateCard: {
-    backgroundColor: '#5d4fb3', // Light blue for current date
+    backgroundColor: GlobalColor.fadedColor, // Light blue for current date
   },
   month: {
     textTransform: 'capitalize',

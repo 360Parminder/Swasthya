@@ -15,21 +15,11 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
  
 
-  const colorScheme = useColorScheme();
-
-  // useEffect(() => {
-  //   getFCMToken().then((token) => {
-  //     setFCMToken(token);
-  //     console.log("form sign",token);
-      
-  //   });
-  // }, []);
-
   const handleSignIn = async () => {
    const response = await login(phoneNumber, password);
   };
 
-  const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
+
 
   return (
    isLoading ? <LoaderLine /> : (
@@ -43,7 +33,7 @@ const SignIn = () => {
         <TextInput
           style={GlobalStyles.input}
           placeholder="Mobile Number"
-          placeholderTextColor={colorScheme === 'dark' ? "#ffffff" : "#000000"}
+          placeholderTextColor="#000"
           onChangeText={text => setPhoneNumber(text)}
           value={phoneNumber}
           keyboardType="phone-pad"
@@ -51,7 +41,7 @@ const SignIn = () => {
         <TextInput
           style={GlobalStyles.input}
           placeholder="Password"
-          placeholderTextColor={colorScheme === 'dark' ? "#ffffff" : "#000000"}
+          placeholderTextColor="#000"
           onChangeText={text => setPassword(text)}
           value={password}
           secureTextEntry={true}
@@ -67,38 +57,12 @@ const SignIn = () => {
   );
 };
 
-const lightStyles = StyleSheet.create({
+const styles = StyleSheet.create({
 
   logo: {
     width: 300,
     height: 300,
     marginBottom: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#5D4FB3',
-  },
-  input: {
-    width: '80%',
-    height: 40,
-    backgroundColor: 'white',
-    borderRadius: 5,
-    paddingLeft: 10,
-    marginBottom: 15,
-    color: '#000000',
-  },
-  button: {
-    backgroundColor: '#5D4FB3',
-    paddingVertical: 12,
-    paddingHorizontal: 80,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
   notRegistered: {
     marginTop: 10,
@@ -108,50 +72,6 @@ const lightStyles = StyleSheet.create({
   },
 });
 
-const darkStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#121212',
-  },
-  logo: {
-    width: 300,
-    height: 300,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#BB86FC',
-  },
-  input: {
-    width: '80%',
-    height: 40,
-    backgroundColor: '#1E1E1E',
-    borderRadius: 5,
-    paddingLeft: 10,
-    marginBottom: 15,
-    color: '#ffffff',
-  },
-  button: {
-    backgroundColor: '#BB86FC',
-    paddingVertical: 12,
-    paddingHorizontal: 80,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  notRegistered: {
-    marginTop: 10,
-  },
-  notRegisteredText: {
-    color: '#0077b6',
-  },
-});
+
 
 export default SignIn;

@@ -1,43 +1,44 @@
+// Function for today's date, month, and day
+export function todayDate() {
+  const today = new Date();
+  const date = today.getDate().toString().padStart(2, '0');
+  const month = today.toLocaleString('default', { month: 'long' }).toLowerCase();
+  const day = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
+  return { date, month, day };
+}
 
-//function for Today date and Month
-  export function todayDate() {
-    const today = new Date();
-    const date = today.getDate().toString().padStart(2, '0');
-    const month = today.toLocaleString('default', { month: 'long' }).toLowerCase();
-    return { date, month };
+// Function for last 1 month's dates with date, month, and day
+export const generateLastMonthDates = () => {
+  const today = new Date();
+  const oneMonthAgo = new Date();
+  oneMonthAgo.setMonth(today.getMonth() - 1);
 
+  const dateArray = [];
+
+  for (let d = new Date(oneMonthAgo); d <= today; d.setDate(d.getDate() + 1)) {
+    const date = d.getDate().toString().padStart(2, '0');
+    const month = d.toLocaleString('default', { month: 'short' }).toLowerCase();
+    const day = d.toLocaleString('default', { weekday: 'short' }).toLowerCase();
+    dateArray.push({ date, month, day });
   }
 
-    //function for Last 1 Month date and month
-  export const generateLastMonthDates = () => {
-    const today = new Date();
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(today.getMonth() - 1);
+  return dateArray;
+};
 
-    const dateArray = [];
+// Function for next 1 month's dates with date, month, and day
+export const generateNextMonthDates = () => {
+  const today = new Date();
+  const oneMonthAhead = new Date();
+  oneMonthAhead.setMonth(today.getMonth() + 1);
 
-    for (let d = new Date(oneMonthAgo); d <= today; d.setDate(d.getDate() + 1)) {
-      const date = d.getDate().toString().padStart(2, '0');
-      const month = d.toLocaleString('default', { month: 'short' }).toLowerCase();
-      dateArray.push({ date, month });
-    }
+  const dateArray = [];
 
-    return dateArray;
-  };
+  for (let d = new Date(today); d <= oneMonthAhead; d.setDate(d.getDate() + 1)) {
+    const date = d.getDate().toString().padStart(2, '0');
+    const month = d.toLocaleString('default', { month: 'short' }).toLowerCase();
+    const day = d.toLocaleString('default', { weekday: 'short' }).toLowerCase();
+    dateArray.push({ date, month, day });
+  }
 
-
-  export const generateNextMonthDates = () => {
-    const today = new Date();
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(today.getMonth());
-
-    const dateArray = [];
-
-    for (let d = new Date(oneMonthAgo); d <= today; d.setDate(d.getDate() + 1)) {
-      const date = d.getDate().toString().padStart(2, '0');
-      const month = d.toLocaleString('default', { month: 'short' }).toLowerCase();
-      dateArray.push({ date, month });
-    }
-
-    return dateArray;
-  };
+  return dateArray;
+};

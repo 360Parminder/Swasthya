@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, Modal } from 'react-native';
 import Path from '../services/Path';
+import GlobalStyles from '../Styles/GlobalStyles';
 
 
 
@@ -9,7 +10,7 @@ const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,
   const [otp, setOtp] = useState('');
   const verifyOtp = () => {
     if (otp == validOtp) {
-      navigation.navigate('UserRegester', { mobile: phoneNumber })
+      navigation.navigate('UserRegister', { mobile: phoneNumber })
     }
     else{
       Alert.alert('Invalid OTP')
@@ -52,7 +53,7 @@ const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,
             placeholder="Enter OTP "
             placeholderTextColor="#000000"
             onChangeText={text => setOtp(text)}
-          // value={otp}
+            value={otp}
 
           />
 
@@ -77,13 +78,11 @@ const OtpValidation = ({ navigation }) => {
       Alert.alert('Invalid Phone Number')
     }
     else {
-      //work after backend
       const response = await Path.post("/sendOtp", {
         mobile: `+91${phoneNumber}`,
       })
       if (response.data.data.otp) {
         setValidOtp(response.data.data.otp)
-        
         console.log(response.data.data.otp);
         Alert.alert("Otp send to you Mobile Number")
         setTimeout(() => {
@@ -104,7 +103,7 @@ const OtpValidation = ({ navigation }) => {
         source={require('../assets/images/password.png')}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Enter Your Mobile Number</Text>
+      <Text style={GlobalStyles.title}>Enter Your Mobile Number</Text>
       <Text style={{
          marginBottom: 20,
          color:'#343a40',
@@ -112,15 +111,15 @@ const OtpValidation = ({ navigation }) => {
       }}>We will send you a Confirmation Code</Text>
 
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Enter your Mobile"
         placeholderTextColor="#000000"
         onChangeText={text => setPhoneNumber(text)}
         value={phoneNumber}
         keyboardType="phone-pad"
       />
-      <TouchableOpacity style={styles.button} onPress={() => { sendOtp() }}>
-        <Text style={styles.buttonText}>Send Otp</Text>
+      <TouchableOpacity style={GlobalStyles.button} onPress={() => { sendOtp() }}>
+        <Text style={GlobalStyles.buttonText}>Send Otp</Text>
       </TouchableOpacity>
       <VerifyOtpModal verifyOtpModal={verifyOtpModal} setVerifyOtpModal={setVerifyOtpModal} validOtp={validOtp} navigation={navigation} phoneNumber={phoneNumber} />
     </View>

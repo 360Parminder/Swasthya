@@ -54,14 +54,14 @@ const Profile = ({ navigation }) => {
       <View style={styles.card}>
           <Pressable onPress={()=>navigation.navigate('Personal Details')} style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="person-circle-outline" color={GlobalColor.iconColor} size={25} />
+          <Icon style={{paddingHorizontal:16,paddingVertical:8,borderRadius:10}} name="person-circle-outline" color={GlobalColor.iconColor} size={25} />
           <Text style={styles.cardText}>Personal Details</Text>
           </View>
             <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
           </Pressable>
           <Pressable onPress={()=>navigation.navigate('Help')} style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="help-circle-outline" color={GlobalColor.iconColor} size={25} />
+          <Icon style={{paddingHorizontal:16,paddingVertical:12,borderRadius:10}} name="help-circle-outline" color={GlobalColor.iconColor} size={25} />
           <Text style={styles.cardText}>Help</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
@@ -69,7 +69,7 @@ const Profile = ({ navigation }) => {
 
           <View style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="trash-outline" color={GlobalColor.iconColor} size={25} />
+          <Icon style={{paddingHorizontal:16,paddingVertical:12,borderRadius:10}} name="trash-outline" color={GlobalColor.iconColor} size={25} />
           <Text style={styles.cardText}>Delete account</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
@@ -77,7 +77,7 @@ const Profile = ({ navigation }) => {
 
           <Pressable onPress={()=>{logout()}} style={styles.cardList}>
           <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{backgroundColor:'#FFEEDD',paddingHorizontal:16,paddingVertical:12,borderBottomRightRadius:10,borderTopRightRadius:10}} name="power-outline" color='red' size={25} />
+          <Icon style={{paddingHorizontal:16,paddingVertical:12,borderRadius:10}} name="power-outline" color='red' size={30} />
           <Text style={[styles.cardText,{color:'red'}]}>Log out</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
@@ -116,14 +116,21 @@ const styles = StyleSheet.create({
     marginTop: 26,
     paddingVertical: 10,
     gap: 10,
+    elevation: 1,
+    backgroundColor: '#fff',
+    boxShadow: '0 0 5px rgba(0,0,0,0.1)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
    
   },
   cardList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginEnd: 15,
-    paddingVertical: 5,
+    marginHorizontal: 10,
+   
   },
   cardText: {
     color: '#000',

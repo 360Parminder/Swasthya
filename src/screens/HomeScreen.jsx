@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView, useColorScheme, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView, useColorScheme, Image, ScrollView, StatusBar } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import HomeCard from '../components/HomeCard';
 import CircularProgress from 'react-native-circular-progress-indicator';
@@ -9,7 +9,7 @@ import { BarChart } from 'react-native-gifted-charts';
 import { userDataContext } from '../context/UserContext';
 import GlobalStyles from '../Styles/GlobalStyles';
 import GlobalColor from '../Styles/GlobalColor';
-import { generateLastMonthDates } from '../utils/dateFunction';
+import { generateLastMonthDates, generateNextMonthDates } from '../utils/dateFunction';
 import Header from '../components/Header';
 
 
@@ -36,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
   ];
 
   useEffect(() => {
-    const data = generateLastMonthDates();
+    const data = generateNextMonthDates();
     setData(data);
 
   }, []);
@@ -48,6 +48,8 @@ const HomeScreen = ({ navigation }) => {
   const styles = colorScheme === 'dark' ? lightStyles : lightStyles;
 
   return (   
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor={GlobalColor.backgroundColor} />
         <View style={[GlobalStyles.container,]}>
          <Header/>
           <View style={styles.flatListContainer}>
@@ -122,6 +124,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </ScrollView>
         </View>
+        </>
   );
 };
 
@@ -132,11 +135,13 @@ const lightStyles = StyleSheet.create({
     backgroundColor: '#f5f9fb',
   },
   flatListContainer: {
-    height: 90,
+    height: 120,
     shadowOpacity: 0.1,
     elevation: 3,
     shadowRadius: 1,
-    marginHorizontal:20,
+    paddingHorizontal:20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   separator: {
     height: 10,

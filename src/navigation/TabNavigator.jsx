@@ -7,6 +7,7 @@ import Leaderboard from '../screens/Leaderboard';
 import CustomHeader from '../components/CustomHeader';
 import BrowseStackNavigator from './BrowseStackNavigator';
 import ProfileStack from './ProfileStack';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,11 +20,21 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: '#808080',
         tabBarShowLabel: false,
         tabBarStyle: {
-          marginHorizontal: 10,  // Horizontal margin around tab bar
-          marginBottom: 10,      // Bottom margin for tab bar
-          borderRadius: 15,      // Optional: rounded corners for a card-like effect
-          elevation: 5,          // Optional: shadow for Android
-          shadowOpacity: 0.3,    // Optional: shadow for iOS
+         display: 'flex',
+         position: 'absolute',
+          bottom: Platform.OS === 'ios' ? 20 : 10,
+          left: 20,
+          right: 20,
+          paddingBottom: 5,
+          borderRadius: 15,
+          height: 60,
+          elevation: 10,
+          shadowColor: '#000',
+          shadowOpacity: 0.2,
+          shadowOffset: { width: 0, height: 0 },
+          shadowRadius: 15,
+
+          
         },
         tabBarIcon: ({ color, size }) => {
           let iconName;
@@ -36,9 +47,17 @@ const TabNavigator = () => {
           } else if (route.name === 'Browse') {
             iconName = 'grid';
           }
-          return <Icon name={iconName} color={color} size={size} />;
+          return (
+            <Icon 
+              name={iconName} 
+              color={color} 
+              size={size} 
+              style={{ alignSelf: 'center' }} // Center icon within tab
+            />
+          );
         },
       })}
+      
     >
       <Tab.Screen
         name='Home'
@@ -53,7 +72,7 @@ const TabNavigator = () => {
       <Tab.Screen
         name='Browse'
         component={BrowseStackNavigator}
-        options={{ header: () => <CustomHeader headerTitle={'Browse'} /> }}
+       options={{ headerShown: false }}
       />
       <Tab.Screen
         name='ProfileStack'

@@ -5,6 +5,8 @@ import DatePicker from 'react-native-date-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import GlobalStyles from '../Styles/GlobalStyles';
 import GlobalColor from '../Styles/GlobalColor';
+import { formatDate } from '../utils/dateFunction';
+import UserAuth from '../services/UserAuth';
 
 const UserRegister = ({ navigation, route }) => {
   const { mobile } = route.params;
@@ -28,28 +30,16 @@ const UserRegister = ({ navigation, route }) => {
   const handleRegister = async () => {
     try {
       if (name && password && date && gender && foodPreference && height && weight) {
-        const response = await Path.post("/register", {
-          username: name,
-          mobile: mobile,
-          password: password,
-          weight: weight,
-          height: height,
-          dob: date,
-          gender: gender,
-          food_preference: foodPreference
-        });
-        if (response.data) {
-          Alert.alert(response.data.message);
-          navigation.navigate('SignIn');
-        } else {
-          Alert.alert("Error", "Invalid credentials");
-        }
+        const response = await UserAuth.register(name, mobile, password, weight, height, formatDate(date),gender,foodPreference);
+       console.log(response);
+       
       } else {
         Alert.alert("Please fill all the fields");
       }
     } catch (error) {
       console.log(error);
     }
+    console.log(name, password,formatDate(date),gender,foodPreference,height,weight);
   };
 
   return (
@@ -170,7 +160,7 @@ const pickerSelectStyles = {
     paddingVertical: 8,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: '#8d3c13',
+    borderColor: GlobalColor.borderColor,
     borderRadius: 4,
     color: '#000',
     backgroundColor: '#fff',

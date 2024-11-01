@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Path from "./Path";
 
 const UserAuth = {
@@ -15,14 +16,23 @@ const UserAuth = {
             console.log(error);
         }
     },
-    signUpWithEmailAndPassword: async (email, password) => {
+    register: async (name,mobile,password,weight,height,date,gender,foodPreference) => {
+        console.log(name,mobile,password,weight,height,date);
         try {
-            const response = await Path.post('/auth/register', {
-                email,
-                password,
+            const response = await Path.post('/register', {
+                username: name,
+                mobile: mobile,
+                password: password,
+                weight: Number(weight),
+                height: Number(height),
+                dob: date,
+                gender:gender,
+                food_preference:foodPreference
             });
+            console.log(response);
+            
             if (response) {
-                return response.data;
+                return response;
             }
         } catch (error) {
             console.log(error);
@@ -53,6 +63,18 @@ const UserAuth = {
             console.log(error);
         }
     },
+    logout: async () => {
+        const token = AsyncStorage.getItem('userToken');
+        try {
+            await Path.get('/logout',{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 };
 
 export default UserAuth;

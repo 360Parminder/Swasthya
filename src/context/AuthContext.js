@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     };
     const logout = async () => {
         try {
+            await UserAuth.logout();
             await AsyncStorage.removeItem('userToken');
             setToken(null);
             setIsAuthenticated(false);

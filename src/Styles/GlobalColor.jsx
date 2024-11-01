@@ -1,6 +1,6 @@
 
 const GlobalColor = {
-  primaryColor: '#0284c7',
+  primaryColor: '#7655fd',
   secondaryColor: '#9381FF',
   tertiaryColor: '#FFD8BE',
   backgroundColor: '#f8f7ff',

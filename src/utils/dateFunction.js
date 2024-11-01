@@ -42,3 +42,11 @@ export const generateNextMonthDates = () => {
 
   return dateArray;
 };
+
+// Function to format date as "YYYY-MM-DD" from "2024-11-01T10:05:16.659Z" format
+export function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toISOString().split('T')[0];
+}
+
+

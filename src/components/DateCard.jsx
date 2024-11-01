@@ -13,7 +13,7 @@ const DateCard = ({ item }) => {
  const isCurrentDate = item.date === currentDate && item.month === currentMonth
   return (
     <View style={[styles.card, isCurrentDate && styles.currentDateCard]}>
-      <Text style={[styles.date,isCurrentDate && {color:GlobalColor.buttonBackgroundColor}]}>
+      <Text style={[styles.date,isCurrentDate && {color:GlobalColor.primaryColor}]}>
         {item.day}
       </Text>
      <View style={{backgroundColor:'#fff',padding:5,borderRadius:25}}>
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
    // Light blue for current date
   },
   currentDateCardtext:{
-    color:GlobalColor.buttonBackgroundColor 
+    color:GlobalColor.buttonBackgroundColor,
+    fontSize: 23,
   },
   date: {
     textTransform: 'capitalize',
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
   },
   month: {
     textTransform: 'capitalize',
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: '600',
     color: '#000'
   }
 })

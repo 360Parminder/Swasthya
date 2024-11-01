@@ -64,7 +64,7 @@ const HomeScreen = ({ navigation }) => {
           <ScrollView >
             <View style={styles.grid}>
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>
-                <HomeCard cardTitle={"Steps"} cardLogo={'👟'} logoBg={'#FFFA9E'} mainContent={(
+                <HomeCard cardTitle={"Steps"} cardLogo={'🏃‍♂️'} logoBg={'#FFFA9E'} mainContent={(
                   <CircularProgress
                     title='Steps'
                     titleStyle={{ fontWeight: 'bold', fontSize: 18 }}

@@ -9,6 +9,7 @@ const GlobalStyles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 65 : 0,
     alignItems: 'center',
     width: '100%',
+    paddingBottom: 80,
   },
   text: {
     fontSize: 20,
@@ -55,3 +56,32 @@ const GlobalStyles = StyleSheet.create({
 });
 
 export default GlobalStyles;
+
+const pickerSelectStyles = {
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#8d3c13',
+    borderRadius: 4,
+    color: '#000',
+    backgroundColor: '#fff',
+    paddingRight: 30, // to ensure the text is never behind the icon
+    marginBottom: 10,
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#8d3c13',
+    borderRadius: 4,
+    color: '#000',
+    backgroundColor: '#fff',
+    paddingRight: 30, // to ensure the text is never behind the icon
+    marginBottom: 10,
+  },
+};
+
+export {pickerSelectStyles};

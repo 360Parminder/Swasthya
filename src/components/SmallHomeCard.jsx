@@ -1,63 +1,60 @@
 import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
+import GlobalColor from '../Styles/GlobalColor';
 
-const SmallHomeCard = ({ cardTitle, cardLogo, logoBg, value, valueUnit, mainContent }) => {
-    const colorScheme = useColorScheme();
-    const styles = colorScheme === 'dark' ? darkStyles : lightStyles;
-
+const SmallHomeCard = ({ icon, logoBg,footerText,targetvalue,valueUnit,value }) => {
     return (
-        <View style={styles.card}>
+        <View style={[styles.card,{borderColor:logoBg}]}>
             <View style={styles.header}>
-                <Text style={styles.cardTitle}>{cardTitle ? cardTitle : "Card Title"}</Text>
                 <View style={[styles.cardLogoContainer, { backgroundColor: logoBg }]}>
-                    <Text style={styles.cardLogo}>{cardLogo ? cardLogo : '⛓️‍💥'}</Text>
+                    <Icon name={icon} size={30} color='#fff' />
+                </View>
+                <View style={styles.mainContentContainer}>
+                <View style={{flexDirection:'row',alignItems:'flex-end',gap:6}}>
+                  <Text style={{fontSize:24,fontWeight:'600',color:GlobalColor.textColor}}>{value}</Text>
+                  <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>{targetvalue?targetvalue:valueUnit}</Text>
+                  </View>
                 </View>
             </View>
-            <View style={styles.mainContentContainer}>
-                {mainContent ? mainContent : null}
-            </View>
             <View style={styles.footer}>
-                <Text style={styles.cardValue}>{value ? value : null}</Text>
-                <Text style={styles.valueUnit}>{valueUnit}</Text>
+                <Text style={styles.footerText}>{footerText ? footerText : null}</Text>
             </View>
         </View>
     );
 }
 
-const commonStyles = {
+const styles = {
     card: {
-        width: 180,
-        height: 90,
-        paddingHorizontal: 10,
+        width: 190,
+        height: 80,
         borderRadius: 10,
+        backgroundColor: GlobalColor.cardBackgroundColor,
         shadowOpacity: 0.1,
         elevation: 3,
         shadowRadius: 10,
+        justifyContent:'space-between',
+        padding:8,
+        borderWidth:1
     },
     header: {
         flexDirection: "row",
-        justifyContent: 'space-between',
         alignItems: 'center',
         gap: 10,
     },
     cardTitle: {
         fontSize: 18,
         fontWeight: '600',
-        marginTop: 10,
+      
     },
     cardLogoContainer: {
-        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 4,
-    },
-    cardLogo: {
-        padding: 5,
-        fontSize: 16,
+        borderRadius: 5,
+        padding:2
     },
     mainContentContainer: {
         width: 'auto',
-        marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -67,55 +64,13 @@ const commonStyles = {
         gap: 5,
         marginLeft: 6,
     },
-    cardValue: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    valueUnit: {
-        paddingTop: 5,
-        fontWeight: '500',
-        fontSize: 16,
+    footerText: {
+        fontSize: 14,
+        color:GlobalColor.textColorSecondary,
+        textTransform:'capitalize'
     },
 };
 
-const lightStyles = StyleSheet.create({
-    ...commonStyles,
-    card: {
-        ...commonStyles.card,
-        backgroundColor: '#fff',
-    },
-    cardTitle: {
-        ...commonStyles.cardTitle,
-        color: '#000000',
-    },
-    cardValue: {
-        ...commonStyles.cardValue,
-        color: '#000000',
-    },
-    valueUnit: {
-        ...commonStyles.valueUnit,
-        color: '#858585',
-    },
-});
 
-const darkStyles = StyleSheet.create({
-    ...commonStyles,
-    card: {
-        ...commonStyles.card,
-        backgroundColor: '#333',
-    },
-    cardTitle: {
-        ...commonStyles.cardTitle,
-        color: '#ffffff',
-    },
-    cardValue: {
-        ...commonStyles.cardValue,
-        color: '#ffffff',
-    },
-    valueUnit: {
-        ...commonStyles.valueUnit,
-        color: '#cccccc',
-    },
-});
 
 export default SmallHomeCard;

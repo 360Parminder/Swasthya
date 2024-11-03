@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput, Pressable, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TextInput, Pressable, Button, ScrollView } from 'react-native';
 import React, { useContext, useState } from 'react'
 import { launchImageLibrary } from 'react-native-image-picker';
 import Path from '../../services/Path';
@@ -86,7 +86,8 @@ const AccountSettings = () => {
   };
   return (
 
-    <View style={GlobalStyles.container}>
+    <ScrollView>
+      <View style={GlobalStyles.container}>
       <TouchableOpacity onPress={() => { choosePhoto() }}>
         <Image style={{
           width: 120,
@@ -133,7 +134,7 @@ const AccountSettings = () => {
             placeholderTextColor={'#000'}
           />
         </>
-       <>
+      
        <Text style={GlobalStyles.label}>Age</Text>
         <TextInput
           style={GlobalStyles.input}
@@ -142,7 +143,7 @@ const AccountSettings = () => {
           value={age.toString()}
           editable={false} // Makes input read-only
         />
-        <Button onPress={showDatePicker} title="Select Date of Birth" />
+        <Pressable style={GlobalStyles.button}  onPress={showDatePicker}> <Text style={GlobalStyles.buttonText}>Select Date of Birth</Text></Pressable>
 
         {show && (
           <DateTimePicker
@@ -153,7 +154,6 @@ const AccountSettings = () => {
             maximumDate={new Date()} // Ensures the selected date is not in the future
           />
         )}
-       </>
 
         <>
           <Text style={GlobalStyles.label}>Height</Text>
@@ -161,7 +161,7 @@ const AccountSettings = () => {
             value={userHeight}
             onChangeText={(text) => setUserHeight(text)}
             style={GlobalStyles.input}
-            placeholder='Enter your Height'
+            placeholder={user?.height}
             placeholderTextColor={'#000'}
             keyboardType='numeric'
           />
@@ -188,6 +188,7 @@ const AccountSettings = () => {
         </Pressable>
       </View>
     </View>
+    </ScrollView>
   )
 }
 

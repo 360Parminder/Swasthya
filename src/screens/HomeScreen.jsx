@@ -9,8 +9,11 @@ import { BarChart } from 'react-native-gifted-charts';
 import { userDataContext } from '../context/UserContext';
 import GlobalStyles from '../Styles/GlobalStyles';
 import GlobalColor from '../Styles/GlobalColor';
-import { generateLastMonthDates, generateNextMonthDates } from '../utils/dateFunction';
+import { generateLastMonthDates, generateNextMonthDates, todayDate } from '../utils/dateFunction';
 import Header from '../components/Header';
+import * as Progress from 'react-native-progress';
+import MidCard from '../components/Cards/MidCard';
+import ProgressCard from '../components/Cards/ProgressCard';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -21,106 +24,45 @@ const HomeScreen = ({ navigation }) => {
   const [userRank, setUserRank] = useState();
   const { user } = useContext(userDataContext)
 
-  console.log(user);
-  const colorScheme = useColorScheme();
-
-  const sampleData = [50, 60, 50, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
-  const barData = [
-    { value: 250, label: 'Mon' },
-    { value: 500, label: 'Tue' },
-    { value: 745, label: 'Wed' },
-    { value: 320, label: 'Thu' },
-    { value: 600, label: 'Fri' },
-    { value: 256, label: 'Sat' },
-    { value: 300, label: 'Sun' },
-  ];
-
-  useEffect(() => {
-    const data = generateNextMonthDates();
-    setData(data);
-
-  }, []);
-
-  const ItemSeparator = () => {
-    return <View style={styles.separator} />;
-  };
-
-  const styles = colorScheme === 'dark' ? lightStyles : lightStyles;
+  // const sampleData = [50, 60, 50, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
+  // const barData = [
+  //   { value: 250, label: 'Mon' },
+  //   { value: 500, label: 'Tue' },
+  //   { value: 745, label: 'Wed' },
+  //   { value: 320, label: 'Thu' },
+  //   { value: 600, label: 'Fri' },
+  //   { value: 256, label: 'Sat' },
+  //   { value: 300, label: 'Sun' },
+  // ];
+  const {date, month, day,year}= todayDate();
 
   return (   
     <>
       <StatusBar barStyle="dark-content" backgroundColor={GlobalColor.backgroundColor} />
-        <View style={[GlobalStyles.container,]}>
+        <View style={[GlobalStyles.container,{alignItems:'center'}]}>
          <Header/>
-          <View style={styles.flatListContainer}>
-            <FlatList
-              horizontal={true}
-              ItemSeparatorComponent={ItemSeparator}
-              data={data}
-              renderItem={DateCard}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
+         <View style={{flexDirection:'row',marginBottom:10,width:'100%',paddingHorizontal:20}}>
+          <Text style={{textTransform:'capitalize',fontSize:18}}>{day}</Text>
+          <Text style={{fontWeight:'700',fontSize:19}}>, {date} {month} {year}</Text>
+         </View>
+            <Text style={{width:'100%',paddingHorizontal:20,fontSize:20,fontWeight:'600',marginBottom:20}}>Progress Summary</Text>
           <ScrollView >
             <View style={styles.grid}>
+            <ProgressCard />
+              <SmallHomeCard icon={'water-outline'} logoBg={'#4979FB'} value={1.5} targetvalue={'/2 Litters '} footerText={'you need 0.5 litters more'} />
+              <SmallHomeCard  icon={'heart-outline'} logoBg={'#E94358'} value={110} valueUnit={'Bpm'} footerText={'you have normal Bpm'} />
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>
-                <HomeCard cardTitle={"Steps"} cardLogo={'🏃‍♂️'} logoBg={'#FFFA9E'} mainContent={(
-                  <CircularProgress
-                    title='Steps'
-                    titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
-                    maxValue={2000}
-                    value={steps ? steps + 50 : 50}
-                    duration={2000}
-                    radius={50}
-                    progressValueColor='#5D4FB3'
-                    activeStrokeColor='#5D4FB3'
-                    inActiveStrokeColor='#E6E2EE'
-                  />
-                )} />
+                <HomeCard cardTitle={"Calories"} cardLogo={"flame"} logocolor={'#FF5722'} logoBg={'#FFEEE9'} value={645} valueUnit={'Kcal'} targetvalue={600} />
               </Pressable>
-
-              <HomeCard cardTitle={'Heart rate'} cardLogo={'♥️'} logoBg={'#FFA69E'} mainContent={(
-                <ECGWave data={sampleData} width={170} height={120} />
-              )} />
-
-              <SmallHomeCard cardTitle={'Training'} cardLogo={'💪'} logoBg={'#F7E7A1'} value={'50'} valueUnit={'Minutes'} />
-              <SmallHomeCard cardTitle={'Ranking'} cardLogo={'🏅'} logoBg={'#F7E7A1'} value={userRank} valueUnit={''} />
-
-              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
-                <HomeCard cardTitle={'Calories'} cardLogo={'🔥'} logoBg={'#FFC966'} mainContent={(
-                  <CircularProgress
-                    title='KCal'
-                    titleStyle={{ fontWeight: 'bold', fontSize: 18 }}
-                    maxValue={2000}
-                    value={calories ? calories + 74 : 74}
-                    duration={2000}
-                    radius={50}
-                    progressValueColor='#5D4FB3'
-                    activeStrokeColor='#5D4FB3'
-                    inActiveStrokeColor='#E6E2EE'
-                  />
-                )} />
-              </Pressable>
-
               <Pressable>
-                <HomeCard cardTitle={'Sleep'} cardLogo={'🌙'} logoBg={'#D2EDFF'} mainContent={(
-                  <BarChart
-                    barWidth={10}
-                    width={170}
-                    height={100}
-                    noOfSections={4}
-                    barBorderRadius={4}
-                    frontColor="#5D4FB3"
-                    yAxisThickness={0}
-                    xAxisThickness={0}
-                    data={barData}
-                    xAxisLabelsHeight={0}
-                    yAxisLabelWidth={0}
-                  />
-                )} />
+                <MidCard cardTitle={"Water"} cardLogo={"water"} logocolor={'#4979FB'} logoBg={'#E6F0FF'} value={6} valueUnit={'hours'} targetvalue={8} />
               </Pressable>
-
-              <SmallHomeCard cardTitle={'Distance'} cardLogo={'🚗'} logoBg={'#FF8766'} value={'05'} valueUnit={'kilometers'} />
+              <Pressable>
+                <MidCard cardTitle={"exercise"} cardLogo={"barbell-outline"} logocolor={'#4979FB'} logoBg={'#EDF2FF'} value={45} valueUnit={'mins'} targetvalue={90} />
+              </Pressable>
+              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
+                <HomeCard cardTitle={"Steps"} cardLogo={"walk"} logocolor={'#FEBD59'} logoBg={'#FFF2DE'} value={5213} valueUnit={'steps'} targetvalue={8000}  />
+              </Pressable>
             </View>
           </ScrollView>
         </View>
@@ -128,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-const lightStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: '100%',
     padding: 10,
@@ -146,6 +88,10 @@ const lightStyles = StyleSheet.create({
   separator: {
     height: 10,
     width: 10,
+  },
+  cardContainer: {
+    width: '100%',
+    alignItems: 'center',
   },
   grid: {
     marginTop: 5,

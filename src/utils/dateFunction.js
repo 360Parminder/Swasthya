@@ -4,8 +4,10 @@ export function todayDate() {
   const date = today.getDate().toString().padStart(2, '0');
   const month = today.toLocaleString('default', { month: 'long' }).toLowerCase();
   const day = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
-  return { date, month, day };
+  const year = today.getFullYear();
+  return { date, month, day, year };
 }
+
 
 // Function for last 1 month's dates with date, month, and day
 export const generateLastMonthDates = () => {

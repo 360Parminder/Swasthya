@@ -29,7 +29,7 @@ const userData = {
         }
       },
   
-      fetchUserSteps:  async () => {
+      fetchUserSteps:  async (token) => {
         try {
           const response = await Path.get('/step/view/daily',
             {

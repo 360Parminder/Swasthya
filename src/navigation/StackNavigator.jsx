@@ -2,7 +2,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
-import StatisticsScreen from '../components/StatisticsScreen';
+import StatisticsScreen from '../screens/StatisticsScreen';
 
 import AccountSettings from '../screens/ProfileScreen/AccountSettings';
 import Notification from '../screens/Notification';

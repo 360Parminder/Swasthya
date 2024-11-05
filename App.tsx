@@ -1,6 +1,7 @@
 import React from 'react';
 import AppNavigator from './src/navigation/AppNavigator';
 import { AuthProvider } from './src/context/AuthContext';
+import Bluetooth from './src/components/Bluetooth';
 
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
     <AuthProvider>
       <AppNavigator />
     </AuthProvider>
+    // <Bluetooth/>
 
   )
     

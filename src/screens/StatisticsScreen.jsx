@@ -4,6 +4,7 @@ import { BarChart } from 'react-native-gifted-charts'
 import GlobalStyles from '../Styles/GlobalStyles';
 import GlobalColor from '../Styles/GlobalColor';
 import ProgressCard from '../components/Cards/ProgressCard';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const StatisticsScreen = () => {
   const data = [
@@ -23,7 +24,6 @@ const StatisticsScreen = () => {
           <Text style={{fontSize:18,fontWeight:'600'}}>Steps Counts</Text>
         </View>
         <BarChart
-        
           width={300}
           barWidth={10}
           noOfSections={4}
@@ -58,9 +58,22 @@ const StatisticsScreen = () => {
           }}
         />
       </View>
-      <View>
+      <View style={{width:'95%'}}>
         <Text style={{ color: '#000', fontSize: 18, fontWeight: 'bold', textAlign: 'center', marginTop: 50 }}>Your Progress</Text>
-
+          <View style={{padding:10,borderWidth:1,borderRadius:14,width:'100%',flexDirection:'row',alignItems:'center'}}>
+            <View style={{backgroundColor:'#FFF2DE',justifyContent:'center',alignItems:'center',borderRadius:100,width:50,height:50}}>
+              <Icon name='walk' size={30} color='#FEBD59'  />
+            </View>
+            <View style={{width:'50%'}}>
+              <Text style={{marginLeft:10,fontSize:16,fontWeight:'600'}}>Steps</Text>
+              <Text style={{marginLeft:10,fontSize:14,fontWeight:'400'}}>You have walked 1500 steps 
+              in this day</Text>
+            </View>
+            <View>
+              <Text>1.5k</Text>
+              <Text>/8k Steps</Text>
+            </View>
+          </View>
       </View>
     </View>
   )

@@ -34,14 +34,14 @@ export const UserDataProvider = ({ children }) => {
       if (token) {
         console.log("token",token);
         
-        const response = await userData.fetchUserSteps(token)
-        if (response.status === 200) {
-          setDailySteps(response.data.record[0].steps);
-          setDailyCalories(response.data.record[0].caloriesBurned);
-        }
-        else{
-          Alert.alert("Error", "User not found");
-        }
+        // const response = await userData.fetchUserSteps(token)
+        // if (response.status === 200) {
+        //   setDailySteps(response.data.record[0].steps);
+        //   setDailyCalories(response.data.record[0].caloriesBurned);
+        // }
+        // else{
+        //   Alert.alert("Error", "User not found");
+        // }
       }
     } catch (error) {
       Alert.alert("Error", "User not found");

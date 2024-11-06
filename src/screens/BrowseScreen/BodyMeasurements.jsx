@@ -2,21 +2,22 @@ import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
 import { useContext } from "react";
 import { userDataContext } from "../../context/UserContext";
+import GlobalStyles from "../../Styles/GlobalStyles";
 
 
 const BodyMeasurements =()=>{
-    
-    const {userData} = useContext(userDataContext)
-
+    const {user} = useContext(userDataContext)
     return (
-        <View style={styles.container}>
+        <View style={GlobalStyles.container}>
          <Text style={styles.title}> Body Measurements</Text>
          <View style={{
             gap:14,
-            marginTop:16
+            marginTop:16,
+            width:'95%',
+            alignSelf:'center'
          }}>
-            <ActivityCard title={'Height'} iconName={'body'} fcolor={'#5d4fb3'} date={'May 2023'} value={userData?.height} valueUnit={'Cm'} />
-            <ActivityCard title={'Weight'} iconName={'body'} fcolor={'#5d4fb3'} date={'May 2023'} value={userData?.weight} valueUnit={'Kg'} />
+            <ActivityCard title={'Height'} iconName={'body'} fcolor={'#5d4fb3'} date={'May 2023'} value={user?.height} valueUnit={'Cm'} />
+            <ActivityCard title={'Weight'} iconName={'body'} fcolor={'#5d4fb3'} date={'May 2023'} value={user?.weight} valueUnit={'Kg'} />
          </View>
     
         </View>

@@ -7,7 +7,7 @@ const Browse = ({navigation}) => {
     return (
         <View style={GlobalStyles.container}>
             <ScrollView>
-                <Text style={styles.title}>Categories</Text>
+                <Text style={GlobalStyles.title}>Categories</Text>
               
                     <Pressable onPress={() => navigation.navigate('Activity')}>
                         <View style={styles.categorieHolder}>

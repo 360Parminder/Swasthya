@@ -28,9 +28,7 @@ const UserAuth = {
                 dob: date,
                 gender:gender,
                 food_preference:foodPreference
-            });
-            console.log(response);
-            
+            });  
             if (response) {
                 return response;
             }

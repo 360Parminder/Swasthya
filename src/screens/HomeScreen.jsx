@@ -44,15 +44,19 @@ const HomeScreen = ({ navigation }) => {
           <ScrollView >
             <View style={styles.grid}>
             <ProgressCard />
+            <Pressable onPress={()=>{navigation.navigate('WaterDrink')}}>
               <SmallHomeCard icon={'water-outline'} logoBg={'#4979FB'} value={1.5} targetvalue={'/2 Litters '} footerText={'you need 0.5 litters more'} />
+            </Pressable>
+            <Pressable>
               <SmallHomeCard  icon={'heart-outline'} logoBg={'#E94358'} value={110} valueUnit={'Bpm'} footerText={'you have normal Bpm'} />
+            </Pressable>
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>
                 <HomeCard cardTitle={"Calories"} cardLogo={"flame"} logocolor={'#FF5722'} logoBg={'#FFEEE9'} value={Math.floor(dailyCalories)} valueUnit={'Kcal'} targetvalue={600} />
               </Pressable>
-              <Pressable>
+              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
                 <MidCard cardTitle={"Sleep"} cardLogo={"bed-outline"} logocolor={'#4979FB'} logoBg={'#E6F0FF'} value={6} valueUnit={'hours'} targetvalue={8} />
               </Pressable>
-              <Pressable>
+              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
                 <MidCard cardTitle={"exercise"} cardLogo={"barbell-outline"} logocolor={'#4979FB'} logoBg={'#EDF2FF'} value={45} valueUnit={'mins'} targetvalue={90} />
               </Pressable>
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>

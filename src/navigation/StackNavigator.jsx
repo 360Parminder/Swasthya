@@ -8,6 +8,7 @@ import AccountSettings from '../screens/ProfileScreen/AccountSettings';
 import Notification from '../screens/Notification';
 
 import { Platform } from 'react-native';
+import WaterDrink from '../screens/HomeDetails/WaterDrink';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ const StackNavigator = () => {
           }),
         }}
       />
+      <Stack.Screen name='WaterDrink' component={WaterDrink} options={{ headerShown: false }} />
      
     </Stack.Navigator>
   );

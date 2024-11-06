@@ -18,8 +18,6 @@ const UserRegister = ({ navigation, route }) => {
   const [weight, setWeight] = useState('');
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
-  const [showGenderPicker, setShowGenderPicker] = useState(false);
-  const [showFoodPicker, setShowFoodPicker] = useState(false);
   const options = {
     // weekday: "long",
     year: "numeric",
@@ -31,7 +29,10 @@ const UserRegister = ({ navigation, route }) => {
     try {
       if (name && password && date && gender && foodPreference && height && weight) {
         const response = await UserAuth.register(name, mobile, password, weight, height, formatDate(date),gender,foodPreference);
-       console.log(response);
+          if (response.status === 200) {
+            Alert.alert("User Registered Successfully");
+            navigation.navigate('SignIn');
+          }
        
       } else {
         Alert.alert("Please fill all the fields");

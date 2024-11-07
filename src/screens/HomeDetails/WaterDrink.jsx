@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
-
+import GlobalStyles from '../../Styles/GlobalStyles';
+import Icon from 'react-native-vector-icons/Ionicons';
+import GlobalColor from '../../Styles/GlobalColor';
 
 const WaterDrink = () => {
     const [totalIntake, setTotalIntake] = useState(0);
     const [waterTarget, setWaterTarget] = useState(2000); // Example target in ml
-    const [drinks, setDrinks] = useState([{"amount": 200, "id": "0", "time": "4:28:43 PM"}, {"amount": 200, "id": "1", "time": "4:28:45 PM"}, {"amount": 200, "id": "2", "time": "4:28:45 PM"}, {"amount": 200, "id": "3", "time": "4:28:46 PM"}, {"amount": 200, "id": "4", "time": "4:28:46 PM"}, {"amount": 200, "id": "5", "time": "4:28:46 PM"}, {"amount": 200, "id": "6", "time": "4:28:47 PM"}, {"amount": 200, "id": "7", "time": "4:28:47 PM"}]);
-    console.log('drinks', drinks);
+    const [drinks, setDrinks] = useState([]);
+    // console.log('drinks', drinks);
     
 
     const addDrink = () => {
@@ -14,56 +16,72 @@ const WaterDrink = () => {
             id: drinks.length.toString(),
             amount: 200,
             time: new Date().toLocaleTimeString(),
+            status: 'completed',
         };
         setDrinks([...drinks, newDrink]);
         setTotalIntake(totalIntake + 200);
     };
 
     return (
-        <View style={styles.container}>
+        <View style={GlobalStyles.container}>
             <View style={styles.cardContainer}>
                 <View style={styles.card}>
-                    <Text style={styles.cardTitle}>Total Intake</Text>
+                    <Text style={styles.cardTitle}>Water intake</Text>
+                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:10}}>
+                    <Icon name="water-outline" size={30} color="#007BFF" />
                     <Text style={styles.cardValue}>{totalIntake} ml</Text>
+                    </View>
                 </View>
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Water Target</Text>
+                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:10}}>
+                    <Icon name="ribbon-outline" size={30} color="#007BFF" />
                     <Text style={styles.cardValue}>{waterTarget} ml</Text>
+                    </View>
                 </View>
             </View>
-            <TouchableOpacity style={styles.addButton} onPress={addDrink}>
-                <Text style={styles.addButtonText}>Drink 200 ml</Text>
-            </TouchableOpacity>
                 <ScrollView>
-
-            <FlatList
-            scrollEnabled={true}
-            data={drinks}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-                <View style={styles.drinkCard}>
-                        <Text style={styles.drinkText}>{item.amount} ml</Text>
-                        <Text style={styles.drinkText}>{item.time}</Text>
+            {
+                drinks.map((item, index) => (
+                    <View style={styles.drinkCard} key={index}>
+                        <View>
+                            <Icon name="water-outline" size={30} color="#007BFF" />
+                        </View>
+                        <View style={{gap:5}}>
+                        <Text style={styles.drinkText}>Drink {item.amount} ml of water</Text>
+                       <View style={{flexDirection:'row',gap:3}}>
+                        <Icon name="checkmark-circle" size={20} color={item.status=="completed"?'#32D583':'#D4DBEA'} />
+                        <Text>Completed</Text>
+                       </View>
+                        </View>
+                       <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                        <Icon name="time-outline" size={30} color="#007BFF" />
+                        <Text>{item.time}</Text>
+                       </View>
                     </View>
-                )}
-                />
+                ))
+            }
                 </ScrollView>
+            <TouchableOpacity style={styles.addButton} onPress={addDrink}>
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
+                <Text style={styles.addButtonText}>Tap to drink</Text>
+                <Icon name="water-outline" size={30} color="#fff" />
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#f5f5f5',
-    },
     cardContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 20,
     },
     card: {
+        height: 100,
+        borderWidth: 1,
+        borderColor: GlobalColor.borderColor,
         flex: 1,
         backgroundColor: '#fff',
         padding: 20,
@@ -78,13 +96,17 @@ const styles = StyleSheet.create({
     },
     cardTitle: {
         fontSize: 18,
-        fontWeight: 'bold',
+        color:GlobalColor.textColorSecondary
+        // fontWeight: 'bold',
     },
     cardValue: {
-        fontSize: 16,
-        marginTop: 10,
+        fontSize: 22,
+        fontWeight: '600',
     },
     addButton: {
+        position: 'absolute',
+        bottom: 60,
+        width: '90%',
         backgroundColor: '#007BFF',
         padding: 15,
         borderRadius: 10,
@@ -97,12 +119,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     drinkCard: {
+        width: '95%',
         backgroundColor: '#fff',
         padding: 15,
         marginVertical: 5,
         borderRadius: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,

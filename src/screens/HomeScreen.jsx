@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>
                 <HomeCard cardTitle={"Calories"} cardLogo={"flame"} logocolor={'#FF5722'} logoBg={'#FFEEE9'} value={Math.floor(dailyCalories)} valueUnit={'Kcal'} targetvalue={600} />
               </Pressable>
-              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
+              <Pressable onPress={() => { navigation.navigate('SleepTracker') }}>
                 <MidCard cardTitle={"Sleep"} cardLogo={"bed-outline"} logocolor={'#4979FB'} logoBg={'#E6F0FF'} value={6} valueUnit={'hours'} targetvalue={8} />
               </Pressable>
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>

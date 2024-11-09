@@ -27,23 +27,42 @@ const SleepTracker = () => {
                         <Icon style={{padding:5,borderRadius:100,backgroundColor:'#F0EDFE',fontSize:25}} name='heartbeat' type='font-awesome'  color='#674AF8' />
                         <Text style={{textAlign: 'center',fontSize:20,fontWeight:'500'}}>Total sleep time</Text>
                     </View>
-                    <View>
-                        <View style={{flexDirection:'row'}}>
-                        <Text>6</Text>
-                        <Text>hrs</Text>
-                        <Text>21</Text>
-                        <Text>mins</Text>
+                    <View style={{justifyContent:'space-between',gap:20}}>
+                        <View style={{flexDirection:'row',alignItems:'flex-end',}}>
+                        <Text style={{fontSize:28,fontWeight:'700',color:GlobalColor.darkTextColor}}>6</Text>
+                        <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>hrs</Text>
+                        <Text style={{fontSize:28,fontWeight:'700'}}>21</Text>
+                        <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>mins</Text>
                         </View>
-                        <Text>This isn’t a normal sleep time</Text>
+                        <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>This isn’t a normal sleep time</Text>
                     </View>
                 </View>
                 <View style={styles.column}>
-                    <Card containerStyle={styles.rightCard}>
-                        <Text>Right Card 1</Text>
-                    </Card>
-                    <Card containerStyle={styles.rightCard}>
-                        <Text>Right Card 2</Text>
-                    </Card>
+                    <View style={styles.rightCard}>
+                        <Icon style={{backgroundColor:'#EDF2FF',padding:10,borderRadius:14}} name='bed-outline' type='ionicon' size={25} color='#4979FB' />
+                        <View style={{flexDirection:'column'}}>
+                        <Text>Deep Sleep</Text>
+                        <View style={{flexDirection:'row',alignItems:'flex-end',}}>
+                        <Text style={{fontSize:28,fontWeight:'700',color:GlobalColor.darkTextColor}}>6</Text>
+                        <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>hrs</Text>
+                        <Text style={{fontSize:28,fontWeight:'700'}}>21</Text>
+                        <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>mins</Text>
+                        </View>
+
+                        </View>
+                    </View>
+                    <View style={styles.rightCard}>
+                    <Icon style={{backgroundColor:'#FFF8EE',padding:10,borderRadius:14}} name='bed-outline' type='ionicon' size={35} color='#FEBD59' />
+                        <View style={{flexDirection:'column'}}>
+                        <Text>REM</Text>
+                        <View style={{flexDirection:'row',alignItems:'flex-end',}}>
+                        <Text style={{fontSize:28,fontWeight:'700',color:GlobalColor.darkTextColor}}>6</Text>
+                        <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>hrs</Text>
+                        <Text style={{fontSize:28,fontWeight:'700'}}>21</Text>
+                        <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>mins</Text>
+                        </View>
+                        </View>
+                    </View>
                 </View>
             </View>
 
@@ -99,22 +118,32 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 20,
+        gap: 10,
+        width:'90%'
     },
     column: {
         flexDirection: 'column',
         justifyContent: 'space-between',
     },
     leftCard: {
+        width: 500,
         borderWidth: 1,
         borderColor: GlobalColor.borderColor,
         borderRadius: 10,
         flex: 1,
         padding: 10,
+        justifyContent:'space-between'
 
     },
     rightCard: {
-        flex: 1,
+        // flex: 1,
+        width: 170,
         marginBottom: 10,
+        flexDirection:'row',
+        padding: 10,
+        borderWidth: 1,
+        borderColor: GlobalColor.borderColor,
+        borderRadius: 10,
     },
     heading: {
         fontSize: 16,

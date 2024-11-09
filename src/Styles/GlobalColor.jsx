@@ -20,7 +20,7 @@ const GlobalColor = {
   placeholderColor: '#d3d3d3',
   shadowColor: '#000000',
   textColor: '#121113',
-  textColorSecondary: '#808080',
+  textColorSecondary: '#6A6A6A',
   textColorTertiary: '#4a4a4a',
   textColorQuaternary: '#343a40',
   separatorColor: '#d3d3d3',

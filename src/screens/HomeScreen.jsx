@@ -18,17 +18,7 @@ const HomeScreen = ({ navigation }) => {
   const [heartRate, setHeartRate] = useState(null);
   const [userRank, setUserRank] = useState();
   const { user,dailySteps,dailyCalories } = useContext(userDataContext)
-
-  // const sampleData = [50, 60, 50, 70, 90, 40, 60, 80, 50, 60, 50, 70, 90, 40, 60, 50];
-  // const barData = [
-  //   { value: 250, label: 'Mon' },
-  //   { value: 500, label: 'Tue' },
-  //   { value: 745, label: 'Wed' },
-  //   { value: 320, label: 'Thu' },
-  //   { value: 600, label: 'Fri' },
-  //   { value: 256, label: 'Sat' },
-  //   { value: 300, label: 'Sun' },
-  // ];
+  
   const {date, month, day,year}= todayDate();
 
   return (   

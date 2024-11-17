@@ -8,6 +8,7 @@ import CustomHeader from '../components/CustomHeader';
 import BrowseStackNavigator from './BrowseStackNavigator';
 import ProfileStack from './ProfileStack';
 import { Platform } from 'react-native';
+import GlobalColor from '../Styles/GlobalColor';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ const TabNavigator = () => {
     <Tab.Navigator
       initialRouteName='Home'
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: '#5D4FB3',
+        tabBarActiveTintColor: GlobalColor.primaryColor,
         tabBarInactiveTintColor: '#808080',
         tabBarShowLabel: false,
         tabBarStyle: {

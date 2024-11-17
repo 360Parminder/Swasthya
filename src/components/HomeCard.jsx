@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalColor from '../Styles/GlobalColor';
 
 const HomeCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, targetvalue }) => {
+    console.log(value);
+    
     return (
         <View style={[styles.card,{borderColor:logocolor}]}>
             <View style={styles.header}>
@@ -18,7 +20,7 @@ const HomeCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, ta
                 <Progress.Bar borderRadius={6} animated={true} progress={value/1000} borderColor='#fff' unfilledColor={logoBg} height={10} width={165} color={logocolor} />
             </View>
             <View style={styles.footer}>
-                <Text style={styles.cardValue}>{value ? value : null} {valueUnit}</Text>
+                <Text style={styles.cardValue}>{value ? value : 0} {valueUnit}</Text>
                 <Text style={{color:GlobalColor.textColorSecondary,fontSize:18}}>Target: {targetvalue} {valueUnit}</Text>
             </View>
         </View>
@@ -77,7 +79,8 @@ const styles = StyleSheet.create({
     },
     cardValue: {
       fontSize: 22,
-        fontWeight: '600',
+    fontWeight: '600',
+    color: GlobalColor.darkTextColor
 
     },
 });

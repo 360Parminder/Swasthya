@@ -18,9 +18,8 @@ const HomeScreen = ({ navigation }) => {
   const [heartRate, setHeartRate] = useState(null);
   const [userRank, setUserRank] = useState();
   const { user,dailySteps,dailyCalories } = useContext(userDataContext)
-  
   const {date, month, day,year}= todayDate();
-
+  
   return (   
     <>
       <StatusBar barStyle="dark-content" backgroundColor={GlobalColor.backgroundColor} />

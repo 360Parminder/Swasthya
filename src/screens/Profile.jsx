@@ -11,7 +11,6 @@ import GlobalColor from "../Styles/GlobalColor";
 const Profile = ({ navigation }) => {
   const {logout} = useContext(AuthContext)
   const {user} = useContext(userDataContext)
-  console.log(user);
   const calculateAge = (dobString) => {
     const dob = new Date(dobString);
     const now = new Date();
@@ -19,7 +18,6 @@ const Profile = ({ navigation }) => {
     const ageDate = new Date(ageDiff);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   };
-
   const userAge = calculateAge(user?.dob)
   return (
     <View style={GlobalStyles.container}>
@@ -32,7 +30,7 @@ const Profile = ({ navigation }) => {
         paddingBottom: 20,
         position: 'relative',
       }}>
-        <Image source={user?{uri:user.picture}:require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
+        <Image source={user?.picture? { uri: user.picture }: require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
         <Text style={styles.name}>{user?.username ? user?.username : "User Name "}</Text>
         <Text style={{ color: GlobalColor.darkTextColor, fontSize: 16, fontWeight: '500' }}>{"parminder@gmail.com"}</Text>
       </View>

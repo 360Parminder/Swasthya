@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const Header = () => {
     const { user } = useContext(userDataContext)
+    
     return(
         <View style={{
           width: '90%',
@@ -22,7 +23,11 @@ const Header = () => {
               width: 70,
               height: 70,
               borderRadius: 14,
-            }} source={user ? { uri: user.picture } : require('../assets/images/Profile.jpg')} resizeMode='cover' />
+            }} source={
+              user?.picture
+                ? { uri: user.picture }
+                : require('../assets/images/Profile.jpg')
+            } resizeMode='cover' />
             <View style={{
               flexDirection: 'column',
               justifyContent: 'center',

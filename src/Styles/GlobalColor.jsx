@@ -1,6 +1,6 @@
 
 const GlobalColor = {
-  primaryColor: '#7655fd',
+  primaryColor: '#4979FB',
   secondaryColor: '#9381FF',
   tertiaryColor: '#FFD8BE',
   backgroundColor: '#fff',
@@ -14,7 +14,7 @@ const GlobalColor = {
   successColor: '#84cc16',
   infoColor: '#2563eb',
   disabledColor: '#d3d3d3',
-  borderColor: '#9381FF',
+  borderColor: '#B6C9FD',
   darkiconColor: '#001524',
   lighticonColor: '#FFFFFF',
   placeholderColor: '#d3d3d3',

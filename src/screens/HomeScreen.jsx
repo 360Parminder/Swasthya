@@ -12,12 +12,7 @@ import ProgressCard from '../components/Cards/ProgressCard';
 
 
 const HomeScreen = ({ navigation }) => {
-  const [data, setData] = useState([]);
-  const [steps, setSteps] = useState(0);
-  const [calories, setCalories] = useState(0);
-  const [heartRate, setHeartRate] = useState(null);
-  const [userRank, setUserRank] = useState();
-  const { user,dailySteps,dailyCalories } = useContext(userDataContext)
+  const { dailySteps,dailyCalories } = useContext(userDataContext)
   const {date, month, day,year}= todayDate();
   
   return (   

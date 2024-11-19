@@ -62,6 +62,9 @@ const userData = {
         if (response.status === 200) {
           return response;
         }
+        else if (response.status === 401) {
+          return { success: false, message: "Unauthorized" }
+        }
         else {
           return { success: false, message: "Something went wrong" }
         }

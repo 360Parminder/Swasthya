@@ -111,6 +111,7 @@ const AccountSettings = () => {
             style={GlobalStyles.input}
             placeholder={user?.username}
             placeholderTextColor={'#000'}
+            
           />
         </>
         <>

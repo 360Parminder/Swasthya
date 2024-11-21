@@ -111,7 +111,7 @@ const AccountSettings = () => {
             style={GlobalStyles.input}
             placeholder={user?.username}
             placeholderTextColor={'#000'}
-            
+
           />
         </>
         <>
@@ -162,7 +162,7 @@ const AccountSettings = () => {
             value={userHeight}
             onChangeText={(text) => setUserHeight(text)}
             style={GlobalStyles.input}
-            placeholder={user?.height}
+            placeholder={user?.height.toString()}
             placeholderTextColor={'#000'}
             keyboardType='numeric'
           />

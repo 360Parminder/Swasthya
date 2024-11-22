@@ -16,6 +16,7 @@ const AccountSettings = () => {
   const [userWeight, setUserWeight] = useState();
   const [userAge, setUserAge] = useState();
   const { user } = useContext(userDataContext)
+console.log(user);
 
 
   const choosePhoto = async () => {
@@ -173,7 +174,7 @@ const AccountSettings = () => {
             value={userWeight}
             onChangeText={(text) => setUserWeight(text)}
             style={GlobalStyles.input}
-            placeholder='Enter your weight'
+            placeholder={user?.weight.toString()}
             placeholderTextColor={'#000'}
           />
         </>

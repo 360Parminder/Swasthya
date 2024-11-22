@@ -4,9 +4,11 @@ import { userDataContext } from '../context/UserContext';
 import GlobalStyles from '../Styles/GlobalStyles';
 import { Image, Pressable, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const Header = () => {
     const { user } = useContext(userDataContext)
+    const navigation = useNavigation();
     
     return(
         <View style={{
@@ -37,7 +39,7 @@ const Header = () => {
               <Text style={[GlobalStyles.text,{fontWeight:'600'}]}> {user ? user?.username : 'User Name'}</Text>
             </View>
            </View>
-            <Pressable>
+            <Pressable onPress={()=>navigation.navigate('Notification')}>
               <Icon name="notifications-outline" size={35} color={GlobalColor.iconColor} />
             </Pressable>
           </View>

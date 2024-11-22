@@ -1,3 +1,4 @@
+import { View } from "react-native";
 
 const CaloriesReport = () => {
   return (
@@ -6,3 +7,4 @@ const CaloriesReport = () => {
    </View>
   );
 }
+export default CaloriesReport;

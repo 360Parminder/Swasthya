@@ -34,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
             <Pressable>
               <SmallHomeCard  icon={'heart-outline'} logoBg={'#E94358'} value={110} valueUnit={'Bpm'} footerText={'you have normal Bpm'} />
             </Pressable>
-              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
+              <Pressable onPress={() => { navigation.navigate('CaloriesReport') }}>
                 <HomeCard cardTitle={"Calories"} cardLogo={"flame"} logocolor={'#FF5722'} logoBg={'#FFEEE9'} value={Math.floor(dailyCalories)} valueUnit={'Kcal'} targetvalue={600} />
               </Pressable>
               <Pressable onPress={() => { navigation.navigate('SleepTracker') }}>

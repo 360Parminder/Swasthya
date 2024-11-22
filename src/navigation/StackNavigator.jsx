@@ -10,6 +10,7 @@ import Notification from '../screens/Notification';
 import { Platform } from 'react-native';
 import WaterDrink from '../screens/HomeDetails/WaterDrink';
 import SleepTracker from '../screens/HomeDetails/SleepTracker';
+import CaloriesReport from '../screens/HomeDetails/CaloriesReport';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,8 @@ const StackNavigator = () => {
       />
       <Stack.Screen name='WaterDrink' component={WaterDrink} options={{ headerShown: false }} />
       <Stack.Screen name='SleepTracker' component={SleepTracker} options={{ headerShown: false }} />
+      <Stack.Screen name='CaloriesReport' component={CaloriesReport} options={{ headerShown: false }} />
+
      
     </Stack.Navigator>
   );

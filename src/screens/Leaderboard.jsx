@@ -5,6 +5,8 @@ import Path from '../services/Path';
 import LeaderboardList from '../components/LeaderboardList';
 import LoadingWave from '../components/LoadingWave';
 import LoaderLine from '../components/LoaderLine';
+import GlobalStyles from '../Styles/GlobalStyles';
+import GlobalColor from '../Styles/GlobalColor';
 
 const Leaderboard = () => {
   const [timeframe, setTimeframe] = useState('today');
@@ -57,7 +59,7 @@ const Leaderboard = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[styles.button, timeframe === 'today' && styles.selectedButton]}
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   buttonContainer: {
+    width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
@@ -127,8 +130,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
   },
   selectedButton: {
-    backgroundColor: '#5D4FB3',
-    color:'#fff'
+    backgroundColor: GlobalColor.secondaryColor,
+    color:GlobalColor.lightTextColor
   },
   buttonText: {
     color: '#000',

@@ -28,7 +28,7 @@ class WidgetProvider : AppWidgetProvider() {
 
             // Set up the intent that starts the MainActivity when clicked
             val intent = Intent(context, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
             views.setOnClickPendingIntent(R.id.widget_container, pendingIntent)
 
             // Update the widget

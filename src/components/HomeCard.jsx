@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalColor from '../Styles/GlobalColor';
 
 const HomeCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, targetvalue }) => {
-    console.log(value);
     
     return (
         <View style={[styles.card,{borderColor:logocolor}]}>
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'column',
         width: 190,
-        // height: 170,
+        height: 220,
         backgroundColor: GlobalColor.cardBackgroundColor,
         paddingHorizontal: 10,
         borderRadius: 10,

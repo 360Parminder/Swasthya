@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
 import { PermissionsProvider } from '../context/PermissionsContext';
 import AuthenticationNavigator from './AuthStack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { notificationListener } from '../utils/fcmUtils';
 import { UserDataProvider } from '../context/UserContext';
 import { AuthContext, AuthProvider } from '../context/AuthContext';
 

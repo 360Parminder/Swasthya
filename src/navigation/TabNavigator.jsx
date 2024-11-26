@@ -37,26 +37,26 @@ const TabNavigator = () => {
 
           
         },
-        tabBarIcon: ({ color, size }) => {
+        tabBarIcon: ({ focused, color }) => {
+          const size = focused ? 28 : 24; // Larger icon for focused state
           let iconName;
-          if (route.name === 'Home') {
-            iconName = 'home';
-          } else if (route.name === 'ProfileStack') {
-            iconName = 'person';
-          } else if (route.name === 'Leaderboard') {
-            iconName = 'podium';
-          } else if (route.name === 'Browse') {
-            iconName = 'grid';
+          switch (route.name) {
+            case 'Home':
+              iconName = 'home';
+              break;
+            case 'ProfileStack':
+              iconName = 'person';
+              break;
+            case 'Leaderboard':
+              iconName = 'podium';
+              break;
+            case 'Browse':
+              iconName = 'grid';
+              break;
           }
-          return (
-            <Icon 
-              name={iconName} 
-              color={color} 
-              size={size} 
-              style={{ alignSelf: 'center' }} // Center icon within tab
-            />
-          );
+          return <Icon name={iconName} color={color} size={size} />;
         },
+        
       })}
       
     >

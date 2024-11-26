@@ -5,7 +5,7 @@ import GlobalColor from "../../Styles/GlobalColor"
 
 const CaloriesReportCard = ({ title, value, valueUnit,caloriesValue, targetValue, icon,iconcolor, logoBg }) => {
     return(
-        <View style={{flexDirection:'column',borderWidth:0.5,borderColor:GlobalColor.borderColor,borderRadius:14,padding:10, alignItems:'center',width:'45%'}}>
+        <View style={{flexDirection:'column',borderWidth:0.5,borderColor:`${iconcolor}`,borderRadius:14,padding:10, alignItems:'center',width:'45%'}}>
         <Text style={{width:'100%',textAlign:'left',fontSize:18,fontWeight:'500',marginBottom:5}}>{title}</Text>
         <CircularProgress
                     value={value}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Alert, Image, Pressable, View, Text, TextInput, TouchableOpacity, StyleSheet, Modal } from 'react-native';
-import Path from '../services/Path';
 import DatePicker from 'react-native-date-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import GlobalStyles from '../Styles/GlobalStyles';

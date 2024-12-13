@@ -30,6 +30,8 @@ const GlobalStyles = StyleSheet.create({
     width:'80%',
     fontSize:16,
     color:'#343a40',
+    fontWeight:'bold',
+    marginBottom:5
   },
   input: {
     width: '80%',

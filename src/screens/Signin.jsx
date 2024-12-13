@@ -11,6 +11,7 @@ const SignIn = () => {
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
 
   const handleSignIn = async () => {
@@ -30,14 +31,23 @@ const SignIn = () => {
             resizeMode="contain"
           />
           <Text style={GlobalStyles.title}>Welcome Back to Swasthya</Text>
+
+          <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <Text style={GlobalStyles.label}>Phone Number</Text>
+            {/* <Text style={{ color: 'red' }}>*</Text> */}
+          </View>
           <TextInput
             style={GlobalStyles.input}
-            placeholder="Mobile Number"
+            placeholder="Phone Number"
             placeholderTextColor="#000"
             onChangeText={text => setPhoneNumber(text)}
             value={phoneNumber}
-            keyboardType="phone-pad"
           />
+
+          <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <Text style={GlobalStyles.label}>Password</Text>
+            {/* <Text style={{ color: 'red' }}>*</Text> */}
+          </View>
           <TextInput
             style={GlobalStyles.input}
             placeholder="Password"
@@ -46,6 +56,21 @@ const SignIn = () => {
             value={password}
             secureTextEntry={true}
           />
+        <View>
+          ds   
+          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TextInput
+              style={{ marginRight: 10 }}
+              type="checkbox"
+              value={rememberMe}
+              onValueChange={setRememberMe}
+            />
+            <Text style={GlobalStyles.label}>Remember Me</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} style={styles.notRegistered}>
+            <Text style={[styles.buttonText, styles.notRegisteredText]}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
           <TouchableOpacity style={GlobalStyles.button} onPress={handleSignIn}>
             <Text style={GlobalStyles.buttonText}>Continue</Text>
           </TouchableOpacity>

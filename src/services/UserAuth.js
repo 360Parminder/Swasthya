@@ -72,7 +72,20 @@ const UserAuth = {
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+    forgetPassword: async (email, newPassword) => {
+        try {
+            const response = await Path.post('/auth/forgetPassword', {
+                email,
+                newPassword,
+            });
+            if (response) {
+                return response.data;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
 };
 
 export default UserAuth;

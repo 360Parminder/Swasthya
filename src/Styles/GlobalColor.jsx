@@ -3,7 +3,7 @@ const GlobalColor = {
   primaryColor: '#4979FB',
   secondaryColor: '#9381FF',
   tertiaryColor: '#FFD8BE',
-  backgroundColor: '#fff',
+  backgroundColor: '#f2f2f2',
   cardBackgroundColor: '#ffffff',
   lightTextColor: '#ffffff',
   darkTextColor: '#252422',

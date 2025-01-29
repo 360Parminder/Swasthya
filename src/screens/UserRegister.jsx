@@ -43,7 +43,7 @@ const UserRegister = ({ navigation, route }) => {
   };
 
   return (
-    <View style={[GlobalStyles.container, { justifyContent: 'center' }]}>
+    <View style={[GlobalStyles.container]}>
       <Image
         style={styles.logo}
         source={require('../assets/images/heart-rate.png')}
@@ -156,16 +156,16 @@ const pickerSelectStyles = {
     alignItems: 'center',
   },
   inputAndroid: {
-    fontSize: 16,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderWidth: 1,
+    width: '80%',
     borderColor: GlobalColor.borderColor,
-    borderRadius: 4,
+    borderRadius: 5,
+    borderWidth: 1,
+    height: 50,
+    fontSize: 16,
+    paddingLeft: 10,
     color: '#000',
-    backgroundColor: '#fff',
-    paddingRight: 30, // to ensure the text is never behind the icon
-    marginBottom: 10,
+    marginBottom: 15,
+ 
   },
 };
 

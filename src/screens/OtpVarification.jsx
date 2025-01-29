@@ -3,18 +3,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, Modal } from 'react-native';
 import Path from '../services/Path';
 import GlobalStyles from '../Styles/GlobalStyles';
+import UserAuth from '../services/UserAuth';
 
 
 
 const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,phoneNumber }) => {
   const [otp, setOtp] = useState('');
   const verifyOtp = () => {
-    if (otp == validOtp) {
-      navigation.navigate('UserRegister', { mobile: phoneNumber })
-    }
-    else{
-      Alert.alert('Invalid OTP')
-    }
+    const response = UserAuth.verifyOtp(otp)
+    
   }
   return (
     <Modal
@@ -24,14 +21,14 @@ const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,
     >
       <View style={{
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
       }}>
         <View style={{
           backgroundColor: '#E6E2EE',
-          width:300,
-          justifyContent:'center',
+          width: '100%',
+          height: '70%',
           alignItems:'center',
           paddingVertical:30,
           borderRadius:12
@@ -40,7 +37,7 @@ const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,
           <Text style={{
             fontSize:26,
             fontWeight:'600',
-            width:180,
+            // width:180,
             textAlign:'center',
             marginBottom:20,
             color:'#5D4FB3'
@@ -78,19 +75,14 @@ const OtpValidation = ({ navigation }) => {
       Alert.alert('Invalid Phone Number')
     }
     else {
-      const response = await Path.post("/sendOtp", {
-        mobile: `+91${phoneNumber}`,
-      })
-      if (response.data.data.otp) {
-        setValidOtp(response.data.data.otp)
-        console.log(response.data.data.otp);
+      const response = await UserAuth.sendOtp(phoneNumber)
+      if (response.success) {
         Alert.alert("Otp send to you Mobile Number")
-        setTimeout(() => {
-          setVerifyOtpModal(true)
-        }, 3000);
+      }
+      else {
+        Alert.alert(response.message)
       }
     }
-
   }
 
  

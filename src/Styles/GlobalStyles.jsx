@@ -36,7 +36,7 @@ const GlobalStyles = StyleSheet.create({
   input: {
     width: '80%',
     height: 50,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 15,

@@ -34,7 +34,7 @@ const SignIn = () => {
     isLoading ? <LoaderLine /> : (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={GlobalColor.backgroundColor} />
-        <View style={[GlobalStyles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <View style={[GlobalStyles.container, {  }]}>
           <Image
             style={styles.logo}
             source={require('../assets/images/meditation.png')}
@@ -68,7 +68,7 @@ const SignIn = () => {
             accessibilityLabel="Enter your password"
           />
 
-          <View style={styles.checkboxContainer}>
+          {/* <View style={styles.checkboxContainer}>
             <View style={styles.checkboxRow}>
               <Checkbox
                 status={checked ? 'checked' : 'unchecked'}
@@ -80,7 +80,7 @@ const SignIn = () => {
             <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
               <Text style={[styles.buttonText, styles.notRegisteredText]}>Forgot Password?</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           <TouchableOpacity style={GlobalStyles.button} onPress={handleSignIn}>
             <Text style={GlobalStyles.buttonText}>Continue</Text>
@@ -106,10 +106,10 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between', // Space elements within the row
+    // justifyContent: 'space-between', // Space elements within the row
     alignItems: 'center',
-    width: '100%',
-    marginVertical: 10,
+    // width: '100%',
+    // marginVertical: 10,
     paddingHorizontal: 20, // Add padding to prevent overflow
   },
   checkboxRow: {
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
   },
   notRegisteredText: {
     color: '#03045e',
-    textAlign: 'right', // Align text to the right if needed
-    flexShrink: 1, // Prevent text overflow
+    // textAlign: 'right', // Align text to the right if needed
+    // flexShrink: 1, // Prevent text overflow
   },
 });
 

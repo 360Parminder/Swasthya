@@ -38,19 +38,33 @@ const UserAuth = {
     },
     sendOtp: async (mobile) => {
         try {
-            const response = await Path.post('/auth/sendOtp', {
-                mobile,
+            const response = await Path.post('/sendOtp', {
+                mobile:`+91${mobile}`,
             });
-            if (response) {
-                return response.data;
+            if (response.status === 200) {
+                return {
+                    success: true,
+                    data: response.data,
+                    message: response.data.message,
+                };
+            }
+            else{
+                return {
+                    success: false,
+                    data: response.data,
+                    message: response.message,
+                };
             }
         } catch (error) {
-            console.log(error);
+            return{
+                success: false,
+                message: error.message
+            }
         }
     },
     verifyOtp: async (mobile, otp) => {
         try {
-            const response = await Path.post('/auth/verifyOtp', {
+            const response = await Path.post('verifyOtp', {
                 mobile,
                 otp,
             });

@@ -80,7 +80,7 @@ const OtpValidation = ({ navigation }) => {
         Alert.alert("Otp send to you Mobile Number")
       }
       else {
-        Alert.alert(response.message)
+        Alert.alert("Error",response.message)
       }
     }
   }

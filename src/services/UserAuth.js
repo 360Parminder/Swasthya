@@ -39,7 +39,7 @@ const UserAuth = {
     sendOtp: async (mobile) => {
         try {
             const response = await Path.post('/sendOtp', {
-                mobile:`+91${mobile}`,
+                mobile:`+358${mobile}`,
             });
             if (response.status === 200) {
                 return {
@@ -58,7 +58,7 @@ const UserAuth = {
         } catch (error) {
             return{
                 success: false,
-                message: error.message
+                message: "Error Occured while sending OTP"
             }
         }
     },

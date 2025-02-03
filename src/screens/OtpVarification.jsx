@@ -9,8 +9,16 @@ import UserAuth from '../services/UserAuth';
 
 const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,phoneNumber }) => {
   const [otp, setOtp] = useState('');
-  const verifyOtp = () => {
-    const response = UserAuth.verifyOtp(otp)
+  const verifyOtp = async () => {
+    const response = await UserAuth.verifyOtp(phoneNumber,otp)
+    if (response.success) {
+      Alert.alert("Otp Verified")
+      navigation.navigate('UserRegister',{mobile:phoneNumber})
+    }
+    else {
+      Alert.alert("Error",response.message)
+    }
+    
     
   }
   return (
@@ -77,7 +85,7 @@ const OtpValidation = ({ navigation }) => {
     else {
       const response = await UserAuth.sendOtp(phoneNumber)
       if (response.success) {
-        Alert.alert("Otp send to you Mobile Number")
+        setVerifyOtpModal(true)
       }
       else {
         Alert.alert("Error",response.message)

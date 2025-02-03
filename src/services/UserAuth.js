@@ -29,11 +29,26 @@ const UserAuth = {
                 gender:gender,
                 food_preference:foodPreference
             });  
-            if (response) {
-                return response;
+            console.log(response.data);
+            
+            if (response.status === 200) {
+                return {
+                    success: true,
+                    data: response.data,
+                    message: response.data.message,
+                }
+            }
+            else{
+                return {
+                    success: false,
+                    message: response.data.message,
+                }
             }
         } catch (error) {
-            console.log(error);
+           return {
+                success: false,
+                message: "Error Occured while Registering User"
+           }
         }
     },
     sendOtp: async (mobile) => {
@@ -64,15 +79,25 @@ const UserAuth = {
     },
     verifyOtp: async (mobile, otp) => {
         try {
-            const response = await Path.post('verifyOtp', {
-                mobile,
-                otp,
+            const response = await Path.post('/verifyOtp', {
+                mobile: `+358${mobile}`,
+                otp: Number(otp),
             });
-            if (response) {
+            
+            if (response.status === 200) {
                 return response.data;
             }
+            else{
+                return {
+                    success: false,
+                    message: response.data.message,
+                };
+            }
         } catch (error) {
-            console.log(error);
+            return{
+                success: false,
+                message: "Error Occured while verifying OTP"
+            }
         }
     },
     logout: async () => {

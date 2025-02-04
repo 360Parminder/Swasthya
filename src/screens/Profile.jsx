@@ -1,5 +1,5 @@
-import { useContext} from "react";
-import { View, Text, Image, StyleSheet,Pressable } from "react-native";
+import { useContext } from "react";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import BorderCard from "../components/BorderCard";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from "../context/AuthContext";
@@ -9,8 +9,8 @@ import GlobalColor from "../Styles/GlobalColor";
 
 
 const Profile = ({ navigation }) => {
-  const {logout} = useContext(AuthContext)
-  const {user} = useContext(userDataContext)
+  const { logout } = useContext(AuthContext)
+  const { user } = useContext(userDataContext)
   const calculateAge = (dobString) => {
     const dob = new Date(dobString);
     const now = new Date();
@@ -23,84 +23,64 @@ const Profile = ({ navigation }) => {
     <View style={GlobalStyles.container}>
       <View style={{
         width: '100%',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 20,
-        paddingBottom: 20,
-        position: 'relative',
-      }}>
-        <Image source={user?.picture? { uri: user.picture }: require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
-        <Text style={styles.name}>{user?.username ? user?.username : "User Name "}</Text>
-        <Text style={{ color: GlobalColor.darkTextColor, fontSize: 16, fontWeight: '500' }}>{"parminder@gmail.com"}</Text>
-      </View>
-      <View style={{
         flexDirection: 'row',
-        marginTop: 20,
-        gap: 10
+        position: 'relative',
+        backgroundColor: GlobalColor.primaryColor,
+        borderRadius: 16,
+        alignItems: 'center',
+        paddingVertical: 10,
+        paddingHorizontal: 5,
       }}>
-
-        <BorderCard logo={'⚖️'} value={user?.weight} valueUnit={'kg'} />
-        <BorderCard logo={'🧍'} value={user?.height} valueUnit={'Cm'} />
-        <BorderCard logo={'🎂'} value={userAge?userAge:'..'} valueUnit={'Yrs'} />
-
-
+        <Image source={user?.picture ? { uri: user.picture } : require('../assets/images/Profile.jpg')} style={styles.profilePicture} resizeMode='cover' />
+        <View style={{ flexDirection: 'column',marginLeft:20,width:'70%' }}>
+          <Text style={styles.name}>{user?.username ? user?.username : "User Name "}</Text>
+          <Text style={{ color: GlobalColor.textColor, fontSize: 16, fontWeight: '500',textTransform:'capitalize' }}>{user?.email?user.email:user.mobile}</Text>
+        </View>
       </View>
-
-
-
       <View style={styles.card}>
-          <Pressable onPress={()=>navigation.navigate('Personal Details')} style={styles.cardList}>
-          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{paddingHorizontal:16,paddingVertical:8,borderRadius:10}} name="person-circle-outline" color={GlobalColor.iconColor} size={25} />
-          <Text style={styles.cardText}>Personal Details</Text>
-          </View>
-            <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
-          </Pressable>
-          <Pressable onPress={()=>navigation.navigate('Help')} style={styles.cardList}>
-          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{paddingHorizontal:16,paddingVertical:12,borderRadius:10}} name="help-circle-outline" color={GlobalColor.iconColor} size={25} />
-          <Text style={styles.cardText}>Help</Text>
+        <Pressable onPress={() => navigation.navigate('Personal Details')} style={styles.cardList}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="person-outline" color={GlobalColor.mainColor} size={35} />
+            <Text style={styles.cardText}>Personal Details</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
-          </Pressable>
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate('Help')} style={styles.cardList}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="help-outline" color={GlobalColor.mainColor} size={25} />
+            <Text style={styles.cardText}>Help</Text>
+          </View>
+          <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
+        </Pressable>
 
-          <View style={styles.cardList}>
-          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{paddingHorizontal:16,paddingVertical:12,borderRadius:10}} name="trash-outline" color={GlobalColor.iconColor} size={25} />
-          <Text style={styles.cardText}>Delete account</Text>
+        <View style={styles.cardList}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="trash" color={GlobalColor.mainColor} size={25} />
+            <Text style={styles.cardText}>Delete account</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
-          </View>
+        </View>
 
-          <Pressable onPress={()=>{logout()}} style={styles.cardList}>
-          <View style={{flexDirection:'row',alignItems:'center',gap:5}}>
-          <Icon style={{paddingHorizontal:16,paddingVertical:12,borderRadius:10}} name="power-outline" color='red' size={30} />
-          <Text style={[styles.cardText,{color:'red'}]}>Log out</Text>
+        <Pressable onPress={() => { logout() }} style={styles.cardList}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#b92e2e42' }} name="power" color='red' size={30} />
+            <Text style={[styles.cardText, { color: 'red' }]}>Log out</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={25} />
-          </Pressable>
+        </Pressable>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#f5f9fb',
-    paddingTop: 16
-  },
   profilePicture: {
-    width: 130,
-    height: 130,
+    width: 100,
+    height: 100,
     borderRadius: 80,
-    marginBottom: 20,
   },
   name: {
-    color: GlobalColor.darkTextColor,
+    color: GlobalColor.textColor,
     fontSize: 22,
     fontWeight: '600',
     marginBottom: 2,
@@ -109,32 +89,28 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: GlobalColor.borderColor,
     width: '90%',
     marginTop: 26,
-    paddingVertical: 10,
     gap: 10,
     elevation: 1,
-    backgroundColor: '#fff',
     boxShadow: '0 0 5px rgba(0,0,0,0.1)',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
-   
+
   },
   cardList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
-   
+
   },
   cardText: {
-    color: '#000',
+    color: GlobalColor.textColor,
     fontSize: 18,
     fontWeight: '600',
-    textAlign:'left'
+    textAlign: 'left'
   }
 });
 

@@ -51,4 +51,22 @@ export function formatDate(dateString) {
   return date.toISOString().split('T')[0];
 }
 
+export function getGreeting() {
+  const date = new Date();
+  const hours = date.getHours();
+  let greeting;
+
+  if (hours < 12) {
+      greeting = 'Good Morning 😄';
+  } else if (hours < 18) {
+      greeting = 'Good Afternoon 😃';
+  } else if (hours < 21) {
+      greeting = 'Good Evening 😊';
+  } else {
+      greeting = 'Good Night 😴';
+  }
+  
+  return {greeting};
+}
+
 

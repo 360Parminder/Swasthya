@@ -13,7 +13,7 @@ const SmallHomeCard = ({ icon, logoBg,footerText,targetvalue,valueUnit,value }) 
                 <View style={styles.mainContentContainer}>
                 <View style={{flexDirection:'row',alignItems:'flex-end',gap:6}}>
                   <Text style={{fontSize:24,fontWeight:'600',color:GlobalColor.textColor}}>{value}</Text>
-                  <Text style={{fontSize:18,color:GlobalColor.textColorSecondary}}>{targetvalue?targetvalue:valueUnit}</Text>
+                  <Text style={{fontSize:18,color:GlobalColor.textColor}}>{targetvalue?targetvalue:valueUnit}</Text>
                   </View>
                 </View>
             </View>
@@ -29,7 +29,6 @@ const styles = {
         width: 190,
         height: 80,
         borderRadius: 10,
-        backgroundColor: GlobalColor.cardBackgroundColor,
         shadowOpacity: 0.1,
         elevation: 3,
         shadowRadius: 10,
@@ -66,7 +65,7 @@ const styles = {
     },
     footerText: {
         fontSize: 14,
-        color:GlobalColor.textColorSecondary,
+        color:GlobalColor.textColor,
         textTransform:'capitalize'
     },
 };

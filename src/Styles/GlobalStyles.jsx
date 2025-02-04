@@ -13,7 +13,7 @@ const GlobalStyles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color:GlobalColor.darkTextColor
+    color:GlobalColor.textColor,
   },
   button: {
     backgroundColor: GlobalColor.buttonBackgroundColor,
@@ -29,7 +29,7 @@ const GlobalStyles = StyleSheet.create({
   label:{
     width:'80%',
     fontSize:16,
-    color:'#343a40',
+    color:GlobalColor.textColor,
     fontWeight:'bold',
     marginBottom:5
   },
@@ -53,7 +53,7 @@ const GlobalStyles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: GlobalColor.secondaryColor,
+    color: GlobalColor.textColor,
   },
 });
 

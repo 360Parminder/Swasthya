@@ -17,8 +17,8 @@ const TabNavigator = () => {
     <Tab.Navigator
       initialRouteName='Home'
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: GlobalColor.primaryColor,
-        tabBarInactiveTintColor: '#808080',
+        tabBarActiveTintColor: GlobalColor.mainColor,
+        tabBarInactiveTintColor: GlobalColor.tertiaryColor,
         tabBarShowLabel: false,
         tabBarStyle: {
          display: 'flex',
@@ -34,7 +34,7 @@ const TabNavigator = () => {
           shadowOpacity: 0.2,
           shadowOffset: { width: 0, height: 0 },
           shadowRadius: 15,
-
+          backgroundColor: GlobalColor.primaryColor,
           
         },
         tabBarIcon: ({ focused, color }) => {

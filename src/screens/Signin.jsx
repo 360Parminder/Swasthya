@@ -6,6 +6,9 @@ import GlobalStyles from '../Styles/GlobalStyles';
 import { AuthContext } from '../context/AuthContext';
 import GlobalColor from '../Styles/GlobalColor';
 import { Checkbox } from 'react-native-paper';
+import FloatingLabelInput from '../components/Inputs/FloatingLabelInput';
+
+
 
 const SignIn = () => {
   const { login, isLoading } = useContext(AuthContext);
@@ -29,46 +32,23 @@ const SignIn = () => {
       Alert.alert('Error', 'An error occurred. Please try again later.');
     }
   };
+  console.log(phoneNumber, password);
+  
 
   return (
-    isLoading ? <LoaderLine /> : (
-      <>
-        <StatusBar barStyle="dark-content" backgroundColor={GlobalColor.backgroundColor} />
-        <View style={[GlobalStyles.container, {  }]}>
-          <Image
-            style={styles.logo}
-            source={require('../assets/images/meditation.png')}
-            resizeMode="contain"
-          />
-          <Text style={GlobalStyles.title}>Welcome Back to Swasthya</Text>
+    <View style={[GlobalStyles.container]}>
+      <Image
+        style={styles.logo}
+        source={require('../assets/images/meditation.png')}
+        resizeMode="contain"
+      />
+      <Text style={GlobalStyles.title}>Welcome Back to Swasthya</Text>
 
-          <View style={styles.inputGroup}>
-            <Text style={GlobalStyles.label}>Phone Number</Text>
-          </View>
-          <TextInput
-            style={GlobalStyles.input}
-            placeholder="Phone Number"
-            placeholderTextColor="#000"
-            onChangeText={text => setPhoneNumber(text)}
-            value={phoneNumber}
-            keyboardType="phone-pad"
-            accessibilityLabel="Enter your phone number"
-          />
 
-          <View style={styles.inputGroup}>
-            <Text style={GlobalStyles.label}>Password</Text>
-          </View>
-          <TextInput
-            style={GlobalStyles.input}
-            placeholder="Password"
-            placeholderTextColor="#000"
-            onChangeText={text => setPassword(text)}
-            value={password}
-            secureTextEntry={true}
-            accessibilityLabel="Enter your password"
-          />
+      <FloatingLabelInput label="Phone Number" value={phoneNumber} onChangeText={setPhoneNumber} borderColor={GlobalColor.borderColor} />
+      <FloatingLabelInput label="Password" value={password} onChangeText={setPassword} borderColor={GlobalColor.borderColor} />
 
-          {/* <View style={styles.checkboxContainer}>
+      {/* <View style={styles.checkboxContainer}>
             <View style={styles.checkboxRow}>
               <Checkbox
                 status={checked ? 'checked' : 'unchecked'}
@@ -82,15 +62,14 @@ const SignIn = () => {
             </TouchableOpacity>
           </View> */}
 
-          <TouchableOpacity style={GlobalStyles.button} onPress={handleSignIn}>
-            <Text style={GlobalStyles.buttonText}>Continue</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')} style={styles.notRegistered}>
-            <Text style={[styles.buttonText, styles.notRegisteredText]}>Not registered yet!</Text>
-          </TouchableOpacity>
-        </View>
-      </>
-    )
+      <TouchableOpacity style={GlobalStyles.button} onPress={handleSignIn}>
+        <Text style={GlobalStyles.buttonText}>Continue</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')} style={styles.notRegistered}>
+        <Text style={[styles.buttonText, styles.notRegisteredText]}>Not registered yet!</Text>
+      </TouchableOpacity>
+    </View>
+
   );
 };
 
@@ -120,7 +99,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   notRegisteredText: {
-    color: '#03045e',
+    color: GlobalColor.textColor,
     // textAlign: 'right', // Align text to the right if needed
     // flexShrink: 1, // Prevent text overflow
   },

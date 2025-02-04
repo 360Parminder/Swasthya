@@ -9,11 +9,17 @@ const userData = {
           'Authorization': `Bearer ${token}`
         }
       });
-      if (response) {
-        return response;
+      if (response.status === 200) {
+        return{
+          success: true,
+          data: response.data.user
+        }
+      }
+      else {
+        return { success: false, message: "Something went wrong" }
       }
     } catch (error) {
-      console.log(error);
+     return { success: false, message: "Please your Internet Connection" }
     }
   },
   fetchUserRank: async (date) => {

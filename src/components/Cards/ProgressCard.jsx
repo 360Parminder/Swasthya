@@ -4,10 +4,8 @@ import CircularProgress from "react-native-circular-progress-indicator";
 
 const ProgressCard = ({ title = "Your current progress", progress = 60, buttonText = "Manage", backgroundImage }) => {
     return (
-        <ImageBackground
-            source={require('../../assets/images/Banner.png')}
+        <View
             style={[styles.card, { borderColor: GlobalColor.primaryColor }]}
-            imageStyle={{resizeMode:'cover' }} // Ensure the image covers the whole area
         >
             <View style={styles.textContainer}>
                 <Text style={styles.titleText}>{title}</Text>
@@ -30,7 +28,7 @@ const ProgressCard = ({ title = "Your current progress", progress = 60, buttonTe
                     titleStyle={{ fontWeight: 'bold', fontSize: 16 }}
                 />
             </View>
-        </ImageBackground>
+        </View>
     );
 }
 
@@ -38,16 +36,17 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '95%',
+        width: '100%',
         height: 140,
-        backgroundColor: GlobalColor.cardBackgroundColor,
+        backgroundColor: GlobalColor.primaryColor,
         padding: 10,
         borderRadius: 10,
         shadowOpacity: 0.1,
         elevation: 3,
         shadowRadius: 10,
         borderWidth: 1,
-        overflow: 'hidden', // Ensures rounded corners are respected in the image background
+        overflow: 'hidden',
+        marginBottom: 10,
     },
     textContainer: {
         width: '40%',
@@ -56,18 +55,21 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 24,
         fontWeight: '700',
+        color: GlobalColor.textColor,
     },
     manageButton: {
         paddingHorizontal: 10,
         paddingVertical: 5,
-        backgroundColor: '#EDF2FF',
+        backgroundColor: GlobalColor.secondaryColor,
         borderRadius: 14,
         justifyContent: 'center',
         alignItems: 'center',
         width: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     manageButtonText: {
-        color: '#4979FB',
+        color: GlobalColor.mainColor,
         fontSize: 20,
         fontWeight: '400',
     },

@@ -20,7 +20,7 @@ const HomeCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, ta
             </View>
             <View style={styles.footer}>
                 <Text style={styles.cardValue}>{value ? value : 0} {valueUnit}</Text>
-                <Text style={{color:GlobalColor.textColorSecondary,fontSize:18}}>Target: {targetvalue} {valueUnit}</Text>
+                <Text style={{color:GlobalColor.textColor,fontSize:18}}>Target: {targetvalue} {valueUnit}</Text>
             </View>
         </View>
     );
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: 190,
         height: 220,
-        backgroundColor: GlobalColor.cardBackgroundColor,
         paddingHorizontal: 10,
         borderRadius: 10,
         shadowOpacity: 0.1,
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     cardTitle: {
         fontSize: 18,
         fontWeight: '600',
-        color: '#000000',
+        color: GlobalColor.textColor,
         marginTop: 10
     },
     cardLogoContainer: {
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     cardValue: {
       fontSize: 22,
     fontWeight: '600',
-    color: GlobalColor.darkTextColor
+    color: GlobalColor.textColor,
 
     },
 });

@@ -9,7 +9,7 @@ import UserAuth from '../services/UserAuth';
 
 
 
-const UserRegister = ({navigation, route }) => {
+const UserRegister = ({ navigation, route }) => {
 
   const { mobile } = route.params;
   const [name, setName] = useState('');
@@ -30,19 +30,20 @@ const UserRegister = ({navigation, route }) => {
   const handleRegister = async () => {
     try {
       if (name && password && date && gender && foodPreference && height && weight) {
-        const response = await UserAuth.register(name, mobile, password, weight, height, formatDate(date),gender,foodPreference);
-          if (response.status === 200) {
-            Alert.alert("User Registered Successfully");
-            navigation.navigate('SignIn');
-          }
-       
+        const response = await UserAuth.register(name, mobile, password, weight, height, formatDate(date), gender, foodPreference);
+        if (response.success) {
+          Alert.alert("User Registered Successfully");
+          navigation.navigate('SignIn');
+        }
+        else {
+          Alert.alert("Error", response.message);
+        }
       } else {
         Alert.alert("Please fill all the fields");
       }
     } catch (error) {
-      console.log(error);
+      Alert.alert("Error", "Error Occured while Registering User");
     }
-    console.log(name, password,formatDate(date),gender,foodPreference,height,weight);
   };
 
   return (
@@ -69,7 +70,7 @@ const UserRegister = ({navigation, route }) => {
         placeholderTextColor={"#000"}
       />
       <Pressable
-        style={[GlobalStyles.input,styles.datePicker]}
+        style={[GlobalStyles.input, styles.datePicker]}
         onPress={() => setOpen(true)}
       >
         <Text style={styles.dateText}>
@@ -90,35 +91,35 @@ const UserRegister = ({navigation, route }) => {
         }}
       />
 
-     <View style={{width:'80%',marginBottom: 15}}>
-     <RNPickerSelect
-        style={pickerSelectStyles}
-        placeholderTextColor={"#000"}
-        placeholder={{ label: 'Select your Gender', value: null }}
-        onValueChange={(value) => setGender(value)}
-        selectedValue={gender}
-        items={[
-          { label: 'Male', value: 'male' },
-          { label: 'Female', value: 'female' },
-          { label: 'Other', value: 'transMale' },
-        ]}
-      />
-     </View>
-     <View style={{width:'80%',marginBottom: 15,}}>
-     <RNPickerSelect
-        style={pickerSelectStyles}
-        placeholderTextColor={'#000'}
-        placeholder={{ label: 'Select Food Preference', value: null }}
-        onValueChange={(itemValue, itemIndex) =>
-          setFoodPreference(itemValue)
-        }
-        items={[
-          { label: 'Vegetarian', value: 'veg' },
-          { label: 'Non-vegetarian', value: 'nonVeg' },
-          { label: 'Vegan', value: 'vegan' },
-        ]}
-      />
-     </View>
+      <View style={{ width: '80%', marginBottom: 15 }}>
+        <RNPickerSelect
+          style={pickerSelectStyles}
+          placeholderTextColor={"#000"}
+          placeholder={{ label: 'Select your Gender', value: null }}
+          onValueChange={(value) => setGender(value)}
+          selectedValue={gender}
+          items={[
+            { label: 'Male', value: 'male' },
+            { label: 'Female', value: 'female' },
+            { label: 'Other', value: 'transMale' },
+          ]}
+        />
+      </View>
+      <View style={{ width: '80%', marginBottom: 15, }}>
+        <RNPickerSelect
+          style={pickerSelectStyles}
+          placeholderTextColor={'#000'}
+          placeholder={{ label: 'Select Food Preference', value: null }}
+          onValueChange={(itemValue, itemIndex) =>
+            setFoodPreference(itemValue)
+          }
+          items={[
+            { label: 'Vegetarian', value: 'veg' },
+            { label: 'Non-vegetarian', value: 'nonVeg' },
+            { label: 'Vegan', value: 'vegan' },
+          ]}
+        />
+      </View>
       <TextInput
         style={GlobalStyles.input}
         placeholder="Height (cm)"
@@ -143,33 +144,33 @@ const UserRegister = ({navigation, route }) => {
 };
 const pickerSelectStyles = {
   inputIOS: {
-      width: "100%",
-      borderRadius: 5,
-      borderColor: 'gray',
-      borderWidth: 1,
-      height: 50,
-      fontSize: 16,
-      paddingLeft: 10,
-      backgroundColor: "white",
-      color: "#000",
-      marginBottom: 15,
+    width: "100%",
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    height: 50,
+    fontSize: 16,
+    paddingLeft: 10,
+    backgroundColor: "white",
+    color: "#000",
+    marginBottom: 15,
   },
   placeholder: {
     color: '#000',
   },
   inputAndroid: {
-      width: "100%",
-      height: 50,
-      fontSize: 16,
-      paddingVertical: 8,
-      paddingHorizontal: 10,
-      borderWidth: 1,
-      borderColor: "#000",
-      borderRadius: 10,
-      backgroundColor: GlobalColor.backgroundColor,
-      color: GlobalColor.textColor,
-      paddingRight: 30,
-      marginBottom: 10,
+    width: "100%",
+    height: 50,
+    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: "#000",
+    borderRadius: 10,
+    backgroundColor: GlobalColor.backgroundColor,
+    color: GlobalColor.textColor,
+    paddingRight: 30,
+    marginBottom: 10,
   },
 };
 

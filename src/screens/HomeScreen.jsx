@@ -5,7 +5,7 @@ import SmallHomeCard from '../components/SmallHomeCard';
 import { userDataContext } from '../context/UserContext';
 import GlobalStyles from '../Styles/GlobalStyles';
 import GlobalColor from '../Styles/GlobalColor';
-import {todayDate } from '../utils/dateFunction';
+import { todayDate } from '../utils/dateFunction';
 import Header from '../components/Header';
 import MidCard from '../components/Cards/MidCard';
 import ProgressCard from '../components/Cards/ProgressCard';
@@ -14,6 +14,7 @@ import ProgressCard from '../components/Cards/ProgressCard';
 const HomeScreen = ({ navigation }) => {
   const { dailySteps,dailyCalories } = useContext(userDataContext)
   const {date, month, day,year}= todayDate();
+ 
   
   return (   
     <>
@@ -21,16 +22,16 @@ const HomeScreen = ({ navigation }) => {
         <View style={[GlobalStyles.container,{alignItems:'center'}]}>
          <Header/>
          <View style={{flexDirection:'row',marginBottom:10,width:'100%',paddingHorizontal:20}}>
-          <Text style={{textTransform:'capitalize',fontSize:18}}>{day}</Text>
-          <Text style={{fontWeight:'700',fontSize:19}}>, {date} {month} {year}</Text>
+          <Text style={{textTransform:'capitalize',fontSize:18,color:GlobalColor.textColor}}>{day}</Text>
+          <Text style={{fontWeight:'700',fontSize:19,color:GlobalColor.textColor}}>, {date} {month} {year}</Text>
          </View>
-            <Text style={{width:'100%',paddingHorizontal:20,fontSize:20,fontWeight:'600',marginBottom:20}}>Progress Summary</Text>
-            <ProgressCard />
+         <Text style={{width:'100%',paddingHorizontal:20,fontSize:20,fontWeight:'600',marginBottom:20,color:GlobalColor.textColor}}>Progress Summary</Text>
           <ScrollView 
            style={styles.scrollView} 
            contentContainerStyle={styles.scrollContent}
            showsVerticalScrollIndicator={false}
             >
+            <ProgressCard />
             
             <View style={styles.grid}>
             <Pressable onPress={()=>{navigation.navigate('WaterDrink')}}>

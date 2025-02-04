@@ -17,7 +17,6 @@ const UserAuth = {
         }
     },
     register: async (name,mobile,password,weight,height,date,gender,foodPreference) => {
-        console.log(name,mobile,password,weight,height,date);
         try {
             const response = await Path.post('/register', {
                 username: name,

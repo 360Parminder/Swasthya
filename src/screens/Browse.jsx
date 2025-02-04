@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalStyles from '../Styles/GlobalStyles';
+import GlobalColor from '../Styles/GlobalColor';
 
 const Browse = ({ navigation }) => {
     return (
@@ -154,7 +155,6 @@ const Browse = ({ navigation }) => {
                     <View style={styles.categorieHolder}>
                         <View style={styles.categorieContent}>
                             <View style={{ backgroundColor: '#c5d5ff', padding: 5, borderRadius: 20 }}>
-
                                 <Icon name='fast-food' color='#758bfd' size={32} />
                             </View>
                             <Text style={styles.categorieName}>Diet</Text>
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     categorieName: {
         fontSize: 20,
         fontWeight: '600',
-        color: '#000',
+        color: GlobalColor.textColor,
         marginHorizontal: 20,
 
     },

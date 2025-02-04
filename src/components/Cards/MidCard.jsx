@@ -18,7 +18,7 @@ const MidCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, tar
             </View>
             <View style={styles.footer}>
                 <Text style={styles.cardValue}>{value ? value : null} {valueUnit}</Text>
-                <Text style={{ color: GlobalColor.textColorSecondary, fontSize: 18 }}>Target: {targetvalue} {valueUnit}</Text>
+                <Text style={{ color: GlobalColor.textColor, fontSize: 18 }}>Target: {targetvalue} {valueUnit}</Text>
             </View>
         </View>
     );
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'column',
         width: 190,
-        backgroundColor: GlobalColor.cardBackgroundColor,
         paddingHorizontal: 10,
         borderRadius: 10,
         shadowOpacity: 0.1,
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
         width:'auto',
         fontSize: 18,
         fontWeight: '600',
-        color: '#000000',
+        color: GlobalColor.textColor,
         marginTop: 10,
         textTransform:'capitalize'
     },
@@ -78,6 +77,6 @@ const styles = StyleSheet.create({
     cardValue: {
         fontSize: 22,
         fontWeight: '600',
-
+        color: GlobalColor.textColor,
     },
 });

@@ -6,7 +6,7 @@ import GlobalColor from "../../Styles/GlobalColor"
 const CaloriesReportCard = ({ title, value, valueUnit,caloriesValue, targetValue, icon,iconcolor, logoBg }) => {
     return(
         <View style={{flexDirection:'column',borderWidth:0.5,borderColor:`${iconcolor}`,borderRadius:14,padding:10, alignItems:'center',width:'45%'}}>
-        <Text style={{width:'100%',textAlign:'left',fontSize:18,fontWeight:'500',marginBottom:5}}>{title}</Text>
+        <Text style={{width:'100%',textAlign:'left',fontSize:18,fontWeight:'500',marginBottom:5,color:GlobalColor.textColor}}>{title}</Text>
         <CircularProgress
                     value={value}
                     radius={65}
@@ -26,14 +26,14 @@ const CaloriesReportCard = ({ title, value, valueUnit,caloriesValue, targetValue
                         />
                        </View>
                     )}
-                    titleColor={GlobalColor.textColorSecondary}
+                    titleColor={GlobalColor.textColor}
                     titleStyle={{ fontWeight: 'bold', fontSize: 13 }}
                     valueSuffixStyle={{fontSize:16}}
                     progressValueStyle={{fontSize:16,marginRight:5}}
                 />
                 <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
                   <Icon name="flame" type="ionicon" color={iconcolor} size={25} />
-                    <Text style={{fontSize:18,fontWeight:'500'}}>{caloriesValue} Kcal</Text>
+                    <Text style={{fontSize:18,fontWeight:'500',color:GlobalColor.textColor}}>{caloriesValue} Kcal</Text>
                 </View>
       </View>
     )

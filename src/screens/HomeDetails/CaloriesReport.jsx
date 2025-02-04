@@ -12,7 +12,7 @@ const CaloriesReport = () => {
     <View style={{height:'22%'}}>
 
     </View>
-    <Text style={{fontSize:20,fontWeight:'600',textAlign:'left',width:'90%',marginBottom:10}}>Where your calories burn</Text>
+    <Text style={{fontSize:20,fontWeight:'600',textAlign:'left',width:'90%',marginBottom:10,color:GlobalColor.textColor}}>Where your calories burn</Text>
     <ScrollView>
 
     <View style={styles.grid}>

@@ -16,8 +16,8 @@ export const UserDataProvider = ({ children }) => {
       const token = await AsyncStorage.getItem('userToken');
       if (token) {
         const response = await userData.getUserProfile(token)
-        if (response.status === 200) {
-          setUser(response.data.data);
+        if (response.success) {
+          setUser(response.data);
         }
         else{
           Alert.alert("Error", "User not found");

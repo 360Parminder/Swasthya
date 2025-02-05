@@ -40,7 +40,7 @@ const GlobalStyles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 15,
-    color: '#000000',
+    color: GlobalColor.textColor,
     borderWidth: 1,
     borderColor:GlobalColor.borderColor,
   },

@@ -4,6 +4,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, Moda
 import Path from '../services/Path';
 import GlobalStyles from '../Styles/GlobalStyles';
 import UserAuth from '../services/UserAuth';
+import GlobalColor from '../Styles/GlobalColor';
 
 
 
@@ -34,7 +35,7 @@ const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
       }}>
         <View style={{
-          backgroundColor: '#E6E2EE',
+          backgroundColor: GlobalColor.primaryColor,
           width: '100%',
           height: '70%',
           alignItems:'center',
@@ -54,9 +55,9 @@ const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,
           </Text>
 
           <TextInput
-            style={[styles.input]}
+            style={[GlobalStyles.input]}
             placeholder="Enter OTP "
-            placeholderTextColor="#000000"
+            placeholderTextColor={GlobalColor.textColor}
             onChangeText={text => setOtp(text)}
             value={otp}
 
@@ -97,7 +98,7 @@ const OtpValidation = ({ navigation }) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
       <Image
         style={styles.logo}
         source={require('../assets/images/password.png')}
@@ -106,14 +107,14 @@ const OtpValidation = ({ navigation }) => {
       <Text style={GlobalStyles.title}>Enter Your Mobile Number</Text>
       <Text style={{
          marginBottom: 20,
-         color:'#343a40',
+         color:GlobalColor.textColor,
          fontSize:16
       }}>We will send you a Confirmation Code</Text>
 
       <TextInput
         style={GlobalStyles.input}
         placeholder="Enter your Mobile"
-        placeholderTextColor="#000000"
+        placeholderTextColor={GlobalColor.textColor}
         onChangeText={text => setPhoneNumber(text)}
         value={phoneNumber}
         keyboardType="phone-pad"

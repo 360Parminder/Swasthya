@@ -51,7 +51,7 @@ const UserRegister = ({ navigation, route }) => {
       <Text style={GlobalStyles.title}>Getting Started</Text>
       <Text style={{
         marginBottom: 20,
-        color: '#343a40',
+        color: GlobalColor.textColor,
         fontSize: 16
       }}>Create a account to continue!</Text>
       <TextInput
@@ -59,7 +59,7 @@ const UserRegister = ({ navigation, route }) => {
         placeholder="Name"
         onChangeText={text => setName(text)}
         value={name}
-        placeholderTextColor={"#000"}
+        placeholderTextColor={GlobalColor.textColor}
       />
       <TextInput
         style={GlobalStyles.input}
@@ -67,7 +67,7 @@ const UserRegister = ({ navigation, route }) => {
         onChangeText={text => setPassword(text)}
         value={password}
         secureTextEntry={true}
-        placeholderTextColor={"#000"}
+        placeholderTextColor={GlobalColor.textColor}
       />
       <Pressable
         style={[GlobalStyles.input, styles.datePicker]}
@@ -94,7 +94,7 @@ const UserRegister = ({ navigation, route }) => {
       <View style={{ width: '80%', marginBottom: 15 }}>
         <RNPickerSelect
           style={pickerSelectStyles}
-          placeholderTextColor={"#000"}
+          placeholderTextColor={GlobalColor.textColor}
           placeholder={{ label: 'Select your Gender', value: null }}
           onValueChange={(value) => setGender(value)}
           selectedValue={gender}
@@ -126,7 +126,7 @@ const UserRegister = ({ navigation, route }) => {
         onChangeText={text => setHeight(text)}
         value={height}
         keyboardType="numeric"
-        placeholderTextColor={"#000"}
+        placeholderTextColor={GlobalColor.textColor}
       />
       <TextInput
         style={GlobalStyles.input}
@@ -134,7 +134,7 @@ const UserRegister = ({ navigation, route }) => {
         onChangeText={text => setWeight(text)}
         value={weight}
         keyboardType="numeric"
-        placeholderTextColor={"#000"}
+        placeholderTextColor={GlobalColor.textColor}
       />
       <TouchableOpacity style={GlobalStyles.button} onPress={handleRegister}>
         <Text style={GlobalStyles.buttonText}>Register</Text>
@@ -152,11 +152,11 @@ const pickerSelectStyles = {
     fontSize: 16,
     paddingLeft: 10,
     backgroundColor: "white",
-    color: "#000",
+    color: GlobalColor.textColor,
     marginBottom: 15,
   },
   placeholder: {
-    color: '#000',
+    color: GlobalColor.textColor,
   },
   inputAndroid: {
     width: "100%",
@@ -165,7 +165,7 @@ const pickerSelectStyles = {
     paddingVertical: 8,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: "#000",
+    borderColor: GlobalColor.textColor,
     borderRadius: 10,
     backgroundColor: GlobalColor.backgroundColor,
     color: GlobalColor.textColor,

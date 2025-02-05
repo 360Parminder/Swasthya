@@ -1,29 +1,40 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
+import GlobalColor from '../Styles/GlobalColor'
+import Icon from 'react-native-vector-icons/Ionicons';
 
-
-const LeaderboardList = ({ userRank, userName, userStep }) => {
+const LeaderboardList = ({ userRank, userName, userStep, userCalories }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.userRankHolder}>
                 {
-                userRank ? userRank == 1 ? (
-                    <Image source={require('../assets/images/first.png')} style={styles.userRankImage} resizeMode='cover' />
-                ) : userRank == 2 ? (
-                    <Image source={require('../assets/images/second.png')} style={styles.userRankImage} resizeMode='cover' />
-                ) : userRank == 3 ? (
-                    <Image source={require('../assets/images/third.png')} style={styles.userRankImage} resizeMode='cover' />
-                ) : (<Text style={styles.userRank}>{userRank}</Text>
+                    userRank ? userRank == 1 ? (
+                        <Image source={require('../assets/images/first.png')} style={styles.userRankImage} resizeMode='cover' />
+                    ) : userRank == 2 ? (
+                        <Image source={require('../assets/images/second.png')} style={styles.userRankImage} resizeMode='cover' />
+                    ) : userRank == 3 ? (
+                        <Image source={require('../assets/images/third.png')} style={styles.userRankImage} resizeMode='cover' />
+                    ) : (<Text style={styles.userRank}>{userRank}</Text>
 
-                ) : "N/A"
-            }
+                    ) : "N/A"
+                }
             </Text>
             <Image style={styles.userImage} source={require('../assets/images/Profile.jpg')} resizeMode='cover' />
             <View>
                 <Text style={styles.userName}>
                     {userName}
                 </Text>
-                <Text style={styles.userStep}>{userStep}</Text>
+                <View style={{ flexDirection: 'row', gap: 10,marginTop:5 }}>
+                    <View style={{ flexDirection: 'row', gap: 1, alignItems: 'center' }}>
+                        <Icon style={{}} name="walk" color={GlobalColor.mainColor} size={25} />
+                        <Text style={styles.userStep}>{userStep}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', gap: 1, alignItems: 'center' }}>
+                        <Icon style={{}} name="flame" color={GlobalColor.mainColor} size={25} />
+                        <Text style={styles.userStep}> {userCalories}</Text>
+                    </View>
+
+                </View>
             </View>
         </View>
     )
@@ -31,8 +42,8 @@ const LeaderboardList = ({ userRank, userName, userStep }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '90%',
-        backgroundColor: '#fff',
+        width: '100%',
+        backgroundColor: GlobalColor.primaryColor,
         alignItems: 'center',
         borderRadius: 12,
         flexDirection: 'row',
@@ -48,8 +59,6 @@ const styles = StyleSheet.create({
 
     },
     userRankHolder: {
-        // width:60,
-        // height:60,
         borderRadius: 50,
         marginHorizontal: 10,
         alignItems: 'center',
@@ -58,17 +67,11 @@ const styles = StyleSheet.create({
     userRankImage: {
         width: 30,
         height: 30,
-        // borderRadius: 50,
-        // marginHorizontal: 10,
-
     },
     userRank: {
-        // width: 50,
-        // height: 50,
-        // textAlign:'center',
         fontSize: 20,
         fontWeight: '600',
-        color: '#000',
+        color: GlobalColor.textColor,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -81,13 +84,15 @@ const styles = StyleSheet.create({
     userName: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#000',
+        color: GlobalColor.textColor,
         textTransform: 'capitalize'
     },
     userStep: {
+        alignItems: 'center',
+        justifyContent: 'center',
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#000',
+        color: GlobalColor.textColor,
     },
 
 

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Linking, Image, ScrollView, Modal, Pressable } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Path from '../../services/Path';
 import OneTimeRecipeModal from '../../components/Modals/OneTimeRecipeModal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IngredientsInHand from '../../components/Modals/IngredientsInHand';
@@ -14,6 +12,8 @@ const {
   HarmBlockThreshold,
 } = require("@google/generative-ai");
 const apiKey = Google_API_Key;
+console.log(apiKey);
+
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",

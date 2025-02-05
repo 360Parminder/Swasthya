@@ -14,6 +14,7 @@ const Leaderboard = () => {
   const [date,setDate]=useState(new Date())
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loader,setLoader]=useState(false);
+console.log("leaderboardData",leaderboardData);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
@@ -97,9 +98,9 @@ const Leaderboard = () => {
       {
         loader?<LoaderLine/>:(
           <FlatList
-      
+          style={{width:'90%'}}
           data={leaderboardData}
-          renderItem={({ item,index }) => (<LeaderboardList userRank={index+1} userName={item.username} userStep={item.totalSteps}/>)}
+          renderItem={({ item,index }) => (<LeaderboardList userRank={index+1} userName={item.username} userStep={item.totalSteps} userCalories={item.totalCalories}/>)}
           />
         )
       }
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
-    backgroundColor:'#E6E2EE',
+    backgroundColor: GlobalColor.primaryColor,
     borderRadius:8
   },
   button: {
@@ -127,17 +128,17 @@ const styles = StyleSheet.create({
     width:100,
     padding: 10,
     borderRadius: 5,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: GlobalColor.tertiaryColor,
   },
   selectedButton: {
     backgroundColor: GlobalColor.secondaryColor,
-    color:GlobalColor.lightTextColor
+    color:GlobalColor.textColor
   },
   buttonText: {
-    color: '#000',
+    color: GlobalColor.textColor,
   },
   selectedtext:{
-    color:'#fff'
+    color:GlobalColor.textColor
   }
 
 });

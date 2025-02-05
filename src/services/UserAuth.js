@@ -124,6 +124,22 @@ const UserAuth = {
             console.log(error);
         }
     },
+    updatePassword: async (oldPassword, newPassword) => {
+        try {
+            const response = await Path.post('/updatePassword', {
+                oldPassword,
+                newPassword,
+            });
+            console.log(response.data);
+            
+            if (response.status === 200) {
+                return response.data;
+               
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
 };
 
 export default UserAuth;

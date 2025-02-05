@@ -1,8 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import UserAuth from "../services/UserAuth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
-
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 
 export const AuthContext = createContext();
@@ -17,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const getToken = async () => {
         setIsLoading(true);
       try {
-        const savedToken = await AsyncStorage.getItem('userToken');
+        const savedToken = await EncryptedStorage.getItem('userToken');
         setToken(savedToken);
         setIsAuthenticated(!!savedToken); 
         setIsLoading(false); 
@@ -34,7 +33,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await UserAuth.signIn(mobile, password,fcm_token);
             if (response?.status === 200) {
-                await AsyncStorage.setItem('userToken', response.data.token);
+                await EncryptedStorage.setItem('userToken', response.data.token);
                 setToken(response.data.token);
                 setIsLoading(false);
                 setIsAuthenticated(true);
@@ -52,14 +51,14 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         try {
             await UserAuth.logout();
-            await AsyncStorage.removeItem('userToken');
+            await EncryptedStorage.removeItem('userToken');
             setToken(null);
             setIsAuthenticated(false);
         } catch (error) {
             console.log(error);
             setIsAuthenticated(false);
             setToken(null);
-            await AsyncStorage.removeItem('userToken');
+            await EncryptedStorage.removeItem('userToken');
         }
     };
 

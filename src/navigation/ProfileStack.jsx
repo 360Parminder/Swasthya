@@ -12,7 +12,7 @@ const ProfileStack = () => {
     <Stack.Navigator initialRouteName="Profile">
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
       <Stack.Screen name="Personal Details" component={AccountSettings} options={{ headerShown: false }} />
-      <Stack.Screen name="Help" component={Help} options={{ headerShown: true }} />
+      <Stack.Screen name="Help" component={Help} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

@@ -4,13 +4,14 @@ import CircularProgress from "react-native-circular-progress-indicator";
 import GlobalColor from "../../Styles/GlobalColor";
 import { Icon } from "react-native-elements";
 import CaloriesReportCard from "../../components/Cards/CaloriesReportCard";
+import ProgressCard from "../../components/Cards/ProgressCard";
 
 
 const CaloriesReport = () => {
   return (
    <View style={GlobalStyles.container}>
     <View style={{height:'22%'}}>
-
+      <ProgressCard />
     </View>
     <Text style={{fontSize:20,fontWeight:'600',textAlign:'left',width:'90%',marginBottom:10,color:GlobalColor.textColor}}>Where your calories burn</Text>
     <ScrollView>

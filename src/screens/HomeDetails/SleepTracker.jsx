@@ -25,40 +25,40 @@ const SleepTracker = () => {
                 <View style={styles.leftCard}>
                     <View style={{ flexDirection: 'row', gap: 5, alignItems: 'center' }}>
                         <Icon style={{ padding: 5, borderRadius: 100, backgroundColor: '#F0EDFE', fontSize: 25 }} name='heartbeat' type='font-awesome' color='#674AF8' />
-                        <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: '500' }}>Total sleep time</Text>
+                        <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: '500',color:GlobalColor.textColor }}>Total sleep time</Text>
                     </View>
                     <View style={{ justifyContent: 'space-between', gap: 20 }}>
                         <View style={{ flexDirection: 'row',gap:1,alignItems:'flex-end' }}>
-                            <Text style={{ fontSize: 30, fontWeight: '700',marginEnd:8, color: GlobalColor.darkTextColor }}>6</Text>
-                            <Text style={{ fontSize: 18, color: GlobalColor.textColorSecondary }}>hrs</Text>
-                            <Text style={{ fontSize: 30, fontWeight: '700',marginLeft:8,marginRight:8,color: GlobalColor.darkTextColor}}>21</Text>
-                            <Text style={{ fontSize: 18, color: GlobalColor.textColorSecondary }}>mins</Text>
+                            <Text style={{ fontSize: 30, fontWeight: '700',marginEnd:8, color: GlobalColor.textColor }}>6</Text>
+                            <Text style={{ fontSize: 18, color: GlobalColor.textColor }}>hrs</Text>
+                            <Text style={{ fontSize: 30, fontWeight: '700',marginLeft:8,marginRight:8,color: GlobalColor.textColor}}>21</Text>
+                            <Text style={{ fontSize: 18, color: GlobalColor.textColor }}>mins</Text>
                         </View>
-                        <Text style={{ fontSize: 18, color: GlobalColor.textColorSecondary }}>This isn’t a normal sleep time</Text>
+                        <Text style={{ fontSize: 18, color: GlobalColor.textColor }}>This isn’t a normal sleep time</Text>
                     </View>
                 </View>
                 <View style={styles.column}>
                     <View style={styles.rightCard}>
                         <Icon style={{ backgroundColor: '#EDF2FF', padding: 10, borderRadius: 14 }} name='bed-outline' type='ionicon' size={25} color='#4979FB' />
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ fontWeight: '600' }}>Deep Sleep</Text>
+                            <Text style={{ fontWeight: '600',color:GlobalColor.textColor }}>Deep Sleep</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'flex-end', }}>
-                                <Text style={{ fontSize: 20, fontWeight: '700', color: GlobalColor.darkTextColor }}>4</Text>
-                                <Text style={{ fontSize: 16, color: GlobalColor.textColorSecondary }}>hrs</Text>
-                                <Text style={{ fontSize: 20, fontWeight: '700' }}>1</Text>
-                                <Text style={{ fontSize: 16, color: GlobalColor.textColorSecondary }}>mins</Text>
+                                <Text style={{ fontSize: 20, fontWeight: '700', color: GlobalColor.textColor }}>4</Text>
+                                <Text style={{ fontSize: 16, color: GlobalColor.textColor }}>hrs</Text>
+                                <Text style={{ fontSize: 20, fontWeight: '700',color:GlobalColor.textColor }}>1</Text>
+                                <Text style={{ fontSize: 16, color: GlobalColor.textColor }}>mins</Text>
                             </View>
                         </View>
                     </View>
                     <View style={styles.rightCard}>
                         <Icon style={{ backgroundColor: '#FFF8EE', padding: 10, borderRadius: 14 }} name='bed-outline' type='ionicon' size={25} color='#FEBD59' />
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ fontWeight: '600' }}>REM</Text>
+                            <Text style={{ fontWeight: '600',color:GlobalColor.textColor }}>REM</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'flex-end', }}>
-                                <Text style={{ fontSize: 20, fontWeight: '700', color: GlobalColor.darkTextColor }}>1</Text>
-                                <Text style={{ fontSize: 16, color: GlobalColor.textColorSecondary }}>hrs</Text>
-                                <Text style={{ fontSize: 20, fontWeight: '700' }}>20</Text>
-                                <Text style={{ fontSize: 16, color: GlobalColor.textColorSecondary }}>mins</Text>
+                                <Text style={{ fontSize: 20, fontWeight: '700', color: GlobalColor.textColor }}>1</Text>
+                                <Text style={{ fontSize: 16, color: GlobalColor.textColor}}>hrs</Text>
+                                <Text style={{ fontSize: 20, fontWeight: '700',color:GlobalColor.textColor }}>20</Text>
+                                <Text style={{ fontSize: 16, color: GlobalColor.textColor}}>mins</Text>
                             </View>
                         </View>
                     </View>
@@ -83,6 +83,7 @@ const SleepTracker = () => {
 
 const styles = StyleSheet.create({
     topCard: {
+        backgroundColor: GlobalColor.primaryColor,
         width: '90%',
         flexDirection: 'row',
         marginBottom: 20,
@@ -100,11 +101,11 @@ const styles = StyleSheet.create({
     topCardText: {
         fontSize: 22,
         fontWeight: '600',
-        color: GlobalColor.lightTextColor
+        color: GlobalColor.textColor
     },
     topCardDetail: {
         fontSize: 16,
-        color: GlobalColor.lightTextColor
+        color: GlobalColor.textColor
     },
     row: {
         flexDirection: 'row',
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     leftCard: {
+        backgroundColor: GlobalColor.primaryColor,
         width: 550,
         borderWidth: 1,
         borderColor: GlobalColor.borderColor,
@@ -128,6 +130,7 @@ const styles = StyleSheet.create({
 
     },
     rightCard: {
+        backgroundColor: GlobalColor.primaryColor,
         width: 170,
         marginBottom: 10,
         flexDirection: 'row',
@@ -142,7 +145,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 10,
         textAlign: 'left',
-        width:'90%'
+        width:'90%',
+        color: GlobalColor.textColor
     },
     smallCard: {
         width: 170,

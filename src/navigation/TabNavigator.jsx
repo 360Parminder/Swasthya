@@ -68,7 +68,7 @@ const TabNavigator = () => {
       <Tab.Screen
         name='Leaderboard'
         component={Leaderboard}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name='Browse'

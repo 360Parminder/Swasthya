@@ -36,21 +36,22 @@ const styles = StyleSheet.create({
     width: "85%",
     alignSelf: "center", // Ensures the card centers itself
     marginVertical: 10, // Use marginVertical instead of marginTop for consistent spacing
-    backgroundColor: "#fff", // Optional: Background for better visibility
+    backgroundColor: GlobalColor.primaryColor,
   },
   iconBackground: {
     padding: 10,
     borderRadius: 100,
-    backgroundColor: "#EDF2FF",
+    backgroundColor: GlobalColor.mainBackgroundColor,
   },
   title: {
     fontSize: 20,
     fontWeight: "500",
     marginBottom: 2,
+    color: GlobalColor.textColor,
   },
   message: {
     fontSize: 18,
-    color: GlobalColor.textColorSecondary,
+    color: GlobalColor.textColor,
   },
   timeContainer: {
     flexDirection: "row",
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 18,
-    color: GlobalColor.textColorSecondary,
+    color: GlobalColor.textColor,
   },
 });
 

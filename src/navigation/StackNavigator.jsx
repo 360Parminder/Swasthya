@@ -36,7 +36,7 @@ const StackNavigator = () => {
         name='Notification'
         component={Notification}
         options={{
-          headerShown: true,
+          headerShown: false,
           ...(Platform.OS === 'ios' && {
             headerStyle: { backgroundColor: 'transparent', elevation: 0, shadowOpacity: 0 },
             headerTitle: '',
@@ -45,7 +45,7 @@ const StackNavigator = () => {
       />
       <Stack.Screen name='WaterDrink' component={WaterDrink} options={{ headerShown: false }} />
       <Stack.Screen name='SleepTracker' component={SleepTracker} options={{ headerShown: false }} />
-      <Stack.Screen name='CaloriesReport' component={CaloriesReport} options={{ headerShown: true }} />
+      <Stack.Screen name='CaloriesReport' component={CaloriesReport} options={{ headerShown: false }} />
 
      
     </Stack.Navigator>

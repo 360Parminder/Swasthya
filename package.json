@@ -32,6 +32,7 @@
     "react-native-date-picker": "^5.0.4",
     "react-native-dotenv": "^3.4.11",
     "react-native-elements": "^3.4.3",
+    "react-native-encrypted-storage": "^4.0.3",
     "react-native-fast-image": "^8.6.3",
     "react-native-gifted-charts": "^1.4.11",
     "react-native-global-props": "^1.1.5",

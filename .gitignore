@@ -76,3 +76,9 @@ yarn-error.log
 # Google Firebase Files
 **/google-services.json
 **/google-services.plist
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

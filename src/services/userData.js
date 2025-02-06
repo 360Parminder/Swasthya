@@ -1,14 +1,9 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Path from "./Path";
 
 const userData = {
-  getUserProfile: async (token) => {
+  getUserProfile: async () => {
     try {
-      const response = await Path.get('/profile', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const response = await Path.get('/user/profile');
       if (response.status === 200) {
         return{
           success: true,
@@ -35,19 +30,14 @@ const userData = {
     }
   },
 
-  fetchUserSteps: async (token) => {
+  fetchUserSteps: async () => {
     try {
-      const response = await Path.get('/step/view/daily',
-        {
-          headers: {
-            'authorization': `Bearer ${token}`
-          }
-        }
-
-      );
+      const response = await Path.get('/step/view/daily');
       if (response.status === 200) {
-        return response;
-
+        return {
+          success: true,
+          data: response.data
+        };
       }
       else {
         return { success: false, message: "Something went wrong" }
@@ -79,6 +69,35 @@ const userData = {
     console.log('userWater', error);
   }
 },
+fetchWeekMeal: async (protein,Calories,foodType)=>{
+  try {
+    const response = await Path.get(`/meal/week/${protein}/${Calories}/${foodType}`);
+    if (response.status === 200) {
+      return response;
+    }
+    else {
+      return { success: false, message: "Something went wrong" }
+    }
+  } catch (error) {
+    console.log('weekMeal', error);
+  }
+},
+fetchOneMeal: async (protein,Calories,foodType)=>{
+  try {
+    const response = await Path.get(`/meal/getOneMeal?protein=${protein}&Calories=${Calories}&foodType=vegetarian`);
+    if (response.status === 200) {
+      return {
+        success: true,
+        data: response.data.data
+      }
+    }
+    else {
+      return { success: false, message: "Something went wrong" }
+    }
+  } catch (error) {
+    console.log('oneMeal', error);
+  }
+}
 
 };
 

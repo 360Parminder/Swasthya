@@ -16,15 +16,18 @@ const GlobalStyles = StyleSheet.create({
     color:GlobalColor.textColor,
   },
   button: {
+    width: '80%',
     backgroundColor: GlobalColor.buttonBackgroundColor,
     paddingVertical: 12,
-    paddingHorizontal: 80,
     borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     color: GlobalColor.buttonTextColor,
     fontSize: 16,
     fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
   label:{
     width:'80%',
@@ -61,28 +64,22 @@ export default GlobalStyles;
 
 const pickerSelectStyles = {
   inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: '#8d3c13',
-    borderRadius: 4,
-    color: '#000',
-    backgroundColor: '#fff',
-    paddingRight: 30, // to ensure the text is never behind the icon
-    marginBottom: 10,
+    width: '100%',
+    height:'100%',
+    color: GlobalColor.textColor,
+
   },
   inputAndroid: {
-    fontSize: 16,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: '#8d3c13',
-    borderRadius: 4,
-    color: '#000',
-    backgroundColor: '#fff',
-    paddingRight: 30, // to ensure the text is never behind the icon
-    marginBottom: 10,
+    width: '100%',
+    height:"100%",
+   padding: 0,
+   margin: 0,
+    color: GlobalColor.textColor,
+  },
+  placeholder: {
+    color: GlobalColor.textColor,
+    padding: 0,
+    margin: 0,
   },
 };
 

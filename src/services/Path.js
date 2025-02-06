@@ -4,7 +4,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 // Create an Axios instance
 const Path = axios.create({
-    baseURL:'http://192.168.31.196:9876', // Replace with your API base URL
+    baseURL:'http://localhost:9876', // Replace with your API base URL
     // baseURL:'https://heal-app-mal4.onrender.com'
   // timeout: 10000, // Optional timeout
 });
@@ -12,7 +12,7 @@ const Path = axios.create({
 // Request interceptor
 Path.interceptors.request.use(
   async (config) => {
-    if (!['/login', '/signup'].includes(config.url)) {
+    if (!['/user/login', '/user/signup'].includes(config.url)) {
       try {
         const token = await EncryptedStorage.getItem('userToken');
         console.log('Token retrieved:', token);

@@ -10,35 +10,30 @@ export const UserDataProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [dailySteps, setDailySteps] = useState(null);
   const [dailyCalories, setDailyCalories] = useState(null);
-  const {token} = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
+  console.log("token from user data context", token);
+
   const fetchUserData = async () => {
     try {
-      const token = await AsyncStorage.getItem('userToken');
-      if (token) {
-        const response = await userData.getUserProfile(token)
-        if (response.success) {
-          setUser(response.data);
-        }
-        else{
-          Alert.alert("Error", "User not found");
-        }
+      const response = await userData.getUserProfile(token)
+      if (response.success) {
+        setUser(response.data);
       }
-    } catch (error) {
-      Alert.alert("Error", "User not found");
+    }
+    catch (error) {
+      Alert.alert("Error", error.message);
     }
   };
   const fetchUserSteps = async () => {
     try {
-      const token = await AsyncStorage.getItem('userToken');
-      if (token) {      
-        const response = await userData.fetchUserSteps(token)
-        if (response.status === 200) {
-          setDailySteps(response?.data?.record[0]?.steps==undefined?0:response?.data?.record[0]?.steps);
-          setDailyCalories(response?.data?.record[0]?.calories==undefined?0:response?.data?.record[0]?.calories);
-        }
-        else{
-          Alert.alert("Error", response.message);
-        }
+
+      const response = await userData.fetchUserSteps()
+      if (response.success) {
+        setDailySteps(response?.data?.record[0]?.steps == undefined ? 0 : response?.data?.record[0]?.steps);
+        setDailyCalories(response?.data?.record[0]?.calories == undefined ? 0 : response?.data?.record[0]?.calories);
+      }
+      else {
+        Alert.alert("Error", response.message);
       }
     } catch (error) {
       Alert.alert("Error", error.message);
@@ -50,7 +45,7 @@ export const UserDataProvider = ({ children }) => {
   }, [token]);
 
   return (
-    <userDataContext.Provider value={{ user,dailySteps,dailyCalories }}>
+    <userDataContext.Provider value={{ user, dailySteps, dailyCalories }}>
       {children}
     </userDataContext.Provider>
   );

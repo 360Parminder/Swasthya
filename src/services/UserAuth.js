@@ -4,7 +4,7 @@ import Path from "./Path";
 const UserAuth = {
     signIn: async (mobile, password,fcm_token) => {
         try {
-            const response = await Path.post('/login', {
+            const response = await Path.post('/user/login', {
                 mobile,
                 password,
                 fcm_token
@@ -18,7 +18,7 @@ const UserAuth = {
     },
     register: async (name,mobile,password,weight,height,date,gender,foodPreference) => {
         try {
-            const response = await Path.post('/register', {
+            const response = await Path.post('/user/register', {
                 username: name,
                 mobile: mobile,
                 password: password,

@@ -1,30 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Linking, Image, ScrollView, Modal, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import OneTimeRecipeModal from '../../components/Modals/OneTimeRecipeModal';
-import Icon from 'react-native-vector-icons/Ionicons';
 import IngredientsInHand from '../../components/Modals/IngredientsInHand';
-import {Google_API_Key} from '@env';
-
-const {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} = require("@google/generative-ai");
-const apiKey = Google_API_Key;
-console.log(apiKey);
-
-const genAI = new GoogleGenerativeAI(apiKey);
-const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-});
-const generationConfig = {
-  temperature: 2,
-  topP: 0.95,
-  topK: 64,
-  maxOutputTokens: 1024,
-  responseMimeType: "application/json",
-};
+import GlobalStyles from '../../Styles/GlobalStyles';
+import GlobalColor from '../../Styles/GlobalColor';
 
 
 const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{  
@@ -156,7 +136,7 @@ const Diet = () => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.primaryButton} onPress={() => setOneTimeRecipeModalVisible(true)}>
           <Text style={styles.primaryButtonText}>One Time Recipe</Text>
@@ -167,12 +147,6 @@ const Diet = () => {
         <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
           <Text style={styles.primaryButtonText}>Week Meal</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton}>
-          <Text style={styles.primaryButtonText}>hello</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton}>
-          <Text style={styles.primaryButtonText}>hello</Text>
-        </TouchableOpacity>
       </View>
       <OneTimeRecipeModal oneTimeRecipeModalVisible={oneTimeRecipeModalVisible} setOneTimeRecipeModalVisible={setOneTimeRecipeModalVisible} />
       <IngredientsInHand ingredientsInHandModalVisible={ingredientsInHandModalVisible} setIngredientsInHandModalVisible={setIngredientsInHandModalVisible} />
@@ -182,12 +156,8 @@ const Diet = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f9fb',
-    paddingHorizontal: 15
-  },
   buttonContainer: {
+    width: '100%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -196,7 +166,7 @@ const styles = StyleSheet.create({
     gap: 40,
   },
   primaryButton: {
-    backgroundColor: '#7b53ea',
+    backgroundColor: GlobalColor.primaryColor,
     width: '100%',
     borderRadius: 5,
     alignItems: 'center',

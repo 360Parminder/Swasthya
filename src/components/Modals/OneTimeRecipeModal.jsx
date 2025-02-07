@@ -13,12 +13,18 @@ const OneTimeRecipeModal = ({ oneTimeRecipeModalVisible, setOneTimeRecipeModalVi
   const [calories, setCalories] = useState('');
   const [FoodPreference, setFoodPreference] = useState('');
   const [recipe, setRecipe] = useState();
+  const [loading, setLoading] = useState(false);
+// console.log(FoodPreference);
 
   const fetchMeal = async () => {
+    setRecipe(null);
+    setLoading(true);
     const response = await userData.fetchOneMeal(Protein, calories, FoodPreference);
-    console.log(response.data.hits[0].recipe.totalNutrients);
+    console.log(response.data.hits[0].recipe);
     setRecipe(response.data.hits);
+    setLoading(false);
   }
+  
   return (
     <Modal
       animationType="slide"
@@ -75,13 +81,13 @@ const OneTimeRecipeModal = ({ oneTimeRecipeModalVisible, setOneTimeRecipeModalVi
                 }
                 items={[
                   { label: 'Vegetarian', value: 'vegetarian' },
-                  { label: 'Non-vegetarian', value: 'Non-vegetarian' },
+                  { label: 'Non-vegetarian', value: 'alcohol-cocktail, alcohol-free, celery-free, crustacean-free, dairy-free, DASH, egg-free, fish-free, fodmap-free, gluten-free, immuno-supportive, keto-friendly, kidney-friendly, kosher, low-fat-abs, low-potassium, low-sugar, lupine-free, Mediterranean, mollusk-free, mustard-free, no-oil-added, paleo, peanut-free, pescatarian, pork-free, red-meat-free, sesame-free, shellfish-free, soy-free, sugar-conscious, sulfite-free, tree-nut-free, wheat-free' },
                   { label: 'Vegan', value: 'vegan' },
                 ]}
               />
             </View>
-            <Pressable style={GlobalStyles.button} onPress={() => fetchMeal()}>
-              <Text style={GlobalStyles.buttonText}>Submit</Text>
+            <Pressable disabled={loading} style={GlobalStyles.button} onPress={() => fetchMeal()}>
+              <Text style={GlobalStyles.buttonText}>{loading?"Cooking ...":"Submit"}</Text>
             </Pressable>
           </View>
 
@@ -91,7 +97,7 @@ const OneTimeRecipeModal = ({ oneTimeRecipeModalVisible, setOneTimeRecipeModalVi
               recipe?.map((recipe, index) => {
                 return (
 
-                  <>
+                  <View key={index} >
                     <Text style={styles.title}>{recipe?.recipe?.label}</Text>
                     <Image
                       style={{ width: '100%', height: 200, borderRadius: 10, marginBottom: 10 }}
@@ -117,13 +123,13 @@ const OneTimeRecipeModal = ({ oneTimeRecipeModalVisible, setOneTimeRecipeModalVi
                     <View style={styles.section}>
                       <Text style={styles.sectionTitle}>Nutrition</Text>
                       <Text style={styles.nutrition}>
-                        Protein:
+                        Protein:{Math.floor(recipe?.recipe?.totalNutrients.PROCNT.quantity*10)/10}g
                       </Text>
                       <Text style={styles.nutrition}>
                         Calories:{recipe?.recipe?.calories}
                       </Text>
                     </View>
-                  </>
+                  </View>
                 )
               })
 
@@ -141,33 +147,15 @@ const styles = StyleSheet.create({
   card: {
     marginHorizontal: 10,
     backgroundColor: GlobalColor.secondaryColor,
-    padding: 20,
+    // padding: 20,
+    paddingVertical: 20,
     borderRadius: 10,
     alignItems: 'center',
-  },
-  input: {
-    height: 50,
-    borderColor: GlobalColor.borderColor,
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    color: GlobalColor.textColor,
   },
   picker: {
     height: 70,
     color: GlobalColor.textColor,
     marginBottom: 10,
-  },
-  button: {
-    backgroundColor: '#7945e2',
-    paddingVertical: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#ded9fb',
-    fontWeight: 'bold',
   },
 
   cardContainer: {

@@ -101,7 +101,7 @@ const userData = {
   },
   fetchOneMeal: async (protein, Calories, foodType) => {
     try {
-      const response = await Path.get(`/meal/getOneMeal?protein=${protein}&Calories=${Calories}&foodType=vegetarian`);
+      const response = await Path.get(`/meal/getOneMeal?protein=${protein}&Calories=${Calories}&foodType=${foodType}`);
       if (response.status === 200) {
         return {
           success: true,

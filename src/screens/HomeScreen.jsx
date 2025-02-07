@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, ScrollView, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, StatusBar, Dimensions } from 'react-native';
 import React, { useContext, useState } from 'react';
 import HomeCard from '../components/HomeCard';
 import SmallHomeCard from '../components/SmallHomeCard';
@@ -13,9 +13,8 @@ import ProgressCard from '../components/Cards/ProgressCard';
 
 const HomeScreen = ({ navigation }) => {
   const { dailySteps,dailyCalories } = useContext(userDataContext)
-  console.log(dailySteps,dailyCalories);
-  
   const {date, month, day,year}= todayDate();
+  const height = Dimensions.get('window').height;
  
   
   return (   
@@ -29,12 +28,10 @@ const HomeScreen = ({ navigation }) => {
          </View>
          <Text style={{width:'100%',paddingHorizontal:20,fontSize:20,fontWeight:'600',marginBottom:20,color:GlobalColor.textColor}}>Progress Summary</Text>
           <ScrollView 
-           style={styles.scrollView} 
            contentContainerStyle={styles.scrollContent}
            showsVerticalScrollIndicator={false}
             >
             <ProgressCard />
-            
             <View style={styles.grid}>
             <Pressable onPress={()=>{navigation.navigate('WaterDrink')}}>
               <SmallHomeCard icon={'water-outline'} logoBg={'#4979FB'} value={1.5} targetvalue={'/2 Litters '} footerText={'you need 0.5 litters more'} />
@@ -67,19 +64,17 @@ const styles = StyleSheet.create({
     marginTop: 5,
     flexDirection: 'column',
     flexWrap: 'wrap',
-    // justifyContent: 'space-between',
     gap: 10,
     paddingHorizontal: 10,
     paddingBottom: 10,
-    height: '50%',
-  },
-  scrollView: {
-    width: '100%',
-    flex: 1,
+    height: '100%',
   },
   scrollContent: {
-    // paddingHorizontal: 10,
-    paddingBottom: 20,
+    width: '100%',
+    height: '100%',
+    flexGrow: 1,
+    paddingBottom: 40, 
+    // alignItems: 'center',
   },
 });
 

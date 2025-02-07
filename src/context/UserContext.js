@@ -30,7 +30,7 @@ export const UserDataProvider = ({ children }) => {
       const response = await userData.fetchUserSteps()
       if (response.success) {
         setDailySteps(response?.data?.record[0]?.steps == undefined ? 0 : response?.data?.record[0]?.steps);
-        setDailyCalories(response?.data?.record[0]?.calories == undefined ? 0 : response?.data?.record[0]?.calories);
+        setDailyCalories(response?.data?.record[0]?.caloriesBurned == undefined ? 0 : response?.data?.record[0]?.caloriesBurned);
       }
       else {
         Alert.alert("Error", response.message);
@@ -39,10 +39,15 @@ export const UserDataProvider = ({ children }) => {
       Alert.alert("Error", error.message);
     }
   }
+  
   useEffect(() => {
     fetchUserData();
     fetchUserSteps();
   }, [token]);
+
+  setInterval(() => {
+    fetchUserSteps();
+  }, 60000);
 
   return (
     <userDataContext.Provider value={{ user, dailySteps, dailyCalories }}>

@@ -145,8 +145,16 @@ const Diet = () => {
           <Text style={styles.primaryButtonText}>Ingredients in Hand</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
-          <Text style={styles.primaryButtonText}>Week Meal</Text>
+          <Text style={styles.primaryButtonText}>find Week Meal</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
+          <Text style={styles.primaryButtonText}>View Today Meal</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
+          <Text style={styles.primaryButtonText}>View Week Meal</Text>
+        </TouchableOpacity>
+        
+
       </View>
       <OneTimeRecipeModal oneTimeRecipeModalVisible={oneTimeRecipeModalVisible} setOneTimeRecipeModalVisible={setOneTimeRecipeModalVisible} />
       <IngredientsInHand ingredientsInHandModalVisible={ingredientsInHandModalVisible} setIngredientsInHandModalVisible={setIngredientsInHandModalVisible} />
@@ -158,23 +166,26 @@ const Diet = () => {
 const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
-    flexDirection: 'column',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
     marginBottom: 20,
-    gap: 40,
+    gap: 10,
   },
   primaryButton: {
     backgroundColor: GlobalColor.primaryColor,
-    width: '100%',
+    width: '40%',
+    height: 150,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
+    textAlign: 'center',
   },
   primaryButtonText: {
-    color: '#f6f4fe',
+    color: GlobalColor.textColor,
     fontSize: 20,
     textTransform: 'capitalize',
     fontWeight: '600',

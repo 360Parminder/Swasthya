@@ -13,6 +13,8 @@ import ProgressCard from '../components/Cards/ProgressCard';
 
 const HomeScreen = ({ navigation }) => {
   const { dailySteps,dailyCalories } = useContext(userDataContext)
+  console.log(dailySteps,dailyCalories);
+  
   const {date, month, day,year}= todayDate();
  
   

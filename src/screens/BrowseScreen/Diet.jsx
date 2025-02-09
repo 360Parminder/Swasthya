@@ -190,12 +190,6 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontWeight: '600',
   },
-  secondaryButton: {
-    // Add styles for secondary buttons if needed
-  },
-  secondaryButtonText: {
-    // Add styles for secondary button text if needed
-  },
   card: {
     marginHorizontal:10,
     backgroundColor: '#ded9fb',

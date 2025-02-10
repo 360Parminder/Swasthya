@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Path from "./Path";
 
 const UserAuth = {
@@ -100,13 +99,8 @@ const UserAuth = {
         }
     },
     logout: async () => {
-        const token = AsyncStorage.getItem('userToken');
         try {
-            await Path.get('/logout',{
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            await Path.get('/logout');
         } catch (error) {
             console.log(error);
         }

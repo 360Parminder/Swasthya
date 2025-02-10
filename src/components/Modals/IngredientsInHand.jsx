@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Linking, Image, ScrollView, Modal, Pressable } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Path from '../../services/Path';
 import Icon from 'react-native-vector-icons/Ionicons';
 

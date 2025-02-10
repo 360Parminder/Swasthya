@@ -2,7 +2,6 @@ import { View, Text, Image, TouchableOpacity, TextInput, Pressable, Button, Scro
 import React, { useContext, useState } from 'react'
 import { launchImageLibrary } from 'react-native-image-picker';
 import Path from '../../services/Path';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyles from '../../Styles/GlobalStyles';
 import { userDataContext } from '../../context/UserContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -33,32 +32,32 @@ console.log(user);
     }
   }
 
-  const updateProfile = async () => {
-    const token = await AsyncStorage.getItem('userToken')
-    if (userProfile) {
-      const formData = new FormData();
-      formData.append('file', {
-        uri: userProfile.uri,
-        type: userProfile.type,
-        name: userProfile.fileName,
-      });
+  // const updateProfile = async () => {
+  //   // const token = await AsyncStorage.getItem('userToken')
+  //   if (userProfile) {
+  //     const formData = new FormData();
+  //     formData.append('file', {
+  //       uri: userProfile.uri,
+  //       type: userProfile.type,
+  //       name: userProfile.fileName,
+  //     });
 
-      try {
-        const response = await Path.post('/profile/picture', formData, {
-          headers: {
-            // 'Content-Type': 'multipart/form-data',
-            'authorization': `Bearer ${token}`
-          },
-        })
-        if (response) {
-          console.log(response.data);
-        }
+  //     try {
+  //       const response = await Path.post('/profile/picture', formData, {
+  //         headers: {
+  //           // 'Content-Type': 'multipart/form-data',
+  //           'authorization': `Bearer ${token}`
+  //         },
+  //       })
+  //       if (response) {
+  //         console.log(response.data);
+  //       }
 
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // }
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [age, setAge] = useState('');

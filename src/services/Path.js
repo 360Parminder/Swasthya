@@ -1,10 +1,11 @@
 
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 // Create an Axios instance
 const Path = axios.create({
-    baseURL:'http://localhost:9876', // Replace with your API base URL
+    baseURL:'http://localhost:8002', // Replace with your API base URL
     // baseURL:'https://heal-app-mal4.onrender.com'
   // timeout: 10000, // Optional timeout
 });
@@ -52,7 +53,7 @@ Path.interceptors.response.use(
         case 401:
           // Alert.alert('Unauthorized', data.message || 'Authentication failed');
           try {
-            await EncryptedStorage.removeItem('token'); // Clear token
+            await EncryptedStorage.removeItem('userToken'); // Clear token
             console.log('Token cleared. Redirecting to login...');
             // Add your navigation logic to redirect to the login screen
           } catch (storageError) {

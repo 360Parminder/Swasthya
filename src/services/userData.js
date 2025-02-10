@@ -10,11 +10,12 @@ const userData = {
           data: response.data.user
         }
       }
+
       else {
         return { success: false, message: "Something went wrong" }
       }
     } catch (error) {
-      return { success: false, message: "Please your Internet Connection" }
+      return { success: false, message: "Please your Internet Connection",error:error }
     }
   },
   fetchUserRank: async (date) => {
@@ -40,11 +41,15 @@ const userData = {
         };
       }
       else {
-        return { success: false, message: "Something went wrong" }
+        return {
+          success: false,
+          message: "Something went wrong",
+          data: null
+        }
       }
 
     } catch (error) {
-      console.log('userSteps', error);
+      return { success: false, message: "Please check your Internet Connection",error:error }
     }
   },
   fetchUserWater: async (token) => {

@@ -5,10 +5,11 @@ import TabNavigator from './TabNavigator';
 import { PermissionsProvider } from '../context/PermissionsContext';
 import AuthenticationNavigator from './AuthStack';
 import { UserDataProvider } from '../context/UserContext';
-import { AuthContext, AuthProvider } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
+import NetworkError from '../screens/Error/NetworkError';
 
 const AppNavigator = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, isNetworkError } = useContext(AuthContext);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -16,11 +17,11 @@ const AppNavigator = () => {
   }, [isAuthenticated]);
 
   return (
-    
+
     <UserDataProvider>
       <PermissionsProvider>
         <NavigationContainer>
-          {loggedIn ? <TabNavigator /> : <AuthenticationNavigator />}
+          {loggedIn ? (isNetworkError ? <NetworkError /> : <TabNavigator />) : (isNetworkError?<NetworkError/>:<AuthenticationNavigator />)}
         </NavigationContainer>
       </PermissionsProvider>
     </UserDataProvider>

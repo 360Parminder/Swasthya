@@ -10,15 +10,20 @@ export const UserDataProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [dailySteps, setDailySteps] = useState(null);
   const [dailyCalories, setDailyCalories] = useState(null);
-  const { token } = useContext(AuthContext)
+  const { token,setIsNetworkError,isNetworkError } = useContext(AuthContext)
   console.log("token from user data context", token);
 
   const fetchUserData = async () => {
     try {
       const response = await userData.getUserProfile(token)
+      console.log("response from user data context", response);
+      
       if (response.success) {
         setUser(response.data);
       }
+      else if (response?.error?.status == 'Network/Request Error') {
+        setIsNetworkError(true);
+     }
     }
     catch (error) {
       Alert.alert("Error", error.message);
@@ -28,10 +33,14 @@ export const UserDataProvider = ({ children }) => {
     try {
 
       const response = await userData.fetchUserSteps()
+      console.log("response from user data context", response);
       if (response.success) {
         setDailySteps(response?.data?.record[0]?.steps == undefined ? 0 : response?.data?.record[0]?.steps);
         setDailyCalories(response?.data?.record[0]?.caloriesBurned == undefined ? 0 : response?.data?.record[0]?.caloriesBurned);
       }
+      else if (response?.error?.status == 'Network/Request Error') {
+        setIsNetworkError(true);
+     }
       else {
         Alert.alert("Error", response.message);
       }
@@ -43,14 +52,18 @@ export const UserDataProvider = ({ children }) => {
   useEffect(() => {
     fetchUserData();
     fetchUserSteps();
-  }, [token]);
+  }, [token,!isNetworkError]);
 
   setInterval(() => {
     fetchUserSteps();
   }, 60000);
+  const onRetry = async () => {
+   await fetchUserData();
+    await fetchUserSteps();
+  }
 
   return (
-    <userDataContext.Provider value={{ user, dailySteps, dailyCalories }}>
+    <userDataContext.Provider value={{ user, dailySteps, dailyCalories, onRetry }}>
       {children}
     </userDataContext.Provider>
   );

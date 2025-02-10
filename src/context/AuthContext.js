@@ -8,9 +8,10 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [token, setToken] = useState();
+    const [token, setToken] = useState('');
     const [fcm_token, setFcmToken] = useState();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isNetworkError, setIsNetworkError] = useState(false);
 
    useEffect(() => {
     const getToken = async () => {
@@ -40,6 +41,10 @@ export const AuthProvider = ({ children }) => {
                 setIsAuthenticated(true);
                 return response.data;
             }
+            else if (response?.status == 'Network/Request Error') {
+               setIsNetworkError(true);
+                setIsLoading(false);
+            }
             else {
                 Alert.alert("Error", "Invalid Credentials");
                 setIsLoading(false);
@@ -64,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isLoading, login, token,logout,isAuthenticated,fcm_token }}>
+        <AuthContext.Provider value={{ isLoading, login, token,logout,isAuthenticated,fcm_token,setFcmToken,isNetworkError,setIsNetworkError }}>
             {children}
         </AuthContext.Provider>
     )

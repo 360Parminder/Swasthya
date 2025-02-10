@@ -11,12 +11,12 @@ export const UserDataProvider = ({ children }) => {
   const [dailySteps, setDailySteps] = useState(null);
   const [dailyCalories, setDailyCalories] = useState(null);
   const { token,setIsNetworkError,isNetworkError } = useContext(AuthContext)
-  console.log("token from user data context", token);
+  // console.log("token from user data context", token);
 
   const fetchUserData = async () => {
     try {
       const response = await userData.getUserProfile(token)
-      console.log("response from user data context", response);
+      // console.log("response from user data context", response);
       
       if (response.success) {
         setUser(response.data);
@@ -33,7 +33,7 @@ export const UserDataProvider = ({ children }) => {
     try {
 
       const response = await userData.fetchUserSteps()
-      console.log("response from user data context", response);
+      // console.log("response from user data context", response);
       if (response.success) {
         setDailySteps(response?.data?.record[0]?.steps == undefined ? 0 : response?.data?.record[0]?.steps);
         setDailyCalories(response?.data?.record[0]?.caloriesBurned == undefined ? 0 : response?.data?.record[0]?.caloriesBurned);
@@ -54,9 +54,9 @@ export const UserDataProvider = ({ children }) => {
     fetchUserSteps();
   }, [token,!isNetworkError]);
 
-  setInterval(() => {
-    fetchUserSteps();
-  }, 60000);
+  // setInterval(() => {
+  //   fetchUserSteps();
+  // }, 60000);
   const onRetry = async () => {
    await fetchUserData();
     await fetchUserSteps();

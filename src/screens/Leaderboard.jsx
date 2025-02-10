@@ -7,6 +7,7 @@ import LoadingWave from '../components/LoadingWave';
 import LoaderLine from '../components/LoaderLine';
 import GlobalStyles from '../Styles/GlobalStyles';
 import GlobalColor from '../Styles/GlobalColor';
+import userData from '../services/userData';
 
 const Leaderboard = () => {
   const [timeframe, setTimeframe] = useState('today');
@@ -14,51 +15,20 @@ const Leaderboard = () => {
   const [date,setDate]=useState(new Date())
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loader,setLoader]=useState(false);
-console.log("leaderboardData",leaderboardData);
+// console.log("leaderboardData",leaderboardData);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       setLoader(true)
-        try {
-            const token = await AsyncStorage.getItem('userToken');
-            if (token) {
-                const response = await Path.post(
-                    "/leaderboard/overall",
-                    {
-                      period: timeframe,
-                    },
-                    {
-                        headers: {
-                            authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-                if (response) {
-                    // console.log("response", response.data.data);
-                    setLeaderboardData(response?.data?.data);
-                    setLoader(false)
-                }
-            }
-        } catch (error) {
-            console.error("Error fetching leaderboard:", error);
-            
-        }
+       const response = await userData.fetchleaderboard(timeframe);
+       if (response.success) {
+        setLeaderboardData(response.data.leaderboard);
+        setLoader(false)
+      }
     };
 
     fetchLeaderboard();
 }, [timeframe]); 
-  const renderLeaderboardData = () => {
-    // Logic to fetch and display leaderboard data based on timeframe and scope
-    return (
-      <View>
-        <Text style={{
-            color:'#000'
-        }}>{`Displaying ${scope} leaderboard for ${timeframe}`}</Text>
-        {/* Replace with actual leaderboard data */}
-      </View>
-    );
-  };
-
   return (
     <View style={GlobalStyles.container}>
       <View style={styles.buttonContainer}>

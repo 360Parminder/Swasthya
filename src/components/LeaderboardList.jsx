@@ -31,7 +31,7 @@ const LeaderboardList = ({ userRank, userName, userStep, userCalories }) => {
                     </View>
                     <View style={{ flexDirection: 'row', gap: 1, alignItems: 'center' }}>
                         <Icon style={{}} name="flame" color={GlobalColor.mainColor} size={25} />
-                        <Text style={styles.userStep}> {userCalories}</Text>
+                        <Text style={styles.userStep}> {Math.floor(userCalories)}</Text>
                     </View>
 
                 </View>

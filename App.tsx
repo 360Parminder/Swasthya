@@ -5,7 +5,7 @@ import Bluetooth from './src/components/Bluetooth';
 import { enableScreens } from 'react-native-screens';
 import { StatusBar } from 'react-native';
 import GlobalColor from './src/Styles/GlobalColor';
-enableScreens();
+// enableScreens();
 
 const App = () => {
   

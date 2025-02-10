@@ -7,6 +7,8 @@ import GlobalStyles from "../../Styles/GlobalStyles";
 
 const BodyMeasurements =()=>{
     const {user} = useContext(userDataContext)
+    console.log("user",user);
+    
     return (
         <View style={GlobalStyles.container}>
          <Text style={styles.title}> Body Measurements</Text>
@@ -16,8 +18,8 @@ const BodyMeasurements =()=>{
             width:'95%',
             alignSelf:'center'
          }}>
-            <ActivityCard title={'Height'} iconName={'body'} fcolor={'#5d4fb3'} date={'May 2023'} value={user?.height} valueUnit={'Cm'} />
-            <ActivityCard title={'Weight'} iconName={'body'} fcolor={'#5d4fb3'} date={'May 2023'} value={user?.weight} valueUnit={'Kg'} />
+            <ActivityCard title={'Height'} iconName={'body'} fcolor={'#5d4fb3'} date={user.updated_at} value={user?.height} valueUnit={'Cm'} />
+            <ActivityCard title={'Weight'} iconName={'body'} fcolor={'#5d4fb3'} date={user.updated_at} value={user?.weight} valueUnit={'Kg'} />
          </View>
     
         </View>

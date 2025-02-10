@@ -1,8 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { formatDate2 } from '../utils/dateFunction'
+import GlobalColor from '../Styles/GlobalColor'
 
 const ActivityCard = ({ title,iconName,fcolor, date, value, valueUnit }) => {
+    const {month,year} = formatDate2(date)
+    
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
@@ -20,11 +24,8 @@ const ActivityCard = ({ title,iconName,fcolor, date, value, valueUnit }) => {
                 justifyContent: 'space-between',
                 gap:2
                }}>
-               <Text style={styles.date}>{date}</Text>
-               <Icon style={{
-                fontSize:18
-
-               }} name="chevron-forward" color="#000" Size={35} />
+               <Text style={styles.date}>{month} {year}</Text>
+               <Icon style={{fontSize:15}} name="chevron-forward" color={GlobalColor.textColor} Size={35} />
                </View>
                 
             </View>
@@ -37,7 +38,7 @@ const ActivityCard = ({ title,iconName,fcolor, date, value, valueUnit }) => {
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
+        backgroundColor:GlobalColor.primaryColor,
         justifyContent: 'center',
         marginHorizontal:20,
         borderRadius:14,
@@ -59,27 +60,28 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 5,
+        color:GlobalColor.textColor
     },
     date: {
         fontSize: 15,
-        color: '#000',
+        color: GlobalColor.textColor,
         marginBottom: 5,
+        textTransform:'capitalize'
     },
     valueContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'center',
     },
     value: {
         fontSize: 30,
         fontWeight: 'bold',
-        color: '#000',
+        color: GlobalColor.textColor,
         marginRight: 5,
     },
     valueUnit: {
         fontSize: 18,
         fontWeight:'700',
-        color: '#33415c',
+        color: GlobalColor.textColor,
         textAlignVertical:'bottom',
         marginTop:10
     },

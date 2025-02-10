@@ -9,6 +9,7 @@ export function todayDate() {
 }
 
 
+
 // Function for last 1 month's dates with date, month, and day
 export const generateLastMonthDates = () => {
   const today = new Date();
@@ -49,6 +50,16 @@ export const generateNextMonthDates = () => {
 export function formatDate(dateString) {
   const date = new Date(dateString);
   return date.toISOString().split('T')[0];
+}
+
+// Function to format date as "date" "day" "month" "year" from "2024-11-01T10:05:16.659Z" format
+export function formatDate2(dateString) {
+  const today = new Date(dateString);
+  const date = today.getDate().toString().padStart(2, '0');
+  const month = today.toLocaleString('default', { month: 'long' }).toLowerCase();
+  const day = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
+  const year = today.getFullYear();
+  return { date, month, day, year };
 }
 
 export function getGreeting() {

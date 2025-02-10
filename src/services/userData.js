@@ -119,7 +119,25 @@ const userData = {
     } catch (error) {
       console.log('oneMeal', error);
     }
-  }
+  },
+  fetchleaderboard: async (period) => {
+    try {
+      const response = await Path.post('/leaderboard/overall',
+        { period: period }
+      );
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message: "Something went wrong" }
+      }
+    } catch (error) {
+     return { success: false, message: "Please check your Internet Connection",error:error }
+    }
+  },
 
 };
 

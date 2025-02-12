@@ -15,7 +15,6 @@ const AppNavigator = () => {
   useEffect(() => {
     setLoggedIn(isAuthenticated);
   }, [isAuthenticated]);
-
   return (
     <UserDataProvider>
       <PermissionsProvider>

@@ -35,7 +35,6 @@ const TabNavigator = () => {
           shadowOffset: { width: 0, height: 0 },
           shadowRadius: 15,
           backgroundColor: GlobalColor.primaryColor,
-          
         },
         tabBarIcon: ({ focused, color }) => {
           const size = focused ? 28 : 24; // Larger icon for focused state

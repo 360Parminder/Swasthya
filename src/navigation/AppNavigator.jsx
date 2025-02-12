@@ -17,7 +17,6 @@ const AppNavigator = () => {
   }, [isAuthenticated]);
 
   return (
-
     <UserDataProvider>
       <PermissionsProvider>
         <NavigationContainer>

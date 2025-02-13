@@ -12,7 +12,7 @@ const BrowseStackNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="BrowseHome">
       <Stack.Screen name="BrowseHome" component={Browse} options={{ headerShown: false }} />
-      <Stack.Screen name="Medication" component={Medication} options={{ headerShown: true }} />
+      <Stack.Screen name="Medication" component={Medication} options={{ headerShown: false }} />
       <Stack.Screen
         name='Diet'
         component={Diet}

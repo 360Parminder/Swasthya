@@ -5,8 +5,8 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 // Create an Axios instance
 const Path = axios.create({
-    baseURL:'http://localhost:8002', // Replace with your API base URL
-    // baseURL:'https://heal-app-mal4.onrender.com'
+    // baseURL:'http://localhost:8002', // Replace with your API base URL
+    baseURL:'https://swasthya-end.slugdev.me'
   // timeout: 10000, // Optional timeout
 });
 

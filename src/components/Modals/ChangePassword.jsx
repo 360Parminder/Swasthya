@@ -37,7 +37,9 @@ const ChangePassword = ({ visible, setVisible }) => {
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <View style={{ width: '100%', height: '10%', flexDirection: 'row', alignItems: 'center', borderRadius: 10, justifyContent: 'space-between', padding: 10 }}>
-                        <TouchableOpacity onPress={() => setVisible(false)} style={{}}> <Icon style={{ fontWeight: '600' }} name="close-outline" color={GlobalColor.errorColor} size={30} /></TouchableOpacity>
+                        <TouchableOpacity onPress={() => setVisible(false)} style={{}}>
+                            <Icon style={{ fontWeight: '600' }} name="close-outline" color={GlobalColor.errorColor} size={30} />
+                        </TouchableOpacity>
                         <Text style={{ color: GlobalColor.textColor, fontSize: 20, fontWeight: '600' }}>Change Password</Text>
                         <View style={{ width: 50 }} />
                     </View>

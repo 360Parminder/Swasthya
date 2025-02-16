@@ -6,8 +6,8 @@ const FloatingLabelInput = ({
   label,
   value,
   onChangeText,
-  borderColor = "gray",
-  focusBorderColor = "blue",
+  borderColor = GlobalColor.borderColor,
+  focusBorderColor = GlobalColor.mainColor,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 

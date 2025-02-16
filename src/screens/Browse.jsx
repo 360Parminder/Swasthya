@@ -59,6 +59,17 @@ const Browse = ({ navigation }) => {
                         {/* <Icon name="chevron-forward" color="#000" size={28} /> */}
                     </View>
                 </Pressable>
+                <Pressable onPress={() => navigation.navigate('Connections')}>
+                    <View style={styles.categorieHolder}>
+                        <View style={styles.categorieContent}>
+                            <View style={{ backgroundColor: '#b9e7fe', padding: 5, borderRadius: 20 }}>
+                                <Icon name='people' color='#0077b6' size={32} />
+                            </View>
+                            <Text style={styles.categorieName}>Connections</Text>
+                        </View>
+                        {/* <Icon name="chevron-forward" color="#000" size={28} /> */}
+                    </View>
+                </Pressable>
 
                 <Pressable onPress={() => navigation.navigate('Nutrition')}>
                     <View style={styles.categorieHolder}>
@@ -174,6 +185,7 @@ const Browse = ({ navigation }) => {
                         {/* <Icon name="chevron-forward" color="#000" size={28} /> */}
                     </View>
                 </Pressable>
+               
             </ScrollView>
         </View>
     )

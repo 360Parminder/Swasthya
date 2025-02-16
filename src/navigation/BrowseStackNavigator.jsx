@@ -6,6 +6,7 @@ import Medication from '../screens/BrowseScreen/Medication';
 import Activity from '../screens/BrowseScreen/Activity';
 import BodyMeasurements from '../screens/BrowseScreen/BodyMeasurements';
 import Diet from '../screens/BrowseScreen/Diet';
+import Connections from '../screens/BrowseScreen/Connections';
 const Stack = createNativeStackNavigator();
 
 const BrowseStackNavigator = () => {
@@ -45,6 +46,11 @@ const BrowseStackNavigator = () => {
             headerTitle: '',
           }),
         }}
+      />
+      <Stack.Screen
+        name='Connections'
+        component={Connections}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

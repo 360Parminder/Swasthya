@@ -138,7 +138,116 @@ const userData = {
      return { success: false, message: "Please check your Internet Connection",error:error }
     }
   },
-
+  fetchAllUsers: async () => {
+    try {
+      const response = await Path.get('/request/alluser');
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      } 
+      else {
+        return { success: false, message: "Something went wrong" }
+      }
+    } catch (error) {
+      return { success: false, message: "Please check your Internet Connection",error:error }
+    }
+  },
+  fetchAllConnections: async () => {
+    try {
+      const response = await Path.get('/request/allconnections');
+      return response;
+    } catch (error) {
+      console.log('fetchAllConnections', error);
+    }
+  },
+  sendConnectionRequest: async (userId) => {
+    try {
+      const response = await Path.post('/request/send_request', {
+        receiverId: userId
+      });
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message:response.message }
+      }
+    } catch (error) {
+      return { success: false, message:error.message,error:error }
+    }
+  },
+  fetchMyConnections: async () => {
+    try {
+      const response = await Path.get('/relatives/my_connections');
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      } 
+      else {
+        return { success: false, message:response.message }
+      }
+    } catch (error) {
+      return { success: false, message:error.message,error:error }
+    }
+  },
+  fetchConnectionRequests: async () => {
+    try {
+      const response = await Path.get('/request/my_requests');
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message:response.message }
+      }
+    } catch (error) {
+      return { success: false, message:error.message,error:error }
+    }
+  },
+  acceptConnectionRequest: async (userId) => {
+    try {
+      const response = await Path.post('/request/accept_request',{
+        senderId: userId
+      });
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message:response.message }
+      }
+    } catch (error) {
+      return { success: false, message:error.message,error:error }
+    }
+  },
+  rejectConnectionRequest: async (userId) => {
+    try {
+      const response = await Path.post('/request/reject_request',{
+        senderId: userId
+      });
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message:response.message }
+      }
+    } catch (error) {
+      return { success: false, message:error.message,error:error }
+    }
+  }
 };
 
 export default userData;

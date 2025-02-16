@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   container: {
     position: "relative",
     marginVertical: 10,
-    width:'100%'
+    width:'90%'
   },
   input: {
     borderWidth: 1,

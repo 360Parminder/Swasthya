@@ -3,11 +3,17 @@ import React from 'react';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalColor from '../Styles/GlobalColor';
+import LinearGradient from 'react-native-linear-gradient';
 
 const HomeCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, targetvalue }) => {
-    
+
     return (
-        <View style={[styles.card,{borderColor:logocolor}]}>
+            <LinearGradient
+            colors={['#000', `${logocolor}`]} // Gradient colors
+                start={{ x: 0, y: 0 }}          // Start point (top-left corner)
+                end={{ x: 1, y: 1 }}            // End point (bottom-right corner)
+                style={[styles.card, { borderColor: logocolor }]}
+            >
             <View style={styles.header}>
                 <Text style={styles.cardTitle}>{cardTitle ? cardTitle : "Card Title"}</Text>
 
@@ -16,13 +22,13 @@ const HomeCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, ta
                 <View style={[styles.cardLogoContainer, { backgroundColor: logoBg }]}>
                     <Icon name={cardLogo} style={styles.cardLogo} color={logocolor} />
                 </View>
-                <Progress.Bar borderRadius={6} animated={true} progress={value/1000} borderColor='#fff' unfilledColor={logoBg} height={10} width={165} color={logocolor} />
+                <Progress.Bar borderRadius={6} animated={true} progress={value / 1000} borderColor='#fff' unfilledColor={logoBg} height={10} width={165} color={logocolor} />
             </View>
             <View style={styles.footer}>
                 <Text style={styles.cardValue}>{value ? value : 0} {valueUnit}</Text>
-                <Text style={{color:GlobalColor.textColor,fontSize:18}}>Target: {targetvalue} {valueUnit}</Text>
+                <Text style={{ color: GlobalColor.textColor, fontSize: 18 }}>Target: {targetvalue} {valueUnit}</Text>
             </View>
-        </View>
+        </LinearGradient>
     );
 }
 
@@ -36,7 +42,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 3,
         shadowRadius: 10,
-        borderWidth:1,
+        borderWidth: 1,
+        
     },
     header: {
         flexDirection: "row",
@@ -68,17 +75,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     footer: {
-        width:'100%',
-        flexDirection:'column',
+        width: '100%',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 10,
-        marginBottom: 10    
+        marginBottom: 10
     },
     cardValue: {
-      fontSize: 22,
-    fontWeight: '600',
-    color: GlobalColor.textColor,
+        fontSize: 22,
+        fontWeight: '600',
+        color: GlobalColor.textColor,
 
     },
 });

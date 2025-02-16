@@ -2,10 +2,16 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalColor from '../Styles/GlobalColor';
+import LinearGradient from 'react-native-linear-gradient';
 
 const SmallHomeCard = ({ icon, logoBg,footerText,targetvalue,valueUnit,value }) => {
     return (
-        <View style={[styles.card,{borderColor:logoBg}]}>
+          <LinearGradient
+                           colors={['#000', `${logoBg}`]} // Gradient colors
+                               start={{ x: 0, y: 0 }}          // Start point (top-left corner)
+                               end={{ x: 1, y: 1 }}            // End point (bottom-right corner)
+                               style={[styles.card, { borderColor: logoBg }]}
+                           >
             <View style={styles.header}>
                 <View style={[styles.cardLogoContainer, { backgroundColor: logoBg }]}>
                     <Icon name={icon} size={30} color='#fff' />
@@ -20,7 +26,7 @@ const SmallHomeCard = ({ icon, logoBg,footerText,targetvalue,valueUnit,value }) 
             <View style={styles.footer}>
                 <Text style={styles.footerText}>{footerText ? footerText : null}</Text>
             </View>
-        </View>
+        </LinearGradient>
     );
 }
 

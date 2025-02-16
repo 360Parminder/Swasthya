@@ -3,10 +3,16 @@ import React from 'react';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalColor from '../../Styles/GlobalColor';
+import LinearGradient from 'react-native-linear-gradient';
 
 const MidCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, targetvalue }) => {
     return (
-        <View style={[styles.card,{borderColor:logocolor}]}>
+        <LinearGradient
+                   colors={['#000', `${logocolor}`]} // Gradient colors
+                       start={{ x: 0, y: 0 }}          // Start point (top-left corner)
+                       end={{ x: 1, y: 1 }}            // End point (bottom-right corner)
+                       style={[styles.card, { borderColor: logocolor }]}
+                   >
             <View style={styles.header}>
                 <Icon name={cardLogo} style={styles.cardLogo} color={logocolor} />
                 <Text style={styles.cardTitle}>{cardTitle ? cardTitle : "Card Title"}</Text>
@@ -20,7 +26,7 @@ const MidCard = ({ cardTitle, cardLogo, logoBg, logocolor, value, valueUnit, tar
                 <Text style={styles.cardValue}>{value ? value : null} {valueUnit}</Text>
                 <Text style={{ color: GlobalColor.textColor, fontSize: 18 }}>Target: {targetvalue} {valueUnit}</Text>
             </View>
-        </View>
+        </LinearGradient>
     );
 }
 

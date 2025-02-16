@@ -1,36 +1,45 @@
-
-import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 // Create an Axios instance
 const Path = axios.create({
-    // baseURL:'http://localhost:8002', // Replace with your API base URL
-    baseURL:'https://swasthya-end.slugdev.me'
+    baseURL:'http://localhost:8003', // Replace with your API base URL
+    // baseURL:'https://swasthya-end.slugdev.me'
   // timeout: 10000, // Optional timeout
 });
+
+
+// List of routes that do not require authentication
+const publicRoutes = ['/user/login', '/user/signup', '/user/sendOtp', '/user/verifyOtp'];
 
 // Request interceptor
 Path.interceptors.request.use(
   async (config) => {
-    if (!['/user/login', '/user/signup'].includes(config.url)) {
+    // Check if the request URL is not in the publicRoutes list
+    if (!publicRoutes.includes(config.url)) {
       try {
+        // Retrieve the token from EncryptedStorage
         const token = await EncryptedStorage.getItem('userToken');
         console.log('Token retrieved:', token);
-        
+
+        // If a token is found, add it to the Authorization header
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         } else {
-          console.log('No token found. User might need to log in.');
-          // Optionally redirect to login or handle unauthenticated state here
+          // Optionally handle the case where no token is found
+          console.warn('No token found. Please log in.');
         }
       } catch (error) {
+        // Handle any errors that occur while retrieving the token
         console.error('Error retrieving token:', error);
       }
     }
+
+    // Return the modified config
     return config;
   },
   (error) => {
+    // Handle request errors
     return Promise.reject(error);
   }
 );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Animated, Easing } from 'react-native';
+import GlobalColor from '../Styles/GlobalColor';
 
 const LoaderLine = () => {
   const animation = new Animated.Value(0);
@@ -40,7 +41,7 @@ const LoaderLine = () => {
           }),
           height: '100%',
           borderRadius: 30,
-          backgroundColor: '#5D4FB3',
+          backgroundColor: GlobalColor.mainColor,
         }}
       />
     </View>

@@ -51,8 +51,8 @@ const UserAuth = {
     },
     sendOtp: async (mobile) => {
         try {
-            const response = await Path.post('/sendOtp', {
-                mobile:`+358${mobile}`,
+            const response = await Path.post('/user/sendOtp', {
+                mobile:`+91${mobile}`,
             });
             if (response.status === 200) {
                 return {
@@ -77,8 +77,8 @@ const UserAuth = {
     },
     verifyOtp: async (mobile, otp) => {
         try {
-            const response = await Path.post('/verifyOtp', {
-                mobile: `+358${mobile}`,
+            const response = await Path.post('/user/verifyOtp', {
+                mobile: `+91${mobile}`,
                 otp: Number(otp),
             });
             

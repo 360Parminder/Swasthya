@@ -114,9 +114,12 @@ dependencies {
     implementation("com.facebook.react:react-android")
     implementation project(':react-native-android-widget')
     implementation "com.facebook.react:react-native:+"
+     implementation 'com.facebook.fresco:fresco:3.6.0'
+    implementation 'com.facebook.fresco:animated-gif:3.6.0'
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
+
     } else {
         implementation jscFlavor
     }

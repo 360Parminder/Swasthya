@@ -40,7 +40,7 @@ const BrowseStackNavigator = () => {
         name='Activity'
         component={Activity}
         options={{
-          headerShown: true,
+          headerShown: false,
           ...(Platform.OS === 'ios' && {
             headerStyle: { backgroundColor: 'transparent', elevation: 0, shadowOpacity: 0 },
             headerTitle: '',

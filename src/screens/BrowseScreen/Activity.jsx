@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import ActivityCard from '../../components/ActivityCard'
-
+import GlobalStyles from '../../Styles/GlobalStyles'
+import GlobalColor from '../../Styles/GlobalColor'
 const Activity = () => {
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
      <Text style={styles.title}>Activity</Text>
      <View style={{
         gap:14,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
         title: {
             fontSize: 30,
             fontWeight: 'bold',
-            color: '#000',
+            color: GlobalColor.textColor,
             textAlign: 'left',
             marginTop: 10,
             marginHorizontal: 20,

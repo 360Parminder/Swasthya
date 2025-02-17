@@ -100,9 +100,16 @@ const UserAuth = {
     },
     logout: async () => {
         try {
-            await Path.get('/logout');
+            await Path.get('/user/logout');
+            return {
+                success: true,
+                message: "Logged out successfully"
+            }
         } catch (error) {
-            console.log(error);
+           return {
+            success: false,
+            message: "Error Occured while logging out"
+           }
         }
     },
     forgetPassword: async (email, newPassword) => {
@@ -120,7 +127,7 @@ const UserAuth = {
     },
     updatePassword: async (oldPassword, newPassword) => {
         try {
-            const response = await Path.post('/updatePassword', {
+            const response = await Path.post('/user/updatePassword', {
                 oldPassword,
                 newPassword,
             });

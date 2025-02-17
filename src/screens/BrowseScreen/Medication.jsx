@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Modal, TextInput } from 'react-native';
 import React, { useState } from 'react';
-import MedicineCard from '../../components/MedicineCard';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { generateLastMonthDates, todayDate } from '../../utils/dateFunction';
-
+import GlobalStyles from '../../Styles/GlobalStyles';
+import GlobalColor from '../../Styles/GlobalColor';
 const MedicationDetail = ({ name, type, dosage, frequency }) => {
   return (
     <View style={styles.medicationDetail}>
@@ -12,9 +12,9 @@ const MedicationDetail = ({ name, type, dosage, frequency }) => {
       </View>
       <View style={styles.medicationInfo}>
         <Text style={styles.medicationName}>{name}</Text>
-        <Text>{type}</Text>
-        <Text>{dosage}</Text>
-        <Text><Icon name={'time-outline'} /> {frequency}</Text>
+        <Text style={styles.medicationType}>{type}</Text>
+        <Text style={styles.medicationDosage}>{dosage}</Text>
+        <Text style={styles.medicationFrequency}><Icon name={'time-outline'} /> {frequency}</Text>
       </View>
     </View>
   );
@@ -26,14 +26,10 @@ const AddMedicationModal = ({ modalVisible, setModalVisible }) => {
   const [medicationType, setMedicationType] = useState('');
   const [medicationStrength, setMedicationStrength] = useState('');
   const [medicationFrequency, setMedicationFrequency] = useState('');
-const {date, month}= todayDate()
-// console.log(date,month);
-const dateArray = generateLastMonthDates();
-// console.log(dateArray);
 
   const screens = [
     <View key="screen1" style={styles.modalContent}>
-        <View style={[styles.modalHeader,{justifyContent:''}]}>
+      <View style={styles.modalHeader}>
         <TouchableOpacity onPress={() => setModalVisible(false)}>
           <Text style={styles.modalCancelText}>Cancel</Text>
         </TouchableOpacity>
@@ -43,7 +39,7 @@ const dateArray = generateLastMonthDates();
       <TextInput 
         placeholder='Add Medication Name'
         style={styles.modalInput}
-        placeholderTextColor={'#000'}
+        placeholderTextColor={'#666'}
         onChangeText={text => setMedicationName(text)}
       />
       <TouchableOpacity style={styles.modalButton} onPress={() => setCurrentScreen(1)}>
@@ -56,7 +52,7 @@ const dateArray = generateLastMonthDates();
           <Icon name={'chevron-back-outline'} color={'#3a86ff'} size={18}/>
           <Text style={styles.modalBackText}>Back</Text>
         </TouchableOpacity>
-        <Text style={[styles.modalHeaderText,{fontSize:18,color:'#000'}]}>{medicationName}</Text>
+        <Text style={styles.modalHeaderText}>{medicationName}</Text>
         <TouchableOpacity onPress={() => setModalVisible(false)}>
           <Text style={styles.modalCancelText}>Cancel</Text>
         </TouchableOpacity>
@@ -87,7 +83,7 @@ const dateArray = generateLastMonthDates();
           <Icon name={'chevron-back-outline'} color={'#3a86ff'} size={18}/>
           <Text style={styles.modalBackText}>Back</Text>
         </TouchableOpacity>
-        <Text style={[styles.modalHeaderText,{fontSize:18,color:'#000'}]}>{medicationName}</Text>
+        <Text style={styles.modalHeaderText}>{medicationName}</Text>
         <TouchableOpacity onPress={() => setModalVisible(false)}>
           <Text style={styles.modalCancelText}>Cancel</Text>
         </TouchableOpacity>
@@ -96,7 +92,7 @@ const dateArray = generateLastMonthDates();
       <Text style={styles.modalText}>Add the Medication Strength</Text>
       <TextInput
         style={styles.modalInput}
-        placeholderTextColor={'#000'}
+        placeholderTextColor={'#666'}
         placeholder="Add Strength"
         onChangeText={setMedicationStrength}
         value={medicationStrength}
@@ -129,7 +125,7 @@ const dateArray = generateLastMonthDates();
           <Icon name={'chevron-back-outline'} color={'#3a86ff'} size={18}/>
           <Text style={styles.modalBackText}>Back</Text>
         </TouchableOpacity>
-        <Text style={[styles.modalHeaderText,{fontSize:18,color:'#000'}]}>{medicationName}</Text>
+        <Text style={styles.modalHeaderText}>{medicationName}</Text>
         <TouchableOpacity onPress={() => setModalVisible(false)}>
           <Text style={styles.modalCancelText}>Cancel</Text>
         </TouchableOpacity>
@@ -164,205 +160,36 @@ const dateArray = generateLastMonthDates();
 
 const Medication = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const today = new Date();
-  const oneMonthAgo = new Date();
-  oneMonthAgo.setMonth(today.getMonth());
-  console.log(oneMonthAgo);
+
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
+        <Text style={styles.title}>Medication</Text>
       <ScrollView>
-      <View style={{
-        marginTop:10,
-        flexDirection:'row',
-        gap:5
-      }}>
-      <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center'
-        }}>
-          <Text>
-            W
-          </Text>
-          <View style={{
-            backgroundColor:'#000',
-            width:30,
-            height:30,
-            borderRadius:50
-          }}>
-          </View>
-        </View>
-      </View>
-        <View>
+
+        <View style={styles.logContainer}>
           <Text style={styles.logTitle}>Log</Text>
-          <View style={{
-            borderRadius:10,
-            backgroundColor:'#fff',
-            paddingHorizontal:10,
-            paddingVertical:20,
-            shadowOpacity:0.1,
-            shadowRadius:10,
-            marginHorizontal:2,
-          }}>
-            <Text style={{
-              fontSize:18,
-            }}>
-              No Medication Scheduled
-            </Text>
+          <View style={styles.logContent}>
+            <Text style={styles.logText}>No Medication Scheduled</Text>
           </View>
-          {/* <MedicineCard />
-          <MedicineCard /> */}
         </View>
         <View style={styles.asNeededContainer}>
           <Text style={styles.asNeededTitle}>As-Needed Medications</Text>
-          <Icon style={styles.addIcon} name={'add'} color={'#000'} size={26} />
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <Icon name={'add'} color={'#3a86ff'} size={26} />
+          </TouchableOpacity>
         </View>
         <View style={styles.yourMedicationsContainer}>
           <View style={styles.yourMedicationsHeader}>
             <Text style={styles.yourMedicationsTitle}>Manage Your Medications</Text>
             <Text style={styles.editText}>Edit</Text>
           </View>
-
-          {/* <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
-          <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" />
-          <MedicationDetail name="Toprimate" type="Tablet" dosage="50 mg" frequency="Every Day" /> */}
           <View style={styles.addMedicationContainer}>
-            <Text style={{
-             fontSize:18,
-             fontWeight:'500',
-             marginBottom:5
-            }}>
-            Add a Medication
+            <Text style={styles.addMedicationTitle}>Add a Medication</Text>
+            <Text style={styles.addMedicationDescription}>
+              Simplify your medication tracking by entering details quickly and setting up reminders. Ensure you never miss a dose with timely notifications.
             </Text>
-            <Text style={{
-              fontSize:16,
-              marginBottom:15
-            }}>
-           Simplify your medication tracking by entering details quickly and setting up reminders. Ensure you never miss a dose with timely notifications.
-            </Text>
-            <TouchableOpacity style={{
-              alignItems:'center',
-            }}  onPress={() => setModalVisible(true)}>
-              <Text style={styles.addMedicationText}>Add Medication</Text>
+            <TouchableOpacity style={styles.addMedicationButton} onPress={() => setModalVisible(true)}>
+              <Text style={styles.addMedicationButtonText}>Add Medication</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -378,46 +205,72 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f9fb',
     paddingHorizontal: 20,
   },
-  logTitle: {
-    fontSize: 18,
+  title: {
+    fontSize: 22,
     fontWeight: 'bold',
-    color: '#6b6b6b',
-    marginTop: 40,
-    marginBottom:20
+    color: GlobalColor.textColor,
+    marginBottom: 5,
+    marginHorizontal: 20,
+  },
+  logContainer: {
+    marginTop: 10,
+  },
+  logTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: GlobalColor.textColor,
+    marginBottom: 10,
+  },
+  logContent: {
+    backgroundColor: GlobalColor.primaryColor,
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 3,
+  },
+  logText: {
+    fontSize: 16,
+    color: GlobalColor.textColor,
   },
   asNeededContainer: {
     marginTop: 30,
-    justifyContent:'space-between',
-    backgroundColor:'#fff',
-    borderRadius:10,
-    flexDirection:'row',
-    paddingHorizontal:10,
-    paddingVertical:10
-
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: GlobalColor.primaryColor,
+    borderRadius: 10,
+    padding: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 3,
   },
   asNeededTitle: {
     fontSize: 18,
-    color: '#000814',
+    fontWeight: 'bold',
+    color: GlobalColor.textColor,
   },
-  // addIcon: {
-  //   alignSelf: 'flex-end',
-  // },
   yourMedicationsContainer: {
     marginTop: 30,
   },
   yourMedicationsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 20,
   },
   yourMedicationsTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
-    color: '#6b6b6b',
+    color: GlobalColor.textColor,
   },
   editText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#3a86ff',
+    color: GlobalColor.mainColor,
   },
   medicationDetail: {
     flexDirection: 'row',
@@ -427,7 +280,7 @@ const styles = StyleSheet.create({
   medicationImageContainer: {
     width: 50,
     height: 50,
-    borderRadius: 50,
+    borderRadius: 25,
     borderColor: '#3a86ff',
     borderWidth: 1,
     justifyContent: 'center',
@@ -437,33 +290,60 @@ const styles = StyleSheet.create({
   medicationImage: {
     width: 30,
     height: 30,
-    borderRadius: 30,
+    borderRadius: 15,
     backgroundColor: '#3a86ff',
   },
   medicationInfo: {
     marginLeft: 20,
   },
   medicationName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    color: GlobalColor.textColor,
+  },
+  medicationType: {
+    fontSize: 16,
+    color: GlobalColor.textColor,
+  },
+  medicationDosage: {
+    fontSize: 16,
+    color: GlobalColor.textColor,
+  },
+  medicationFrequency: {
+    fontSize: 16,
+    color: GlobalColor.textColor,
   },
   addMedicationContainer: {
-    borderRadius:10,
-    backgroundColor: '#fff',
-    marginTop: 20,
-    justifyContent: 'center',
-    // alignItems: 'center',
-    paddingHorizontal:10,
-    paddingVertical:20,
-    shadowOpacity:0.1,
-    shadowRadius:10,
-    shadowColor:'#000',
-
+    backgroundColor: GlobalColor.primaryColor,
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 3,
   },
-  addMedicationText: {
-    fontSize: 16,
+  addMedicationTitle: {
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#3a86ff',
+    color: GlobalColor.textColor,
+    marginBottom: 10,
+  },
+  addMedicationDescription: {
+    fontSize: 16,
+    color: GlobalColor.textColor,
+    marginBottom: 20,
+  },
+  addMedicationButton: {
+    backgroundColor: '#3a86ff',
+    borderRadius: 10,
+    padding: 15,
+    alignItems: 'center',
+  },
+  addMedicationButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: GlobalColor.textColor,
   },
   modalOverlay: {
     flex: 1,
@@ -489,6 +369,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+    marginBottom: 20,
   },
   modalBackButton: {
     flexDirection: 'row',
@@ -508,17 +389,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   modalText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#333',
     marginBottom: 20,
   },
   modalInput: {
     width: '100%',
-    padding: 10,
+    padding: 15,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 10,
     marginBottom: 20,
+    fontSize: 16,
+    color: '#333',
   },
   modalButton: {
     width: '100%',
@@ -529,7 +413,8 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     fontSize: 18,
-    color: 'white',
+    fontWeight: 'bold',
+    color: '#fff',
   },
   medicationTypeContainer: {
     flexDirection: 'row',
@@ -559,11 +444,12 @@ const styles = StyleSheet.create({
   },
   frequencyLabel: {
     fontSize: 16,
-    color: '#000',
+    color: '#666',
   },
   frequencyValue: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#333',
   },
 });
 

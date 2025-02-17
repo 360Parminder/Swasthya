@@ -15,8 +15,8 @@ const ActivityCard = ({ title,iconName,fcolor, date, value, valueUnit }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                }}>
-               <Icon name={iconName} color={fcolor} size={22}/>
-               <Text style={[styles.title,{color:fcolor}]}>{title}</Text>
+               <Icon name={iconName} color={GlobalColor.mainColor} size={22}/>
+               <Text style={[styles.title]}>{title}</Text>
                </View>
                <View style={{
                 flexDirection: 'row',
@@ -55,12 +55,13 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         marginBottom:10,
+       
         },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 5,
-        color:GlobalColor.textColor
+        color:GlobalColor.mainColor
     },
     date: {
         fontSize: 15,

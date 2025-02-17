@@ -3,7 +3,7 @@ import ActivityCard from "../../components/ActivityCard";
 import { useContext } from "react";
 import { userDataContext } from "../../context/UserContext";
 import GlobalStyles from "../../Styles/GlobalStyles";
-
+import GlobalColor from "../../Styles/GlobalColor";
 
 const BodyMeasurements =()=>{
     const {user} = useContext(userDataContext)
@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f5f9fb',
         },
-        title: {
+            title: {
             fontSize: 30,
             fontWeight: 'bold',
-            color: '#000',
+            color: GlobalColor.textColor,
             textAlign: 'left',
             marginTop: 10,
             marginHorizontal: 20,

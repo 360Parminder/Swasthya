@@ -1,4 +1,5 @@
 import Path from "./Path";
+import axios from "axios";
 
 const userData = {
   getUserProfile: async () => {
@@ -15,7 +16,7 @@ const userData = {
         return { success: false, message: "Something went wrong" }
       }
     } catch (error) {
-      return { success: false, message: "Please your Internet Connection",error:error }
+      return { success: false, message: "Please your Internet Connection", error: error }
     }
   },
   fetchUserRank: async (date) => {
@@ -49,7 +50,7 @@ const userData = {
       }
 
     } catch (error) {
-      return { success: false, message: "Please check your Internet Connection",error:error }
+      return { success: false, message: "Please check your Internet Connection", error: error }
     }
   },
   fetchUserWater: async (token) => {
@@ -135,7 +136,7 @@ const userData = {
         return { success: false, message: "Something went wrong" }
       }
     } catch (error) {
-     return { success: false, message: "Please check your Internet Connection",error:error }
+      return { success: false, message: "Please check your Internet Connection", error: error }
     }
   },
   fetchAllUsers: async () => {
@@ -146,12 +147,12 @@ const userData = {
           success: true,
           data: response.data
         }
-      } 
+      }
       else {
         return { success: false, message: "Something went wrong" }
       }
     } catch (error) {
-      return { success: false, message: "Please check your Internet Connection",error:error }
+      return { success: false, message: "Please check your Internet Connection", error: error }
     }
   },
   fetchAllConnections: async () => {
@@ -174,10 +175,10 @@ const userData = {
         }
       }
       else {
-        return { success: false, message:response.message }
+        return { success: false, message: response.message }
       }
     } catch (error) {
-      return { success: false, message:error.message,error:error }
+      return { success: false, message: error.message, error: error }
     }
   },
   fetchMyConnections: async () => {
@@ -188,12 +189,12 @@ const userData = {
           success: true,
           data: response.data
         }
-      } 
+      }
       else {
-        return { success: false, message:response.message }
+        return { success: false, message: response.message }
       }
     } catch (error) {
-      return { success: false, message:error.message,error:error }
+      return { success: false, message: error.message, error: error }
     }
   },
   fetchConnectionRequests: async () => {
@@ -206,15 +207,15 @@ const userData = {
         }
       }
       else {
-        return { success: false, message:response.message }
+        return { success: false, message: response.message }
       }
     } catch (error) {
-      return { success: false, message:error.message,error:error }
+      return { success: false, message: error.message, error: error }
     }
   },
   acceptConnectionRequest: async (userId) => {
     try {
-      const response = await Path.post('/request/accept_request',{
+      const response = await Path.post('/request/accept_request', {
         senderId: userId
       });
       if (response.status === 200) {
@@ -224,15 +225,15 @@ const userData = {
         }
       }
       else {
-        return { success: false, message:response.message }
+        return { success: false, message: response.message }
       }
     } catch (error) {
-      return { success: false, message:error.message,error:error }
+      return { success: false, message: error.message, error: error }
     }
   },
   rejectConnectionRequest: async (userId) => {
     try {
-      const response = await Path.post('/request/reject_request',{
+      const response = await Path.post('/request/reject_request', {
         senderId: userId
       });
       if (response.status === 200) {
@@ -242,10 +243,64 @@ const userData = {
         }
       }
       else {
-        return { success: false, message:response.message }
+        return { success: false, message: response.message }
       }
     } catch (error) {
-      return { success: false, message:error.message,error:error }
+      return { success: false, message: error.message, error: error }
+    }
+  },
+  fetchMedication: async () => {
+    try {
+      const response = await Path.get('/medication/view/all');
+      console.log(response.data);
+      
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+        }
+      else {
+        return { success: false, message: response.message }
+      }
+    } catch (error) {
+      return { success: false, message: "Please check your Internet Connection", error: error }
+    }
+  },
+  addMedication: async (medicationData) => {
+    console.log(medicationData);
+    
+    try {
+        const response = await Path.post('/medication/create', {
+            medicine_name: medicationData.medicine_name,
+            forms: medicationData.forms.toLowerCase(),
+            strength: medicationData.strength,
+            unit: medicationData.unit,
+            frequency: {
+                type: "As Needed"
+                // We can add interval and specificDays if needed later
+            },
+            times: [
+                {
+                    dose: medicationData.dose || "1",
+                    time: new Date(medicationData.time).toISOString()
+                }
+            ],
+            start_date: medicationData.start_date.toISOString(),
+            description: medicationData.description || `${medicationData.medicine_name} medication`,
+        });
+
+        if (response.status === 200) {
+            return {
+                success: true,
+                data: response.data
+            };
+        } else {
+            return { success: false, message: response.message };
+        }
+    } catch (error) {
+        console.error('Error adding medication:', error);
+        return { success: false, message: error.message, error: error };
     }
   }
 };

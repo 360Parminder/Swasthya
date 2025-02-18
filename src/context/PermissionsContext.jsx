@@ -1,88 +1,81 @@
-import { View, Text, Platform } from 'react-native'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
+import { Platform } from 'react-native';
 import { PERMISSIONS, RESULTS, check, request } from 'react-native-permissions';
 import messaging from '@react-native-firebase/messaging';
+import { requestUserPermission, notificationListener, showLocalNotification } from '../Apis/firebase';
 
 export const PermissionsContext = createContext();
 
-export const PermissionsProvider = ({children}) => {
+export const PermissionsProvider = ({ children }) => {
+  const [fcmToken, setFcmToken] = useState(null);
 
-useEffect(() => {
-  const requestPermission = async ()=>{
-    if (Platform.OS==='ios') {
-  const result = await check(PERMISSIONS.IOS.REMINDERS)
-  
-    switch (result) {
-      case RESULTS.UNAVAILABLE:
-        console.log('This feature is not available (on this device / in this context)');
-        break;
-      case RESULTS.DENIED:
-        console.log('The permission has not been requested / is denied but requestable');
-        const requestResult = await request(PERMISSIONS.IOS.REMINDERS);
-       console.log(`Permission request result: ${requestResult}`);
-       if (requestResult === RESULTS.GRANTED) {
-         console.log('Permission granted after request');
-       } else {
-         console.log('Permission not granted after request');
-       }
-      break;
-      case RESULTS.GRANTED:
-        console.log('The permission is granted');
-        break;
-      case RESULTS.LIMITED:
-        console.log('The permission is limited: some actions are possible');  
-        break;
-      case RESULTS.BLOCKED:
-        console.log('The permission is denied and not requestable anymore');
-        break;  
-      default:
-        break;
-    }
- 
-  }
-  else if (Platform.OS==='android') {
-   const result= await check(PERMISSIONS.ANDROID.POST_NOTIFICATIONS)
-    switch (result) {
-      case RESULTS.UNAVAILABLE:
-        console.log('This feature is not available (on this device / in this context)');
-        break;
-      case RESULTS.DENIED:
-        console.log('The permission has not been requested / is denied but requestable');
-         const requestResult = await request(PERMISSIONS.ANDROID.POST_NOTIFICATIONS);
-        console.log(`Permission request result: ${requestResult}`);
-        if (requestResult === RESULTS.GRANTED) {
-          console.log('Permission granted after request');
-        } else {
-          console.log('Permission not granted after request');
+  useEffect(() => {
+    const setupNotifications = async () => {
+      // Request permission and get token
+      await requestUserPermission();
+      
+      // Get FCM token
+      const token = await messaging().getToken();
+      if (token) {
+        setFcmToken(token);
+        console.log('FCM Token:', token);
+      }
+
+      // Set up notification listeners
+      await notificationListener();
+    };
+
+    const requestPermissions = async () => {
+      const permission = Platform.select({
+        ios: PERMISSIONS.IOS.REMINDERS,
+        android: PERMISSIONS.ANDROID.POST_NOTIFICATIONS,
+      });
+
+      try {
+        const result = await check(permission);
+        
+        if (result === RESULTS.DENIED) {
+          const requestResult = await request(permission);
+          console.log(`Permission request result: ${requestResult}`);
+          
+          if (requestResult === RESULTS.GRANTED) {
+            console.log('Permission granted after request');
+            setupNotifications();
+          }
+        } else if (result === RESULTS.GRANTED) {
+          console.log('Permission already granted');
+          setupNotifications();
         }
-      break;
-      case RESULTS.GRANTED:
-        console.log('The permission is granted');
-        break;
-      case RESULTS.LIMITED:
-        console.log('The permission is limited: some actions are possible');  
-        break;
-      case RESULTS.BLOCKED:
-        console.log('The permission is denied and not requestable anymore');
-        break;  
-      default:
-        break;
-    }
-  }
-  
-  }
-  requestPermission()
-  
-}, [])
+      } catch (error) {
+        console.error('Permission check failed:', error);
+      }
+    };
 
+    requestPermissions();
 
+    // Cleanup
+    return () => {
+      // Remove any listeners if needed
+    };
+  }, []);
 
-const [Permissions,setPermissions]=useState(null);
+  // Handle incoming messages
+  const onMessageReceived = async (message) => {
+    console.log('New message received:', message);
+    showLocalNotification(
+      message.notification?.title || 'New Message',
+      message.notification?.body || 'You have a new message'
+    );
+  };
+
+  // Set up message handlers
+  messaging().onMessage(onMessageReceived);
+  messaging().setBackgroundMessageHandler(onMessageReceived);
 
   return (
-    <PermissionsContext.Provider value={{Permissions,setPermissions}}>
-        {children}
+    <PermissionsContext.Provider value={{ fcmToken }}>
+      {children}
     </PermissionsContext.Provider>
-  )
-}
+  );
+};
 

@@ -7,11 +7,13 @@ import { AuthContext } from '../context/AuthContext';
 import GlobalColor from '../Styles/GlobalColor';
 import { Checkbox } from 'react-native-paper';
 import FloatingLabelInput from '../components/Inputs/FloatingLabelInput';
+import { PermissionsContext } from '../context/PermissionsContext';
 
 
 
 const SignIn = () => {
   const { login, isLoading } = useContext(AuthContext);
+  const {fcmToken} = useContext(PermissionsContext);
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +26,7 @@ const SignIn = () => {
     }
 
     try {
-      const response = await login(phoneNumber, password);
+      const response = await login(phoneNumber, password,fcmToken);
       if (!response.success) {
         Alert.alert('Login Failed', 'Invalid credentials. Please try again.');
       }

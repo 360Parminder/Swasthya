@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     getToken();
   }, []);
 
-    const login = async (mobile, password) => {
+    const login = async (mobile, password,fcm_token) => {
         setIsLoading(true);
         try {
             const response = await UserAuth.signIn(mobile, password,fcm_token);

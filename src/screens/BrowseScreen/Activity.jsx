@@ -70,7 +70,6 @@ const Activity = () => {
       </View>
     )
   }
-
   return (
     <View style={GlobalStyles.container}>
       <View style={styles.header}>

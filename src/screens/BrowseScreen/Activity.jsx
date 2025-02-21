@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     color: GlobalColor.textColor,
   },
   calendarContainer: {
+    height:'90',
     marginVertical: 10,
   },
   dateList: {
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   dateCard: {
     width: 60,
     height: 80,
-    backgroundColor: GlobalColor.secondaryColor,
+    backgroundColor: GlobalColor.primaryColor,
     borderRadius: 12,
     marginRight: 10,
     alignItems: 'center',
@@ -148,8 +149,9 @@ const styles = StyleSheet.create({
   },
   activitiesContainer: {
     flex: 1,
-    backgroundColor: GlobalColor.primaryColor,
+    // backgroundColor: GlobalColor.primaryColor,
     padding: 20,
+    width:'100%'
   },
   sectionTitle: {
     fontSize: 20,

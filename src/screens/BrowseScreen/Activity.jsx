@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import GlobalStyles from '../../Styles/GlobalStyles'
 import GlobalColor from '../../Styles/GlobalColor'
-import Icon from 'react-native-vector-icons/Ionicons'
 import ActivityCard from '../../components/Cards/ActivityCard'
 
 const Activity = () => {

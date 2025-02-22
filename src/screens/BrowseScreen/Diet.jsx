@@ -5,6 +5,7 @@ import OneTimeRecipeModal from '../../components/Modals/OneTimeRecipeModal';
 import IngredientsInHand from '../../components/Modals/IngredientsInHand';
 import GlobalStyles from '../../Styles/GlobalStyles';
 import GlobalColor from '../../Styles/GlobalColor';
+import SquareBox from '../../components/Button/SquareBox';
 
 
 const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{  
@@ -138,23 +139,31 @@ const Diet = () => {
   return (
     <View style={GlobalStyles.container}>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.primaryButton} onPress={() => setOneTimeRecipeModalVisible(true)}>
-          <Text style={styles.primaryButtonText}>One Time Recipe</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton} onPress={()=>setIngredientsInHandModalVisible(true)}>
-          <Text style={styles.primaryButtonText}>Ingredients in Hand</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
-          <Text style={styles.primaryButtonText}>find Week Meal</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
-          <Text style={styles.primaryButtonText}>View Today Meal</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton} onPress={()=>setWeekMealModalVisible(true)}>
-          <Text style={styles.primaryButtonText}>View Week Meal</Text>
-        </TouchableOpacity>
-        
-
+        <SquareBox
+          title="One Time Recipe"
+          icon="restaurant"
+          onPress={() => setOneTimeRecipeModalVisible(true)}
+        />
+        <SquareBox
+          title="Ingredients in Hand"
+          icon="basket"
+          onPress={() => setIngredientsInHandModalVisible(true)}
+        />
+        <SquareBox
+          title="Find Week Meal"
+          icon="calendar"
+          onPress={() => setWeekMealModalVisible(true)}
+        />
+        <SquareBox
+          title="View Today Meal"
+          icon="today"
+          onPress={() => {/* Your function */}}
+        />
+        <SquareBox
+          title="View Week Meal"
+          icon="calendar"
+          onPress={() => {/* Your function */}}
+        />
       </View>
       <OneTimeRecipeModal oneTimeRecipeModalVisible={oneTimeRecipeModalVisible} setOneTimeRecipeModalVisible={setOneTimeRecipeModalVisible} />
       <IngredientsInHand ingredientsInHandModalVisible={ingredientsInHandModalVisible} setIngredientsInHandModalVisible={setIngredientsInHandModalVisible} />
@@ -165,30 +174,11 @@ const Diet = () => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: '100%',
-    flexWrap: 'wrap',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
-    marginBottom: 20,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 20,
     gap: 10,
-  },
-  primaryButton: {
-    backgroundColor: GlobalColor.primaryColor,
-    width: '40%',
-    height: 150,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 8,
-    textAlign: 'center',
-  },
-  primaryButtonText: {
-    color: GlobalColor.textColor,
-    fontSize: 20,
-    textTransform: 'capitalize',
-    fontWeight: '600',
   },
   card: {
     marginHorizontal:10,
@@ -220,15 +210,6 @@ const styles = StyleSheet.create({
     color: '#ded9fb',
     fontWeight: 'bold',
   },
-  // input: {
-  //   width: '80%',
-  //   height: 40,
-  //   backgroundColor: 'white',
-  //   borderRadius: 5,
-  //   paddingLeft: 10,
-  //   marginBottom: 15,
-  //   color: '#000'
-  // },
   cardContainer: {
     backgroundColor: '#edeafd',
     borderRadius: 10,

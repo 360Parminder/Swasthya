@@ -6,24 +6,33 @@ import {
     Modal,
     TouchableOpacity,
     FlatList,
-    Image,
     Alert,
 } from 'react-native';
 import userData from '../../services/userData';
 import GlobalColor from '../../Styles/GlobalColor';
+import RequestCard from '../Cards/RequestCard';
 
 const MyConnectionsRequests = ({ isVisible, onClose }) => {
-    const [requests, setRequests] = useState([]);
+    const [receivedRequests, setReceivedRequests] = useState([]);
+    const [sentRequests, setSentRequests] = useState([]);
+    const [activeTab, setActiveTab] = useState('received');
 
     useEffect(() => {
-        fetchRequests();
-    }, []);
+        if (isVisible) {
+            fetchRequests();
+        }
+    }, [isVisible]);
 
     const fetchRequests = async () => {
         try {
             const response = await userData.fetchConnectionRequests();
+            console.log("response",response);
+            
             if (response.success) {
-                setRequests(response.data.data);
+                setReceivedRequests(response.data.receivedRequests);
+                setSentRequests(response.data.sentRequests);
+            } else {
+                Alert.alert('Error', response.message);
             }
         } catch (error) {
             Alert.alert('Error', 'Failed to fetch connection requests');
@@ -37,6 +46,8 @@ const MyConnectionsRequests = ({ isVisible, onClose }) => {
             if (response.success) {
                 Alert.alert('Success', 'Connection request accepted');
                 fetchRequests();
+            } else {
+                Alert.alert('Error', response.message);
             }
         } catch (error) {
             Alert.alert('Error', 'Failed to accept request');
@@ -49,63 +60,17 @@ const MyConnectionsRequests = ({ isVisible, onClose }) => {
             if (response.success) {
                 Alert.alert('Success', 'Connection request rejected');
                 fetchRequests();
+            } else {
+                Alert.alert('Error', response.message);
             }
         } catch (error) {
             Alert.alert('Error', 'Failed to reject request');
         }
     };
 
-    const calculateAge = (dob) => {
-        const birthDate = new Date(dob);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
-    };
-
-    const renderRequestCard = ({ item }) => (
-        <View key={item._id} style={styles.card}>
-            <View style={styles.userInfoContainer}>
-                <Image
-                    source={
-                        item.picture
-                            ? { uri: item.picture }
-                            : require('../../assets/images/Profile.png')
-                    }
-                    style={styles.profileImage}
-                />
-                <View style={styles.userDetails}>
-                    <Text style={styles.username}>{item.username}</Text>
-                    <Text style={styles.userInfo}>
-                        Age: {calculateAge(item.dob)} | Gender: {item.gender}
-                    </Text>
-                    <Text style={styles.userId}>ID: {item._id}</Text>
-                </View>
-            </View>
-            <View style={styles.actionButtons}>
-                <TouchableOpacity
-                    style={[styles.actionButton, styles.acceptButton]}
-                    onPress={() => handleAcceptRequest(item._id)}
-                >
-                    <Text style={styles.actionButtonText}>Accept</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.actionButton, styles.rejectButton]}
-                    onPress={() => handleRejectRequest(item._id)}
-                >
-                    <Text style={styles.actionButtonText}>Reject</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
-
     const EmptyListComponent = () => (
         <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No connection requests</Text>
+            <Text style={styles.emptyText}>No {activeTab} requests</Text>
         </View>
     );
 
@@ -119,9 +84,36 @@ const MyConnectionsRequests = ({ isVisible, onClose }) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text style={styles.modalTitle}>Connection Requests</Text>
+                    
+                    <View style={styles.tabContainer}>
+                        <TouchableOpacity 
+                            style={[styles.tab, activeTab === 'received' && styles.activeTab]}
+                            onPress={() => setActiveTab('received')}
+                        >
+                            <Text style={[styles.tabText, activeTab === 'received' && styles.activeTabText]}>
+                                Received
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={[styles.tab, activeTab === 'sent' && styles.activeTab]}
+                            onPress={() => setActiveTab('sent')}
+                        >
+                            <Text style={[styles.tabText, activeTab === 'sent' && styles.activeTabText]}>
+                                Sent
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
                     <FlatList
-                        data={requests}
-                        renderItem={renderRequestCard}
+                        data={activeTab === 'received' ? receivedRequests : sentRequests}
+                        renderItem={({ item }) => (
+                            <RequestCard
+                                item={activeTab === 'received' ? item.sender : item.receiver}
+                                type={activeTab}
+                                onAccept={handleAcceptRequest}
+                                onReject={handleRejectRequest}
+                            />
+                        )}
                         keyExtractor={(item) => item._id}
                         contentContainerStyle={styles.listContainer}
                         ListEmptyComponent={EmptyListComponent}
@@ -140,14 +132,12 @@ const styles = StyleSheet.create({
     modalContainer: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {
         backgroundColor: GlobalColor.primaryColor,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        width: '100%',
         height: '90%',
         padding: 20,
     },
@@ -158,72 +148,33 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: GlobalColor.textColor,
     },
-    listContainer: {
-        paddingVertical: 10,
-    },
-    card: {
+    tabContainer: {
+        flexDirection: 'row',
+        marginBottom: 20,
         backgroundColor: GlobalColor.secondaryColor,
         borderRadius: 10,
-        padding: 15,
-        marginBottom: 15,
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
+        padding: 5,
     },
-    userInfoContainer: {
-        flexDirection: 'row',
-        marginBottom: 10,
-    },
-    profileImage: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        marginRight: 15,
-    },
-    userDetails: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-    username: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 4,
-        color: GlobalColor.textColor,
-    },
-    userInfo: {
-        fontSize: 14,
-        color: GlobalColor.textColor,
-        marginBottom: 2,
-    },
-    userId: {
-        fontSize: 12,
-        color: GlobalColor.textColor,
-        marginBottom: 2,
-    },
-    actionButtons: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 10,
-    },
-    actionButton: {
+    tab: {
         flex: 1,
         padding: 10,
-        borderRadius: 5,
         alignItems: 'center',
-        marginHorizontal: 5,
+        borderRadius: 8,
     },
-    acceptButton: {
-        backgroundColor: GlobalColor.successColor,
+    activeTab: {
+        backgroundColor: GlobalColor.mainColor,
     },
-    rejectButton: {
-        backgroundColor: GlobalColor.errorColor,
-    },
-    actionButtonText: {
-        color: GlobalColor.buttonTextColor,
+    tabText: {
         fontSize: 16,
+        color: GlobalColor.textColor,
+        fontWeight: '500',
+    },
+    activeTabText: {
+        color: GlobalColor.buttonTextColor,
         fontWeight: '600',
+    },
+    listContainer: {
+        flexGrow: 1,
     },
     emptyContainer: {
         flex: 1,

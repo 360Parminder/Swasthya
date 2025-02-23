@@ -71,6 +71,17 @@ const Browse = ({ navigation }) => {
                     </View>
                 </Pressable>
 
+                <Pressable onPress={() => navigation.navigate('Exercise')}>
+                    <View style={styles.categorieHolder}>
+                        <View style={styles.categorieContent}>
+                            <View style={{ backgroundColor: '#bcf6c8', padding: 5, borderRadius: 20 }}>
+                                <Icon name='barbell' color='#80ed99' size={32} />
+                            </View>
+                            <Text style={styles.categorieName}>Exercise</Text>
+                        </View>
+                        {/* <Icon name="chevron-forward" color="#000" size={28} /> */}
+                    </View>
+                </Pressable>
                 <Pressable onPress={() => navigation.navigate('Nutrition')}>
                     <View style={styles.categorieHolder}>
                         <View style={styles.categorieContent}>

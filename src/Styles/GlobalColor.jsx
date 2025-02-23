@@ -4,9 +4,9 @@ const GlobalColor = {
   primaryColor:'#141414',
   secondaryColor:'#1f1f1f',
   tertiaryColor:'#303030',
-  errorColor:'#ce2222',
+  errorColor:'#920a0a',
   warningColor:'#fbff00',
-  successColor:'#00ff00',
+  successColor:'#1e8b00',
   iconColor:'#fff',
   textColor:'#fdfdfd',
   borderColor: '#353535',
@@ -14,10 +14,6 @@ const GlobalColor = {
   buttonTextColor:'#fdfdfd',
   mainColor:'#4979FB',
   mainBackgroundColor:'#2e53b97a',
-
-
-
-  
 }
 
 export default GlobalColor;

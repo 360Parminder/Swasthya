@@ -302,6 +302,42 @@ const userData = {
         console.error('Error adding medication:', error);
         return { success: false, message: error.message, error: error };
     }
+    },
+  getExercises: async () => {
+    try {
+      const response = await Path.get('/workout/all_exercises ');
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message: response.message }
+      }
+    } catch (error) {
+      return { success: false, message: "Please check your Internet Connection", error: error }
+    }
+  },
+  getExerciseBodyPart: async (bodyPart) => {
+    try {
+      const response = await Path.post('/workout/bodyPart',{
+        bodyPart: bodyPart
+      });
+      console.log("response from getExerciseBodyPart", response);
+      
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message: response.message }
+      }
+    } catch (error) {
+      return { success: false, message: "Please check your Internet Connection", error: error }
+    }
   }
 };
 

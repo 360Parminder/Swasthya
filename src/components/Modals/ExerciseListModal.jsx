@@ -1,9 +1,21 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import BaseExerciseModal from './BaseExerciseModal';
-import GlobalColor from '../../Styles/GlobalColor';
+import ExerciseCard from '../Cards/ExerciseCard';
+import userData from '../../services/userData';
 
 const ExerciseListModal = ({ visible, onClose }) => {
+    const [exercises, setExercises] = useState([]);
+    const [selectedExercise, setSelectedExercise] = useState(null);
+
+    useEffect(() => {
+        const fetchExercises = async () => {
+            const response = await userData.getExercises();
+            setExercises(response.data);
+        };
+        fetchExercises();
+    }, []);
+
     return (
         <BaseExerciseModal
             visible={visible}
@@ -11,8 +23,13 @@ const ExerciseListModal = ({ visible, onClose }) => {
             title="Exercise List"
         >
             <View style={styles.container}>
-                {/* Add your exercise list content here */}
-                <Text style={styles.text}>Exercise List Content</Text>
+                {exercises?.map((exercise) => (
+                    <ExerciseCard
+                        key={exercise.id}
+                        exercise={exercise}
+                        onBookmark={setSelectedExercise}
+                    />
+                ))}
             </View>
         </BaseExerciseModal>
     );
@@ -22,10 +39,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-    },
-    text: {
-        color: GlobalColor.textColor,
-        fontSize: 16,
     },
 });
 

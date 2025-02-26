@@ -1,10 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import BaseExerciseModal from './BaseExerciseModal';
 import GlobalColor from '../../Styles/GlobalColor';
 import Icon from 'react-native-vector-icons/Ionicons';
+import userData from '../../services/userData';
+import ExerciseCard from '../Cards/ExerciseCard';
 
-const EquipmentModal = ({ visible, onClose }) => {
+const EquipmentModal = ({ visible, onClose }) => {  
     const equipment = [
         { id: '1', name: 'assisted', icon: 'fitness' },
         { id: '2', name: 'band', icon: 'ribbon' },
@@ -35,9 +37,30 @@ const EquipmentModal = ({ visible, onClose }) => {
         { id: '27', name: 'weighted', icon: 'barbell' },
         { id: '28', name: 'wheel roller', icon: 'fitness' },
     ];
+    const [loading, setLoading] = useState(false);
+    const [exercises, setExercises] = useState([]);
+    const [selectedEquipment, setSelectedEquipment] = useState(equipment[0].name);
+    const [selectedExercise, setSelectedExercise] = useState(null);
+    useEffect(() => {
+        setLoading(true);
+        const fetchExercises = async () => {
+            const response = await userData.getExerciseEquipment(selectedEquipment);
+            if (response.success) {
+                setExercises(response.data);
+            }
+            else {
+                Alert.alert(response.message);
+            }
+            setLoading(false);
+        };
+        fetchExercises();
+    }, [selectedEquipment]);
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.itemContainer}>
+        <TouchableOpacity style={[
+            styles.itemContainer,
+            selectedEquipment === item.name && styles.selectedItem
+        ]} onPress={() => setSelectedEquipment(item.name)}>
             <Icon name={item.icon} size={24} color={GlobalColor.mainColor} />
             <Text style={styles.itemText}>{item.name}</Text>
         </TouchableOpacity>
@@ -50,12 +73,23 @@ const EquipmentModal = ({ visible, onClose }) => {
             title="Equipment Exercises"
         >
             <FlatList
+                showsHorizontalScrollIndicator={false}
                 horizontal
                 data={equipment}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 contentContainerStyle={styles.listContainer}
             />
+            {loading ? (<ActivityIndicator size="large" color={GlobalColor.mainColor} />):(
+               exercises.map((exercise)=>(
+                <ExerciseCard
+                    key={exercise.id}
+                    exercise={exercise}
+                    onBookmark={setSelectedExercise}
+                />
+               ))
+            )}
+
         </BaseExerciseModal>
     );
 };
@@ -80,6 +114,9 @@ const styles = StyleSheet.create({
         color: GlobalColor.textColor,
         fontSize: 16,
         marginLeft: 15,
+    },
+    selectedItem: {
+        backgroundColor: GlobalColor.mainColor + '40',
     },
 });
 

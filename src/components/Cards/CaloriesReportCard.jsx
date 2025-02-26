@@ -33,7 +33,7 @@ const CaloriesReportCard = ({ title, value, valueUnit,caloriesValue, targetValue
                 />
                 <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
                   <Icon name="flame" type="ionicon" color={iconcolor} size={25} />
-                    <Text style={{fontSize:18,fontWeight:'500',color:GlobalColor.textColor}}>{caloriesValue} Kcal</Text>
+                    <Text style={{fontSize:18,fontWeight:'500',color:GlobalColor.textColor}}>{Math.round(caloriesValue)} Kcal</Text>
                 </View>
       </View>
     )

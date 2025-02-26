@@ -253,13 +253,13 @@ const userData = {
     try {
       const response = await Path.get('/medication/view/all');
       console.log(response.data);
-      
+
       if (response.status === 200) {
         return {
           success: true,
           data: response.data
         }
-        }
+      }
       else {
         return { success: false, message: response.message }
       }
@@ -269,40 +269,40 @@ const userData = {
   },
   addMedication: async (medicationData) => {
     console.log(medicationData);
-    
-    try {
-        const response = await Path.post('/medication/create', {
-            medicine_name: medicationData.medicine_name,
-            forms: medicationData.forms.toLowerCase(),
-            strength: medicationData.strength,
-            unit: medicationData.unit,
-            frequency: {
-                type: "As Needed"
-                // We can add interval and specificDays if needed later
-            },
-            times: [
-                {
-                    dose: medicationData.dose || "1",
-                    time: new Date(medicationData.time).toISOString()
-                }
-            ],
-            start_date: medicationData.start_date.toISOString(),
-            description: medicationData.description || `${medicationData.medicine_name} medication`,
-        });
 
-        if (response.status === 200) {
-            return {
-                success: true,
-                data: response.data
-            };
-        } else {
-            return { success: false, message: response.message };
-        }
+    try {
+      const response = await Path.post('/medication/create', {
+        medicine_name: medicationData.medicine_name,
+        forms: medicationData.forms.toLowerCase(),
+        strength: medicationData.strength,
+        unit: medicationData.unit,
+        frequency: {
+          type: "As Needed"
+          // We can add interval and specificDays if needed later
+        },
+        times: [
+          {
+            dose: medicationData.dose || "1",
+            time: new Date(medicationData.time).toISOString()
+          }
+        ],
+        start_date: medicationData.start_date.toISOString(),
+        description: medicationData.description || `${medicationData.medicine_name} medication`,
+      });
+
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        };
+      } else {
+        return { success: false, message: response.message };
+      }
     } catch (error) {
-        console.error('Error adding medication:', error);
-        return { success: false, message: error.message, error: error };
+      console.error('Error adding medication:', error);
+      return { success: false, message: error.message, error: error };
     }
-    },
+  },
   getExercises: async () => {
     try {
       const response = await Path.get('/workout/all_exercises ');
@@ -321,10 +321,45 @@ const userData = {
   },
   getExerciseBodyPart: async (bodyPart) => {
     try {
-      const response = await Path.post('/workout/bodyPart',{
+      const response = await Path.post('/workout/bodyPart', {
         bodyPart: bodyPart
       });
-      console.log("response from getExerciseBodyPart", response);
+
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message: response.message }
+      }
+    } catch (error) {
+      return { success: false, message: "Please check your Internet Connection", error: error }
+    }
+  },
+  getExerciseEquipment: async (equipment) => {
+    try {
+      const response = await Path.post('/workout/equipment', {
+        equipment: equipment
+      });
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      } else {
+        return { success: false, message: response.message }
+      }
+    } catch (error) {
+      return { success: false, message: "Please check your Internet Connection", error: error }
+    }
+  },
+  getExerciseMuscleTarget: async (muscle) => {
+    try {
+      const response = await Path.post('/workout/target', {
+        target: muscle
+      });
       
       if (response.status === 200) {
         return {

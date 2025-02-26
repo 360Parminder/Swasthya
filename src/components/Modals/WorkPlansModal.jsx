@@ -1,48 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator  } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import BaseExerciseModal from './BaseExerciseModal';
 import ExerciseCard from '../Cards/ExerciseCard';
 import GlobalColor from '../../Styles/GlobalColor';
 import Icon from 'react-native-vector-icons/Ionicons';
 import userData from '../../services/userData';
 
-const BodyPartModal = ({ visible, onClose }) => {
-    const bodyParts = [
-        { id: '1', name: 'back', icon: 'body' },
-        { id: '2', name: 'cardio', icon: 'body' },
-        { id: '3', name: 'chest', icon: 'body' },
-        { id: '4', name: 'lower arms', icon: 'body' },
-        { id: '5', name: 'lower legs', icon: 'body' },
-        { id: '6', name: 'shoulders', icon: 'body' },
-        { id: '7', name: 'upper arms', icon: 'body' },
-        { id: '8', name: 'upper legs', icon: 'body' },
-        { id: '9', name: 'waist', icon: 'body' },
+const WorkPlansModal = ({ visible, onClose }) => {
+    const workoutPlans = [
+        { id: '1', name: 'Beginner', icon: 'body' },
+        { id: '2', name: 'Intermediate', icon: 'barbell' },
+        { id: '3', name: 'Advanced', icon: 'fitness' },
+        { id: '4', name: 'Full Body', icon: 'body' },
+        { id: '5', name: 'Upper Body', icon: 'body' },
+        { id: '6', name: 'Lower Body', icon: 'body' },
     ];
+
     const [exercises, setExercises] = useState([]);
-    const [selectedBodyPart, setSelectedBodyPart] = useState(bodyParts[0].name);
+    const [selectedPlan, setSelectedPlan] = useState(workoutPlans[0].name);
     const [selectedExercise, setSelectedExercise] = useState(null);
     const [loading, setLoading] = useState(false);
 
-
     useEffect(() => {
         const fetchExercises = async () => {
-            if (selectedBodyPart) {
+            if (selectedPlan) {
                 setLoading(true);
-                const response = await userData.getExerciseBodyPart(selectedBodyPart);
+                // Replace with actual API call when available
+                const response = await userData.getExerciseList();
                 setExercises(response.data);
                 setLoading(false);
             }
         };
         fetchExercises();
-    }, [selectedBodyPart]);
+    }, [selectedPlan]);
 
     const renderItem = ({ item }) => (
         <TouchableOpacity 
             style={[
                 styles.itemContainer,
-                selectedBodyPart === item.name && styles.selectedItem
+                selectedPlan === item.name && styles.selectedItem
             ]} 
-            onPress={() => setSelectedBodyPart(item.name)}
+            onPress={() => setSelectedPlan(item.name)}
         >
             <Icon name={item.icon} size={24} color={GlobalColor.mainColor} />
             <Text style={styles.itemText}>{item.name}</Text>
@@ -53,29 +51,27 @@ const BodyPartModal = ({ visible, onClose }) => {
         <BaseExerciseModal
             visible={visible}
             onClose={onClose}
-            title="Body Part Exercises"
+            title="Workout Plans"
         >
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 horizontal
-                data={bodyParts}
+                data={workoutPlans}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 contentContainerStyle={styles.listContainer}
             />
-            <View style={styles.exercisesContainer}>
-                {loading ? (
-                    <ActivityIndicator size="large" color={GlobalColor.mainColor} />
-                ) : (
-                    exercises?.map((exercise) => (
-                        <ExerciseCard
-                            key={exercise.id}
-                            exercise={exercise}
-                            onBookmark={setSelectedExercise}
-                        />
-                    ))
-                )}
-            </View>
+            {loading ? (
+                <ActivityIndicator size="large" color={GlobalColor.mainColor} />
+            ) : (
+                exercises?.map((exercise) => (
+                    <ExerciseCard
+                        key={exercise.id}
+                        exercise={exercise}
+                        onBookmark={setSelectedExercise}
+                    />
+                ))
+            )}
         </BaseExerciseModal>
     );
 };
@@ -84,28 +80,24 @@ const styles = StyleSheet.create({
     listContainer: {
         padding: 10,
     },
-    exercisesContainer: {
-        flex: 1,
-        padding: 10,
-    },
     itemContainer: {
         height: 50,
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 5,
+        padding: 15,
         backgroundColor: GlobalColor.secondaryColor,
         borderRadius: 10,
+        marginBottom: 10,
         marginHorizontal: 5,
     },
-    selectedItem: {
-        backgroundColor: GlobalColor.mainColor + '40',
-    },
     itemText: {
-        textTransform: 'capitalize',
         color: GlobalColor.textColor,
         fontSize: 16,
         marginLeft: 15,
     },
+    selectedItem: {
+        backgroundColor: GlobalColor.mainColor + '40',
+    },
 });
 
-export default BodyPartModal; 
+export default WorkPlansModal;

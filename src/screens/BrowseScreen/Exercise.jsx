@@ -38,7 +38,7 @@ const Exercise = () => {
                     onPress={() => setEquipmentModal(true)}
                 />
                 <SquareBox
-                    title="Target Muscle"
+                    title="Targeted Workout"
                     icon="fitness"
                     onPress={() => setMuscleTargetModal(true)}
                 />

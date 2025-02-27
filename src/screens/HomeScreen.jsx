@@ -49,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
               <Pressable>
                 <SmallHomeCard icon={'heart-outline'} logoBg={'#E94358'} value={110} valueUnit={'Bpm'} footerText={'you have normal Bpm'} />
               </Pressable>
-              <Pressable onPress={() => { navigation.navigate('Analysis') }}>
+              <Pressable onPress={() => { navigation.navigate('ExerciseSchedule') }}>
                 <MidCard cardTitle={"exercise"} cardLogo={"barbell-outline"} logocolor={'#4979FB'} logoBg={'#EDF2FF'} value={45} valueUnit={'mins'} targetvalue={90} />
               </Pressable>
               <Pressable onPress={() => { navigation.navigate('Analysis') }}>

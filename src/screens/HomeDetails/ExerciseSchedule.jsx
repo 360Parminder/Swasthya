@@ -64,10 +64,11 @@ const ExerciseSchedule = () => {
 
 const styles = StyleSheet.create({
   topCard: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: GlobalColor.primaryColor,
     borderRadius: 15,
     padding: 20,
     marginHorizontal: 16,
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
   },
   metricContainer: {
     alignItems: 'center',
+    width: '50%',
   },
   metricLabel: {
     fontSize: 14,
@@ -109,8 +111,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   exerciseCard: {
+        
+    width: '100%',
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: GlobalColor.primaryColor,
     borderRadius: 12,
     padding: 12,
     marginBottom: 12,

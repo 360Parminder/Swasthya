@@ -109,9 +109,9 @@ const styles = StyleSheet.create({
   },
   exerciseList: {
     paddingHorizontal: 16,
+    width: '100%',
   },
   exerciseCard: {
-        
     width: '100%',
     flexDirection: 'row',
     backgroundColor: GlobalColor.primaryColor,

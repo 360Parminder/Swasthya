@@ -51,10 +51,11 @@ const ExerciseSchedule = () => {
             <View style={styles.exerciseDetails}>
               <Text style={styles.exerciseName}>{exercise.name}</Text>
               <View style={styles.exerciseMetrics}>
-                <Text style={styles.exerciseMetric}>{exercise.sets} sets</Text>
+                <Text style={[styles.exerciseMetric,{fontWeight:'800',fontSize:16}]}>{exercise.sets} sets</Text>
                 <Text style={styles.exerciseMetric}>{exercise.reps}x reps</Text>
               </View>
             </View>
+            <Icon style={{backgroundColor:'green',borderRadius:100,padding:2}} name="chevron-right" type="material" color={GlobalColor.textColor} size={26} />
           </View>
         ))}
       </ScrollView>
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
+    alignItems: 'center',
   },
   exerciseImage: {
     width: 80,

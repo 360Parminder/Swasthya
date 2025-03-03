@@ -10,39 +10,112 @@ const ExerciseSchedule = () => {
       image: require("../../assets/images/Group.png"),
       sets: 3,
       reps: 16,
+      completed: true,
     },
     {
       name: "Squats", 
       image: require("../../assets/images/Group.png"),
       sets: 4,
       reps: 12,
+      completed: true,
     },
     {
       name: "Lunges",
       image: require("../../assets/images/Group.png"), 
       sets: 3,
       reps: 10,
+      completed: false,
     },
-    // Add more exercises as needed
+    {
+      name: "Plank",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 30,
+      completed: false,
+    },
+    {
+      name: "Crunches",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 20,
+      completed: false,
+    },
+    {
+      name: "Leg Raises",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 15,
+      completed: false,
+    },
+    {
+      name: "Bicycle Crunches",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 20,
+      completed: false,
+    },
+    {
+      name: "Russian Twists",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 20,
+      completed: false,
+    },
+    {
+      name: "Mountain Climbers",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 20,
+      completed: false,
+    },
+    {
+      name: "Burpees",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 10,
+      completed: false,
+    },
+    {
+      name: "High Knees",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 20,
+      completed: false,
+    },
+    {
+      name: "Jumping Jacks",
+      image: require("../../assets/images/Group.png"),
+      sets: 3,
+      reps: 20,
+      completed: false,
+    },
+    
   ];
 
   return (
     <View style={GlobalStyles.container}>
       <View style={styles.topCard}>
         <View style={styles.metricContainer}>
-          <Icon name="timer" type="material" color={GlobalColor.textColor} size={24} />
-          <Text style={styles.metricLabel}>Duration</Text>
-          <Text style={styles.metricValue}>1:10:30</Text>
+          <Icon style={{backgroundColor:'#FEBD59',padding:5,borderRadius:100}} name="time" type="ionicon" color={GlobalColor.textColor} size={30} />
+         <View style={{alignItems:'center'}}>
+         <Text style={styles.metricLabel}>Duration</Text>
+         <Text style={styles.metricValue}>1:10:30</Text>
+         </View>
         </View>
         <View style={styles.divider} />
         <View style={styles.metricContainer}>
-          <Icon name="local-fire-department" type="material" color={GlobalColor.textColor} size={24} />
-          <Text style={styles.metricLabel}>Calories</Text>
-          <Text style={styles.metricValue}>34 kcal</Text>
+          <Icon style={{backgroundColor:'#FF5722',padding:5,borderRadius:100}} name="flame" type="ionicon" color={GlobalColor.textColor} size={30} />
+         <View style={{alignItems:'center'}}>
+         <Text style={styles.metricLabel}>Calories</Text>
+         <Text style={styles.metricValue}>34 kcal</Text>
+         </View>
         </View>
       </View>
 
-      <Text style={styles.sectionTitle}>Exercise List</Text>
+     <View style={{width:'100%',marginTop:16,flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:16,marginVertical:8,marginBottom:16}}>
+     <Text style={styles.sectionTitle}>Exercise List</Text>
+     <Text style={{color:GlobalColor.textColor,opacity:0.8}}>12 Exercise</Text>
+     </View>
 
       <ScrollView style={styles.exerciseList}>
         {exercises.map((exercise, index) => (
@@ -55,7 +128,7 @@ const ExerciseSchedule = () => {
                 <Text style={styles.exerciseMetric}>{exercise.reps}x reps</Text>
               </View>
             </View>
-            <Icon style={{backgroundColor:'green',borderRadius:100,padding:2}} name="chevron-right" type="material" color={GlobalColor.textColor} size={26} />
+            <Icon style={{backgroundColor:exercise.completed?'#32D583':'#D4DBEA',borderRadius:100,padding:2}} name="chevron-right" type="material" color={GlobalColor.textColor} size={26} />
           </View>
         ))}
       </ScrollView>
@@ -74,13 +147,11 @@ const styles = StyleSheet.create({
     padding: 20,
     marginHorizontal: 16,
     marginTop: 16,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
   },
   metricContainer: {
+    justifyContent:'center',
+    flexDirection: 'row',
+    gap: 16,
     alignItems: 'center',
     width: '50%',
   },
@@ -99,14 +170,12 @@ const styles = StyleSheet.create({
     width: 1,
     height: '100%',
     backgroundColor: '#E0E0E0',
+    paddingVertical: 8,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: '600',
     color: GlobalColor.textColor,
-    marginHorizontal: 16,
-    marginTop: 24,
-    marginBottom: 16,
   },
   exerciseList: {
     paddingHorizontal: 16,

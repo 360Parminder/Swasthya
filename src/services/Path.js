@@ -5,8 +5,8 @@ import { navigate } from './navigationService';
 
 // Create an Axios instance
 const Path = axios.create({
-    baseURL:'http://localhost:8003', // Replace with your API base URL
-    // baseURL:'https://swasthya-end.slugdev.me'
+    // baseURL:'http://localhost:8003', // Replace with your API base URL
+    baseURL:'https://swasthya-end.slugdev.me'
   // timeout: 10000, // Optional timeout
 });
 

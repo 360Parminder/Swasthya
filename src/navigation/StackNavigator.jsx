@@ -12,6 +12,7 @@ import WaterDrink from '../screens/HomeDetails/WaterDrink';
 import SleepTracker from '../screens/HomeDetails/SleepTracker';
 import CaloriesReport from '../screens/HomeDetails/CaloriesReport';
 import ExerciseSchedule from '../screens/HomeDetails/ExerciseSchedule';
+import ExerciseDescription from '../components/ExerciseDescription';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,7 +49,7 @@ const StackNavigator = () => {
       <Stack.Screen name='SleepTracker' component={SleepTracker} options={{ headerShown: false }} />
       <Stack.Screen name='CaloriesReport' component={CaloriesReport} options={{ headerShown: false }} />
       <Stack.Screen name='ExerciseSchedule' component={ExerciseSchedule} options={{ headerShown: false }} />
-     
+        <Stack.Screen name='ExerciseDescription' component={ExerciseDescription} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

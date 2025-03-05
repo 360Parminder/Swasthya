@@ -1,9 +1,12 @@
-import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import GlobalStyles from "../../Styles/GlobalStyles";
 import GlobalColor from "../../Styles/GlobalColor";
 import { Icon } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 const ExerciseSchedule = () => {
+  const navigation = useNavigation();
+
   const exercises = [
     {
       name: "Push-ups",
@@ -119,8 +122,8 @@ const ExerciseSchedule = () => {
 
       <ScrollView style={styles.exerciseList}>
         {exercises.map((exercise, index) => (
-          <View key={index} style={styles.exerciseCard}>
-            <Image source={exercise.image} style={styles.exerciseImage} />
+          <TouchableOpacity onPress={()=>navigation.navigate('ExerciseDescription')} key={index} style={styles.exerciseCard}>
+            <Image source={exercise.image} style={styles.exerciseImage} resizeMode="contain" />
             <View style={styles.exerciseDetails}>
               <Text style={styles.exerciseName}>{exercise.name}</Text>
               <View style={styles.exerciseMetrics}>
@@ -129,7 +132,7 @@ const ExerciseSchedule = () => {
               </View>
             </View>
             <Icon style={{backgroundColor:exercise.completed?'#32D583':'#D4DBEA',borderRadius:100,padding:2}} name="chevron-right" type="material" color={GlobalColor.textColor} size={26} />
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

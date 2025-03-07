@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isNetworkError, setIsNetworkError] = useState(false);
 
+    
    useEffect(() => {
     const getToken = async () => {
         setIsLoading(true);

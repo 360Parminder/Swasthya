@@ -360,7 +360,7 @@ const userData = {
       const response = await Path.post('/workout/target', {
         target: muscle
       });
-      
+
       if (response.status === 200) {
         return {
           success: true,
@@ -375,5 +375,29 @@ const userData = {
     }
   }
 };
+ addExercise: async (exerciseData) => {
+    try {
+      const response = await Path.post('/workout/add_exercise', {
+        name: exerciseData.name,
+        bodyPart: exerciseData.bodyPart,
+        equipment: exerciseData.equipment,
+        target: exerciseData.target,
+        description: exerciseData.description,
+        videoUrl: exerciseData.videoUrl
+      });
+
+      if (response.status === 200) {
+        return {
+          success: true,
+          data: response.data
+        }
+      }
+      else {
+        return { success: false, message: response.message }
+      }
+    } catch (error) {
+      return { success: false, message: "Please check your Internet Connection", error: error }
+    }
+  }
 
 export default userData;

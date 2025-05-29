@@ -9,9 +9,11 @@ import GlobalColor from "../Styles/GlobalColor";
 import ProfileModal from "../components/Modals/ProfileModal";
 import ChangePassword from "../components/Modals/ChangePassword";
 import HelpModal from "../components/Modals/HelpModal";
+import { useNavigation } from "@react-navigation/native";
 
 
-const Profile = ({ navigation }) => {
+const Profile = () => {
+  const navigation = useNavigation()
   const { logout } = useContext(AuthContext)
   const { user } = useContext(userDataContext)
   const calculateAge = (dobString) => {
@@ -46,28 +48,28 @@ const Profile = ({ navigation }) => {
       <View style={styles.card}>
         <Pressable onPress={() => setProfileModal(true)} style={styles.cardList}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="person-outline" color={GlobalColor.mainColor} size={35} />
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="person" color={GlobalColor.mainColor} size={35} />
             <Text style={styles.cardText}>Personal Details</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={35} />
         </Pressable>
         <Pressable onPress={() => setChangePassword(true)} style={styles.cardList}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="lock-closed-outline" color={GlobalColor.mainColor} size={35} />
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="lock-closed" color={GlobalColor.mainColor} size={35} />
             <Text style={styles.cardText}>Change Password</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={35} />
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('Notification')} style={styles.cardList}>
+        {/* <Pressable onPress={() => navigation.navigate('Notification')} style={styles.cardList}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="notifications-outline" color={GlobalColor.mainColor} size={35} />
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="notifications" color={GlobalColor.mainColor} size={35} />
             <Text style={styles.cardText}>Notification</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={35} />
-        </Pressable>
+        </Pressable> */}
         <Pressable onPress={() => sethelpModal(true)} style={styles.cardList}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="help-outline" color={GlobalColor.mainColor} size={35} />
+            <Icon style={{ padding:10, borderRadius: 100,backgroundColor:'#2e53b97a' }} name="information"  color={GlobalColor.mainColor} size={35} />
             <Text style={styles.cardText}>Help</Text>
           </View>
           <Icon name="chevron-forward" color={GlobalColor.iconColor} size={35} />

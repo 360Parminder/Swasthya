@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import GlobalColor from "../../Styles/GlobalColor";
+import { Icon } from "react-native-elements";
 
 const ModalHeading = ({ title, setModalVisible }) => {
   return (
@@ -7,7 +8,7 @@ const ModalHeading = ({ title, setModalVisible }) => {
         <View style={{width:50}} />
       <Text style={styles.modalTitle}>{title}</Text>
       <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-        <Text style={styles.closeButtonText}>Close</Text>
+        <Icon name="chevron-down" type="ionicon" size={30} color={GlobalColor.textColor} />
       </TouchableOpacity>
     </View>
   );
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
+        marginBottom: 10,
     },
     modalTitle: {
         color: GlobalColor.textColor,

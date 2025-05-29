@@ -7,8 +7,9 @@ import {
     TouchableOpacity,
     Modal,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+
 import GlobalColor from '../../Styles/GlobalColor';
+import { Icon } from 'react-native-elements';
 
 const MedicationCard = ({ medication }) => {
     const [showDetails, setShowDetails] = useState(false);
@@ -32,6 +33,31 @@ const MedicationCard = ({ medication }) => {
             year: 'numeric'
         });
     };
+    // Map medication forms to corresponding Font Awesome 5 icons
+    const getIconForForm = (form) => {
+        const iconMap = {
+            'tablet': 'tablets',
+            'capsule': 'capsules',
+            'liquid': 'prescription-bottle',
+            'topical': 'pump-medical',
+            'cream': 'pump-medical',
+            'device': 'stethoscope',
+            'drops': 'eye-dropper',
+            'foam': 'pump-soap',
+            'gel': 'prescription-bottle',
+            'inhaler': 'lungs',
+            'injection': 'syringe',
+            'lotion': 'pump-medical',
+            'ointment': 'prescription-bottle-alt',
+            'patch': 'band-aid',
+            'powder': 'prescription-bottle',
+            'spray': 'spray-can',
+            'suppository': 'capsules'
+        };
+        return iconMap[form.toLowerCase()] || 'pills';
+    };
+
+    const medicationIcon = getIconForForm(medication.forms);
 
     return (
         <>
@@ -40,11 +66,7 @@ const MedicationCard = ({ medication }) => {
                 onPress={() => setShowDetails(true)}
             >
                 <View style={styles.medicationImageContainer}>
-                    <Image
-                        source={require('../../assets/images/capsule.jpg')}
-                        style={styles.medicationImage}
-                        resizeMode="contain"
-                    />
+                    <Icon name={medicationIcon} size={28} type='font-awesome-5' color={GlobalColor.mainColor} />
                 </View>
                 <View style={styles.medicationInfo}>
                     <Text style={styles.medicationName}>{medication.medicine_name}</Text>
@@ -56,7 +78,7 @@ const MedicationCard = ({ medication }) => {
                         ))}
                     </View>
                 </View>
-                <Icon name="chevron-forward" size={20} color={GlobalColor.mainColor} />
+                <Icon name="chevron-forward" size={20} type="ionicon" color={GlobalColor.mainColor} />
             </TouchableOpacity>
 
             <Modal
@@ -72,15 +94,11 @@ const MedicationCard = ({ medication }) => {
                                 style={styles.closeButton}
                                 onPress={() => setShowDetails(false)}
                             >
-                                <Icon name="chevron-down" size={24} color={GlobalColor.textColor} />
+                                <Icon name="chevron-down" size={24} type="ionicon" color={GlobalColor.textColor} />
                             </TouchableOpacity>
                             <View style={styles.headerContent}>
                                 <View style={styles.medicationImageContainerLarge}>
-                                    <Image
-                                        source={require('../../assets/images/capsule.jpg')}
-                                        style={styles.medicationImageLarge}
-                                        resizeMode="contain"
-                                    />
+                                   <Icon name={medicationIcon} size={40} type='font-awesome-5' color={GlobalColor.mainColor} />
                                 </View>
                                 <Text style={styles.modalTitle}>{medication.medicine_name}</Text>
                                 <Text style={styles.modalSubtitle}>
@@ -92,12 +110,12 @@ const MedicationCard = ({ medication }) => {
                         <View style={styles.modalBody}>
                             <View style={styles.infoSection}>
                                 <View style={styles.infoCard}>
-                                    <Icon name="fitness-outline" size={20} color={GlobalColor.mainColor} />
+                                    <Icon name="fitness-outline" size={20} type="ionicon" color={GlobalColor.mainColor} />
                                     <Text style={styles.infoLabel}>Strength</Text>
                                     <Text style={styles.infoValue}>{medication.strength} {medication.unit}</Text>
                                 </View>
                                 <View style={styles.infoCard}>
-                                    <Icon name="repeat-outline" size={20} color={GlobalColor.mainColor} />
+                                    <Icon name="repeat-outline" size={20} type="ionicon" color={GlobalColor.mainColor} />
                                     <Text style={styles.infoLabel}>Frequency</Text>
                                     <Text style={styles.infoValue}>{medication.frequency.type}</Text>
                                 </View>
@@ -105,7 +123,7 @@ const MedicationCard = ({ medication }) => {
 
                             <View style={styles.sectionContainer}>
                                 <Text style={styles.sectionTitle}>
-                                    <Icon name="time-outline" size={18} color={GlobalColor.mainColor} /> Timings
+                                    <Icon name="time-outline" size={18} type="ionicon" color={GlobalColor.mainColor} /> Timings
                                 </Text>
                                 <View style={styles.timingsGrid}>
                                     {medication.times.map((time, index) => (
@@ -119,7 +137,7 @@ const MedicationCard = ({ medication }) => {
 
                             <View style={styles.sectionContainer}>
                                 <Text style={styles.sectionTitle}>
-                                    <Icon name="calendar-outline" size={18} color={GlobalColor.mainColor} /> Schedule
+                                    <Icon name="calendar-outline" size={18} type="ionicon" color={GlobalColor.mainColor} /> Schedule
                                 </Text>
                                 <View style={styles.scheduleCard}>
                                     <Text style={styles.scheduleLabel}>Start Date</Text>
@@ -130,7 +148,7 @@ const MedicationCard = ({ medication }) => {
                             {medication.description && (
                                 <View style={styles.sectionContainer}>
                                     <Text style={styles.sectionTitle}>
-                                        <Icon name="information-circle-outline" size={18} color={GlobalColor.mainColor} /> Notes
+                                        <Icon name="information-circle-outline" type="ionicon" size={18} color={GlobalColor.mainColor} /> Notes
                                     </Text>
                                     <View style={styles.descriptionCard}>
                                         <Text style={styles.descriptionText}>{medication.description}</Text>

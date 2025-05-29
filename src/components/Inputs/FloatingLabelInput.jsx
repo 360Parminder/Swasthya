@@ -8,6 +8,7 @@ const FloatingLabelInput = ({
   onChangeText,
   borderColor = GlobalColor.borderColor,
   focusBorderColor = GlobalColor.mainColor,
+  labelBackground
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -32,6 +33,7 @@ const FloatingLabelInput = ({
             top: isFocused || value ? -12 : 13,
             fontSize: isFocused || value ? 14 : 16,
             zIndex: isFocused || value ? 1 : 0,
+            backgroundColor:labelBackground,
           },
         ]}
       >
@@ -59,7 +61,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 10,
     transition: "top 200ms, font-size 200ms",
-    backgroundColor: GlobalColor.backgroundColor,
     color: GlobalColor.textColor,
   },
 });

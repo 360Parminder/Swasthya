@@ -20,12 +20,18 @@ export const AuthProvider = ({ children }) => {
       try {
         const savedToken = await EncryptedStorage.getItem('userToken');
         console.log('Token retrieved from Encrypted data :', savedToken);
-        setToken(savedToken);
-        setIsAuthenticated(true); 
-        setIsLoading(false); 
+        if (savedToken) {
+            setToken(savedToken);
+            setIsAuthenticated(true); 
+            setIsLoading(false); 
+        } else {
+            setIsAuthenticated(false);
+            setIsLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching token", error);
         setIsLoading(false);
+        setIsAuthenticated(false);
       }
     };
     getToken();

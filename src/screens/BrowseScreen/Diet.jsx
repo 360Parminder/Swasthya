@@ -6,6 +6,8 @@ import IngredientsInHand from '../../components/Modals/IngredientsInHand';
 import GlobalStyles from '../../Styles/GlobalStyles';
 import GlobalColor from '../../Styles/GlobalColor';
 import SquareBox from '../../components/Button/SquareBox';
+import ModalHeading from '../../components/Heading/ModalHeading';
+import FloatingLabelInput from '../../components/Inputs/FloatingLabelInput';
 
 
 const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{  
@@ -58,7 +60,7 @@ const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{
           <View style={{
             width: '100%',
             height: '85%',
-            backgroundColor: 'white',
+            backgroundColor: GlobalColor.primaryColor,
             borderTopEndRadius: 20,
             borderTopStartRadius: 20,
             shadowColor: '#000',
@@ -69,38 +71,23 @@ const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{
             // bottom:0
           }}
           >
-              <View style={{
-              height: '8%',
-              paddingRight: 16,
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-            }}>
-              <Pressable onPress={() => setWeekMealModalVisible(false)}>
-                <Text style={{
-                  fontSize: 20,
-                  color: '#3a86ff',
-                  fontWeight: '600',
-                }}>Close</Text>
-            </Pressable>
-            </View>
+        <ModalHeading title="Find Week Meal" setModalVisible={setWeekMealModalVisible}  />
 
             <View style={styles.card}>
-        <TextInput
-          style={styles.input}
-          placeholder="Protein"
+       
+        <FloatingLabelInput
+          label="Protein"
           value={input1}
           onChangeText={setInput1}
-          placeholderTextColor={'#2d1560'}
           keyboardType='numeric'
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Calories"
-          value={input2}
-          onChangeText={setInput2}
-          placeholderTextColor={'#2d1560'}
-          keyboardType='numeric'
+       
+        <FloatingLabelInput
+          label="Food Preference"
+          value={FoodPreference}
+          onChangeText={setFoodPreference}
         />
+        
         <View style={[styles.input, { paddingLeft: 5,alignItems:'center',justifyContent:'center',placeholderTextColor:'#000 '}]}>
           <RNPickerSelect
             placeholder={{ label: 'Select Food Preference', value: null }}
@@ -114,8 +101,8 @@ const WeekMealModal=({weekMealModalVisible,setWeekMealModalVisible})=>{
             ]}
           />
         </View>
-        <Pressable style={styles.button} onPress={fetchMeal}>
-          <Text style={styles.buttonText}>Submit</Text>
+        <Pressable style={GlobalStyles.button} onPress={fetchMeal}>
+          <Text style={GlobalStyles.buttonText}>Submit</Text>
         </Pressable>
       </View>
 
@@ -182,9 +169,11 @@ const styles = StyleSheet.create({
   },
   card: {
     marginHorizontal:10,
-    backgroundColor: '#ded9fb',
+    backgroundColor: GlobalColor.secondaryColor,
     padding: 20,
     borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   input: {
     height: 40,

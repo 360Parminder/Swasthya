@@ -44,7 +44,7 @@ const Header = () => {
         </View>
       </View>
       <Pressable onPress={() => navigation.navigate('Notification')}>
-        <Icon name="notifications-outline" size={35} color={GlobalColor.iconColor} />
+        <Icon name="notifications" size={35} color={GlobalColor.iconColor} />
       </Pressable>
     </View>
   )

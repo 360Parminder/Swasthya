@@ -24,9 +24,11 @@ const HelpModal = ({ visible, setVisible }) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                 <View style={{ width: '100%', height: '10%', flexDirection: 'row', alignItems: 'center', borderRadius: 10, justifyContent: 'space-between', padding: 10 }}>
-                        <TouchableOpacity onPress={() => setVisible(false)} style={{}}> <Icon style={{ fontWeight: '600' }} name="close-outline" color={GlobalColor.errorColor} size={30} /></TouchableOpacity>
-                        <Text style={{ color: GlobalColor.textColor, fontSize: 20, fontWeight: '600' }}>Help</Text>
                         <View style={{ width: 50 }} />
+                        <Text style={{ color: GlobalColor.textColor, fontSize: 20, fontWeight: '600' }}>Help</Text>
+                        <TouchableOpacity onPress={() => setVisible(false)} >
+                             <Icon name="chevron-down" color={GlobalColor.textColor} size={32} />
+                             </TouchableOpacity>
                     </View>
                     <Text style={styles.title}>We’re here to help whenever you need us</Text>
                     <Text style={styles.subtitle}>Have a question? Send a message to 360.parminder@gmail.com at any time</Text>
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: '700',
         textAlign: 'center',
-        width: '80%',
+        width: '85%',
         color: GlobalColor.textColor,
     },
     subtitle: {

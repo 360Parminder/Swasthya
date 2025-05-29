@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={GlobalColor.backgroundColor} />
+      <StatusBar barStyle='default' backgroundColor={GlobalColor.backgroundColor} />
       <View style={[GlobalStyles.container, { alignItems: 'center' }]}>
         <Header />
         <View style={{ flexDirection: 'row', marginBottom: 10, width: '100%', paddingHorizontal: 20 }}>

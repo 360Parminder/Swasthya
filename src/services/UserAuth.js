@@ -54,6 +54,8 @@ const UserAuth = {
             const response = await Path.post('/user/sendOtp', {
                 mobile:`+91${mobile}`,
             });
+            console.log(response.data);
+            
             if (response.status === 200) {
                 return {
                     success: true,

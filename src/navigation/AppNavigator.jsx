@@ -10,6 +10,8 @@ import NetworkError from '../screens/Error/NetworkError';
 
 const AppNavigator = () => {
   const { isAuthenticated, isNetworkError } = useContext(AuthContext);
+  console.log('isAuthenticated', isAuthenticated);
+  console.log('isNetworkError', isNetworkError);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const AppNavigator = () => {
     <UserDataProvider>
       <PermissionsProvider>
         <NavigationContainer>
-          {loggedIn ? (isNetworkError ? <NetworkError /> : <TabNavigator />) : (isNetworkError?<NetworkError/>:<AuthenticationNavigator />)}
+          {loggedIn ? (isNetworkError ? <NetworkError /> : <TabNavigator/>) :<AuthenticationNavigator />}
         </NavigationContainer>
       </PermissionsProvider>
     </UserDataProvider>

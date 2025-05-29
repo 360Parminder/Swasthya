@@ -2,6 +2,7 @@ import { Image, Modal, ScrollView, StyleSheet, Text, Touchable, TouchableOpacity
 import GlobalColor from "../../Styles/GlobalColor";
 import { useContext } from "react";
 import { userDataContext } from "../../context/UserContext";
+import { Icon } from "react-native-elements";
 
 const ProfileModal = ({ visible, setVisible }) => {
   const { user } = useContext(userDataContext)
@@ -17,9 +18,9 @@ const ProfileModal = ({ visible, setVisible }) => {
       <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' }}>
         <View style={{ width: '100%', height: '80%', justifyContent: 'center', alignItems: 'center', backgroundColor: GlobalColor.primaryColor, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
           <View style={{ width: '100%', height: '10%', flexDirection: 'row', alignItems: 'center', borderRadius: 10, justifyContent: 'space-between', padding: 10 }}>
-            <TouchableOpacity onPress={() => setVisible(false)} style={{ padding: 10 }}><Text style={{ color: GlobalColor.mainColor }}>Close</Text></TouchableOpacity>
-            <Text style={{ color: GlobalColor.textColor, fontSize: 20, fontWeight: '600' }}>Personal Details</Text>
             <View style={{ width: 50 }} />
+            <Text style={{ color: GlobalColor.textColor, fontSize: 20, fontWeight: '600' }}>Personal Details</Text>
+            <TouchableOpacity onPress={() => setVisible(false)} style={{ padding: 10 }}><Text style={{ color: GlobalColor.mainColor }}><Icon name="chevron-down" color={GlobalColor.textColor} type="ionicon" size={32} style={{}}/></Text></TouchableOpacity>
           </View>
           <ScrollView style={{ width: '100%', height: '100%' }}>
             <View style={{ alignItems: 'center', marginBottom: 20 }}>

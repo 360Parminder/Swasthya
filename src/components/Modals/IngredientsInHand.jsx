@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Linking, Image, ScrollView, Modal, Pressable } from 'react-native';
 import Path from '../../services/Path';
 import Icon from 'react-native-vector-icons/Ionicons';
+import GlobalColor from '../../Styles/GlobalColor';
+import GlobalStyles from '../../Styles/GlobalStyles';
+import FloatingLabelInput from '../Inputs/FloatingLabelInput';
+import ModalHeading from '../Heading/ModalHeading';
 
 const {
   GoogleGenerativeAI,
@@ -73,7 +77,7 @@ const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModa
             <View style={{
               width: '100%',
               height: '85%',
-              backgroundColor: 'white',
+              backgroundColor: GlobalColor.primaryColor,
               borderTopEndRadius: 20,
               borderTopStartRadius: 20,
               shadowColor: '#000',
@@ -83,52 +87,29 @@ const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModa
               elevation: 5,
               // bottom:0
             }}>
-               <View style={{
-                height: '8%',
-                paddingRight: 16,
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-              }}>
-                <Pressable onPress={() => setIngredientsInHandModalVisible(false)}>
-                  <Text style={{
-                    fontSize: 20,
-                    color: '#3a86ff',
-                    fontWeight: '600',
-                  }}>Close</Text>
-              </Pressable>
-              </View>
-  
+              <ModalHeading title="Ingredients In Hand" setModalVisible={setIngredientsInHandModalVisible} />
               <View style={styles.card}>
         {inputs.map((input, index) => (
-          <View key={index}>
-            <TextInput
-              style={styles.input}
-              placeholder="ingredient"
-              value={input.protein}
-              onChangeText={(text) => handleInputChange(index, 'ingredient', text)}
-              placeholderTextColor={'#2d1560'}
-            />
+          <View key={index} style={styles.section}>
+           <FloatingLabelInput
+            label="Ingredient"
+            value={input.ingredient}
+            onChangeText={(text) => handleInputChange(index, 'ingredient', text)}
+            placeholder="Ingredient"
+            placeholderTextColor={GlobalColor.textColor}
+            style={styles.input}
+            labelBackground={GlobalColor.secondaryColor}
+           />
             
           </View>
         ))}
         
-        <Pressable style={[{
-          width: 35,
-          height: 35,
-          borderRadius: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom:10,
-          padding:0
-        },styles.button]} onPress={addInput}>
-        <Icon style={{
-          fontSize:20,
-          fontWeight:'bold'
-          // margin:4
-        }} name="add"color={'#fff'}/>
-        </Pressable>
-        <Pressable style={styles.button} onPress={fetchMeal}>
-          <Text style={styles.buttonText}>Submit</Text>
+        <TouchableOpacity style={[styles.addButton]} onPress={addInput}>
+        <Icon name="add" size={28} color={GlobalColor.textColor}/>
+        <Text style={GlobalStyles.buttonText}>Add Ingredient</Text>
+        </TouchableOpacity>
+        <Pressable style={GlobalStyles.button} onPress={fetchMeal}>
+          <Text style={GlobalStyles.buttonText}>Submit</Text>
         </Pressable>
       </View>
   
@@ -165,17 +146,14 @@ const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModa
       textTransform: 'capitalize',
       fontWeight: '600',
     },
-    secondaryButton: {
-      // Add styles for secondary buttons if needed
-    },
-    secondaryButtonText: {
-      // Add styles for secondary button text if needed
-    },
     card: {
+      width: '100%',
       marginHorizontal:10,
-      backgroundColor: '#ded9fb',
+      backgroundColor: GlobalColor.secondaryColor,
       padding: 20,
       borderRadius: 10,
+      // justifyContent: 'center',
+      alignItems: 'center',
     },
     input: {
       height: 40,
@@ -228,6 +206,9 @@ const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModa
       marginBottom: 10,
     },
     section: {
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center ',
       marginBottom: 15,
     },
     sectionTitle: {
@@ -250,6 +231,14 @@ const IngredientsInHand=({ingredientsInHandModalVisible,setIngredientsInHandModa
       color: '#2d1560',
     },
     addButton: {
+     width: '80%',
+      height: 40,
+      borderRadius: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 10,
+      backgroundColor: GlobalColor.mainColor,
+      flexDirection: 'row',
       // your styles for add button
     },
     addButtonText: {

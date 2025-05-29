@@ -1,67 +1,84 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet } from "react-native";
+import { StyleSheet, TextInput, Text, View, Animated } from "react-native";
 import GlobalColor from "../../Styles/GlobalColor";
 
 const FloatingLabelInput = ({
   label,
   value,
   onChangeText,
-  borderColor = GlobalColor.borderColor,
-  focusBorderColor = GlobalColor.mainColor,
-  labelBackground
+  style,
+  inputStyle,
+  // labelStyle,
+  containerStyle,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const animatedIsFocused = new Animated.Value(value ? 1 : 0);
+
+  React.useEffect(() => {
+    Animated.timing(animatedIsFocused, {
+      toValue: (isFocused || value) ? 1 : 0,
+      duration: 200,
+      useNativeDriver: false,
+    }).start();
+  }, [isFocused, value]);
+
+  const labelStyle = {
+    position: 'absolute',
+    left: 16,
+    top: animatedIsFocused.interpolate({
+      inputRange: [0, 1],
+      outputRange: [16, -10],
+    }),
+    fontSize: animatedIsFocused.interpolate({
+      inputRange: [0, 1],
+      outputRange: [14, 16],
+    }),
+    color: GlobalColor.textColor,
+    backgroundColor: GlobalColor.backgroundColor,
+    paddingHorizontal: 4,
+  };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.inputGroup, containerStyle]}>
       <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        placeholderTextColor={GlobalColor.textColor}
         style={[
           styles.input,
-          { borderBottomColor: isFocused ? focusBorderColor : borderColor },
-          { borderBottomColor: isFocused ? focusBorderColor : borderColor },
+          isFocused || value ? styles.inputFocused : null,
+          inputStyle,
         ]}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder=" "
       />
-      <Text
-        style={[
-          styles.label,
-          {
-            top: isFocused || value ? -12 : 13,
-            fontSize: isFocused || value ? 14 : 16,
-            zIndex: isFocused || value ? 1 : 0,
-            backgroundColor:labelBackground,
-          },
-        ]}
-      >
+      <Animated.Text style={[labelStyle, labelStyle]}>
         {label}
-      </Text>
+      </Animated.Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: "relative",
+  inputGroup: {
     marginVertical: 10,
-    width:'90%'
+    position: "relative",
+    alignSelf: "center",
+    width: "100%",
   },
   input: {
-    borderWidth: 1,
-    borderColor:GlobalColor.borderColor,
-    borderRadius: 5,
-    height: 50,
+    position: "relative",
+    color: GlobalColor.textColor,
     fontSize: 16,
-    color: GlobalColor.textColor,
+    padding: 12,
+    borderWidth: 2,
+    borderColor: GlobalColor.borderColor,
+    borderRadius: 12,
+    backgroundColor: "transparent",
+    width: "100%",
   },
-  label: {
-    position: "absolute",
-    left: 10,
-    transition: "top 200ms, font-size 200ms",
-    color: GlobalColor.textColor,
+  inputFocused: {
+    borderColor: GlobalColor.mainColor,
   },
 });
 

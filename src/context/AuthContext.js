@@ -40,21 +40,24 @@ export const AuthProvider = ({ children }) => {
     const login = async (mobile, password,fcm_token) => {
         setIsLoading(true);
         try {
-            const {data,messsage,success} = await UserAuth.signIn(mobile, password,fcm_token);
-            if (success) {
+            const {data} = await UserAuth.signIn(mobile, password,fcm_token);
+            console.log('data in login', data);
+            if (data.success) {
                 await EncryptedStorage.setItem('userToken',data.token);
                 setToken(data.token);
                 setIsLoading(false);
                 setIsAuthenticated(true);
-                return  ;
+                return data.token;
             }
             else {
-                Alert.alert("Error", messsage);
+                console.log('data in else', data);
+                Alert.alert("Error", data.message);
                 setIsLoading(false);
                 setIsAuthenticated(false);
             }
         } catch (error) {
-            Alert.alert("Error", error.messsage);
+            console.log('Error in login catch', error);
+            Alert.alert("Error", error.message);
             setIsLoading(false);
             setIsAuthenticated(false);
         }

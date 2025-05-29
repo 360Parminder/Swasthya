@@ -24,17 +24,8 @@ const SignIn = () => {
       Alert.alert('Error', 'Please fill in both phone number and password');
       return;
     }
-
-    try {
-      const response = await login(phoneNumber, password,fcmToken);
-      if (!response.success) {
-        Alert.alert('Login Failed', 'Invalid credentials. Please try again.');
-      }
-    } catch (error) {
-      Alert.alert('Error', 'An error occurred. Please try again later.');
-    }
+   await login(phoneNumber, password,fcmToken);
   };
-  console.log(phoneNumber, password);
   
 
   return (

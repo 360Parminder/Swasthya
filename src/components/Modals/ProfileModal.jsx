@@ -43,7 +43,7 @@ const ProfileModal = ({ visible, setVisible }) => {
                                 </Text>
 
                                 <Text style={styles.detailItem}>
-                                    Date of Birth: {user?.dob}
+                                    Date of Birth: {user?.dob.split('T')[0]}
                                 </Text>
                                 <Text style={styles.detailItem}>
                                     Gender: {user?.gender}

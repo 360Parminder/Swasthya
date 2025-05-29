@@ -9,10 +9,18 @@ const UserAuth = {
                 fcm_token
             });
             if (response) {
-                return response;
+                return {
+                    success: true,
+                    data: response.data,
+                    message: response.data.message,
+                }
             }
         } catch (error) {
-            console.log(error);
+            return {
+                success: false,
+                data: error.response.data,
+                message: error.response.data.message || "Error Occured while logging in",
+            }
         }
     },
     register: async (name,mobile,password,weight,height,date,gender,foodPreference) => {

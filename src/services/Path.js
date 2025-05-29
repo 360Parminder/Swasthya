@@ -26,8 +26,14 @@ Path.interceptors.request.use(
 
 // Response interceptor
 Path.interceptors.response.use(
-  (response) => response,
-  (error) => Promise.reject(error)
+  (response) => {
+    console.log('Response received:', response.data);
+    return response;
+  },
+  (error) => {
+    console.log('Error in response interceptor:', error);
+    return Promise.reject(error);
+  }
 );
 
 export default Path;

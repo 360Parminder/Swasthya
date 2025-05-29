@@ -40,25 +40,23 @@ export const AuthProvider = ({ children }) => {
     const login = async (mobile, password,fcm_token) => {
         setIsLoading(true);
         try {
-            const response = await UserAuth.signIn(mobile, password,fcm_token);
-            if (response?.status === 200) {
-                await EncryptedStorage.setItem('userToken', response.data.token);
-                setToken(response.data.token);
+            const {data,messsage,success} = await UserAuth.signIn(mobile, password,fcm_token);
+            if (success) {
+                await EncryptedStorage.setItem('userToken',data.token);
+                setToken(data.token);
                 setIsLoading(false);
                 setIsAuthenticated(true);
-                return response.data;
-            }
-            else if (response?.status == 'Network/Request Error') {
-               setIsNetworkError(true);
-                setIsLoading(false);
+                return  ;
             }
             else {
-                Alert.alert("Error", "Invalid Credentials");
+                Alert.alert("Error", messsage);
                 setIsLoading(false);
+                setIsAuthenticated(false);
             }
         } catch (error) {
-            Alert.alert("Error", "Invalid Credentials");
+            Alert.alert("Error", error.messsage);
             setIsLoading(false);
+            setIsAuthenticated(false);
         }
     };
     const logout = async () => {

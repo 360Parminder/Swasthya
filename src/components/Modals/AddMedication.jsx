@@ -6,7 +6,6 @@ import {
     Modal,
     TouchableOpacity,
     TextInput,
-    Image,
     Alert,
     ScrollView,
 } from 'react-native';
@@ -14,7 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalColor from '../../Styles/GlobalColor';
 import userData from '../../services/userData';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import RNPickerSelect from 'react-native-picker-select';
 const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
     const [currentScreen, setCurrentScreen] = useState(0);
     const [medicationData, setMedicationData] = useState({
@@ -25,8 +24,15 @@ const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
         dose: '1',
         time: new Date(),
         start_date: new Date(),
-        description: ''
+        description: '',
+        for:"myself",
     });
+    const relativesList = [
+        { label: 'Father', value: 'father123' },
+        { label: 'Mother', value: 'mother123' },
+        { label: 'Spouse', value: 'spouse123' },
+        { label: 'Child', value: 'child123' },
+    ];
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
 
@@ -41,6 +47,7 @@ const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
             time: new Date(),
             start_date: new Date(),
             description: '',
+            forWhom: 'myself',
         });
     };
 
@@ -98,40 +105,88 @@ const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
     const screens = [
         // Screen 1: Medication Name
         <View key="screen1" style={styles.screenContent}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={onClose}>
-                    <Text style={styles.cancelText}>Cancel</Text>
-                </TouchableOpacity>
-            </View>
-            <Image 
-                style={styles.image} 
-                source={require('../../assets/images/health-report.gif')} 
-                resizeMode='contain'
-            />
-            <Text style={styles.title}>Medication Name</Text>
-            <TextInput 
-                placeholder='Enter medication name'
-                style={styles.input}
-                placeholderTextColor={GlobalColor.textColor}
-                value={medicationData.medicine_name}
-                onChangeText={(text) => updateMedicationData('medicine_name', text)}
-            />
-            <TextInput 
-                placeholder='Description (optional)'
-                style={styles.input}
-                placeholderTextColor={GlobalColor.textColor}
-                value={medicationData.description}
-                onChangeText={(text) => updateMedicationData('description', text)}
-                multiline
-            />
-            <TouchableOpacity 
-                style={[styles.button, !medicationData.medicine_name && styles.buttonDisabled]}
-                onPress={() => medicationData.medicine_name && setCurrentScreen(1)}
-                disabled={!medicationData.medicine_name}
-            >
-                <Text style={styles.buttonText}>Next</Text>
+        <View style={styles.header}>
+            <TouchableOpacity onPress={onClose}>
+                <Text style={styles.cancelText}>Cancel</Text>
             </TouchableOpacity>
-        </View>,
+        </View>
+        <View style={styles.iconContainer}>
+            <Icon name="medical-outline" size={80} color={GlobalColor.mainColor} />
+        </View>
+        <Text style={styles.title}>Medication Name</Text>
+        
+        {/* For Whom Dropdown */}
+        <View style={styles.dropdownContainer}>
+            <Text style={styles.dropdownLabel}>Who is this medication for?</Text>
+            <View style={styles.dropdownWrapper}>
+                <RNPickerSelect
+                    onValueChange={(value) => updateMedicationData('forWhom', value)}
+                    items={[
+                        { label: 'Myself', value: 'myself' },
+                        { label: 'Relative', value: 'relative' },
+                    ]}
+                    value={medicationData.forWhom}
+                    style={pickerSelectStyles}
+                    placeholder={{}}
+                    Icon={() => (
+                        <Icon 
+                            name="chevron-down-outline" 
+                            size={20} 
+                            color={GlobalColor.textColor} 
+                            style={styles.dropdownIcon}
+                        />
+                    )}
+                />
+            </View>
+        </View>
+
+        {/* Relative Dropdown (conditionally shown) */}
+        {medicationData.forWhom === 'relative' && (
+            <View style={styles.dropdownContainer}>
+                <Text style={styles.dropdownLabel}>Select Relative</Text>
+                <View style={styles.dropdownWrapper}>
+                    <RNPickerSelect
+                        onValueChange={(value) => updateMedicationData('relativeId', value)}
+                        items={relativesList}
+                        value={medicationData.relativeId}
+                        style={pickerSelectStyles}
+                        placeholder={{ label: 'Select a relative...', value: null }}
+                        Icon={() => (
+                            <Icon 
+                                name="chevron-down-outline" 
+                                size={20} 
+                                color={GlobalColor.textColor} 
+                                style={styles.dropdownIcon}
+                            />
+                        )}
+                    />
+                </View>
+            </View>
+        )}
+
+        <TextInput 
+            placeholder='Enter medication name'
+            style={styles.input}
+            placeholderTextColor={GlobalColor.textColor}
+            value={medicationData.medicine_name}
+            onChangeText={(text) => updateMedicationData('medicine_name', text)}
+        />
+        <TextInput 
+            placeholder='Description (optional)'
+            style={styles.input}
+            placeholderTextColor={GlobalColor.textColor}
+            value={medicationData.description}
+            onChangeText={(text) => updateMedicationData('description', text)}
+            multiline
+        />
+        <TouchableOpacity 
+            style={[styles.button, !medicationData.medicine_name && styles.buttonDisabled]}
+            onPress={() => medicationData.medicine_name && setCurrentScreen(1)}
+            disabled={!medicationData.medicine_name}
+        >
+            <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+    </View>,
 
         // Screen 2: Medication Form
         <View key="screen2" style={styles.screenContent}>
@@ -145,11 +200,9 @@ const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
                     <Text style={styles.cancelText}>Cancel</Text>
                 </TouchableOpacity>
             </View>
-            <Image 
-                style={styles.image} 
-                source={require('../../assets/images/drugsbottle.gif')} 
-                resizeMode='contain'
-            />
+            <View style={styles.iconContainer}>
+                <Icon name="flask-outline" size={80} color={GlobalColor.mainColor} />
+            </View>
             <Text style={styles.title}>Medication Form</Text>
             <View style={styles.optionsGrid}>
                 {medicationForms.map((form) => (
@@ -189,11 +242,9 @@ const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
                     <Text style={styles.cancelText}>Cancel</Text>
                 </TouchableOpacity>
             </View>
-            <Image 
-                style={styles.image} 
-                source={require('../../assets/images/vaccine.gif')} 
-                resizeMode='contain'
-            />
+            <View style={styles.iconContainer}>
+                <Icon name="barbell-outline" size={80} color={GlobalColor.mainColor} />
+            </View>
             <Text style={styles.title}>Medication Strength</Text>
             <View style={styles.strengthContainer}>
                 <TextInput
@@ -243,11 +294,9 @@ const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
                     <Text style={styles.cancelText}>Cancel</Text>
                 </TouchableOpacity>
             </View>
-            <Image 
-                style={styles.image} 
-                source={require('../../assets/images/vaccine.gif')} 
-                resizeMode='contain'
-            />
+            <View style={styles.iconContainer}>
+                <Icon name="alarm-outline" size={80} color={GlobalColor.mainColor} />
+            </View>
             <Text style={styles.title}>When do you take this?</Text>
 
             <TouchableOpacity 
@@ -320,6 +369,26 @@ const AddMedication = ({ isVisible, onClose, onMedicationAdded }) => {
         </Modal>
     );
 };
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        color: GlobalColor.textColor,
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    inputAndroid: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        color: GlobalColor.textColor,
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    iconContainer: {
+        top: Platform.OS === 'ios' ? 10 : 15,
+        right: 10,
+    },
+});
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -364,10 +433,8 @@ const styles = StyleSheet.create({
         color: GlobalColor.mainColor,
         fontSize: 16,
     },
-    image: {
-        width: 150,
-        height: 150,
-        alignSelf: 'center',
+    iconContainer: {
+        alignItems: 'center',
         marginVertical: 20,
     },
     title: {
@@ -376,6 +443,23 @@ const styles = StyleSheet.create({
         color: GlobalColor.textColor,
         marginBottom: 20,
         textAlign: 'center',
+    },
+    dropdownContainer: {
+        marginBottom: 15,
+    },
+    dropdownLabel: {
+        fontSize: 14,
+        color: GlobalColor.textColor,
+        marginBottom: 5,
+    },
+    dropdownWrapper: {
+        borderWidth: 1,
+        borderColor: GlobalColor.secondaryColor,
+        borderRadius: 10,
+        backgroundColor: GlobalColor.secondaryColor,
+    },
+    dropdownIcon: {
+        marginRight: 10,
     },
     input: {
         backgroundColor: GlobalColor.secondaryColor,
@@ -443,35 +527,6 @@ const styles = StyleSheet.create({
     unitTextSelected: {
         color: GlobalColor.buttonTextColor,
     },
-    frequencyContainer: {
-        marginBottom: 20,
-    },
-    frequencyLabel: {
-        fontSize: 16,
-        color: GlobalColor.textColor,
-        marginBottom: 10,
-    },
-    frequencyOptions: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    frequencyButton: {
-        width: '32%',
-        backgroundColor: GlobalColor.secondaryColor,
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-    },
-    frequencyButtonSelected: {
-        backgroundColor: GlobalColor.mainColor,
-    },
-    frequencyText: {
-        color: GlobalColor.textColor,
-        fontSize: 16,
-    },
-    frequencyTextSelected: {
-        color: GlobalColor.buttonTextColor,
-    },
     button: {
         backgroundColor: GlobalColor.mainColor,
         padding: 15,
@@ -496,19 +551,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     dateText: {
-        fontSize: 16,
-        color: GlobalColor.textColor,
-        marginLeft: 10,
-    },
-    timeButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: GlobalColor.secondaryColor,
-        padding: 15,
-        borderRadius: 10,
-        marginBottom: 20,
-    },
-    timeText: {
         fontSize: 16,
         color: GlobalColor.textColor,
         marginLeft: 10,

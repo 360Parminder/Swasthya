@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import GlobalStyles from '../../Styles/GlobalStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import GlobalColor from '../../Styles/GlobalColor';
+import Path from '../../services/Path';
+import userData from '../../services/userData';
 
 const WaterDrink = () => {
     const [totalIntake, setTotalIntake] = useState(0);
     const [waterTarget, setWaterTarget] = useState(2000); // Example target in ml
     const [drinks, setDrinks] = useState([]);
     // console.log('drinks', drinks);
-    
+    const fetchDrinks = async () => {
+        const {data} = await userData.fetchUserWater()
+        console.log('resp', data.data);
+        setWaterTarget(data.data.intakeTarget)
+        setTotalIntake(data.data.totalIntake)
+        setDrinks(data.data.waterIntake)
+     };
+    useEffect(() => {
+        
+        fetchDrinks();
+    }, []);
 
     const addDrink = () => {
-        const newDrink = {
-            id: drinks.length.toString(),
-            amount: 200,
-            time: new Date().toLocaleTimeString(),
-            status: 'completed',
-        };
-        setDrinks([...drinks, newDrink]);
-        setTotalIntake(totalIntake + 200);
+        // const newDrink = {
+        //     id: drinks.length.toString(),
+        //     amount: 200,
+        //     time: new Date().toLocaleTimeString(),
+        //     status: 'completed',
+        // };
+        // setDrinks([...drinks, newDrink]);
+        // setTotalIntake(totalIntake + 200);
+        fetchDrinks();
     };
 
     return (

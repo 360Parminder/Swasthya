@@ -3,9 +3,9 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 // Create an Axios instance
 const Path = axios.create({
-    // baseURL:'http://localhost:8003', // Replace with your API base URL
+    baseURL:'http://localhost:8003', // Replace with your API base URL
     // baseURL:'https://swasthya-end.slugdev.me'
-    baseURL:'https://api-swasthya.onrender.com'
+    // baseURL:'https://api-swasthya.onrender.com'
 });
 
 // List of routes that do not require authentication

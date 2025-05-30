@@ -55,24 +55,16 @@ const userData = {
   },
   fetchUserWater: async (token) => {
     try {
-      const response = await Path.get('/water',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-      if (response.status === 200) {
-        return response;
-      }
-      else if (response.status === 401) {
-        return { success: false, message: "Unauthorized" }
-      }
-      else {
-        return { success: false, message: "Something went wrong" }
-      }
+      const response = await Path.get('/water');
+      
+    return {
+      success: true,
+      data: response.data,
+      message: "Water fetched successfully"
+    };
     }
     catch (error) {
-      console.log('userWater', error);
+      return { success: false, message: "Please check your Internet Connection", error: error }
     }
   },
   fetchUserSleep: async (token) => {
@@ -271,7 +263,7 @@ const userData = {
     console.log(medicationData);
 
     try {
-      const response = await Path.post('/medication/create', {
+      const response = await Path.post('/medication', {
         medicine_name: medicationData.medicine_name,
         forms: medicationData.forms.toLowerCase(),
         strength: medicationData.strength,

@@ -1,99 +1,110 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, Modal } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 import GlobalStyles from '../Styles/GlobalStyles';
-import UserAuth from '../services/UserAuth';
 import GlobalColor from '../Styles/GlobalColor';
+import UserAuth from '../services/UserAuth';
+import FloatingLabelInput from '../components/Inputs/FloatingLabelInput';
 
-
-
-const VerifyOtpModal = ({ verifyOtpModal, setVerifyOtpModal,validOtp,navigation,phoneNumber }) => {
+const VerifyOtpModal = ({ visible, onClose, phoneNumber, navigation }) => {
   const [otp, setOtp] = useState('');
+
   const verifyOtp = async () => {
-    const response = await UserAuth.verifyOtp(phoneNumber,otp)
-    if (response.success) {
-      Alert.alert("Otp Verified")
-      navigation.navigate('UserRegister',{mobile:phoneNumber})
+    try {
+      const response = await UserAuth.verifyOtp(phoneNumber, otp);
+      if (response.success) {
+        Alert.alert("Success", "OTP Verified");
+        onClose();  // Close modal first
+        navigation.navigate('UserRegister', { mobile: phoneNumber });
+      } else {
+        Alert.alert("Verification Failed", response.message || "Invalid OTP");
+      }
+    } catch (err) {
+      Alert.alert("Error", "Something went wrong. Please try again.");
     }
-    else {
-      Alert.alert("Error",response.message)
-    }
-    
-    
-  }
+  };
+
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={verifyOtpModal}
+      visible={visible}
+      onRequestClose={onClose}
     >
-      <View style={{
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      }}>
-        <View style={{
-          backgroundColor: GlobalColor.primaryColor,
-          width: '100%',
-          height: '70%',
-          alignItems:'center',
-          paddingVertical:30,
-          borderRadius:12
-        }}>
-
-          <Text style={{
-            fontSize:26,
-            fontWeight:'600',
-            // width:180,
-            textAlign:'center',
-            marginBottom:20,
-            color:'#5D4FB3'
-          }}>
-            Verify your Phone Number
-          </Text>
-
+      <View style={styles.modalOverlay}>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Verify your Phone Number</Text>
           <TextInput
-            style={[GlobalStyles.input]}
-            placeholder="Enter OTP "
+            style={[GlobalStyles.input, styles.otpInput]}
+            placeholder="Enter OTP"
             placeholderTextColor={GlobalColor.textColor}
-            onChangeText={text => setOtp(text)}
+            onChangeText={setOtp}
+            keyboardType="numeric"
             value={otp}
-
           />
-
-          <TouchableOpacity onPress={() => { verifyOtp(), setVerifyOtpModal(false) }} style={[styles.button, { display: 'flex' }]} >
-            <Text style={[styles.buttonText]}>Continue</Text>
+          <TouchableOpacity onPress={verifyOtp} style={styles.button}>
+            <Text style={styles.buttonText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </View>
-
     </Modal>
-  )
-}
-
+  );
+};
 
 const OtpValidation = ({ navigation }) => {
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [validOtp, setValidOtp] = useState("")
-  const [verifyOtpModal, setVerifyOtpModal] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [verifyOtpModal, setVerifyOtpModal] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState({
+    label: 'India',
+    value: 'IN',
+    dialCode: '+91',
+    code: 'IN'
+  });
+  const [showOtherCountryMessage, setShowOtherCountryMessage] = useState(false);
 
-  const sendOtp = async () => {
-    if (phoneNumber.length != 10) {
-      Alert.alert('Invalid Phone Number')
-    }
-    else {
-      const response = await UserAuth.sendOtp(phoneNumber)
-      if (response.success) {
-        setVerifyOtpModal(true)
-      }
-      else {
-        Alert.alert("Error",response.message)
-      }
+  const countryCodes = [
+    { label: 'India (+91)', value: { code: 'IN', dialCode: '+91' } },
+    { label: 'USA (+1)', value: { code: 'US', dialCode: '+1' } },
+    { label: 'UK (+44)', value: { code: 'GB', dialCode: '+44' } },
+    // Add more countries as needed
+  ]
+
+  const handleCountryChange = (country) => {
+    setSelectedCountry({
+      code: country.code,
+      dialCode: country.dialCode,
+      label: countryCodes.find(c => c.value.code === country.code)?.label || ''
+    });
+    
+    if (country.code !== 'IN') {
+      setShowOtherCountryMessage(true)
+    } else {
+      setShowOtherCountryMessage(false)
     }
   }
 
- 
 
+  const sendOtp = async () => {
+    if (selectedCountry.code !== 'IN') return;
+
+    if (phoneNumber.length !== 10) {
+      Alert.alert('Invalid Phone Number', 'Please enter a 10-digit number.');
+      return;
+    }
+    try {
+      const response = await UserAuth.sendOtp(selectedCountry.dialCode, phoneNumber);
+      if (response.success) {
+        setVerifyOtpModal(true);
+      } else {
+        Alert.alert("Error", response.message || "Failed to send OTP.");
+      }
+    } catch (error) {
+      Alert.alert("Network Error", "Unable to send OTP. Please try again.");
+    }
+  };
+  console.log("Selected Country:", selectedCountry);
+  console.log("Phone Number:", phoneNumber);
+  
 
   return (
     <View style={GlobalStyles.container}>
@@ -103,61 +114,137 @@ const OtpValidation = ({ navigation }) => {
         resizeMode="contain"
       />
       <Text style={GlobalStyles.title}>Enter Your Mobile Number</Text>
-      <Text style={{
-         marginBottom: 20,
-         color:GlobalColor.textColor,
-         fontSize:16
-      }}>We will send you a Confirmation Code</Text>
+      <Text style={styles.subtitle}>We will send you a confirmation code</Text>
 
-      <TextInput
-        style={GlobalStyles.input}
-        placeholder="Enter your Mobile"
-        placeholderTextColor={GlobalColor.textColor}
-        onChangeText={text => setPhoneNumber(text)}
-        value={phoneNumber}
-        keyboardType="phone-pad"
-      />
-      <TouchableOpacity style={GlobalStyles.button} onPress={() => { sendOtp() }}>
-        <Text style={GlobalStyles.buttonText}>Send Otp</Text>
+      <View style={styles.countryInputContainer}>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            onValueChange={handleCountryChange}
+            items={countryCodes}
+            value={selectedCountry}
+            style={pickerSelectStyles}
+            placeholder={{}}
+            useNativeAndroidPickerStyle={false}
+          />
+        </View>
+        <FloatingLabelInput
+          label="Enter your Mobile"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+          keyboardType="numeric"
+          containerStyle={{ flex: 1 }}
+        />
+      </View>
+
+      {showOtherCountryMessage && (
+        <Text style={styles.otherCountryMessage}>
+          Currently we support only India. More countries coming soon!
+        </Text>
+      )}
+
+      <TouchableOpacity
+        style={[GlobalStyles.button, selectedCountry.code !== 'IN' && styles.disabledButton]}
+        onPress={sendOtp}
+        disabled={selectedCountry.code !== 'IN'}
+      >
+        <Text style={GlobalStyles.buttonText}>Send OTP</Text>
       </TouchableOpacity>
-      <VerifyOtpModal verifyOtpModal={verifyOtpModal} setVerifyOtpModal={setVerifyOtpModal} validOtp={validOtp} navigation={navigation} phoneNumber={phoneNumber} />
+
+      <VerifyOtpModal
+        visible={verifyOtpModal}
+        onClose={() => setVerifyOtpModal(false)}
+        phoneNumber={phoneNumber}
+        navigation={navigation}
+      />
     </View>
   );
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#E6E2EE',
+};
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    backgroundColor: 'black',
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    color: 'white',
+    paddingRight: 30,
   },
+  inputAndroid: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 16,
+    padding: 12,
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
+});
+
+const styles = StyleSheet.create({
   logo: {
     width: 200,
     height: 200,
     marginBottom: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: '#212529',
+  subtitle: {
+    marginBottom: 20,
+    color: GlobalColor.textColor,
+    fontSize: 16,
   },
-  input: {
+  countryInputContainer: {
+    flexDirection: 'row',
     width: '80%',
-    height: 40,
-    backgroundColor: 'white',
-    borderRadius: 5,
-    paddingLeft: 10,
     marginBottom: 15,
-    color: '#000000'
-    // placeholderTextColor: "#000000",
+    alignItems: 'center',
+  },
+  pickerContainer: {
+    backgroundColor: 'black',
+    borderRadius: 5,
+    marginRight: 10,
+    justifyContent: 'center',
+    height: 50,
+    width: 90,
+  },
+  otherCountryMessage: {
+    color: 'orange',
+    marginBottom: 15,
+    textAlign: 'center',
+    width: '80%',
+  },
+  disabledButton: {
+    opacity: 0.6,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContainer: {
+    backgroundColor: GlobalColor.primaryColor,
+    width: '100%',
+    height: '70%',
+    alignItems: 'center',
+    paddingVertical: 30,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  modalTitle: {
+    fontSize: 26,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#5D4FB3',
+  },
+  otpInput: {
+    width: '80%',
+    marginBottom: 20,
   },
   button: {
     backgroundColor: '#5D4FB3',
     paddingVertical: 12,
     paddingHorizontal: 80,
     borderRadius: 5,
-    marginBottom: 10
   },
   buttonText: {
     color: 'white',
@@ -165,4 +252,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
 export default OtpValidation;

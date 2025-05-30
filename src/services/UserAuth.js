@@ -1,7 +1,7 @@
 import Path from "./Path";
 
 const UserAuth = {
-    signIn: async (mobile, password,fcm_token) => {
+    signIn: async (mobile, password, fcm_token) => {
         try {
             const response = await Path.post('/user/login', {
                 mobile,
@@ -23,7 +23,7 @@ const UserAuth = {
             }
         }
     },
-    register: async (name,mobile,password,weight,height,date,gender,foodPreference) => {
+    register: async (name, mobile, password, weight, height, date, gender, foodPreference) => {
         try {
             const response = await Path.post('/user/register', {
                 username: name,
@@ -32,11 +32,11 @@ const UserAuth = {
                 weight: Number(weight),
                 height: Number(height),
                 dob: date,
-                gender:gender,
-                food_preference:foodPreference
-            });  
+                gender: gender,
+                food_preference: foodPreference
+            });
             console.log(response.data);
-            
+
             if (response.status === 200) {
                 return {
                     success: true,
@@ -44,26 +44,27 @@ const UserAuth = {
                     message: response.data.message,
                 }
             }
-            else{
+            else {
                 return {
                     success: false,
                     message: response.data.message,
                 }
             }
         } catch (error) {
-           return {
+            return {
                 success: false,
                 message: "Error Occured while Registering User"
-           }
+            }
         }
     },
-    sendOtp: async (mobile) => {
+    sendOtp: async (countryCode, mobile) => {
         try {
             const response = await Path.post('/user/sendOtp', {
-                mobile:`+91${mobile}`,
+                countryCode,
+                mobile
             });
             console.log(response.data);
-            
+
             if (response.status === 200) {
                 return {
                     success: true,
@@ -71,7 +72,7 @@ const UserAuth = {
                     message: response.data.message,
                 };
             }
-            else{
+            else {
                 return {
                     success: false,
                     data: response.data,
@@ -79,7 +80,7 @@ const UserAuth = {
                 };
             }
         } catch (error) {
-            return{
+            return {
                 success: false,
                 message: "Error Occured while sending OTP"
             }
@@ -88,21 +89,22 @@ const UserAuth = {
     verifyOtp: async (mobile, otp) => {
         try {
             const response = await Path.post('/user/verifyOtp', {
-                mobile: `+91${mobile}`,
+                mobile: `${mobile}`,
                 otp: Number(otp),
             });
-            
+
             if (response.status === 200) {
                 return response.data;
             }
-            else{
+            else {
                 return {
                     success: false,
                     message: response.data.message,
                 };
             }
         } catch (error) {
-            return{
+            console.log(error);
+            return {
                 success: false,
                 message: "Error Occured while verifying OTP"
             }
@@ -116,10 +118,10 @@ const UserAuth = {
                 message: "Logged out successfully"
             }
         } catch (error) {
-           return {
-            success: false,
-            message: "Error Occured while logging out"
-           }
+            return {
+                success: false,
+                message: "Error Occured while logging out"
+            }
         }
     },
     forgetPassword: async (email, newPassword) => {
@@ -142,10 +144,10 @@ const UserAuth = {
                 newPassword,
             });
             console.log(response.data);
-            
+
             if (response.status === 200) {
                 return response.data;
-               
+
             }
         } catch (error) {
             console.log(error);

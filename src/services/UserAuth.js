@@ -87,11 +87,14 @@ const UserAuth = {
         }
     },
     verifyOtp: async (mobile, otp) => {
+        console.log("Verifying OTP for mobile:", mobile, "with OTP:", otp);
+        
         try {
             const response = await Path.post('/user/verifyOtp', {
                 mobile: `${mobile}`,
-                otp: Number(otp),
+                otp: otp,
             });
+            console.log("Response from verifyOtp:", response.data);
 
             if (response.status === 200) {
                 return response.data;

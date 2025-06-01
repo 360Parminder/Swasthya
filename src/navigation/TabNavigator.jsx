@@ -17,26 +17,43 @@ const TabNavigator = () => {
     <Tab.Navigator
       initialRouteName='Home'
       screenOptions={({ route }) => ({
+      
         tabBarActiveTintColor: GlobalColor.mainColor,
         tabBarInactiveTintColor: GlobalColor.tertiaryColor,
         tabBarShowLabel: false,
-        tabBarStyle: {
-         display: 'flex',
+        tabBarStyle:{
          position: 'absolute',
+        //  display: 'flex',
+          // flexDirection: 'row',
+          // alignItems: 'center',
+          //   flexDirection: 'row',
+          // justifyContent: 'space-around',
+          alignItems: 'center',
           bottom: Platform.OS === 'ios' ? 20 : 10,
           left: 20,
           right: 20,
-          paddingBottom: 5,
+          // paddingBottom: 5,
           borderRadius: 15,
-          height: 60,
+          height: 80,
           elevation: 10,
           shadowColor: '#000',
           shadowOpacity: 0.2,
           shadowOffset: { width: 0, height: 0 },
           shadowRadius: 15,
           backgroundColor: GlobalColor.primaryColor,
+          // justifyContent: 'center',
+          // alignItems: 'center',
+        
+          
+        },
+        tabBarItemStyle: {
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingVertical: 10,
         },
         tabBarIcon: ({ focused, color }) => {
+          
           const size = focused ? 28 : 24; // Larger icon for focused state
           let iconName;
           switch (route.name) {
@@ -53,7 +70,7 @@ const TabNavigator = () => {
               iconName = 'grid';
               break;
           }
-          return <Icon name={iconName} color={color} size={size} />;
+          return <Icon name={iconName} color={color} size={size}  />;
         },
         
       })}
